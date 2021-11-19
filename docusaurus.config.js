@@ -10,11 +10,11 @@ const config = {
   tagline: 'Dinosaurs are cool',
   url: 'https://dataengai.github.io',
   baseUrl: '/',
-  onBrokenLinks: 'warn',
+  onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'dataengai', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  projectName: 'dataengai.github.io', // Usually your repo name.
 
   presets: [
     [
