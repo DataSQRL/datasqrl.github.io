@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'DataSQRL',
+  tagline: 'Build Data Services In Minutes with SQL',
   url: 'https://dataengai.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -42,22 +42,33 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: 'dark',
+      },
       navbar: {
-        title: 'My Site',
+        title: 'DataSQRL',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'DataSQRL Logo',
+          src: 'img/head_squirrel.svg',
         },
         items: [
           {
             type: 'doc',
+            docId: 'getting-started/overview',
+            position: 'left',
+            label: 'Learn',
+          },
+          {
+            type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Documentation',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/community', label: 'Community', position: 'left'},
+          {to: '/blog', label: 'News', position: 'left'},
+          {to: '/support', label: 'Support', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/tbd',
             label: 'GitHub',
             position: 'right',
           },
@@ -70,8 +81,20 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: 'Getting Started',
+                to: '/docs/getting-started/overview',
+              },
+              {
+                label: 'Documentation Overview',
                 to: '/docs/intro',
+              },
+              {
+                label: 'Reference Docs',
+                to: '/docs/reference/overview',
+              },
+              {
+                label: 'Developer Docs',
+                to: '/docs/dev/overview',
               },
             ],
           },
@@ -79,16 +102,12 @@ const config = {
             title: 'Community',
             items: [
               {
+                label: 'Slack',
+                href: 'https://slack.com/invite/datasqrl',
+              },
+              {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://stackoverflow.com/questions/tagged/datasqrl',
               },
             ],
           },
@@ -96,17 +115,21 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
+                label: 'News',
                 to: '/blog',
               },
               {
+                label: 'Support',
+                to: '/support',
+              },
+              {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/tbd',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} DataSQRL, Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
