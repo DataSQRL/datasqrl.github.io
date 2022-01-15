@@ -4,32 +4,9 @@ sidebar_position: 1
 
 # Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to DataSQRL! We are so glad that you want to learn more about project.
 
-## Getting Started
+The quickest way to get going is to follow the [Introductory Tutorial](./getting-started/tutorials/nutshop-tutorial).
+We will take you through the steps of building a data service in DataSQRL for a simple online shop.
+And we get to have some fun with nuts - best of both worlds!
 
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**:
-
-```shell
-npm init docusaurus@latest my-website classic
-```
-
-## Start your site
-
-Run the development server:
-
-```shell
-cd my-website
-
-npx docusaurus start
-```
-
-Your site starts at `http://localhost:3000`.
-
-Open `docs/intro.md` and edit some lines: the site **reloads automatically** and displays your changes.
