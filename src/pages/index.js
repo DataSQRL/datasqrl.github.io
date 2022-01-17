@@ -17,8 +17,8 @@ function HomepageHeader() {
             <p className="hero__subtitle">
                 DataSQRL is an open-source <Link to="/docs/reference/concepts/view-store">view store</Link> for
                 building <Link to="docs/reference/concepts/data-service">data services</Link> from existing
-                data sources using an <Link to="/docs/getting-started/sqrl/overview">enhanced version of SQL</Link>
-                developers call “not awful”.
+                data sources using an <Link to="/docs/getting-started/sqrl/overview">enhanced version of SQL</Link> developers
+                call “not awful”.
             </p>
             <div className={styles.buttons}>
               <Link
@@ -59,7 +59,7 @@ const WhyDataSQRLList = [
     linkText: 'Learn More',
     description: (
       <>
-        Express your data logic and transformations with the SQL you already know.
+        Express your data logic, transformations, and analytics with the SQL you already know.
         Development with SQL sounds like eating soup with a sword but a bit of syntactic
         sugar makes it productive, easy to debug, and simple to maintain.
       </>

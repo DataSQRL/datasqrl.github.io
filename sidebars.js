@@ -53,19 +53,7 @@ const sidebars = {
             'getting-started/tutorials/byod-tutorial',
           ],
         },
-        {
-          type: 'category',
-          label: 'Why DataSQRL?',
-          link: {
-            type: 'doc',
-            id: 'getting-started/why/overview',
-          },
-          items: [
-            'getting-started/why/save-time',
-            'getting-started/why/easy-to-use',
-            'getting-started/why/performance',
-          ],
-        },
+        "getting-started/why-datasqrl",
         {
           type: 'category',
           label: 'DataSQRL Use Cases',
