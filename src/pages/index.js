@@ -110,7 +110,7 @@ const GettingStartedList = [
   {
     title: 'Why DataSQRL?',
     Svg: require('../../static/img/nut.svg').default,
-    link: '/docs/getting-started/why/overview',
+    link: '/docs/getting-started/why-datasqrl',
     linkText: 'Find Out',
     description: (
       <>
@@ -263,17 +263,17 @@ export default function Home() {
             <h2 className="margin-bottom--md">Start Using DataSQRL</h2>
             <div className="row margin-bottom--md">
               <div className="col col--4 text--center">
-                  <Link className="button button--primary button--lg" to="/docs/getting-started/download/binaries">
+                  <Link className="button button--primary button--lg" to="/docs/getting-started/install#binaries">
                     Download Binaries
                   </Link>
               </div>
               <div className="col col--4 text--center">
-                  <Link className="button button--primary button--lg" to="/docs/getting-started/download/docker">
+                  <Link className="button button--primary button--lg" to="/docs/getting-started/install#docker">
                     Get Docker Image
                   </Link>
               </div>
               <div className="col col--4 text--center">
-                  <Link className="button button--primary button--lg" to="https://github.com/tbd">
+                  <Link className="button button--primary button--lg" to="/docs/getting-started/install#build">
                     Build Yourself
                   </Link>
               </div>

@@ -27,19 +27,7 @@ const sidebars = {
       },
       collapsed: false,
       items: [
-        {
-          type: 'category',
-          label: 'Download & Install',
-          link: {
-            type: 'generated-index',
-            title: 'Download Options',
-            description: "Pick one of the following options to download and install DataSQRL:"
-          },
-          items: [
-            'getting-started/download/docker',
-            'getting-started/download/binaries',
-          ],
-        },
+        "install",
         {
           type: 'category',
           label: 'Intro Tutorials',
