@@ -4,8 +4,8 @@ title: "Why DataSQRL?"
 
 # Why Should You Use DataSQLR?
 
-## Saves You Time
+## Saves You Time {#save-time}
 
-## Easy to Use
+## Easy to Use {#easy-to-use}
 
-## Fast & Efficient
+## Fast & Efficient {#performance}

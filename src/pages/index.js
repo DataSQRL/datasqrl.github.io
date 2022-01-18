@@ -42,7 +42,7 @@ const WhyDataSQRLList = [
   {
     title: 'Saves You Time',
     Svg: require('../../static/img/squirrel_clock.svg').default,
-    link: '/docs/getting-started/why/save-time',
+    link: '/docs/getting-started/why-datasqrl#save-time',
     linkText: 'Learn More',
     description: (
       <>
@@ -55,7 +55,7 @@ const WhyDataSQRLList = [
   {
     title: 'Easy to Use',
     Svg: require('../../static/img/nut.svg').default,
-    link: '/docs/getting-started/why/easy-to-use',
+    link: '/docs/getting-started/why-datasqrl#easy-to-use',
     linkText: 'Learn More',
     description: (
       <>
@@ -68,7 +68,7 @@ const WhyDataSQRLList = [
   {
     title: 'Fast & Efficient',
     Svg: require('../../static/img/head_squirrel.svg').default,
-    link: '/docs/getting-started/why/performance',
+    link: '/docs/getting-started/why-datasqrl#performance',
     linkText: 'Learn More',
     description: (
       <>
