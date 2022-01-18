@@ -19,7 +19,7 @@ want to use the data we have about our customers to sell them nuts with a person
 Before the fun begins, we need to do a little bit of prep work.
 
 First, we want to make sure you have DataSQRL installed on your machine so you can follow the
-steps in this tutorial and run the examples. Follow the [Download & Install](/docs/category/download--install)
+steps in this tutorial and run the examples. Follow the [Download & Install](/docs/getting-started/install)
 instruction. It'll be quick. We will wait right here.
 
 Sweet, now that you got DataSQRL installed, we just need the data files for this tutorial so you
