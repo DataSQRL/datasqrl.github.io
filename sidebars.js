@@ -27,7 +27,7 @@ const sidebars = {
       },
       collapsed: false,
       items: [
-        "install",
+        "getting-started/install",
         {
           type: 'category',
           label: 'Intro Tutorials',
