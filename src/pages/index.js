@@ -23,7 +23,7 @@ function HomepageHeader() {
             <div className={styles.buttons}>
               <Link
                 className="button button--primary button--lg"
-                to="/docs/getting-started/tutorials/nutshop-tutorial">
+                to="/docs/getting-started/nutshop-tutorial">
                 Get Started in 10 minutes
               </Link>
             </div>
@@ -84,7 +84,7 @@ const GettingStartedList = [
   {
     title: 'Customer 360 Tutorial',
     Svg: require('../../static/img/nut.svg').default,
-    link: '/docs/getting-started/tutorials/nutshop-tutorial',
+    link: '/docs/getting-started/nutshop-tutorial',
     linkText: 'Get Started',
     description: (
       <>
@@ -95,9 +95,9 @@ const GettingStartedList = [
     ),
   },
   {
-    title: 'BYOD Tutorial',
+    title: 'DataSQRL Overview',
     Svg: require('../../static/img/full_squirrel.svg').default,
-    link: '/docs/getting-started/tutorials/byod-tutorial',
+    link: '/docs/getting-started/sqrl/overview',
     linkText: 'Get Started',
     description: (
       <>

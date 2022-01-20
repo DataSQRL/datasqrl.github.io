@@ -28,17 +28,22 @@ const sidebars = {
       collapsed: false,
       items: [
         "getting-started/install",
+        "getting-started/nutshop-tutorial",
         {
           type: 'category',
-          label: 'Intro Tutorials',
+          label: 'DataSQRL Overview',
           link: {
-            type: 'generated-index',
-            title: 'Introductory Tutorials',
-            description: "Following the intro tutorials will get you up and running with DataSQRL in a few minutes. We recommend you work through the tutorials in order:"
+            type: 'doc',
+            id: 'getting-started/sqrl/overview',
           },
           items: [
-            'getting-started/tutorials/nutshop-tutorial',
-            'getting-started/tutorials/byod-tutorial',
+            'getting-started/sqrl/table',
+            'getting-started/sqrl/relationship',
+            'getting-started/sqrl/nested-table',
+            'getting-started/sqrl/subscriptions',
+            'getting-started/sqrl/functions',
+            'getting-started/sqrl/lifecycle',
+            'getting-started/sqrl/sql-primer',
           ],
         },
         "getting-started/why-datasqrl",
@@ -52,23 +57,6 @@ const sidebars = {
           },
           items: [
             'getting-started/use-cases/telco',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Introduction to SQRL',
-          link: {
-            type: 'doc',
-            id: 'getting-started/sqrl/overview',
-          },
-          items: [
-            'getting-started/sqrl/table',
-            'getting-started/sqrl/relationship',
-            'getting-started/sqrl/nested-table',
-            'getting-started/sqrl/subscriptions',
-            'getting-started/sqrl/functions',
-            'getting-started/sqrl/lifecycle',
-            'getting-started/sqrl/sql-primer',
           ],
         },
         {
