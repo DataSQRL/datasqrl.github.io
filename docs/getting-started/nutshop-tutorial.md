@@ -111,7 +111,7 @@ Orders.date := util.time.fromEpochMillis(time);
 ```
 
 In this statement we are declaring a new field `date` on the `Orders` table which defined
-by applying the utility function `util.tim.fromEpochMillis` to the `time` field.
+by applying the utility function `util.time.fromEpochMillis` to the `time` field.
 
 Secondly, the `discount` field on the order entries is absent when no discount was applied.
 It's pretty annoying to check for existence whenever we want to access that field. This
