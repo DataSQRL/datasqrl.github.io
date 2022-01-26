@@ -5,10 +5,11 @@ title: "Intro Tutorial"
 # Customer 360 Tutorial
 
 Because we have the humor of a middle schooler on Adderall, this introductory tutorial
-will implement data-driven features for our online DataSQRL nut shop.
+will implement data-driven features for our online DataSQRL nut shop. Nuts and squirrels - 
+how funny are we?
 
 The DataSQRL nut shop is a pretty basic online shop that processes and keeps track of orders 
-placed by customers. We want to add Customer 360 functionality to the shop, which means given 
+placed by customers. We want to add Customer 360 functionality to the shop, which means giving 
 customers insights into their past orders and recommending products to purchase. In short, we
 want to use the data we have about our customers to sell them nuts with a personalized touch.
 
@@ -20,7 +21,7 @@ Before the fun begins, we need to install DataSQRL so you can run the service we
 Follow the [Download & Install](/docs/getting-started/install)
 instruction. It'll be quick. We will wait right here.
 
-Let's fire up DataSQRL by typing the following command into your terminal or shell:
+Let's fire up DataSQRL by executing the following command into your terminal or shell:
 ```bash
 datasqrl run dev &
 ```
@@ -34,25 +35,26 @@ data service. When you are done with development, you can stop the process by ex
 
 First, we are going to add some data from our online shop for us to play with. Navigate to
 a directory on your computer where you can place files for this tutorial. [Download this zip
-archive](/) and unzip it in the folder. You should now see a folder `nutshop-data` that 
+archive](/) and unzip it in the folder. You should see the folder `nutshop-data` which 
 contains the order and product data for our shop.
 
 Let's feed that data to DataSQRL with the following command:
 ```bash
-datasqrl dataset folder nutshop-data
+datasqrl source folder nutshop-data
 ```
 
-This command instructs DataSQRL to register the data in the `nutshop-data` folder as a 
+This command instructs DataSQRL to connect the data in the `nutshop-data` folder as a 
 dataset and gives you the following response:
 ```bash
-Registering dataset "nutshop-data" to DataSQRL server "localhost:7050"
-Adding table "Products" with files [products.csv]
-Adding table "Orders" with files [orders_1.json]
+Connecting source "nutshop-data" to DataSQRL server "localhost:7050"
+Adding dataset "nutshop-data"
+Adding table "nutshop-data.Products" with files [products.csv]
+Adding table "nutshop-data.Orders" with files [orders_*.json]
 ```
 
 We can now access the data and build a data service with it. Create a file called 
-`customer360.sqrl` and open it in your favorite editor. This is the **SQRL script** where
-we define the transformations and logic for our Customer 360 data service. **SQRL** is an
+`customer360.sqrl` and open it in your favorite editor. This is the SQRL script where
+we define the transformations and logic for our Customer 360 data service. SQRL is an
 extension of SQL that adds a few concepts and some syntactic sugar to make it easier to
 develop with SQL and build data services. SQRL is like adding bacon to a sandwich: it makes
 SQL better in ways that seem obvious in hindsight.
@@ -93,7 +95,7 @@ GraphQL query into the left hand side and hitting the run button:
 You should see the requested information for the product with id "5". You can modify
 the filter condition to query for products by their fields.
 
-Voila, we got a functioning data service with a `products` and `orders` API entry points
+Voila, we got a functioning data service with `products` and `orders` API entry points
 for the respective tables that we imported. That was easier than making fun of the metaverse.
 
 ## Step 2: Transforming Data {#transform}
@@ -110,8 +112,8 @@ need to convert `time` to a proper DateTime field so we can handle it like a tim
 Orders.date := util.time.fromEpochMillis(time);
 ```
 
-In this statement we are declaring a new field `date` on the `Orders` table which defined
-by applying the utility function `util.tim.fromEpochMillis` to the `time` field.
+In this statement we are declaring a new field `date` on the `Orders` table and define it
+by applying the utility function `util.time.fromEpochMillis` to the `time` field.
 
 Secondly, the `discount` field on the order entries is absent when no discount was applied.
 It's pretty annoying to check for existence whenever we want to access that field. This
@@ -138,7 +140,7 @@ the customer at the center.
 :::info
 
 SQRL is an extension of SQL and we are going to use some basic SQL syntax. If you are
-unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/getting-started/sqrl/sql-primer)
+unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/getting-started/intro/sql-primer)
 first.
 
 :::
@@ -147,7 +149,7 @@ First, we define a `Customers` table based on the
 unique customer ids from the `Orders` table.
 
 ```sqrl
-Customers := SELECT DISTINCT customerid as id FROM Orders;
+Customers := SELECT DISTINCT customerid AS id FROM Orders;
 ```
 
 So far, our tables are independent of one another. For our Customer 360, we want
@@ -155,11 +157,11 @@ to link customers to their orders to display a customer's shopping history. We a
 this by defining a relationship between `Customers` and `Orders`:
 
 ```sqrl
-Customers.orders := JOIN Orders ON Orders.customerid = _.id ORDER BY time DESC
+Customers.orders := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC
 ```
 
 A relationship is declared as a field on a table which references the related records as
-defined by the `JOIN` statement on the right. As in SQL, a JOIN relates records from two
+defined by the `JOIN` statement on the right. A JOIN relates records from two
 tables based on a JOIN predicate - in our case matching customer ids.
 The underscore is syntactic sugar that SQRL adds to SQL for referring to the table on the
 left hand side on which the relationship is defined.
@@ -202,7 +204,7 @@ Try executing the following GraphQL query in GraphiQL to navigate through the re
 }
 ```
 
-We can now navigate through our data with the flexibility and determination of Luke
+We can now navigate through our data with the uncanny agility of Luke
 Skywalker in the Death Star.
 
 ## Step 3: Analyzing Data {#analysis}
@@ -218,20 +220,21 @@ Orders.total := sum(entries.total);
 Orders.savings := sum(entries.discount);
 ```
 
-Perfect, now it's time to aggregate those values for each customer by month.
+We can use those fields to aggregate those values for each customer by month.
 
 ```datasqrl
 Customers.spending_by_month :=
-                     SELECT util.time.truncateToMonth(date) AS month,
-                            sum(total) AS total_spend,
-                            sum(discount) AS total_savings
-                     FROM _.orders
-                     GROUP BY month ORDER BY month DESC;
+         SELECT util.time.truncateToMonth(date) AS month,
+                sum(total) AS total_spend,
+                sum(discount) AS total_savings
+         FROM _.orders
+         GROUP BY month ORDER BY month DESC;
 ```
 
 This statement defines a nested table `spending_by_month` beneath `Customers` which takes
-all the orders referenced by the `orders` relationship on `Customers` and groups them by
-the month of the order's date to sum of the total and discount for all the orders in each
+all the orders referenced by the `orders` relationship on `Customers` for each customer
+record and groups them by
+the month of the order's date. It then sums up the total and savings for all the orders in each
 group. The utility function `truncateToMonth` takes a date and returns the date for the
 beginning of the month in which that input date occurred.
 
@@ -239,6 +242,7 @@ beginning of the month in which that input date occurred.
 
 We got our data cleaned up, transformed into a customer-centric view, linked together through
 relationships to access customers' shopping history, and we added a spending analysis.
+[Click here](/) to see the full script.
 That's a great start for a Customer 360 data service. And it is all readily accessible
 through the GraphQL API.
 
@@ -254,5 +258,5 @@ You just built and accessed a Customer 360 data service. Good work!
 Give yourself a pat on the back.
 
 This tutorial covered the basics of building data services in DataSQRL. We recommend that
-you read the [DataSQRL Overview](sqrl/overview) next because it extends this tutorial and
+you read the [DataSQRL Overview](intro/overview) next because it extends this tutorial and
 covers each of the concepts covered here in more detail.

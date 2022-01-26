@@ -34,16 +34,14 @@ const sidebars = {
           label: 'DataSQRL Overview',
           link: {
             type: 'doc',
-            id: 'getting-started/sqrl/overview',
+            id: 'getting-started/intro/overview',
           },
           items: [
-            'getting-started/sqrl/table',
-            'getting-started/sqrl/relationship',
-            'getting-started/sqrl/nested-table',
-            'getting-started/sqrl/subscriptions',
-            'getting-started/sqrl/functions',
-            'getting-started/sqrl/lifecycle',
-            'getting-started/sqrl/sql-primer',
+            'getting-started/intro/data-sources',
+            'getting-started/intro/sqrl',
+            'getting-started/intro/api',
+            'getting-started/intro/server',
+            'getting-started/intro/advanced',
           ],
         },
         "getting-started/why-datasqrl",
@@ -87,13 +85,12 @@ const sidebars = {
           type: 'category',
           label: 'Data Sources',
           link: {
-            type: 'generated-index',
-            title: 'How to Connect Data Sources to DataSQRL',
-            description: "DataSQRL supports a range of data sources. Pick the one you want to connect to learn how:"
+            type: 'doc',
+            id: 'guides/sources/overview',
           },
           items: [
-            'guides/sources/kafka',
             'guides/sources/files',
+            'guides/sources/kafka',
           ],
         },
         {
@@ -152,6 +149,7 @@ const sidebars = {
           items: [
             'reference/concepts/data-service',
             'reference/concepts/view-store',
+            'reference/sources/overview',
           ],
         },
         {
@@ -167,6 +165,17 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Data Sources',
+          link: {
+            type: 'doc',
+            id: 'reference/sources/overview',
+          },
+          items: [
+            'reference/sources/api',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Functions',
           link: {
             type: 'generated-index',
@@ -178,6 +187,7 @@ const sidebars = {
             'reference/functions/string-fct',
           ],
         },
+        'reference/cmd',
       ],
     },
     {
@@ -197,6 +207,7 @@ const sidebars = {
             id: 'dev/architecture/overview',
           },
           items: [
+            'dev/architecture/data-source',
             'dev/architecture/ingest',
           ],
         },
