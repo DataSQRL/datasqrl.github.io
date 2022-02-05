@@ -3,10 +3,10 @@
 This section introduces you to the core concepts of DataSQRL and provides enough
 context for you to start building your own data services in DataSQRL.
 
-We will extend our [Customer 360 data service](nutshop-tutorial) for our nut shop to
+We will extend our [Customer 360 data service](../nutshop-tutorial) for our nut shop to
 illustrate the concepts with examples. We are going to add product recommendations, a
-nutritional analysis, and much more. It'll be a riot. Please read the
-[introductory tutorial](nutshop-tutorial) first, so you can follow along. It only takes
+nutritional analysis, and more. It'll be a riot. Please read the
+[introductory tutorial](../nutshop-tutorial) first, so you can follow along. It only takes
 10 minutes.
 
 ## What is DataSQRL? {#whatis}

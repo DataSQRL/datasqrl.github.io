@@ -76,15 +76,15 @@ This command continuously monitors your SQRL script and submits any changes to t
 DataSQRL server for execution. The server executes the script and generates a data service
 from the result which is exposed as a GraphQL API.
 
+### Querying the API {#api}
+
 The command also opens a page in your browser where you can inspect the resulting API with
 GraphiQL, which is a lightweight IDE for your API. Try it out by pasting the following
 GraphQL query into the left hand side and hitting the run button:
 ```graphql
 {
-    products(filter: [{ id: {eq: "5"}}])
-    {
-        data
-        {
+    products(filter: [{ id: {eq: "1"}}]) {
+        items {
             name
             sizing
             weight_in_grams
@@ -92,7 +92,7 @@ GraphQL query into the left hand side and hitting the run button:
     } 
 }
 ```
-You should see the requested information for the product with id "5". You can modify
+You should see the requested information for the product with id equal to "1". You can modify
 the filter condition to query for products by their fields.
 
 Voila, we got a functioning data service with `products` and `orders` API entry points
@@ -132,7 +132,7 @@ Note the nested table syntax in `Orders.entries` to reference the nested `entrie
 within the `Orders` table. SQRL supports [nested tables](/) which is useful when dealing with
 hierarchical data like our `Orders` data.
 
-### Data Structure
+### Data Structure {#structure}
 
 A Customer 360 application is all about the customer, so let's restructure our data with
 the customer at the center.
@@ -140,7 +140,7 @@ the customer at the center.
 :::info
 
 SQRL is an extension of SQL and we are going to use some basic SQL syntax. If you are
-unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/getting-started/intro/sql-primer)
+unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer)
 first.
 
 :::
@@ -157,7 +157,7 @@ to link customers to their orders to display a customer's shopping history. We a
 this by defining a relationship between `Customers` and `Orders`:
 
 ```sqrl
-Customers.orders := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC
+Customers.purchases := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC
 ```
 
 A relationship is declared as a field on a table which references the related records as
@@ -170,7 +170,7 @@ Similarly, we want to link the `Orders.entries` to the actual product records th
 reference. This calls for another relationship:
 
 ```sqrl
-Orders.entries.product := JOIN Products ON Products.id = _.productid;
+Orders.entries.product := JOIN Products ON Products.id = _.productid LIMIT 1;
 ```
 
 When you save the script, a `customers` endpoint has been added to the API and we can access
@@ -181,19 +181,14 @@ Try executing the following GraphQL query in GraphiQL to navigate through the re
 
 ```graphql
 {
-    customers(filter: [{ id: {eq: "50"}}])
-    {
-        data
-        {
-            orders(limit:10)
-            {
+    customers(filter: [{ id: {eq: "50"}}]) {
+        items {
+            purchases(pageSize:10) {
                 id
                 time
-                entries
-                {
+                entries {
                     quantity
-                    product
-                    {
+                    product {
                         name
                         weight_in_grams
                     }
@@ -227,30 +222,59 @@ Customers.spending_by_month :=
          SELECT util.time.truncateToMonth(date) AS month,
                 sum(total) AS total_spend,
                 sum(discount) AS total_savings
-         FROM _.orders
+         FROM _.purchases
          GROUP BY month ORDER BY month DESC;
 ```
 
 This statement defines a nested table `spending_by_month` beneath `Customers` which takes
-all the orders referenced by the `orders` relationship on `Customers` for each customer
+all the orders referenced by the `purchases` relationship on `Customers` for each customer
 record and groups them by
 the month of the order's date. It then sums up the total and savings for all the orders in each
 group. The utility function `truncateToMonth` takes a date and returns the date for the
 beginning of the month in which that input date occurred.
 
-## Step 4: Accessing the API {#api}
+## Step 4: Querying the API {#api}
 
 We got our data cleaned up, transformed into a customer-centric view, linked together through
 relationships to access customers' shopping history, and we added a spending analysis.
 [Click here](/) to see the full script.
+
 That's a great start for a Customer 360 data service. And it is all readily accessible
 through the GraphQL API.
 
-The final step is to access the API from your application.
+The final step is to access the API from your application. We'll look at an example in Javascript. Take a look at the [API guides](/docs/guides/api/overview) to learn how to query the API from your favorite language or framework.
 
-Should we only show a Javascript example here and link to other programming languages?
-What exactly would this look like?
+Create the Javascript file `index.js` with the following code:
+```js
+import { ApolloClient, gql} from "@apollo/client";
 
+const client = new ApolloClient({ 
+  uri: 'http://localhost:7050/graphql/customer360'
+});
+```
+
+This imports and connects the [Apollo GraphQL client](https://www.apollographql.com/docs/react/)  to our customer 360 API. If you don't have the client installed, run `npm install @apollo/client graphql` first. \
+We can now run queries against it.
+
+```js
+client
+  .query({
+    query: gql`
+      query GetProduct {
+        products(filter: [{ id: {eq: "1"}}]) {
+            items {
+                name
+                sizing
+                weight_in_grams
+            }
+        }
+      }
+    `
+  })
+  .then(result => console.log(result));
+```
+
+Run this code to see the result printed to your console.
 
 ## Next Steps {#next}
 
@@ -258,5 +282,5 @@ You just built and accessed a Customer 360 data service. Good work!
 Give yourself a pat on the back.
 
 This tutorial covered the basics of building data services in DataSQRL. We recommend that
-you read the [DataSQRL Overview](intro/overview) next because it extends this tutorial and
-covers each of the concepts covered here in more detail.
+you read the [DataSQRL Introduction](intro/overview) next because it extends this tutorial and
+explains each of the concepts covered here in more detail. If you found this short tutorial too *dense* or missing information, the complete [DataSQRL Introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.

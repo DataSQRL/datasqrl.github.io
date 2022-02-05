@@ -17,7 +17,7 @@ function HomepageHeader() {
             <p className="hero__subtitle">
                 DataSQRL is an open-source <Link to="/docs/reference/concepts/view-store">view store</Link> for
                 building <Link to="docs/reference/concepts/data-service">data services</Link> from existing
-                data sources using an <Link to="/docs/getting-started/sqrl/overview">enhanced version of SQL</Link> developers
+                data sources using an <Link to="/docs/reference/sqrl/overview">enhanced version of SQL</Link> developers
                 call “not awful”.
             </p>
             <div className={styles.buttons}>
@@ -97,7 +97,7 @@ const GettingStartedList = [
   {
     title: 'DataSQRL Overview',
     Svg: require('../../static/img/full_squirrel.svg').default,
-    link: '/docs/getting-started/sqrl/overview',
+    link: '/docs/getting-started/intro/overview',
     linkText: 'Get Started',
     description: (
       <>
@@ -126,7 +126,7 @@ const LearnMoreList = [
   {
     title: 'DataSQRL Use Cases',
     Svg: require('../../static/img/nut.svg').default,
-    link: '/docs/category/datasqrl-use-cases',
+    link: '/',
     linkText: 'Learn More',
     description: (
       <>

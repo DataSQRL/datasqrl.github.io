@@ -20,7 +20,7 @@ tells the DataSQRL server where it can find data and how to access it. That's wh
 a data source is the first step for building data services with DataSQRL: without
 data sources there is no data to build with.
 
-## Data Source Basics
+## Data Source Basics {#basics}
 
 In our [introductory tutorial](../nutshop-tutorial#adding-data) we connected a folder 
 as a data source to DataSQRL with the following command:

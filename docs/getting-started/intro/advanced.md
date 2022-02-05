@@ -1,20 +1,39 @@
 
 # Advanced Concepts
 
-## Multiple APIs
 
-split large script into two
 
-## Streaming Data Source
 
-consume orders from Kafka queue - link to guide
 
 ## SQRL Functions
 
-## Flexible Data Types and Schemas
+importing functions
 
-## Hints and Optimization
+iff
+
+function libraries: Geo, Statistics, time
+
+
+## Useful Fields
+
+_uid, _ingest_time, _source_time 
+
+uid() and now() in subscriptions
+
+
+## Hints and Optimization {#hints}
+
+nested pagination
+
+API: name (for type and root query), 
 
 ## Script Evolution
 
-## Locking down schema in production
+### Multiple APIs
+
+break product recommendation into own script
+
+## API Access Control
+
+
+

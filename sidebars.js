@@ -45,7 +45,7 @@ const sidebars = {
           ],
         },
         "getting-started/why-datasqrl",
-        {
+/*        {
           type: 'category',
           label: 'DataSQRL Use Cases',
           link: {
@@ -57,6 +57,7 @@ const sidebars = {
             'getting-started/use-cases/telco',
           ],
         },
+*/
         {
           type: 'category',
           label: 'DataSQRL Comparison',
@@ -83,7 +84,7 @@ const sidebars = {
       items: [
         {
           type: 'category',
-          label: 'Data Sources',
+          label: 'Sources & Sinks',
           link: {
             type: 'doc',
             id: 'guides/sources/overview',
@@ -149,6 +150,10 @@ const sidebars = {
           items: [
             'reference/concepts/data-service',
             'reference/concepts/view-store',
+            'reference/sqrl/overview',
+            'reference/sqrl/table',
+            'reference/sqrl/relationship',
+            'reference/sqrl/time',
             'reference/sources/overview',
           ],
         },

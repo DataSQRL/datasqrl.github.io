@@ -1,5 +1,5 @@
 ---
-title: "GraphQL in JavaScript"
+title: "Query API in JS"
 ---
 
-# How to Access the DataSQRL GraphQL API in JavaScript
+# Querying the DataSQRL API from Javascript
