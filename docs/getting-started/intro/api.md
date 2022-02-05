@@ -212,7 +212,7 @@ With all this setup out of the way, let's build a React component that displays 
 ```js
 function Purchase({id, time, entries}) {
     return (
-        <div key={id}>
+        <div>
         <h2>Order No. {id}</h2>
         <p>Order placed on {time}</p>
         <h3>Order Entries</h3>
@@ -233,7 +233,7 @@ function Entry({quantity, product}) {
 
 function PurchaseHistory({customerid}) {
   const dayInMillis = 24*60*60*1000;
-  let after = new Date(new Date().getTime() - 31*dayInMillis).toLocaleDateString()
+  const after = new Date(new Date().getTime() - 31*dayInMillis).toLocaleDateString()
   const { loading, error, data } = useQuery(recentPurchasesQuery, {
     variables : { customerid, after }
   });
