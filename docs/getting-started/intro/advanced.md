@@ -1,5 +1,10 @@
+---
+title: "Advanced Concepts"
+---
 
-# Advanced Concepts
+
+# Advanced Concepts in DataSQRL
+
 
 
 
@@ -33,7 +38,6 @@ API: name (for type and root query),
 
 break product recommendation into own script
 
-## API Access Control
 
 
 

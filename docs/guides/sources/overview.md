@@ -1,6 +1,6 @@
 # How to Connect Data Sources & Sinks to DataSQRL
 
-## Data Sources
+## Data Sources {#sources}
 
 DataSQRL supports the following types of data sources to consume data from:
 
@@ -16,7 +16,7 @@ to DataSQRL to support your data source. That's the power of open source!
 :::
 
 
-## Data Sinks
+## Data Sinks {#sinks}
 
 DataSQRL supports the following types of data sinks to push subscription
 events to:

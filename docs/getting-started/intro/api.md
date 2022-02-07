@@ -366,8 +366,13 @@ This annotation enables pagination for the nested `products_by_protein` table. W
 
 ## Next Steps
 
-
+You've built a small Customer 360 application in React and explored how to query the flexible GraphQL API that DataSQRL generates to get the result sets you need. You are ready to build application with DataSQRL. Before you run off and build a billion dollar app, take a quick look at the next section on [how to operate DataSQRL server](server).
 
 ---
 
-* Other sink types
+If you want to learn more about querying the API, here are a couple of resources you might find helpful:
+
+* The [API reference documentation](/docs/reference/api/reference) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
+* Learn how to query the API from [JVM/Android](/docs/guides/api/graphql-jvm) or [iOS](/docs/guides/api/graphql-ios) applications.
+* Learn more about [subscriptions](/docs/reference/sqrl/table#subscriptions) and how to [feed subscriptions to data sinks](/docs/reference/api/subscriptions).
+* The list of [supported data sinks](/docs/guides/sources/overview#sinks) in DataSQRL links to guides on how to connect various types of sinks to DataSQRL.
