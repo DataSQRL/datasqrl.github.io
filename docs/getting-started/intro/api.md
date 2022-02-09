@@ -372,7 +372,7 @@ You've built a small Customer 360 application in React and explored how to query
 
 If you want to learn more about querying the API, here are a couple of resources you might find helpful:
 
-* The [API reference documentation](/docs/reference/api/reference) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
+* The [API reference documentation](/docs/reference/api/graphql-api) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
 * Learn how to query the API from [JVM/Android](/docs/guides/api/graphql-jvm) or [iOS](/docs/guides/api/graphql-ios) applications.
 * Learn more about [subscriptions](/docs/reference/sqrl/table#subscriptions) and how to [feed subscriptions to data sinks](/docs/reference/api/subscriptions).
 * The list of [supported data sinks](/docs/guides/sources/overview#sinks) in DataSQRL links to guides on how to connect various types of sinks to DataSQRL.

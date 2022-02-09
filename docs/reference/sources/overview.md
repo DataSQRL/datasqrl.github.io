@@ -1,8 +1,8 @@
 ---
-title: "Data Sources"
+title: "Data Sources and Sinks"
 ---
 
-# What is a Data Source?
+# What are Data Sources and Sinks?
 
 To be written
 
@@ -22,3 +22,12 @@ If you are trying to connect a particular type of data source to DataSQRL, take 
 the [full list of supported data sources](/docs/guides/sources/overview)
 which detailed guides on how to connect them.
 
+## Source Data Schema
+
+link to schema-management
+
+## Adding a Data Source Type
+
+link to dev docs
+
+## How to Connect Data Sinks

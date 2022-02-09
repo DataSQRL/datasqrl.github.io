@@ -150,8 +150,18 @@ const sidebars = {
           items: [
             'reference/concepts/data-service',
             'reference/concepts/view-store',
-            'reference/sqrl/overview',
-            'reference/sources/overview',
+            'reference/concepts/datasqrl',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Sources & Sinks',
+          link: {
+            type: 'doc',
+            id: 'reference/sources/overview',
+          },
+          items: [
+            'reference/sources/api',
           ],
         },
         {
@@ -184,13 +194,29 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Data Sources',
+          label: 'API',
           link: {
             type: 'doc',
-            id: 'reference/sources/overview',
+            id: 'reference/api/overview',
           },
           items: [
-            'reference/sources/api',
+            'reference/api/graphql-api',
+            'reference/api/subscriptions',
+            'reference/api/access-control',
+            'reference/api/graphql-primer',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Operations',
+          link: {
+            type: 'doc',
+            id: 'reference/operations/overview',
+          },
+          items: [
+            'reference/operations/configuration',
+            'reference/operations/monitoring',
+            'reference/operations/optimizer',
           ],
         },
         'reference/cmd',

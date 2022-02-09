@@ -1,6 +1,8 @@
+---
+title: "Time"
+---
 
-
-# Time in SQRL
+# How to work with Time in SQRL
 
 ## Time Buckets
 

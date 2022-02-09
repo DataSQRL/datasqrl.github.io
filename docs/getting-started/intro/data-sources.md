@@ -4,49 +4,29 @@ title: "Connect Data Source"
 
 # Connecting Data Sources
 
-Before we can use data in our scripts, we have to connect the data source with DataSQRL
-server so the server knows how to access the data.
+Before we can use data in our scripts, we have to connect the data source with DataSQRL server so the server knows how to access the data.
 
 ## What is a Data Source?
 
-A data source is a system that holds data and allows access to the data. DataSQRL supports
-many types of data sources: filesystems, cloud storage, database systems, queues, logs, 
-and more. Check out the [full list of supported data sources](/docs/guides/sources/overview)
-which links to detailed information on how to connect them to DataSQRL.
+A data source is a system that holds data and allows access to the data. DataSQRL supports many types of data sources: filesystems, cloud storage, database systems, queues, logs, and more. Check out the [full list of supported data sources](/docs/guides/sources/overview) which links to detailed information on how to connect them to DataSQRL.
 
-A data source is connected to the DataSQRL server via the [command line utility](/docs/reference/cmd#sources)
-or through the [data source API](/docs/reference/sources/api). Connecting a data source
-tells the DataSQRL server where it can find data and how to access it. That's why connecting
-a data source is the first step for building data services with DataSQRL: without
-data sources there is no data to build with.
+A data source is connected to the DataSQRL server via the [command line utility](/docs/reference/cmd#sources) or through the [data source API](/docs/reference/sources/api). Connecting a data source tells the DataSQRL server where it can find data and how to access it. That's why connecting a data source is the first step for building data services with DataSQRL: without data sources there is no data to build with.
 
 ## Data Source Basics {#basics}
 
-In our [introductory tutorial](../nutshop-tutorial#adding-data) we connected a folder 
-as a data source to DataSQRL with the following command:
+In our [introductory tutorial](../nutshop-tutorial#adding-data) we connected a folder as a data source to DataSQRL with the following command:
 ```bash
 datasqrl source folder nutshop-data
 ```
 
-This adds the dataset `nutshop-data` to the server and a table for each file contained
-within the folder: the `products` table for data in `products.csv` and the `orders` table
-for records in `orders_1.json`.
+This adds the dataset `nutshop-data` to the server and a table for each file contained within the folder: the `products` table for data in `products.csv` and the `orders` table for records in `orders_1.json`.
 
-DataSQRL structures data into tables with fields (or columns). A data record is represented as 
-a table row. Tables can be nested to represent hierarchical data. \
-For example, the json file `orders_1.json` is made
-available in DataSQRL as the table `orders` with fields like `time` and `customerid` and each order
-record is a row in the table. The `orders` table has a nested `entries` table for each order
-entry in the hierarchical json source data.
+DataSQRL structures data into tables with fields (or columns). A data record is represented as a table row. Tables can be nested to represent hierarchical data. <br />
+For example, the json file `orders_1.json` is made available in DataSQRL as the table `orders` with fields like `time` and `customerid` and each order record is a row in the table. The `orders` table has a nested `entries` table for each order entry in the hierarchical json source data.
 
-Tables are grouped into datasets. A dataset usually consists of tables that are related or
-logically belong together like the `orders` and `products` tables in our tutorial.
+Tables are grouped into datasets. A dataset usually consists of tables that are related or logically belong together like the `orders` and `products` tables in our tutorial.
 
-A data source provides access to one or multiple datasets. A folder data source adds a
-single dataset to the DataSQRL server which has the same name as the folder by default.
-Some data sources add multiple datasets. Datasets must be unique on a single server instance,
-i.e. if two data sources try to add datasets with the same name, you'll get an error and
-have to [specify a different](/docs/reference/cmd#sources) name for the duplicate dataset. \
+A data source provides access to one or multiple datasets. A folder data source adds a single dataset to the DataSQRL server which has the same name as the folder by default. Some data sources add multiple datasets. Datasets must be unique on a single server instance, i.e. if two data sources try to add datasets with the same name, you'll get an error and have to [specify a different](/docs/reference/cmd#sources) name for the duplicate dataset. <br />
 Likewise, tables within a dataset must have unique names. 
 
 To use a table within your SQRL script, you import the table through an import statement:
@@ -167,5 +147,5 @@ dive deeper:
 * **Schema Discovery**: DataSQRL automatically analyzes the data in data sources to 
  discover the schema. DataSQRL supports flexible schemas and heterogeneous data types,
  which means you don't have to worry about schema in most cases. Learn more about
- [schema management](/docs/reference/concepts/schema-management) in DataSQRL and how you can 
+ [schema management](/docs/reference/sources/schema-management) in DataSQRL and how you can 
  [overwrite the schema](/docs/guides/sources/manual-schema) when you are dealing with complex or messy data.

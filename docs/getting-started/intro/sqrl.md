@@ -179,7 +179,7 @@ function.
 
 In most cases, type inference is obvious and you can let DataSQRL handle data types and schema for you.
 One less thing to worry about. \
-Read more about [schema management](/docs/reference/concepts/schema-management)
+Read more about [schema management](/docs/reference/sources/schema-management)
 and how to [manually define data types](/docs/guides/sources/manual-schema) for 
 datasets with heterogeneous or very messy data where it isn't obvious.
 

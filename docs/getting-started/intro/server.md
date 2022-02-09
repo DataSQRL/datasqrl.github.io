@@ -94,7 +94,7 @@ datasets:
 
 The file lists all the columns with their data type and nullability status for each of the tables that we import in our script. This defines the schema contract that will be enforced for all incoming data processed by our script in production. When DataSQRL encounters a record that does not satisfy the pre-schema, it will log an error message with the record and not process it.
 
-In most cases, it is sufficient to take a quick look at the generated pre-schema file to make sure it matches our expectation. Learn more about [schema management](/docs/reference/concepts/schema-management) and how to customize the pre-schema if DataSQRL doesn't generate the right pre-schema for your data service.
+In most cases, it is sufficient to take a quick look at the generated pre-schema file to make sure it matches our expectation. Learn more about [schema management](/docs/reference/sources/schema-management) and how to customize the pre-schema if DataSQRL doesn't generate the right pre-schema for your data service.
 
 With the queries and pre-schema in hand, we can submit our SQRL script to production:
 

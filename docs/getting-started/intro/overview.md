@@ -1,6 +1,6 @@
 # Introduction to DataSQRL
 
-This section introduces you to the core concepts of DataSQRL and provides enough
+This extended tutorial introduces you to the core concepts of DataSQRL and provides enough
 context for you to start building your own data services in DataSQRL.
 
 We will extend our [Customer 360 data service](../nutshop-tutorial) for our nut shop to
@@ -22,7 +22,7 @@ SQRL (pronounced "squirrel") stands for *"Structured Query and Reaction Language
 extends the popular database language SQL by some constructs and syntactic sugar to make
 it easier and more productive to build responsive data services from raw data. Specifically,
 SQRL provides support for realtime data streams and the ability to react to incoming data -
-hence the name. A big chunk of this introduction is devoted to covering how SQRL extends
+hence the name. A big chunk of this tutorial is devoted to covering how SQRL extends
 SQL and the concepts it provides that make building data services easy. But we are getting
 ahead of ourselves.
 

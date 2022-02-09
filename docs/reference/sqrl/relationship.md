@@ -2,7 +2,7 @@
 title: "Relationship"
 ---
 
-# What is a SQRL Relationship
+# What is a SQRL Relationship?
 
 link to ER and OOP
 relationship paths and chaining

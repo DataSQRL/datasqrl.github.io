@@ -1,4 +1,8 @@
-# SQL Primer
+---
+title: "SQL Primer"
+---
+
+# Brief Introduction to SQL
 
 Concepts to introduce:
 * SELECT (aggregations)
