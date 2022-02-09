@@ -41,7 +41,7 @@ function HomepageHeader() {
 const WhyDataSQRLList = [
   {
     title: 'Saves You Time',
-    Svg: require('../../static/img/squirrel_clock.svg').default,
+    Svg: require('../../static/img/index/undraw_time_management_sqrl.svg').default,
     link: '/docs/getting-started/why-datasqrl#save-time',
     linkText: 'Learn More',
     description: (
@@ -54,27 +54,27 @@ const WhyDataSQRLList = [
   },
   {
     title: 'Easy to Use',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/undraw_programming_sqrl.svg').default,
     link: '/docs/getting-started/why-datasqrl#easy-to-use',
     linkText: 'Learn More',
     description: (
       <>
         Express your data logic, transformations, and analytics with the SQL you already know.
         Development with SQL sounds like eating soup with a sword but a bit of syntactic
-        sugar makes it productive, easy to debug, and simple to maintain.
+        sugar makes it productive, easy to debug, and simple to maintain. <br />&nbsp;
       </>
     ),
   },
   {
     title: 'Fast & Efficient',
-    Svg: require('../../static/img/head_squirrel.svg').default,
+    Svg: require('../../static/img/index/undraw_fast_loading_sqrl.svg').default,
     link: '/docs/getting-started/why-datasqrl#performance',
     linkText: 'Learn More',
     description: (
       <>
         DataSQRL compiles efficient data architectures that optimize partitioning,
         data flows, index selection, and query execution on top of Apache Flink and Postgres.
-        There actually is some neat technology behind this buzzword bingo.
+        There actually is some neat technology behind this buzzword bingo. <br />&nbsp;
       </>
     ),
   },
@@ -83,7 +83,7 @@ const WhyDataSQRLList = [
 const GettingStartedList = [
   {
     title: 'Customer 360 Tutorial',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/undraw_online_shopping_sqrl.svg').default,
     link: '/docs/getting-started/nutshop-tutorial',
     linkText: 'Get Started',
     description: (
@@ -95,21 +95,21 @@ const GettingStartedList = [
     ),
   },
   {
-    title: 'DataSQRL Overview',
-    Svg: require('../../static/img/full_squirrel.svg').default,
+    title: 'DataSQRL Training',
+    Svg: require('../../static/img/index/undraw_personal_training_sqrl.svg').default,
     link: '/docs/getting-started/intro/overview',
     linkText: 'Get Started',
     description: (
       <>
-        If you want to build a custom data service using your own data, this tutorial
-        guides you through the steps from start to finish. It’s the more adventurous
-        path to learning DataSQRL but if you make it, you get extra bragging rights.
+        If you want to build a custom data service using your own data, this training
+        guides you through the steps from start to finish. It extends the tutorial,
+        covers everything you need to know, and gets you home before dinner.
       </>
     ),
   },
   {
     title: 'Why DataSQRL?',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/undraw_questions_sqrl.svg').default,
     link: '/docs/getting-started/why-datasqrl',
     linkText: 'Find Out',
     description: (
@@ -125,7 +125,7 @@ const GettingStartedList = [
 const LearnMoreList = [
   {
     title: 'DataSQRL Use Cases',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/undraw_use_cases_sqrl.svg').default,
     link: '/',
     linkText: 'Learn More',
     description: (
@@ -138,7 +138,7 @@ const LearnMoreList = [
   },
   {
     title: 'DataSQRL Comparison',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/undraw_decide_sqrl.svg').default,
     link: '/docs/getting-started/comparison/overview',
     linkText: 'Compare',
     description: (
@@ -151,7 +151,7 @@ const LearnMoreList = [
   },
   {
     title: 'Documentation',
-    Svg: require('../../static/img/full_squirrel.svg').default,
+    Svg: require('../../static/img/index/undraw_documents_sqrl.svg').default,
     link: '/docs/intro',
     linkText: 'Read the Docs',
     description: (
@@ -167,7 +167,7 @@ const LearnMoreList = [
 const SupportList = [
   {
     title: 'Join us on Slack',
-    Svg: require('../../static/img/head_squirrel.svg').default,
+    Svg: require('../../static/img/index/slack_sqrl.svg').default,
     link: 'https://slack.com/invite/datasqrl',
     linkText: 'Join Slack Community',
     description: (
@@ -180,7 +180,7 @@ const SupportList = [
   },
   {
     title: 'Ask on Stack Overflow',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/stackoverflow_sqrl.svg').default,
     link: 'https://stackoverflow.com/questions/tagged/datasqrl',
     linkText: 'Ask Your Question',
     description: (
@@ -193,7 +193,7 @@ const SupportList = [
   },
   {
     title: 'Commercial Support',
-    Svg: require('../../static/img/full_squirrel.svg').default,
+    Svg: require('../../static/img/index/undraw_active_support_sqrl.svg').default,
     link: '',
     linkText: 'Get in Touch',
     description: (
@@ -209,7 +209,7 @@ const SupportList = [
 const DeveloperResourcesList = [
   {
     title: 'DataSQRL Architecture',
-    Svg: require('../../static/img/nut.svg').default,
+    Svg: require('../../static/img/index/undraw_architecture_sqrl.svg').default,
     link: '/docs/dev/architecture/overview',
     linkText: 'Learn more about the architecture',
     description: (
@@ -222,7 +222,7 @@ const DeveloperResourcesList = [
   },
   {
     title: 'SQRL Language Reference',
-    Svg: require('../../static/img/head_squirrel.svg').default,
+    Svg: require('../../static/img/index/undraw_nut_document_sqrl.svg').default,
     link: '/docs/reference/sqrl/overview',
     linkText: 'Learn more about SQRL',
     description: (
@@ -235,7 +235,7 @@ const DeveloperResourcesList = [
   },
   {
     title: 'Contribute on Github',
-    Svg: require('../../static/img/full_squirrel.svg').default,
+    Svg: require('../../static/img/index/undraw_contribute_sqrl.svg').default,
     link: '/docs/dev/contribute',
     linkText: 'Become a Contributor',
     description: (

@@ -31,7 +31,7 @@ const sidebars = {
         "getting-started/nutshop-tutorial",
         {
           type: 'category',
-          label: 'DataSQRL Overview',
+          label: 'DataSQRL Training',
           link: {
             type: 'doc',
             id: 'getting-started/intro/overview',

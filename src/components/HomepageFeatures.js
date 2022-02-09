@@ -18,7 +18,7 @@ function Feature({Svg, title, link, linkText, description}) {
         <p className="text--left margin-bottom--sm">{description}</p>
         <div className="text--center">
           <Link
-            className="button button--primary button--sm"
+            className="button button--secondary button--sm"
             to={link}>
             {linkText}
           </Link>
