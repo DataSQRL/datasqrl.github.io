@@ -188,7 +188,7 @@ import {
 import recentPurchasesQuery from 'queries/GetRecentPurchases.graphql';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:7050/graphql/customer360',
+  uri: 'http://localhost:7050/graphql/customer360/v0',
   cache: new InMemoryCache()
 });
 ```

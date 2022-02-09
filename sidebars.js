@@ -151,21 +151,35 @@ const sidebars = {
             'reference/concepts/data-service',
             'reference/concepts/view-store',
             'reference/sqrl/overview',
-            'reference/sqrl/table',
-            'reference/sqrl/relationship',
-            'reference/sqrl/time',
             'reference/sources/overview',
           ],
         },
         {
           type: 'category',
-          label: 'SQRL Language Spec',
+          label: 'SQRL',
           link: {
             type: 'doc',
             id: 'reference/sqrl/overview',
           },
           items: [
             'reference/sqrl/grammar',
+            'reference/sqrl/table',
+            'reference/sqrl/relationship',
+            'reference/sqrl/time',
+            {
+              type: 'category',
+              label: 'Functions',
+              link: {
+                type: 'generated-index',
+                title: 'Functions in SQRL',
+                description: "Functions make your life so much easier and your SQRL scripts so much shorter. If we could \
+                only remember them when we need them. Luckily you have this reference list of functions to look them up:"
+              },
+              items: [
+                'reference/sqrl/functions/string-fct',
+                'reference/sqrl/functions/time-fct',
+              ],
+            },
           ],
         },
         {
@@ -177,19 +191,6 @@ const sidebars = {
           },
           items: [
             'reference/sources/api',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Functions',
-          link: {
-            type: 'generated-index',
-            title: 'Functions in SQRL',
-            description: "Functions make your life so much easier and your SQRL scripts so much shorter. If we could \
-            only remember them when we need them. Luckily you have this reference list of functions to look them up:"
-          },
-          items: [
-            'reference/functions/string-fct',
           ],
         },
         'reference/cmd',

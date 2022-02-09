@@ -431,7 +431,7 @@ Customers.spending_by_month :=
 ```
 
 This defines a nested table which aggregates over the orders for each customer.
-SQRL has a built-in library of [*time* functions](/docs/reference/functions/time-fct)
+SQRL has a built-in library of [*time* functions](/docs/reference/sqrl/functions/time-fct)
 that compute time buckets of
 various durations. We can then group on those buckets in order to compute
 aggregates across non-overlapping time intervals. In this example, we

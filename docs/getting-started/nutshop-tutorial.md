@@ -249,7 +249,7 @@ Create the Javascript file `index.js` with the following code:
 import { ApolloClient, gql} from "@apollo/client";
 
 const client = new ApolloClient({ 
-  uri: 'http://localhost:7050/graphql/customer360'
+  uri: 'http://localhost:7050/graphql/customer360/v0'
 });
 ```
 
