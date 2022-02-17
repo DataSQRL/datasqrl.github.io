@@ -4,7 +4,7 @@ title: "Why DataSQRL?"
 
 # Why does DataSQRL exist?
 
-We love building with data, but we got frustrated by how complicated it is to build data-driven features. That's why we build DataSQRL.
+We love building with data, but we got frustrated by how complicated it is to build data-driven features. That's why we built DataSQRL.
 
 There are a gazillion CRUD frameworks and ORM libraries for mapping database rows onto objects, but if you want to do anything more interesting with your data, you are on your own. Want to do complex data transformations? Say hello to obscure stored procedures, brittle data pipelines, and a scattershot of python scripts. Want to do data analytics? Good luck wading through the jungle of data warehouse fiefdoms, big data overkill, and mountains of SQL.
 
