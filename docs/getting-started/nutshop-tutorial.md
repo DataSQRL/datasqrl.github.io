@@ -4,7 +4,7 @@ title: "Intro Tutorial"
 
 # Customer 360 Tutorial
 
-Because we have the humor of a middle schooler on Adderall, this introductory tutorial
+Because we have the humor of middle schoolers on Adderall, this introductory tutorial
 will implement data-driven features for our online DataSQRL nut shop. Nuts and squirrels - 
 how funny are we?
 
@@ -70,7 +70,7 @@ In DataSQLR, all data is structured as tables and tables are grouped into datase
 
 In your terminal, execute the following command to run our little SQRL script:
 ```bash
-datasqrl dev customer360.sqrl
+datasqrl watch customer360.sqrl
 ```
 This command continuously monitors your SQRL script and submits any changes to the running
 DataSQRL server for execution. The server executes the script and generates a data service
@@ -112,7 +112,7 @@ need to convert `time` to a proper DateTime field so we can handle it like a tim
 Orders.date := util.time.fromEpochMillis(time);
 ```
 
-In this statement we are declaring a new field `date` on the `Orders` table and define it
+In this statement we are declaring a new field `date` on the `Orders` table and defining it
 by applying the utility function `util.time.fromEpochMillis` to the `time` field.
 
 Secondly, the `discount` field on the order entries is absent when no discount was applied.
@@ -221,7 +221,7 @@ We can use those fields to aggregate those values for each customer by month.
 Customers.spending_by_month :=
          SELECT util.time.truncateToMonth(date) AS month,
                 sum(total) AS total_spend,
-                sum(discount) AS total_savings
+                sum(savings) AS total_savings
          FROM _.purchases
          GROUP BY month ORDER BY month DESC;
 ```
@@ -253,7 +253,7 @@ const client = new ApolloClient({
 });
 ```
 
-This imports and connects the [Apollo GraphQL client](https://www.apollographql.com/docs/react/)  to our customer 360 API. If you don't have the client installed, run `npm install @apollo/client graphql` first. \
+This imports and connects the [Apollo GraphQL client](https://www.apollographql.com/docs/react/)  to our customer 360 API. If you don't have the client installed, run `npm install @apollo/client graphql` first.
 We can now run queries against it.
 
 ```js
@@ -283,4 +283,4 @@ Give yourself a pat on the back.
 
 This tutorial covered the basics of building data services in DataSQRL. We recommend that
 you read the [DataSQRL Introduction](intro/overview) next because it extends this tutorial and
-explains each of the concepts covered here in more detail. If you found this short tutorial too *dense* or missing information, the complete [DataSQRL Introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
+explains each of the concepts covered here in more detail. If you found this short tutorial too dense or missing information, the complete [DataSQRL Introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
