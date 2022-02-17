@@ -215,7 +215,8 @@ Orders.total := sum(entries.total);
 Orders.savings := sum(entries.discount);
 ```
 
-We can use those fields to aggregate those values for each customer by month.
+We can use those fields to aggregate those values for each customer by month. Recall that we've
+previously created a relationship from Customers to Orders called "purchases".
 
 ```datasqrl
 Customers.spending_by_month :=
