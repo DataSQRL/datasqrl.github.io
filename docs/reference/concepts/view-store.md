@@ -14,7 +14,7 @@ That's a lot in one sentence, let's unpack it starting at the end.
 * **Partially maintained views:** A view store is capable of maintaining views or computing views at query time depending on the needs of the user. A view store can flexibly adjust the way it computes views to trade-off the computational cost needed to maintain views when input data changes versus computing the views at query time.
 * **Fast, concurrent access:** A view store is a responsive, operational data system which means new input data is immediately available for querying and the system can support a large number of concurrent users while providing low latency (<100ms) response times.
 
-A view store is a data system that can support realtime data services and data-driven features in user facing applications.
+A view store is a data system that can support realtime data services and data-driven features in user facing applications. Software developers rely on view stores to serve data-intensive or complex queries in their data service or application over external sources of data.
 
 The motivation for breaking out view stores as a distinct category of data systems is similar to that for data warehouses. <br />
 A data warehouse is a data system that combines, transforms, and consolidates input data from multiple transactional databases and other data sources to provide an environment where analysts can run business intelligence queries. <br />
