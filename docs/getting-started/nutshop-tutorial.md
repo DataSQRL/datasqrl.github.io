@@ -117,20 +117,20 @@ Orders.date := util.time.fromEpochMillis(time);
 In this statement we are declaring a new field `date` on the `Orders` table and defining it
 by applying the utility function `util.time.fromEpochMillis` to the `time` field.
 
-Secondly, the `discount` field on the order entries is absent when no discount was applied.
+Secondly, the `discount` field on the order items is absent when no discount was applied.
 It's pretty annoying to check for existence whenever we want to access that field. This
 is an easy fix which defaults `discount` to `0.0` when the field is missing using the 
 `coalesce` function:
 
 ```datasqrl
-Orders.entries.discount := coalesce(discount, 0.0);
+Orders.items.discount := coalesce(discount, 0.0);
 ```
 
 Nice, our data already looks much better. Adding to and overwriting fields on tables 
 incrementally makes it pretty easy to clean your data.
 When you save the script, you can see the new `date` field on `Orders` in the API.
 
-Note the nested table syntax in `Orders.entries` to reference the nested `entries` records
+Note the nested table syntax in `Orders.items` to reference the nested `items` records
 within the `Orders` table. SQRL supports [nested tables](/) which is useful when dealing with
 hierarchical data like our `Orders` data.
 
@@ -168,11 +168,11 @@ tables based on a JOIN predicate - in our case matching customer ids.
 The underscore is syntactic sugar that SQRL adds to SQL for referring to the table on the
 left hand side on which the relationship is defined.
 
-Similarly, we want to link the `Orders.entries` to the actual product records that they
+Similarly, we want to link the `Orders.items` to the actual product records that they
 reference. This calls for another relationship:
 
 ```sqrl
-Orders.entries.product := JOIN Products ON Products.id = _.productid LIMIT 1;
+Orders.items.product := JOIN Products ON Products.id = _.productid LIMIT 1;
 ```
 
 When you save the script, a `customers` endpoint has been added to the API and we can access
@@ -188,7 +188,7 @@ Try executing the following GraphQL query in GraphiQL to navigate through the re
             purchases(pageSize:10) {
                 id
                 time
-                entries {
+                items {
                     quantity
                     product {
                         name
@@ -212,9 +212,9 @@ would like to know how much they are spending and saving in our shop every month
 First, let's compute the total and savings for each order as separate fields.
 
 ```datasqrl
-Orders.entries.total := quantity * unit_price - discount;
-Orders.total := sum(entries.total);
-Orders.savings := sum(entries.discount);
+Orders.items.total := quantity * unit_price - discount;
+Orders.total := sum(items.total);
+Orders.savings := sum(items.discount);
 ```
 
 We can use those fields to aggregate those values for each customer by month. Recall that we've

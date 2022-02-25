@@ -137,7 +137,7 @@ Please send us example SQRL scripts where the optimizer makes the wrong decision
 -- @optimizer(materialize=true)
 Customers._recent_avg_protein :=
         SELECT SUM(e.quantity * p.weight_in_gram * n.protein)/SUM(e.quantity * p.weight_in_gram)
-        FROM _.purchases.entries e JOIN e.product p JOIN p.nutrition n
+        FROM _.purchases.items e JOIN e.product p JOIN p.nutrition n
         WHERE e.parent.date > now() - INTERVAL 6 MONTH;
 
 -- @api(paginate=true)

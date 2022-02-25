@@ -280,21 +280,21 @@ SQRL supports nested and hierarchical data like JSON objects through nested tabl
 A nested table has a parent table and all rows in a nested table are associated
 with a single parent row in the parent table.
 
-In the nut shop tutorial the `Orders` table has a nested `Orders.entries` table
-that contains the entry records for each order. When referring to a nested table,
+In the nut shop tutorial the `Orders` table has a nested `Orders.items` table
+that contains the item records for each order. When referring to a nested table,
 we have to use the fully qualified name of the table which includes the parent.
-`SELECT * FROM Orders.entries` is valid but `SELECT * FROM entries` is not because
+`SELECT * FROM Orders.items` is valid but `SELECT * FROM items` is not because
 there is no table with that name in the global namespace of the SQRL script.
 
 SQRL automatically adds a relationship field with the name of the nested
 table to the parent table which relates all child records to the parent
-record. The `entries` relationship on the `Orders` table can be used to query
-the entry records for a particular order, e.g. 
-`SELECT SUM(entries.discount) AS order_discount FROM Orders`. \
+record. The `items` relationship on the `Orders` table can be used to query
+the item records for a particular order, e.g. 
+`SELECT SUM(items.discount) AS order_discount FROM Orders`. \
 Likewise, SQRL adds a `parent` relationship on the child table which relates
 rows to their parent rows in the parent table. This relationship can be used
 to refer to parent row attributes, e.g. 
-`SELECT productid, parent.date FROM Orders.entries`
+`SELECT productid, parent.date FROM Orders.items`
 
 ### Defining Nested Tables
 
@@ -313,9 +313,10 @@ orderd by frequency. In other words, we want to look at all the products purchas
 
 ```sqrl
 Customers.past_purchases :=
-         SELECT e.productid, count(e.*) as num_orders, sum(e.quantity) as total_quantity
-         FROM _.purchases.entries e
-         ORDER BY count DESC, quantity DESC;
+         SELECT i.productid, count(i.*) as num_orders, sum(i.quantity) as total_quantity
+         FROM _.purchases.items i
+         GROUP BY i.productid
+         ORDER BY num_orders DESC, total_quantity DESC;
 ```
 
 The table `past_purchases` is defined as a nested table within `Customers`.
@@ -326,9 +327,9 @@ and we can think of the query definition as being applied to *each row* of the
 parent table.
 
 We use the special table handle `_` to refer to each row in the parent 
-`Customers` table. The `FROM` clause `_.purchases.entries` chains together
-the `purchases` relationship on `Customers` with the `entries` relationship
-on `Orders` to retrieve all entry records for all order records associated
+`Customers` table. The `FROM` clause `_.purchases.items` chains together
+the `purchases` relationship on `Customers` with the `items` relationship
+on `Orders` to retrieve all item records for all order records associated
 with a single customer record. Chaining together relationships allows us to
 avoid the complexity of multiple JOIN expressions in this query.
 
@@ -459,11 +460,11 @@ past purchases.
 ```sqrl
 Customers.recent_avg_protein :=
       SELECT SUM(e.quantity * p.weight_in_gram * n.protein)/SUM(e.quantity * p.weight_in_gram)
-      FROM _.purchases.entries e JOIN e.product p JOIN p.nutrition n
+      FROM _.purchases.items e JOIN e.product p JOIN p.nutrition n
       WHERE e.parent.date > now() - INTERVAL 6 MONTH;
 ```
 
-In the `FROM` clause of this query, we are joining the order entries a customer has
+In the `FROM` clause of this query, we are joining the order items a customer has
 bought with the product information and the nutritional information so we can compute
 the average protein content. Note, how we are using the previously defined relationships
 instead of table names in the JOIN expressions to chain the relationships together.

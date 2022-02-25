@@ -104,7 +104,7 @@ One of the benefits of defining relationships in SQRL is that we can navigate th
                       order: [{time: DESC}], pageSize:100 ) {
                 id
                 time
-                entries(pageSize: 50) {
+                items(pageSize: 50) {
                     quantity
                     product {
                         name
@@ -118,13 +118,13 @@ One of the benefits of defining relationships in SQRL is that we can navigate th
 ```
 
 This queries navigates multiple relationships to fetch all the data we need to show a customer's purchase history of the last month. Let's dissect it. \
-At the top level, we are using the `customers` endpoint to query for the customer with `id=50`. We then navigate through the `purchases` relationship and filter out all orders that were placed before February (i.e. last month). In addition, we want those purchases ordered by time decreasing and only fetch up to 100 of them. For each purchase order, we navigate through the `entries` relationship to fetch up to 50 nested order entries. And for each order entry, we navigate through the `product` relationship to get the product information for the ordered product.
+At the top level, we are using the `customers` endpoint to query for the customer with `id=50`. We then navigate through the `purchases` relationship and filter out all orders that were placed before February (i.e. last month). In addition, we want those purchases ordered by time decreasing and only fetch up to 100 of them. For each purchase order, we navigate through the `items` relationship to fetch up to 50 nested order items. And for each order item, we navigate through the `product` relationship to get the product information for the ordered product.
 
 Relationships allow us to construct complex queries which return all the data we need in a single request. We don't have to stitch our desired result set together by querying multiple tables. That saves you a ton of time and is also a lot faster.
 
 When you navigate through a relationship, you can use the `filter`, `order`, `pageSize` argument in the same way you would when querying a table at the top level to specify which related records you want to be returned, in what order, and how many of them.
 
-Note, that these arguments are applied locally for each record that is returned. In the query above, `entries(pageSize: 50)` means that we are asking for up to 50 order entries *for each* purchase order and not 50 total for the entire request. Since this query can return up to 100 purchase orders, the result of this request could potentially return 5000 order entries total in the worst case. \
+Note, that these arguments are applied locally for each record that is returned. In the query above, `items(pageSize: 50)` means that we are asking for up to 50 order items *for each* purchase order and not 50 total for the entire request. Since this query can return up to 100 purchase orders, the result of this request could potentially return 5000 order items total in the worst case. \
 As we navigate through relationships, we need to keep in mind that result set cardinalities multiply and choose small enough page sizes to avoid huge responses from the server.
 
 ## Application Development
@@ -143,7 +143,7 @@ query GetRecentPurchases($customerid: Int!, $after: DateTime!) {
                       order: [{time: DESC}], pageSize:100 ) {
                 id
                 time
-                entries(pageSize: 50) {
+                items(pageSize: 50) {
                     quantity
                     product {
                         name
@@ -210,13 +210,13 @@ module: {
 With all this setup out of the way, let's build a React component that displays the purchase history for a customer.
 
 ```js
-function Purchase({id, time, entries}) {
+function Purchase({id, time, items}) {
     return (
         <div>
         <h2>Order No. {id}</h2>
         <p>Order placed on {time}</p>
         <h3>Order Entries</h3>
-        {entries.map((props, idx) => (
+        {items.map((props, idx) => (
             <Entry key={idx} {...props} />
         ))}
         </div>
@@ -248,7 +248,7 @@ function PurchaseHistory({customerid}) {
 
 ```
 
-We defined 3 React components: `Purchase`, `Entry`, and `PurchaseHistory`. The first two components wrap each order record and each entry record into HTML. The real action is in `PurchaseHistory` where we invoke the method `useQuery` to submit the imported `recentPurchasesQuery` against the API via the configured client. We submit the variables `customerid` and `after` with the query. We compute `after` as the date that's 31 days prior to now whereas `customerid` is an attribute of the component.
+We defined 3 React components: `Purchase`, `Entry`, and `PurchaseHistory`. The first two components wrap each order record and each item record into HTML. The real action is in `PurchaseHistory` where we invoke the method `useQuery` to submit the imported `recentPurchasesQuery` against the API via the configured client. We submit the variables `customerid` and `after` with the query. We compute `after` as the date that's 31 days prior to now whereas `customerid` is an attribute of the component.
 
 To wrap up our simple React application, we are going to define a React component that represents the entire webpage and contains the `PurchaseHistory` component.
 

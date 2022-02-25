@@ -22,7 +22,7 @@ datasqrl source folder nutshop-data
 This adds the dataset `nutshop-data` to the server and a table for each file contained within the folder: the `products` table for data in `products.csv` and the `orders` table for records in `orders_1.json`.
 
 DataSQRL structures data into tables with fields (or columns). A data record is represented as a table row. Tables can be nested to represent hierarchical data. <br />
-For example, the json file `orders_1.json` is made available in DataSQRL as the table `orders` with fields like `time` and `customerid` and each order record is a row in the table. The `orders` table has a nested `entries` table for each order entry in the hierarchical json source data.
+For example, the json file `orders_1.json` is made available in DataSQRL as the table `orders` with fields like `time` and `customerid` and each order record is a row in the table. The `orders` table has a nested `items` table for each order item in the hierarchical json source data.
 
 Tables are grouped into datasets. A dataset usually consists of tables that are related or logically belong together like the `orders` and `products` tables in our tutorial.
 
