@@ -68,9 +68,10 @@ const sidebars = {
                 Think Oxford dictionary for data nerds. Sounds fun? Read on! Doesn't? Then imagine Benedict Cumberbatch reading it to you with a British accent."
           },
           items: [
+            'getting-started/concepts/datasqrl',
+            'getting-started/concepts/sqrl',
             'getting-started/concepts/data-service',
             'getting-started/concepts/view-store',
-            'getting-started/concepts/datasqrl',
           ],
         },
         {

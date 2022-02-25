@@ -285,5 +285,5 @@ You just built and accessed a Customer 360 data service. Good work!
 Give yourself a pat on the back.
 
 This tutorial covered the basics of building data services in DataSQRL. We recommend that
-you read the [DataSQRL Introduction](intro/overview) next because it extends this tutorial and
-explains each of the concepts covered here in more detail. If you found this short tutorial too dense or missing information, the complete [DataSQRL Introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
+you continue with the [DataSQRL Training](intro/overview) next because it extends this tutorial and
+explains each of the concepts covered here in more detail. If you found this short tutorial too dense or missing information, the complete [DataSQRL Training](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
