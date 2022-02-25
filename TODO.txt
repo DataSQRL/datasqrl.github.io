@@ -1,0 +1,3 @@
+- Rename "pre-schema" to "input schema"
+- Rename "submit" to "deploy" in the context of scripts send to DataSQRL server for execution
+- Convert subscriptions.json to yml format for consistency of configuration files

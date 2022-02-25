@@ -60,6 +60,21 @@ const sidebars = {
 */
         {
           type: 'category',
+          label: 'Key Concepts',
+          link: {
+            type: 'generated-index',
+            title: 'Key Concepts in DataSQRL',
+            description: "Knowing the key concepts in DataSQRL is useful for understanding how it works and how to use it. \
+                Think Oxford dictionary for data nerds. Sounds fun? Read on! Doesn't? Then imagine Benedict Cumberbatch reading it to you with a British accent."
+          },
+          items: [
+            'getting-started/concepts/data-service',
+            'getting-started/concepts/view-store',
+            'getting-started/concepts/datasqrl',
+          ],
+        },
+        {
+          type: 'category',
           label: 'DataSQRL Comparison',
           link: {
             type: 'doc',
@@ -138,21 +153,6 @@ const sidebars = {
         id: 'reference/overview',
       },
       items: [
-        {
-          type: 'category',
-          label: 'Key Concepts',
-          link: {
-            type: 'generated-index',
-            title: 'Key Concepts in DataSQRL',
-            description: "Knowing the key concepts in DataSQRL is useful for understanding how it works and how to use it. \
-                Think Oxford dictionary for data nerds. Sounds fun? Read on! Doesn't? Then imagine Benedict Cumberbatch reading it to you with a British accent."
-          },
-          items: [
-            'reference/concepts/data-service',
-            'reference/concepts/view-store',
-            'reference/concepts/datasqrl',
-          ],
-        },
         {
           type: 'category',
           label: 'Sources & Sinks',

@@ -4,6 +4,8 @@ title: "Intro Tutorial"
 
 # Customer 360 Tutorial
 
+<img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="320"/>
+
 Because we have the humor of middle schoolers on Adderall, this introductory tutorial
 will implement data-driven features for our online DataSQRL nut shop. Nuts and squirrels - 
 how funny are we?
@@ -13,7 +15,7 @@ placed by customers. We want to add Customer 360 functionality to the shop, whic
 customers insights into their past orders and recommending products to purchase. In short, we
 want to use the data we have about our customers to sell them nuts with a personalized touch.
 
-![DataSQRL Nut Shop](/img/getting-started/tutorial/nutshop.jpg)
+
 
 ## Install {#setup}
 

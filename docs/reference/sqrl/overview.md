@@ -1,5 +1,5 @@
 
-# What is SQRL?
+# SQRL Reference
 
 Here you can learn more about SQRL than you ever wanted to know.
 
