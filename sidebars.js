@@ -74,7 +74,8 @@ const sidebars = {
             'getting-started/concepts/view-store',
           ],
         },
-        {
+        'getting-started/comparison/overview',
+/*        {
           type: 'category',
           label: 'DataSQRL Comparison',
           link: {
@@ -87,7 +88,7 @@ const sidebars = {
             'getting-started/comparison/data-science',
             'getting-started/comparison/custom',
           ],
-        },
+        }, */
       ],
     },
     {
