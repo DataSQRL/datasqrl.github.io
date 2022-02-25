@@ -73,7 +73,7 @@ can add additional data to the data source folder while our script is running. H
 
 First, make sure you followed the [nut shop tutorial](../nutshop-tutorial) and are still 
 running the `customer360` SQRL script in development mode via the
-`datasqrl dev customer360.sqrl` command.
+`datasqrl watch customer360.sqrl` command.
 
 Run the following query in GraphiQL and notice the result.
 

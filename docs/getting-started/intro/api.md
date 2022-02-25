@@ -309,7 +309,7 @@ To link the  `NewCustomerPromotion` subscription in our Customer 360 script to `
 If you are running the `customer360.sqrl` script in development mode, interrupt the process by pressing `CTRL-C`. Then restart it with the subscription configuration as an argument:
 
 ```bash
-datasqrl dev customer360.sqrl -s subscriptions.json
+datasqrl watch customer360.sqrl -s subscriptions.json
 ```
 
 This runs our script in development with the subscription linked to the file sink. If you wait a few seconds for the server to process the script, you will see the file `newcustomerpromotion.json` appear in the `output` folder with json records for each customer that has spent more than $100 with us.
