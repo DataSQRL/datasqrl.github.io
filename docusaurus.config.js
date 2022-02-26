@@ -124,7 +124,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/tbd',
+                href: 'https://github.com/DataEngAi/',
               },
             ],
           },
