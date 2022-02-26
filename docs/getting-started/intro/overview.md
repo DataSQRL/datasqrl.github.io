@@ -1,4 +1,6 @@
-# Introduction to DataSQRL
+# DataSQRL Training
+
+<img src="/img/index/undraw_personal_training_sqrl.svg" alt="Nut Shop Tutorial >" width="300"/>
 
 This extended tutorial introduces you to the core concepts of DataSQRL and provides enough
 context for you to start building your own data services in DataSQRL.
@@ -11,12 +13,13 @@ nutritional analysis, and more. It'll be a riot. Please read the
 
 ## What is DataSQRL? {#whatis}
 
-*Add Schematic drawing of DataSQRL server with incoming scripts & data and producing APIs*
-
 DataSQRL is a data system for building data services from various sources of data.
 You connect data sources to a running DataSQRL server and then write SQRL scripts that
 clean, transform, and analyze the data. Executing the script on the DataSQRL server
 generates a GraphQL API for you data service that you can consume any way you want.
+
+*Add Schematic drawing of DataSQRL server with incoming scripts & data and producing APIs*
+
 
 SQRL (pronounced "squirrel") stands for *"Structured Query and Reaction Language"*. It
 extends the popular database language SQL by some constructs and syntactic sugar to make
