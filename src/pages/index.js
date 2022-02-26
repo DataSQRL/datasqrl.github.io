@@ -30,7 +30,7 @@ function HomepageHeader() {
             </div>
         </div>
         <div className={clsx('col col--6')}>
-            <p className={styles.video}> Video goes here
+            <p className={styles.video}> Code goes here
             </p>
         </div>
       </div>
