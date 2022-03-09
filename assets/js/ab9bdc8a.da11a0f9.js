@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[9063],{9980:function(e,t,n){n.r(t);var l=n(7294),r=n(2434);t.default=function(){return l.createElement(r.Z,{title:"Hello"},l.createElement("div",{style:{display:"flex",justifyContent:"center",alignItems:"center",height:"50vh",fontSize:"20px"}},l.createElement("p",null,"We offer support for DataSQRL")))}}}]);
