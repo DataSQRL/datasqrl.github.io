@@ -28,14 +28,14 @@ DataSQRL provides these benefits because it's a tightly integrated package purpo
 
 ### Saves You Time {#save-time}
 
-To build a data service, you need an API layer that exposes and services the data service API, a database to serve the data returned by the API, and an ingest layer that collects all the data for your data service and stores it in the database. <br />
-And that's just the price of admission. If you want to do anything of value with your data beyond just compiling and serving it, you also need an analytics layer to transform and enrich the data as well as a data pipeline to glue all these pieces together. And we haven't addressed scalability or robustness yet.
+To build a data service, you need an API layer that exposes and services the data service API, a database to serve the data returned by the API, and an ingest layer that collects all the data for your data service from various sources and stores it in the database. <br />
+And that's just the price of admission. If you want to do anything of value with your data beyond just compiling and serving it, you also need an analytics layer to transform and enrich the data as well as a data pipeline to glue all these pieces together. If you want to respond to data in realtime, you need a streaming architecture and low latency updates. And we haven't addressed scalability or robustness yet.
 
 <img src="/img/index/undraw_time_management_sqrl.svg" alt="DataSQRL saves you time >" width="300"/>
 
 The point is: There are a lot of pieces to a data service architecture and assembling all these moving pieces yourself takes a ton of time and effort.
 
-DataSQRL is a tightly-knit package that integrates best-of-breed components to give you a data service architecture out of the box. DataSQRL uses [Apache Flink](https://flink.apache.org/) as the data pipeline that weaves all the components together and builds the ingest and analytics layer on top. DataSQRL uses the popular [Postgres](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) database systems to store and serve the data. The API layer is build on the fast [Vertx](https://vertx.io/) framework. 
+DataSQRL is a tightly-knit package that integrates best-of-breed components to give you a data service architecture out of the box. DataSQRL uses [Apache Flink](https://flink.apache.org/) as the streaming data pipeline that weaves all the components together and builds the ingest and analytics layer on top. DataSQRL uses the popular [Postgres](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) database systems to store and serve the data. The API layer is build on the fast [Vertx](https://vertx.io/) framework. 
 
 DataSQRL not only stitches these components into a high-performance data service architecture but also ensures that the data moves seamlessly between components by synchronizing data types, orchestrating data flows, managing failures, and providing visibility into and across components.
 
@@ -52,7 +52,7 @@ Because DataSQRL abstracts much complexity of implementing data services it save
 
 DataSQRL provides a higher-level of abstraction for implementing data services. That makes things easier in two ways:
 
-First, DataSQRL handles a lot of things for you that you don't have to worry about at all. Schema management, data flows, data type conversions, data synchronization - all of those things are managed directly by DataSQRL. When you implement a data service in DataSQRL you have to learn fewer concepts to be successful. DataSQRL doesn't hide any of these elements from you. You get full visibility and can control those elements if you like. But you don't have to and in most cases you never have to worry about it.
+First, DataSQRL handles a lot of things for you that you don't have to worry about at all. Schema management, data flows, data type conversions, stream orchestration, data synchronization - all of those things are managed directly by DataSQRL. When you implement a data service in DataSQRL you have to learn fewer concepts to be successful. DataSQRL doesn't hide any of these elements from you. You get full visibility and can control those elements if you like. But you don't have to and in most cases you never have to worry about it.
 
 You can focus entirely on the logic of your data service by defining data transformations and analytics. DataSQRL uses those definitions to figure out what the schema should look like, how the data should flow, and what the exposed API looks like. This simplifies implementing a data service and saves you a ton of "glue code" that holds a data service architecture together.
 
@@ -75,6 +75,8 @@ Building a data service prototype is one thing, but getting a data service to pr
 If you are dealing with a substantial amount of data, you need to handle the data efficiently. Otherwise, your data service is going to be costly, slow, and unstable. Even a trivial omission like a missing index structure can bring down an otherwise soundly engineered data service once you reach a few gigabytes of data with a handful of concurrent users. To make matters worse, you often don't find out about these issues until late in the game or after you've shipped to production, which ruins game night with tacos.
 
 DataSQRL has an [optimizer](/docs/reference/operations/optimizer) that picks optimal data structures, chooses the least expensive execution path, installs index structures, pushes down predicates, batches requests, and pools resources. All those things you really don't want to think about when you are building a data service on a timeline but can potentially come back to bite you. DataSQRL takes care of them for you.
+
+DataSQRL uses [Apache Flink](https://flink.apache.org/) to execute realtime streaming data flows and transformations and stores the resulting data in [Postgres](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) databases to serve API requests. This means your data service runs on a robust, fast, and efficient architecture that is optimized by DataSQRL.
 
 If your data service becomes successful (fingers crossed 🤞) or the amount of data keeps growing, you'll need to scale. Building scale into a system after the fact is very expensive. With DataSQRL you are building on a scalable foundation and when it comes time to scale you know that you can add resources and the system will be able to manage more data and more traffic. However, DataSQRL doesn't slow you down initially with scalability concerns.
 
