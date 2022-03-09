@@ -4,11 +4,11 @@ title: "View Store"
 
 # What is a View Store?
 
-A view store is a data system that provides fast, concurrent access to partially maintained views over sources of input data.
+A view store is a data system that provides fast, concurrent access to partially maintained views over streaming sources of input data.
 
 That's a lot in one sentence, let's unpack it starting at the end.
 
-* **Sources of input data:** A view store processes data produced by other systems which are the sources of input data. A view store is not a transactional database or authoritative data store. It combines input data from multiple sources and processes it.
+* **Streaming sources of input data:** A view store processes data produced by other systems which are the sources of input data. A view store is not a transactional database or authoritative data store. It combines input data from multiple sources and processes it. To respond to changes or new data in realtime, input data is streamed into a view store.
 * **View:** "Processing data" means computing views over the input data. A [view](https://en.wikipedia.org/wiki/View_(SQL)) is a database term for the result set of a pre-defined query. By composing views, a view store can derive arbitrary transformations or analytics on the input data.
 * **Maintained View:** A view is called *maintained* if the result set of the view is incrementally maintained as the input data changes. Maintaining a view makes it faster to query for its results.
 * **Partially maintained views:** A view store is capable of maintaining views or computing views at query time depending on the needs of the user. A view store can flexibly adjust the way it computes views to trade-off the computational cost needed to maintain views when input data changes versus computing the views at query time.

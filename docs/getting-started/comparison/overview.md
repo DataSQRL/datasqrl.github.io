@@ -4,7 +4,9 @@ title: "DataSQRL Comparison"
 
 # How does DataSQRL compare to other Data Technologies?
 
-You get that [DataSQRL](../concepts/datasqrl) is a tool for building [data services](../concepts/data-service) from external data sources, but you are wondering if it's the right tool for your project. And how does it compare to other data technologies you are considering to get the work done?
+<img src="/img/index/undraw_decide_sqrl.svg" alt="When to use DataSQRL >" width="300"/>
+
+You get that [DataSQRL](../concepts/datasqrl) is a tool for building [data services](../concepts/data-service) from streaming data sources, but you are wondering if it's the right tool for your project. And how does it compare to other data technologies you are considering to get the work done?
 
 While it depends a lot on the specifics of your project, the following heuristics are generally useful:
 

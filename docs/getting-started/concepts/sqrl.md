@@ -12,7 +12,7 @@ You express the logic of your data service in SQRL through a sequence SQL statem
 
 SQRL is a loosely-typed language which infers data types from the input data. You can explicitly define data types and schemas if you want to, but in most cases you let DataSQRL handle all the type and schema management for you and save a lot of time.
 
-SQRL stands for "Structured Query and Reaction Language" is designed specifically for developers who are building responsive data services. It has a low learning curve because it is essentially "just" SQL but adds enough convenience features to SQL to make it feel like a productive programming language. Check out the [introductory tutorial](../nutshop-tutorial) to get a feel for the language and see how SQRL allows you to build data services in a few minutes.
+SQRL stands for "Structured Query and Reaction Language" is designed specifically for developers who are building streaming data services. It has a low learning curve because it is essentially "just" SQL but adds enough convenience features to SQL to make it feel like a productive programming language. Check out the [introductory tutorial](../nutshop-tutorial) to get a feel for the language and see how SQRL allows you to build data services in a few minutes.
 
 ## SQRL Features
 

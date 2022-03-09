@@ -15,9 +15,9 @@ function HomepageHeader() {
         <div className={clsx('col col--6')}>
             <h1 className="hero__title">{siteConfig.tagline}</h1>
             <p className="hero__subtitle">
-                <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> is an open-source
-                <Link to="/docs/getting-started/concepts/view-store">view store</Link> for
-                building <Link to="/docs/getting-started/concepts/data-service">data services</Link> from existing
+                <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> is an
+                open-source <Link to="/docs/getting-started/concepts/view-store">view store</Link> for
+                building <Link to="/docs/getting-started/concepts/data-service">data services</Link> from streaming
                 data sources using an <Link to="/docs/getting-started/concepts/sqrl">enhanced version of SQL</Link> developers
                 call “not awful”.
             </p>

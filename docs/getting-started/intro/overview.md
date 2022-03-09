@@ -23,7 +23,7 @@ generates a GraphQL API for you data service that you can consume any way you wa
 
 SQRL (pronounced "squirrel") stands for *"Structured Query and Reaction Language"*. It
 extends the popular database language SQL by some constructs and syntactic sugar to make
-it easier and more productive to build responsive data services from raw data. Specifically,
+it easier and more productive to build responsive data services from streaming data. Specifically,
 SQRL provides support for realtime data streams and the ability to react to incoming data -
 hence the name. A big chunk of this tutorial is devoted to covering how SQRL extends
 SQL and the concepts it provides that make building data services easy. But we are getting

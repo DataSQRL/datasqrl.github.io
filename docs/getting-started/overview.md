@@ -22,7 +22,7 @@ We get it: there are a million technologies out there so why should you spend yo
 
 <img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="300"/>
 
-DataSQRL makes it easier and faster to build [data services](/docs/getting-started/concepts/data-service) from external data sources. [Read more about](why-datasqrl) why building data services is so difficult and how DataSQRL tries to make it less painful.
+DataSQRL makes it easier and faster to build [data services](/docs/getting-started/concepts/data-service) from streaming data sources. [Read more about](why-datasqrl) why building data services is so difficult and how DataSQRL tries to make it less painful.
 
 DataSQRL is essentially a compiler and optimizer for an SQL-based language called [SQRL](/docs/getting-started/concepts/sqrl) that extends SQL with syntax and constructs to make it developer friendly. You implement the logic and structure of your data service in SQRL and DataSQRL compiles it into ingest layers, data transformations, analytics, schemas, databases, and APIs for you. The result is an end-to-end integrated data pipeline with an API serving layer. [Learn more about](/docs/getting-started/concepts/datasqrl) DataSQRL and all the plumbing and integration work it takes off your shoulders.
 
