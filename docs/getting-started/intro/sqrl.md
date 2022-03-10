@@ -1,8 +1,8 @@
 ---
-title: "Write SQRL Script"
+title: "Implement SQRL Script"
 ---
 
-# Writing SQRL Scripts
+# Implementing SQRL Scripts
 
 The logic and function of a data service is defined in the SQRL script.
 That's where the action is. We are going to dive deeper into

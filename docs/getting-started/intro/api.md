@@ -1,5 +1,5 @@
 ---
-title: "Using the API"
+title: "Access the API"
 ---
 
 # Accessing the API

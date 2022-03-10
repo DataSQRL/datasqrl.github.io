@@ -33,7 +33,7 @@ data service. When you are done with development, you can stop the process by ex
 `datasqrl stop`.
 
 
-## Step 1: Adding Data {#adding-data}
+## Step 1: Connect Data {#adding-data}
 
 First, we are going to add some data from our online shop for us to play with. Navigate to
 a directory on your computer where you can place files for this tutorial. [Download this zip
@@ -78,7 +78,7 @@ This command continuously monitors your SQRL script and submits any changes to t
 DataSQRL server for execution. The server executes the script and generates a data service
 from the result which is exposed as a GraphQL API.
 
-### Querying the API {#api}
+### Query the API {#api}
 
 The command also opens a page in your browser where you can inspect the resulting API with
 GraphiQL, which is a lightweight IDE for your API. Try it out by pasting the following
@@ -100,7 +100,9 @@ the filter condition to query for products by their fields.
 Voila, we got a functioning data service with `products` and `orders` API entry points
 for the respective tables that we imported. That was easier than making fun of the metaverse.
 
-## Step 2: Transforming Data {#transform}
+## Step 2: Implement Data Logic {#transform}
+
+Now it's time to implement the logic of our data service in the SQRL script. We are going to clean up the data, structure it according to our needs, and analyze the data to add additional value to our Customer 360.
 
 ### Data Cleansing
 
@@ -204,7 +206,7 @@ Try executing the following GraphQL query in GraphiQL to navigate through the re
 We can now navigate through our data with the uncanny agility of Luke
 Skywalker in the Death Star.
 
-## Step 3: Analyzing Data {#analysis}
+### Data Analysis {#analysis}
 
 Let's dig our hands even deeper into the data dough and do some data analysis. Our customers
 would like to know how much they are spending and saving in our shop every month.
@@ -236,7 +238,7 @@ the month of the order's date. It then sums up the total and savings for all the
 group. The utility function `truncateToMonth` takes a date and returns the date for the
 beginning of the month in which that input date occurred.
 
-## Step 4: Querying the API {#api}
+## Step 3: Access the API {#api}
 
 We got our data cleaned up, transformed into a customer-centric view, linked together through
 relationships to access customers' shopping history, and we added a spending analysis.
