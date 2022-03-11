@@ -35,20 +35,6 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.tabs--hero .tabs__item {
-    border-bottom-width: 0px;
-}
-
-.tabs--hero .tabs__item--active {
-    color: var(--ifm-color-secondary);
-    border-bottom-color: var(--ifm-color-secondary);
-    background: var(--ifm-color-secondary-lightest);
-}
-
-html[data-theme='dark'] .tabs--hero .tabs__item--active {
-    background: var(--ifm-color-secondary-darkest);
-}
-
 img[alt$=">"] {
   float: right;
   margin: 1rem;
@@ -79,4 +65,18 @@ img[alt$="<|"] {
   border-style: solid;
   border-width: 2px;
   border-color: var(--ifm-text-color);
+}
+
+.tabs--hero .tabs__item {
+    border-bottom-width: 0px;
+}
+
+.tabs--hero .tabs__item--active {
+    color: var(--ifm-color-secondary);
+    border-bottom-color: var(--ifm-color-secondary);
+    background: var(--ifm-color-secondary-lightest);
+}
+
+html[data-theme='dark'] .tabs--hero .tabs__item--active {
+    background: var(--ifm-color-secondary-darker);
 }

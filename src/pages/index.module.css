@@ -37,7 +37,7 @@
 }
 
 html[data-theme='dark'] .codeContent {
-    background: var(--ifm-color-secondary-darkest);
+    background: var(--ifm-color-secondary-darker);
 }
 
 .codeContent p {
@@ -46,6 +46,7 @@ html[data-theme='dark'] .codeContent {
     margin-bottom: 0;
     font-weight: bold;
 }
+
 
 
 .content {
