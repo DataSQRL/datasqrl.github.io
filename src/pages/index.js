@@ -31,7 +31,7 @@ function HomepageHeader() {
             </div>
         </div>
         <div className={clsx('col col--6')}>
-            <CodeExample stepNo={1} />
+            <CodeExample />
         </div>
       </div>
       </div>
@@ -39,28 +39,60 @@ function HomepageHeader() {
   );
 }
 
-function CodeExample({stepNo}) {
-  stepNo = parseInt(stepNo);
-  let step = stepNo+1;
-  return (
-      <div className={styles.code}>
-          <ul class="tabs tabs--block tabs--hero">
-            {ImplementSteps.map(function(step, idx){
-                let tabClass = "tabs__item";
-                if (idx==stepNo) tabClass += " tabs__item--active";
-                return <li class={tabClass}>{idx+1}. {step.title}</li>
-            })}
-          </ul>
-          <div className={styles.codeContent}>
-              <CodeBlock language={ImplementSteps[stepNo].language}>
-{ImplementSteps[stepNo].code}
-              </CodeBlock>
-              <p>Step {step}: {ImplementSteps[stepNo].description}</p>
-          </div>
-      </div>
-  );
-}
+class CodeExample extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+        stepNo: 0,
+    };
+    this.setExplicitStep = this.setExplicitStep.bind(this);
+  }
+
+  setExplicitStep(idx) {
+    clearInterval(this.interval);
+    this.setStep(idx);
+  }
+
+  nextStep() {
+    let stepNo = this.state.stepNo;
+    this.setStep((stepNo+1)%ImplementSteps.length);
+  }
+
+  setStep(idx) {
+    this.setState({stepNo: idx});
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.nextStep(), 5000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  render() {
+      let stepNo = this.state.stepNo;
+      let stepName = stepNo+1;
+      let setStepFct = this.setExplicitStep;
+      return (
+          <div className={styles.code}>
+              <ul className="tabs tabs--block tabs--hero">
+                {ImplementSteps.map(function(step, idx){
+                    let tabClass = "tabs__item";
+                    if (idx==stepNo) tabClass += " tabs__item--active";
+                    return <li key={idx} className={tabClass} onClick={() => setStepFct(idx)}>{idx+1}. {step.title}</li>
+                })}
+              </ul>
+              <div className={styles.codeContent}>
+                  <CodeBlock language={ImplementSteps[stepNo].language}>
+                        {ImplementSteps[stepNo].code}
+                  </CodeBlock>
+                  <p>Step {stepName}: {ImplementSteps[stepNo].description}</p>
+              </div>
+          </div>
+      );
+  }
+}
 
 const ImplementSteps = [
     {
