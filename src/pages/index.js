@@ -98,7 +98,7 @@ const ImplementSteps = [
     {
       title: "Connect",
       description: "Connect data source and import the data",
-      language: "sqrl",
+      language: "sql",
       code:
 `IMPORT nutshop-data.Orders;
 IMPORT nutshop-data.Products;
@@ -108,13 +108,14 @@ IMPORT nutshop-data.Products;
     },
     {
       title: "Implement",
-      description: "Implement the logic of your data service",
-      language: "sqrl",
+      description: "Implement the logic of your data service in SQRL",
+      language: "sql",
       code:
 `Customers := SELECT DISTINCT customerid AS id FROM Orders;
-
-Customers.purchases := JOIN Orders ON Orders.customerid = _.id
-                                    ORDER BY Orders.time DESC;
+-- SQRL extends SQL and supports relationships ...
+Customers.purchases := JOIN Orders ON Orders.customerid=_.id
+                                  ORDER BY Orders.time DESC;
+-- ... and incremental table definitions
 Customers.total_purchases := SUM(purchases.total);`,
     },
     {
