@@ -68,7 +68,7 @@ const config = {
           {to: '/blog', label: 'News', position: 'left'},
           {to: '/support', label: 'Support', position: 'left'},
           {
-            href: 'https://github.com/tbd',
+            href: 'https://github.com/DataEngAi/',
             label: 'GitHub',
             position: 'right',
           },
