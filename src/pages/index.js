@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import CodeBlock from '@theme/CodeBlock';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
@@ -30,14 +31,74 @@ function HomepageHeader() {
             </div>
         </div>
         <div className={clsx('col col--6')}>
-            <p className={styles.video}> Code goes here
-            </p>
+            <CodeExample stepNo={1} />
         </div>
       </div>
       </div>
     </header>
   );
 }
+
+function CodeExample({stepNo}) {
+  stepNo = parseInt(stepNo);
+  let step = stepNo+1;
+  return (
+      <div className={styles.code}>
+          <ul class="tabs tabs--block tabs--hero">
+            {ImplementSteps.map(function(step, idx){
+                let tabClass = "tabs__item";
+                if (idx==stepNo) tabClass += " tabs__item--active";
+                return <li class={tabClass}>{idx+1}. {step.title}</li>
+            })}
+          </ul>
+          <div className={styles.codeContent}>
+              <CodeBlock language={ImplementSteps[stepNo].language}>
+{ImplementSteps[stepNo].code}
+              </CodeBlock>
+              <p>Step {step}: {ImplementSteps[stepNo].description}</p>
+          </div>
+      </div>
+  );
+}
+
+
+const ImplementSteps = [
+    {
+      title: "Connect",
+      description: "Connect data source and import the data",
+      language: "sqrl",
+      code:
+`IMPORT nutshop-data.Orders;
+IMPORT nutshop-data.Products;
+
+
+`,
+    },
+    {
+      title: "Implement",
+      description: "Implement the logic of your data service",
+      language: "sqrl",
+      code:
+`Customers := SELECT DISTINCT customerid AS id FROM Orders;
+
+Customers.purchases := JOIN Orders ON Orders.customerid = _.id
+                                    ORDER BY Orders.time DESC;
+Customers.total_purchases := SUM(purchases.total);`,
+    },
+    {
+      title: "Access",
+      description: "Access the data service through generated GraphQL API",
+      language: "graphql",
+      code:
+`customers(filter: [{ id: {eq: "101"}}]) {
+    items {
+         total_purchases
+         purchases(filter: [{time: {gt: "2022-02-01"}}]) {
+             total
+ }   }   }`,
+    }
+];
+
 
 const WhyDataSQRLList = [
   {

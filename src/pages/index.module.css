@@ -22,12 +22,31 @@
   justify-content: left;
 }
 
-.video {
-  display: flex;
-  line-height: 200px;
-  align-items: center;
-  justify-content: center;
+.code {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    margin-top: 1rem;
 }
+
+.codeContent {
+    padding: 1rem;
+    border-radius: var(--ifm-global-radius);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background: var(--ifm-color-secondary-lightest);
+}
+
+html[data-theme='dark'] .codeContent {
+    background: var(--ifm-color-secondary-darkest);
+}
+
+.codeContent p {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
 
 .content {
   display: flex;
