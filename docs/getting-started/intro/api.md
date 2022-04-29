@@ -61,7 +61,7 @@ To query for all products, you remove any argument that constrains the result se
 }
 ```
 
-This limits the number of returned products to 20 starting at position 10 in the complete list of results. DataSQRL also supports [cursor-style navigation](advanced#pagination) (as used by Relay, for example).
+This limits the number of returned products to 20 starting at position 10 in the complete list of results. DataSQRL also supports [cursor-style navigation](./advanced#pagination) (as used by Relay, for example).
 
 ### Ordering
 
