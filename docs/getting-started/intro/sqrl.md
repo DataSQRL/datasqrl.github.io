@@ -58,8 +58,7 @@ In the [nut shop tutorial](../nutshop-tutorial#adding-data) we imported the
 `Products` and `Orders` tables.
 
 ```sqrl
-IMPORT nutshop-data.Products;
-IMPORT nutshop-data.Orders;
+IMPORT nutshop-data.*;
 ```
 
 These tables are now defined in our script and we can transform, query, or otherwise build with
@@ -106,7 +105,7 @@ through which the frontend team can query for the current order count.
 
 ```graphql
 {
-    numorders
+    NumOrders
     {
         count
     } 
@@ -219,15 +218,12 @@ on the start table, which is how we access it in the script or through the API:
 
 ```graphql
 {
-    customers(filter: [{ id: {eq: "50"}}])
+    Customers(id: "50")
     {
-        data
+        purchases(limit:10)
         {
-            purchases(limit:10)
-            {
-                id
-                time
-            }
+            id
+            time
         }
     } 
 }
@@ -366,12 +362,10 @@ two results with slightly different names.
 
 ```graphql
 {
-    products(filter: [{ id: {eq: "1"}}]) {
-        data {
-            name
-            sizing
-            weight_in_grams
-        }
+    Products(id: "1") {
+        name
+        sizing
+        weight_in_grams
     } 
 }
 ```

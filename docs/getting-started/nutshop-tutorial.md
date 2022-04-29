@@ -54,17 +54,16 @@ Adding table "nutshop-data.Products" with files [products.csv]
 Adding table "nutshop-data.Orders" with files [orders_*.json]
 ```
 
-We can now access the data and build a data service with it. Create a file called 
-`customer360.sqrl` and open it in your favorite editor. This is the SQRL script where
-we define the transformations and logic for our Customer 360 data service. SQRL is an
-extension of SQL that adds a few concepts and some syntactic sugar to make it easier to
-develop with SQL and build data services. SQRL is like adding bacon to a sandwich: it makes
-SQL better in ways that seem obvious in hindsight.
+We can now access the data and build a data service with it. Run the following command to create an SQRL script called `customer360.sqrl` (make sure the file does not already exist):
+```bash
+datasqrl watch customer360.sqrl
+```
 
-Add the following two import statements to your `customer360.sqrl` script:
+The SQRL script is where we define the transformations and logic for our Customer 360 data service. SQRL is an extension of SQL that adds a few concepts and some syntactic sugar to make it easier to develop with SQL and build data services. SQRL is like adding bacon to a sandwich: it makes SQL better in ways that seem obvious in hindsight. 
+Open the 'customer360.sqrl' file in your favorite editor and you'll see:
+
 ```sqrl
-IMPORT nutshop-data.Products;
-IMPORT nutshop-data.Orders;
+IMPORT nutshop-data.*;
 ```
 
 This imports the `Products` and `Orders` tables from the `nutshop-data` dataset to our script.
@@ -74,9 +73,7 @@ In your terminal, execute the following command to run our little SQRL script:
 ```bash
 datasqrl watch customer360.sqrl
 ```
-This command continuously monitors your SQRL script and submits any changes to the running
-DataSQRL server for execution. The server executes the script and generates a data service
-from the result which is exposed as a GraphQL API.
+The `datasqrl watch` command not only creates but also continuously monitors our SQRL script and submits any changes to the running DataSQRL server for execution. The server executes the script and generates a data service from the result which is exposed as a GraphQL API.
 
 ### Query the API {#api}
 
@@ -85,12 +82,10 @@ GraphiQL, which is a lightweight IDE for your API. Try it out by pasting the fol
 GraphQL query into the left hand side and hitting the run button:
 ```graphql
 {
-    products(filter: [{ id: {eq: "1"}}]) {
-        items {
-            name
-            sizing
-            weight_in_grams
-        }
+    Products(id: "1") {
+        name
+        sizing
+        weight_in_grams
     } 
 }
 ```
@@ -185,17 +180,15 @@ Try executing the following GraphQL query in GraphiQL to navigate through the re
 
 ```graphql
 {
-    customers(filter: [{ id: {eq: "50"}}]) {
-        items {
-            purchases(pageSize:10) {
-                id
-                time
-                items {
-                    quantity
-                    product {
-                        name
-                        weight_in_grams
-                    }
+    Customers(id: "50") {
+        purchases(limit:10) {
+            id
+            time
+            items {
+                quantity
+                product {
+                    name
+                    weight_in_grams
                 }
             }
         }
@@ -266,12 +259,10 @@ client
   .query({
     query: gql`
       query GetProduct {
-        products(filter: [{ id: {eq: "1"}}]) {
-            items {
-                name
-                sizing
-                weight_in_grams
-            }
+        Products(id: "1") {
+            name
+            sizing
+            weight_in_grams
         }
       }
     `

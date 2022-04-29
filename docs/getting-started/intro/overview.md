@@ -40,8 +40,7 @@ There are 3 steps to building a data service in DataSQLR:
 2. **[Write SQRL script](sqrl)**: The SQRL script defines the data transformations and
  data logic of our data service. It is the brains of the whole operation. 
 3. **[Access API](api)**: When we execute the SQRL script, the DataSQRL server generates
- a GraphQL data API based on the result. You access the API from your application in
- the programming language of your choice.
+ a GraphQL data API based on the result. You can customize the API and access it from your application in the programming language of your choice.
 
 Before we look more closely at those 3 steps, make sure that you have DataSQRL
 [installed](../install) and [running](../nutshop-tutorial#setup). Later, we'll look in

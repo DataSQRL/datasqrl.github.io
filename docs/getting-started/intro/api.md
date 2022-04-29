@@ -22,59 +22,46 @@ That'll be our starting point for any API request.
 We have seen this `Products` query a few times already:
 ```graphql
 {
-    products(filter: [{ id: {eq: "1"}}]) {
-        items {
-            name
-            sizing
-            weight_in_grams
-        }
+    Products(id: "1") {
+        name
+        sizing
+        weight_in_grams
     } 
 }
 ```
 
-It asks for all products that match the filter condition `id=1` (`eq` stands for "equals") and returns the product's `name`, `sizing`, and `weight_in_grams`.
+It asks for all products that have `id=1` and returns the product's `name`, `sizing`, and `weight_in_grams`.
 
 The easiest way to test GraphQL queries is through the GraphiQL IDE in your browser. Open the URL `localhost:7050/graphiql/`, enter queries you want to run on the left side, hit the run button, and observe the result on the right.
 
 GraphiQL is also useful for developing your own API queries. It provides auto-completion, syntax highlighting, and a schema browser that allows you to explore the API.
 
-### Filters
+### Custom Lookups
 
-All query endpoints support the optional `filter` argument to select a subset of the rows from the table. You can provide multiple filters to query for rows that match all the filters. For example, we can query for all products of type "Nuts" that weight more than 1000 grams:
+You can use the query endpoints to return records from the underlying table by matching column values or filter condition. For example, we can query for all products of type "Nuts" that weight more than 1000 grams:
 
 ```graphql
 {
-    products(filter: [{ type: {eq: "Nuts"}}, {weight_in_gram: {gt: 1000}}]) {
-        items {
-            name
-            weight_in_gram
-        }
+    Products(type: "Nuts", weight_in_gram: {larger: 1000}) {
+        name
+        weight_in_gram
     } 
 }
 ```
-
-The predicate `gt` stands for "greater than". You can also use `lt` for "less than", `gteq` for "greater than or equal", etc.
 
 ### Pagination
 
-To query for all products, you remove the filter argument. That's a lot of results, however. The API supports pagination by default, so we can page through the results rather than getting them all at once. This is important when you are dealing with large datasets.
+To query for all products, you remove any argument that constrains the result set, i.e. `Products() {...}` . That's a lot of results, however. You can use `limit` and `offset` arguments to navigate through large result sets:
 
 ```graphql
 {
-    products(pageSize: 20, pageState: "") {
-        items {
-            name
-        }
-        pageInfo {
-            hasNextPage
-            nextPageState
-        }
+    Products(limit: 20, offset: 10) {
+        name
     } 
 }
 ```
 
-We added the `pageSize` argument to tell the API that we wish to page through the data with 20 rows per page. The empty `pageState` argument tells the API to return the first page. You can also omit that argument to retrieve the first page. \
-However, to access subsequent pages, we pass the `nextPageState` value that was returned on the previous request. The `hasNextPage` field is `true` if there is a subsequent page.
+This limits the number of returned products to 20 starting at position 10 in the complete list of results. DataSQRL also supports [cursor-style navigation](advanced#pagination) (as used by Relay, for example).
 
 ### Ordering
 
@@ -82,12 +69,10 @@ We can also control the order in which results are returned. To have the results
 
 ```graphql
 {
-    products(filter: [{ type: {eq: "Nuts"}}, {weight_in_gram: {gt: 1000}}],
-             order: [{weight_in_gram: ASC}]) {
-        items {
-            name
-            weight_in_gram
-        }
+    Products(type: "Nuts", weight_in_gram: {larger: 1000},
+             order: {weight_in_gram: ASC}) {
+        name
+        weight_in_gram
     } 
 }
 ```
@@ -98,18 +83,15 @@ One of the benefits of defining relationships in SQRL is that we can navigate th
 
 ```graphql
 {
-    customers(filter: [{ id: {eq: "50"}}]) {
-        items {
-            purchases(filter: [{time: {gt: "2022-02-01"}}], 
-                      order: [{time: DESC}], pageSize:100 ) {
-                id
-                time
-                items(pageSize: 50) {
-                    quantity
-                    product {
-                        name
-                        weight_in_grams
-                    }
+    Customers(id: "50") {
+        purchases(ftime: {after: "2022-02-01"}, order: {time: DESC}, limit:100 ) {
+            id
+            time
+            items(limit: 50) {
+                quantity
+                product {
+                    name
+                    weight_in_grams
                 }
             }
         }
@@ -118,13 +100,13 @@ One of the benefits of defining relationships in SQRL is that we can navigate th
 ```
 
 This queries navigates multiple relationships to fetch all the data we need to show a customer's purchase history of the last month. Let's dissect it. \
-At the top level, we are using the `customers` endpoint to query for the customer with `id=50`. We then navigate through the `purchases` relationship and filter out all orders that were placed before February (i.e. last month). In addition, we want those purchases ordered by time decreasing and only fetch up to 100 of them. For each purchase order, we navigate through the `items` relationship to fetch up to 50 nested order items. And for each order item, we navigate through the `product` relationship to get the product information for the ordered product.
+At the top level, we are using the `Customers` endpoint to query for the customer with `id=50`. We then navigate through the `purchases` relationship and filter out all orders that were placed before February (i.e. last month). In addition, we want those purchases ordered by time decreasing and only fetch up to 100 of them. For each purchase order, we navigate through the `items` relationship to fetch up to 50 nested order items. And for each order item, we navigate through the `product` relationship to get the product information for the ordered product.
 
 Relationships allow us to construct complex queries which return all the data we need in a single request. We don't have to stitch our desired result set together by querying multiple tables. That saves you a ton of time and is also a lot faster.
 
-When you navigate through a relationship, you can use the `filter`, `order`, `pageSize` argument in the same way you would when querying a table at the top level to specify which related records you want to be returned, in what order, and how many of them.
+When you navigate through a relationship, you can filter records and use `limit` and `offset` in the same way you would when querying a table at the top level to specify which related records you want to be returned, in what order, and how many of them.
 
-Note, that these arguments are applied locally for each record that is returned. In the query above, `items(pageSize: 50)` means that we are asking for up to 50 order items *for each* purchase order and not 50 total for the entire request. Since this query can return up to 100 purchase orders, the result of this request could potentially return 5000 order items total in the worst case. \
+Note, that these arguments are applied locally for each record that is returned. In the query above, `items(limit: 50)` means that we are asking for up to 50 order items *for each* purchase order and not 50 total for the entire request. Since this query can return up to 100 purchase orders, the result of this request could potentially return 5000 order items total in the worst case. \
 As we navigate through relationships, we need to keep in mind that result set cardinalities multiply and choose small enough page sizes to avoid huge responses from the server.
 
 ## Application Development
@@ -137,18 +119,15 @@ The first step is to take our queries and convert them to generic query template
 
 ```graphql
 query GetRecentPurchases($customerid: Int!, $after: DateTime!) {
-    customers(filter: [{ id: {eq: $customerid}}]) {
-        items {
-            purchases(filter: [{time: {gt: $after}}], 
-                      order: [{time: DESC}], pageSize:100 ) {
-                id
-                time
-                items(pageSize: 50) {
-                    quantity
-                    product {
-                        name
-                        weight_in_grams
-                    }
+    Customers(id: $customerid) {
+        purchases(time: {after: $after}, order: {time: DESC}, limit:100 ) {
+            id
+            time
+            items(pageSize: 50) {
+                quantity
+                product {
+                    name
+                    weight_in_grams
                 }
             }
         }

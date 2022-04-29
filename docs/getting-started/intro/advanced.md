@@ -46,6 +46,29 @@ SQRL includes a lot of useful functions. You can view the [complete listing of f
 * geo, statistics
 
 
+## Pagination {#pagination}
+
+By default, SQRL supports `limit` and `offset` arguments to paginate through large result sets. While simple, this approach has the downside that you may see duplicate records or miss records when navigating between pages as the underlying data - and hence offsets - change. Another downside is that you won't know if there is a "next page" until you run out of results.
+
+To remedy these downsides, SQRL also supports cursor style navigation. When you configure cursor style navigation (WHERE EXACTLY??), results are returned in pages with extra page information:
+
+```graphql
+{
+    products(pageSize: 20, pageState: "") {
+        items {
+            name
+        }
+        pageInfo {
+            hasNextPage
+            nextPageState
+        }
+    } 
+}
+```
+
+We added the `pageSize` argument to tell the API that we wish to page through the data with 20 rows per page. The empty `pageState` argument tells the API to return the first page. You can also omit that argument to retrieve the first page. \
+However, to access subsequent pages, we pass the `nextPageState` value that was returned on the previous request. The `hasNextPage` field is `true` if there is a subsequent page.
+
 ## Hidden Fields and Utility Functions
 
 DataSQRL automatically adds a few hidden columns to all records from imported data source tables:

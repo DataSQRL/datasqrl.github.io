@@ -31,7 +31,13 @@ Tables are grouped into datasets. A dataset usually consists of tables that are 
 A data source provides access to one or multiple datasets. A folder data source adds a single dataset to the DataSQRL server which has the same name as the folder by default. Some data sources add multiple datasets. Datasets must be unique on a single server instance, i.e. if two data sources try to add datasets with the same name, you'll get an error and have to [specify a different](/docs/reference/cmd#sources) name for the duplicate dataset. <br />
 Likewise, tables within a dataset must have unique names. 
 
-To use a table within your SQRL script, you import the table through an import statement:
+To use tables within your SQRL script, you import them through an import statement:
+```sqrl
+IMPORT nutshop-data.*;
+```
+
+This imports all tables from the `nutshop-data` dataset. You can also import tables individually:
+
 ```sqrl
 IMPORT nutshop-data.Products;
 IMPORT nutshop-data.Orders;
@@ -42,12 +48,6 @@ tables in the `nutshop-data` dataset and makes that data available for processin
 the script. \
 Note, that dataset and table names are NOT case-sensitive. 
 `orders` and `Orders` are treated as the same name unless the name is explicitly delimited.
-
-You can also import all tables from a dataset with a single import statement:
-```sqrl
-IMPORT nutshop-data.*;
-```
-This import statement is equivalent to the two above.
 
 That's a lot of concepts and explanation. To summarize:
 
@@ -81,17 +81,14 @@ Run the following query in GraphiQL and notice the result.
 
 ```graphql
 {
-    customers(filter: [{ id: {eq: "50"}}])
+    Customers(id: "50")
     {
-        data
+        purchases(limit:10)
         {
-            orders(limit:10)
-            {
-                id
-                time
-                total
-                savings
-            }
+            id
+            time
+            total
+            savings
         }
     } 
 }

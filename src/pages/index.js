@@ -123,12 +123,12 @@ Customers.total_purchases := SUM(purchases.total);`,
       description: "Access the data service through generated GraphQL API",
       language: "graphql",
       code:
-`customers(filter: [{ id: {eq: "101"}}]) {
-    items {
-         total_purchases
-         purchases(filter: [{time: {gt: "2022-02-01"}}]) {
-             total
- }   }   }`,
+`Customers( id : "101"]) {
+     total_purchases
+     purchases(time: {after: "2022-02-01"}) {
+         total
+     }
+}`,
     }
 ];
 
