@@ -4,7 +4,7 @@ Fantastic, you want to get started with DataSQRL and build data services the fas
 
 ## Learning By Doing
 
-The best way to learn a new tool is to use it. It might sound a little intimidating to build a whole data service in DataSQRL, but we are here to guide you every step along the way.
+If you're looking to learn DataSQRL, the best way is to build something with it. It doesn't have to be perfect, and you don't need to build something that is the biggest and baddest thing ever. Just get started, and make something you are proud of.
 
 <img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="300"/>
 
