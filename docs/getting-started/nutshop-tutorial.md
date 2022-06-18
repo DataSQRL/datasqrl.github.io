@@ -156,7 +156,8 @@ this by defining a relationship between `Customers` and `Orders`:
 Customers.purchases := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC
 ```
 
-A relationship is declared as a field on a table which references the related records as
+A relationship is a connection between two things. In this case, it is a connection between two
+tables in a database. A relationship is declared as a field on a table which references the related records as
 defined by the `JOIN` statement on the right. A JOIN relates records from two
 tables based on a JOIN predicate - in our case matching customer ids.
 The underscore is syntactic sugar that SQRL adds to SQL for referring to the table on the
