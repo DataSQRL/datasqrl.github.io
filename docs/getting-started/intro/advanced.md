@@ -103,7 +103,7 @@ FROM Customers WHERE total_orders >= 100;
 
 ## Script Evolution
 
-You've successfully submitted your SQRL script to production and the data service is running nicely. The PM is super excited by the Customer 360 functionality and after talking to some customers wants to break customer spending down by week instead of by month.
+You've successfully submitted your SQRL script to production and the data service is running smoothly. The project manager is super excited by the Customer 360 functionality and, after talking to some customers, wants to break customer spending down by week instead of by month.
 
 Easy enough for us. We replace `Customers.spending_by_month` with
 
