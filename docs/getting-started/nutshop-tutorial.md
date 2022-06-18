@@ -11,10 +11,9 @@ will implement data-driven features for our online DataSQRL nut shop. Nuts and s
 how funny are we?
 
 The DataSQRL nut shop is a pretty basic online shop that processes and keeps track of orders 
-placed by customers. We want to add Customer 360 functionality to the shop, which means giving 
-customers insights into their past orders and recommending products to purchase. In short, we
-want to use the data we have about our customers to sell them nuts with a personalized touch.
-
+placed by customers. The shop wants to add Customer 360 functionality, which means giving 
+customers insights into their past orders and recommending products to purchase. This would use 
+the data the shop has about its customers to sell them nuts with a personalized touch.
 
 
 ## Install {#setup}
