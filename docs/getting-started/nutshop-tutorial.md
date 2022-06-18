@@ -114,10 +114,7 @@ Orders.date := util.time.fromEpochMillis(time);
 In this statement we are declaring a new field `date` on the `Orders` table and defining it
 by applying the utility function `util.time.fromEpochMillis` to the `time` field.
 
-Secondly, the `discount` field on the order items is absent when no discount was applied.
-It's pretty annoying to check for existence whenever we want to access that field. This
-is an easy fix which defaults `discount` to `0.0` when the field is missing using the 
-`coalesce` function:
+Secondly, the `discount` field is missing from the order items when no discount was applied. It's pretty annoying to have to check for its existence every time we want to access that field. This is an easy fix which defaults `discount` to `0.0` when the field is missing using the `coalesce` function.
 
 ```datasqrl
 Orders.items.discount := coalesce(discount, 0.0);
