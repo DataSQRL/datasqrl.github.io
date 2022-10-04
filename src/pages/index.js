@@ -120,10 +120,10 @@ Customers.total_purchases := SUM(purchases.total);`,
     },
     {
       title: "Access",
-      description: "Access the data service through generated GraphQL API",
+      description: "Access data service through customizable GraphQL API",
       language: "graphql",
       code:
-`Customers( id : "101"]) {
+`Customers( id : "101") {
      total_purchases
      purchases(time: {after: "2022-02-01"}) {
          total
