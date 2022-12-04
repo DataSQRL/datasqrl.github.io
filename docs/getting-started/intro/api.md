@@ -337,7 +337,7 @@ The generated API does not provide nested pagination by default. That makes it s
 ```sqrl
 -- @api(paginate=true)
 Customers.products_by_protein :=
-        SELECT p.id AS productid, ABS(p.nutrition.protein-_._recent_avg_protein) AS protein_difference FROM Products p
+        SELECT p.id AS productid, ABS(p.nutrition.protein - @._recent_avg_protein) AS protein_difference FROM Products p
         ORDER BY protein_difference ASC LIMIT 20;
 ```
 

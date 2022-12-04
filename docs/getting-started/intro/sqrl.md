@@ -146,7 +146,7 @@ For more complex column definitions,
 we can use the full `SELECT` query syntax.
 
 ```sqrl
-Customers.since := SELECT MIN(o.date) FROM Orders o WHERE o.customerid = _.id;
+Customers.since := SELECT MIN(o.date) FROM Orders o WHERE o.customerid = @.id;
 ```
 
 This statement defines a new column `since` on the `Customers` table as the
@@ -155,8 +155,8 @@ date when the customer placed their first order.
 The `SELECT` query on the right is a **localized query** that is evaluated within
 the context of the `Customers` table. Think of a localized query
 as being executed for each row of table on the left-hand side. We can use the special table
-handle `_` to refer to column values of that row. \
-In this instance, `_.id` refers to the `id` columns of the `Customers` table.
+handle `@` to refer to column values of that row. \
+In this instance, `@.id` refers to the `id` columns of the `Customers` table.
 
 Localized queries are a feature of SQRL that allows incremental table definitions
 and simplifies queries because we don't have to write the implicit JOIN between
@@ -198,12 +198,12 @@ In the nut shop tutorial, we defined the following relationship between
 the `Customers` and `Orders` table:
 
 ```sqrl
-Customers.purchases := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC;
+Customers.purchases := JOIN Orders ON Orders.customerid = @.id ORDER BY Orders.time DESC;
 ```
 
 A relationship is defined by a JOIN between two or more tables using the standard
 SQL `JOIN ... ON ...` syntax. The starting point of the JOIN is always the table
-on the left-hand side and we can use the special table handle `_` to refer to
+on the left-hand side and we can use the special table handle `@` to refer to
 it in the JOIN expression. In this case, `Customers` is our *start* table and
 `Orders` is our *end* table of the relationship definition.
 
@@ -246,7 +246,7 @@ This expression is much easier to read and write than the equivalent
 definition:
 
 ```sqrl
-Customers.total_orders := SELECT SUM(o.total) FROM Orders o WHERE o.customerid = _.id;
+Customers.total_orders := SELECT SUM(o.total) FROM Orders o WHERE o.customerid = @.id;
 ```
 
 And we can reuse relationships across definitions. For instance, we can rewrite
@@ -266,8 +266,8 @@ we explicitly establish a 1-to-1 relationship between those two sets of records
 that we can use to enrich our `Products` data with additional information.
 
 ```sqrl
-Products.nutrition := JOIN Nuts ON Nuts.fdcID = _.usda_id LIMIT 1;
-Nuts.product := JOIN Products ON _.fdcID = Products.usda_id LIMIT 1;
+Products.nutrition := JOIN Nuts ON Nuts.fdcID = @.usda_id LIMIT 1;
+Nuts.product := JOIN Products ON @.fdcID = Products.usda_id LIMIT 1;
 ```
 
 ## Nested Tables
@@ -310,7 +310,7 @@ orderd by frequency. In other words, we want to look at all the products purchas
 ```sqrl
 Customers.past_purchases :=
          SELECT i.productid, count(i.*) as num_orders, sum(i.quantity) as total_quantity
-         FROM _.purchases.items i
+         FROM @.purchases.items i
          GROUP BY i.productid
          ORDER BY num_orders DESC, total_quantity DESC;
 ```
@@ -322,8 +322,8 @@ table. Nested tables are always defined in the context of the parent table
 and we can think of the query definition as being applied to *each row* of the
 parent table.
 
-We use the special table handle `_` to refer to each row in the parent 
-`Customers` table. The `FROM` clause `_.purchases.items` chains together
+We use the special table handle `@` to refer to each row in the parent 
+`Customers` table. The `FROM` clause `@.purchases.items` chains together
 the `purchases` relationship on `Customers` with the `items` relationship
 on `Orders` to retrieve all item records for all order records associated
 with a single customer record. Chaining together relationships allows us to
@@ -421,7 +421,7 @@ Customers.spending_by_month :=
          SELECT function.time.truncateToMonth(date) AS month,
                 sum(total) AS total_spend,
                 sum(discount) AS total_savings
-         FROM _.purchases
+         FROM @.purchases
          GROUP BY month ORDER BY month DESC;
 ```
 
@@ -454,7 +454,7 @@ past purchases.
 ```sqrl
 Customers.recent_avg_protein :=
       SELECT SUM(e.quantity * p.weight_in_gram * n.protein)/SUM(e.quantity * p.weight_in_gram)
-      FROM _.purchases.items e JOIN e.product p JOIN p.nutrition n
+      FROM @.purchases.items e JOIN e.product p JOIN p.nutrition n
       WHERE e.parent.date > now() - INTERVAL 6 MONTH;
 ```
 
@@ -475,7 +475,7 @@ of protein content.
 ```sqrl
 Customers.products_by_protein :=
 SELECT p.id AS productid, 
-       ABS(p.nutrition.protein-_.recent_avg_protein) AS protein_difference 
+       ABS(p.nutrition.protein - @.recent_avg_protein) AS protein_difference 
 FROM Products p ORDER BY protein_difference ASC LIMIT 20;
 ```
 
@@ -513,7 +513,7 @@ event that is triggered by the underlying table. We can treat it like any other
 table, for example, by defining a relationship to `Customers`:
 
 ```sqrl
-NewCustomerPromotion.customer := JOIN Customers ON Customers.id = _.customerid;
+NewCustomerPromotion.customer := JOIN Customers ON Customers.id = @.customerid;
 ```
 
 However, subscriptions are special in that they are exposed as WebSockets in the
