@@ -152,7 +152,7 @@ to link customers to their orders to display a customer's shopping history. We a
 this by defining a relationship between `Customers` and `Orders`:
 
 ```sqrl
-Customers.purchases := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC
+Customers.purchases := JOIN Orders ON Orders.customerid = @.id ORDER BY Orders.time DESC
 ```
 
 A relationship is a connection between two things. In this case, it is a connection between two
@@ -166,7 +166,7 @@ Similarly, we want to link the `Orders.items` to the actual product records that
 reference. This calls for another relationship:
 
 ```sqrl
-Orders.items.product := JOIN Products ON Products.id = _.productid LIMIT 1;
+Orders.items.product := JOIN Products ON Products.id = @.productid LIMIT 1;
 ```
 
 When you save the script, a `customers` endpoint has been added to the API and we can access
@@ -217,7 +217,7 @@ Customers.spending_by_month :=
          SELECT util.time.truncateToMonth(date) AS month,
                 sum(total) AS total_spend,
                 sum(savings) AS total_savings
-         FROM _.purchases
+         FROM @.purchases
          GROUP BY month ORDER BY month DESC;
 ```
 

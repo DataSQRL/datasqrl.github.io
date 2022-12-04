@@ -113,7 +113,7 @@ IMPORT nutshop-data.Products;
       code:
 `Customers := SELECT DISTINCT customerid AS id FROM Orders;
 -- SQRL extends SQL and supports relationships ...
-Customers.purchases := JOIN Orders ON Orders.customerid=_.id
+Customers.purchases := JOIN Orders ON Orders.customerid=@.id
                                   ORDER BY Orders.time DESC;
 -- ... and incremental table definitions
 Customers.total_purchases := SUM(purchases.total);`,

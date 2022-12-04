@@ -112,7 +112,7 @@ Customers.spending_by_week :=
          SELECT function.time.truncateToWeek(date) AS week,
                 sum(total) AS total_spend,
                 sum(discount) AS total_savings
-         FROM _.purchases
+         FROM @.purchases
          GROUP BY week ORDER BY week DESC;
 ```
 
@@ -160,13 +160,13 @@ Please send us example SQRL scripts where the optimizer makes the wrong decision
 -- @optimizer(materialize=true)
 Customers._recent_avg_protein :=
         SELECT SUM(e.quantity * p.weight_in_gram * n.protein)/SUM(e.quantity * p.weight_in_gram)
-        FROM _.purchases.items e JOIN e.product p JOIN p.nutrition n
+        FROM @.purchases.items e JOIN e.product p JOIN p.nutrition n
         WHERE e.parent.date > now() - INTERVAL 6 MONTH;
 
 -- @api(paginate=true)
 -- @optimizer(materialize=false)
 Customers.products_by_protein :=
-        SELECT p.id AS productid, ABS(p.nutrition.protein-_._recent_avg_protein) AS protein_difference FROM Products p
+        SELECT p.id AS productid, ABS(p.nutrition.protein - @._recent_avg_protein) AS protein_difference FROM Products p
         ORDER BY protein_difference ASC LIMIT 20;
 Customers.products_by_protein.product := JOIN Products ON Products.id = _productid LIMIT 1;
 ```
