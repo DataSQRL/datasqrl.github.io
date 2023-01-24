@@ -88,15 +88,16 @@ IMPORT time.round_to_month;   -- Import time function
 /* Create new table of unique customers */
 Customers := SELECT DISTINCT customerid AS id FROM Orders;
 /* Augment orders with aggregate calculations */
-Orders.items.total := quantity * unit_price - coalesce(discount, 0.0);
-Orders.totals := SELECT sum(total) as price, sum(discount) as savings FROM @.items;
+Orders.items.total := quantity * unit_price - discount;
+Orders.totals := SELECT sum(total) as price,
+                        sum(discount) as savings FROM @.items;
 /* Create relationship between customers and orders */
 Customers.purchases := JOIN Orders ON Orders.customerid = @.id
                                       ORDER BY Orders.time DESC;
 /* Aggregate the purchase history for each customer by month */
 Customers.spending_by_month :=
     SELECT round_to_month(p.timestamp) AS month,
-           sum(t.price) AS total_spend, sum(t.savings) AS total_savings
+           sum(t.price) AS spend, sum(t.savings) AS saved
     FROM @.purchases p JOIN p.totals t
     GROUP BY month ORDER BY month DESC;`;
 
@@ -106,15 +107,15 @@ const graphqlScript =
 }
 
 type Customers {
-  id: Int
+  id: Int!
   purchases: [Orders]
   spending_by_month(month: String): [spending_by_month]
 }
 
 type spending_by_month {
-  month: String
-  total_spend: Float
-  total_savings: Float
+  month: String!
+  spend: Float!
+  saved: Float!
 }
 ...
 `;
