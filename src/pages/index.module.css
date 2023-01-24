@@ -4,10 +4,21 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 4rem 0 2rem 0;
   text-align: left;
   position: relative;
   overflow: hidden;
+  border-bottom: 3px solid;
+}
+
+.pipelineSvg {
+  height: 250px;
+  width: 600px;
+}
+
+.bannerSvg {
+  height: 250px;
+  width: 130px;
 }
 
 @media screen and (max-width: 966px) {

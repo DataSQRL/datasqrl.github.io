@@ -7,14 +7,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DataSQRL',
-  tagline: 'Build Data Services In Minutes with SQL',
-  url: 'https://dataengai.github.io',
+  tagline: 'Build Data Services In Minutes',
+  url: 'https://datasqrl.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'dataengai', // Usually your GitHub org/user name.
-  projectName: 'dataengai.github.io', // Usually your repo name.
+  organizationName: 'datasqrl', // Usually your GitHub org/user name.
+  projectName: 'datasqrl.github.io', // Usually your repo name.
 
   presets: [
     [
@@ -24,13 +24,13 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
-          editUrl: 'https://github.com/dataengai/dataengai.github.io/edit/main/docs/',
+          editUrl: 'https://github.com/DataSQRL/datasqrl.github.io/edit/main/docs/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/dataengai/dataengai.github.io/edit/main/blog/',
+            'https://github.com/DataSQRL/datasqrl.github.io/edit/main/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -62,13 +62,13 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Documentation',
+            label: 'Docs',
           },
           {to: '/community', label: 'Community', position: 'left'},
-          {to: '/blog', label: 'News', position: 'left'},
-          {to: '/support', label: 'Support', position: 'left'},
+          {to: '/support', label: 'Services', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/DataEngAi/',
+            href: 'https://github.com/DataSQRL/sqrl',
             label: 'GitHub',
             position: 'right',
           },
@@ -109,22 +109,26 @@ const config = {
                 label: 'Stack Overflow',
                 href: 'https://stackoverflow.com/questions/tagged/datasqrl',
               },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/DataSQRL/',
+              },
             ],
           },
           {
-            title: 'More',
+            title: 'DataSQRL',
             items: [
               {
-                label: 'News',
+                label: 'About',
                 to: '/blog',
               },
               {
-                label: 'Support',
+                label: 'Services',
                 to: '/support',
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/DataEngAi/',
+                label: 'Blog',
+                to: '/blog',
               },
             ],
           },
