@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>DataSQRL Blog</title>
-        <link>https://dataengai.github.io/blog</link>
+        <link>https://datasqrl.github.io/blog</link>
         <description>DataSQRL Blog</description>
         <lastBuildDate>Sun, 20 Mar 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,7 +10,7 @@
         <language>en</language>
         <item>
             <title><![CDATA[Let's Bring SQL into the 21st Century]]></title>
-            <link>https://dataengai.github.io/blog/modernize-sql</link>
+            <link>https://datasqrl.github.io/blog/modernize-sql</link>
             <guid>modernize-sql</guid>
             <pubDate>Sun, 20 Mar 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[SQL is the most popular query language for data but it's almost 50 years old and showing its age. We propose adding a couple of features to SQL to make it a better language for building data services.]]></description>
@@ -22,7 +22,7 @@
         </item>
         <item>
             <title><![CDATA[Welcome]]></title>
-            <link>https://dataengai.github.io/blog/welcome</link>
+            <link>https://datasqrl.github.io/blog/welcome</link>
             <guid>welcome</guid>
             <pubDate>Thu, 26 Aug 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Docusaurus blogging features are powered by the blog plugin.]]></description>
