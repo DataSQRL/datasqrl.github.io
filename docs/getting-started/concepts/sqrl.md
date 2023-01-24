@@ -54,7 +54,7 @@ SQRL adds relationships to SQL so you can link tables to each other and explicit
 Relationships are pre-defined `JOIN` clauses that you can reuse across your script.
 
 ```sqrl
-Customers.purchases := JOIN Orders ON Orders.customerid = _.id ORDER BY Orders.time DESC;
+Customers.purchases := JOIN Orders ON Orders.customerid = @.id ORDER BY Orders.time DESC;
 ```
 
 We define the column `purchases` on the table `Customers` to be a relationship to the `Orders` table as defined by the `JOIN` clause on the right. The `purchases` relationship column links a record in the `Customers` table to all the records in the `Orders` table that have a matching `customerid`.
@@ -91,14 +91,14 @@ In addition to supporting hierarchical input data, nested tables also allow us t
 ```sqrl
 Customers.past_purchases :=
          SELECT i.productid, count(i.*) as num_orders, sum(i.quantity) as total_quantity
-         FROM _.purchases.items i
+         FROM @.purchases.items i
          GROUP BY i.productid
          ORDER BY num_orders DESC, total_quantity DESC;
 ```
 
 The table `past_purchases` is defined as a nested table within `Customers`. The SQL query on the right-hand side is a *localized query* which means it is evaluated in the context of the `Customers` table. We can think of the query definition as being applied to *each row* of the parent table.
 
-SQRL introduces the special table handle `_` to refer to each row in the parent `Customers` table. The `FROM` clause `_.purchases.items` chains together the `purchases` relationship on `Customers` with the `items` relationship on `Orders` to retrieve all item records for all order records associated with a single customer record. Chaining together relationships allows us to avoid the complexity of multiple JOIN expressions in this query.
+SQRL introduces the special table handle `@` to refer to each row in the parent `Customers` table. The `FROM` clause `@.purchases.items` chains together the `purchases` relationship on `Customers` with the `items` relationship on `Orders` to retrieve all item records for all order records associated with a single customer record. Chaining together relationships allows us to avoid the complexity of multiple JOIN expressions in this query.
 
 ### Subscription
 
