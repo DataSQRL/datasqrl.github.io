@@ -13,12 +13,17 @@
 
 .pipelineSvg {
   height: 250px;
-  width: 600px;
+  width: 100%;
 }
 
 .bannerSvg {
-  height: 250px;
-  width: 130px;
+  height: 200px;
+  width: 300px;
+}
+
+.closer {
+  border-top: 3px solid;
+  padding: 1rem 0;
 }
 
 @media screen and (max-width: 966px) {

@@ -10,19 +10,19 @@ function Feature({Svg, title, link, linkText, description}) {
   } else {
     image = "";
   }
+  let linkContent;
+  if (link) {
+    linkContent = <div className="text--center"><Link className="button button--secondary button--sm" to={link}>{linkText}</Link></div>
+  } else {
+    linkContent = "";
+  }
   return (
     <div className={clsx('col col--4')}>
       {image}
       <div className="padding-horiz--md">
         <h3 className="text--center">{title}</h3>
         <p className="text--left margin-bottom--sm">{description}</p>
-        <div className="text--center">
-          <Link
-            className="button button--secondary button--sm"
-            to={link}>
-            {linkText}
-          </Link>
-        </div>
+        {linkContent}
       </div>
     </div>
   );
