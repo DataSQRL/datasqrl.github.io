@@ -242,8 +242,9 @@ const sidebars = {
         id: 'process/intro',
       },
       items: [
-        'dev/philosophy',
-        'dev/contribute'
+        'process/customer-focused',
+        'process/responsive',
+        'process/integrated'
       ],
     },
   ],
