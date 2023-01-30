@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[2555],{2918:a=>{a.exports=JSON.parse('{"label":"query language","permalink":"/blog/tags/query-language","allTagsPath":"/blog/tags","count":1}')}}]);
