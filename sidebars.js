@@ -27,8 +27,7 @@ const sidebars = {
       },
       collapsed: false,
       items: [
-        "getting-started/install",
-        "getting-started/nutshop-tutorial",
+        "getting-started/quickstart",
         {
           type: 'category',
           label: 'DataSQRL Training',
@@ -44,51 +43,25 @@ const sidebars = {
             'getting-started/intro/advanced',
           ],
         },
-        "getting-started/why-datasqrl",
+        'getting-started/concepts/datasqrl',
+        'getting-started/concepts/sqrl',
+        "getting-started/concepts/why-datasqrl",
+        'getting-started/comparison/overview',
+
+
 /*        {
           type: 'category',
-          label: 'DataSQRL Use Cases',
+          label: 'Tutorials',
           link: {
             type: 'generated-index',
-            title: 'DataSQRL Use Cases',
-            description: "How is DataSQRL used across various verticals and industries? Pick your use case to find out:"
+            title: 'DataSQRL Tutorials',
+            description: "These tutorials apply DataSQRL to various use cases and industries."
           },
           items: [
-            'getting-started/use-cases/telco',
+            'getting-started/tutorials/telco',
           ],
         },
 */
-        {
-          type: 'category',
-          label: 'Key Concepts',
-          link: {
-            type: 'generated-index',
-            title: 'Key Concepts in DataSQRL',
-            description: "Knowing the key concepts in DataSQRL is useful for understanding how it works and how to use it. \
-                Think Oxford dictionary for data nerds. Sounds fun? Read on! Doesn't? Then imagine Benedict Cumberbatch reading it to you with a British accent."
-          },
-          items: [
-            'getting-started/concepts/datasqrl',
-            'getting-started/concepts/sqrl',
-            'getting-started/concepts/data-service',
-            'getting-started/concepts/view-store',
-          ],
-        },
-        'getting-started/comparison/overview',
-/*        {
-          type: 'category',
-          label: 'DataSQRL Comparison',
-          link: {
-            type: 'doc',
-            id: 'getting-started/comparison/overview',
-          },
-          items: [
-            'getting-started/comparison/database',
-            'getting-started/comparison/data-warehouse',
-            'getting-started/comparison/data-science',
-            'getting-started/comparison/custom',
-          ],
-        }, */
       ],
     },
     {
@@ -216,12 +189,25 @@ const sidebars = {
             id: 'reference/operations/overview',
           },
           items: [
+            'reference/operations/cmd',
             'reference/operations/configuration',
             'reference/operations/monitoring',
             'reference/operations/optimizer',
           ],
         },
-        'reference/cmd',
+        {
+          type: 'category',
+          label: 'Key Concepts',
+          link: {
+            type: 'generated-index',
+            title: 'Key Concepts in DataSQRL',
+            description: "Knowing the key concepts in DataSQRL is useful for understanding how it works and how to use it. \
+                Think Oxford dictionary for data nerds. Sounds fun? Read on! Doesn't? Then imagine Benedict Cumberbatch reading it to you with a British accent."
+          },
+          items: [
+            'reference/concepts/data-service',
+          ],
+        },
       ],
     },
     {
@@ -245,6 +231,18 @@ const sidebars = {
             'dev/architecture/ingest',
           ],
         },
+        'dev/contribute'
+      ],
+    },
+    {
+      type: 'category',
+      label: 'DataSQRL Process',
+      link: {
+        type: 'doc',
+        id: 'process/intro',
+      },
+      items: [
+        'dev/philosophy',
         'dev/contribute'
       ],
     },

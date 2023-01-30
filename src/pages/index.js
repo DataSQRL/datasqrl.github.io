@@ -6,44 +6,30 @@ import CodeBlock from '@theme/CodeBlock';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
+import HomepageHeader from '../components/HomepageHeader';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  const LogoSvg = require('../../static/img/full_squirrel.svg').default;
-  return (
-    <header className={clsx('hero hero--secondary', styles.heroBanner)}>
-      <div className="container">
-      <div className="row">
-        <div className={clsx('col col--8')}>
-            <h1 className="hero__title">{siteConfig.tagline}</h1>
-            <p className="hero__subtitle">
+
+const header =  {
+                   title: 'DataSQRL',
+                   tagLine: 'Build Data Services In Minutes',
+                   text: (
+                     <>
                 <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> is a compiler
                 for building data services from data streams
                 and data stores using an <Link to="/docs/getting-started/concepts/sqrl">enhanced version of SQL</Link> developers
                 call “not awful”.
-            </p>
-            <div className={styles.buttons}>
-              <Link
-                className="button button--primary button--lg"
-                to="/docs/getting-started/nutshop-tutorial">
-                Get Started in 10 minutes
-              </Link>
-            </div>
-        </div>
-        <div className={clsx('col col--4')}>
-            <LogoSvg  className={styles.bannerSvg} alt="DataSQRL logo" />
-        </div>
-      </div>
-      </div>
-    </header>
-  );
-}
+                     </>
+                   ),
+                   buttonLink: '/docs/getting-started/quickstart',
+                   buttonText: 'Get Started in 5 minutes',
+                   LogoSvg: require('../../static/img/full_squirrel.svg').default,
+                 };
 
 const WhyDataSQRLList = [
   {
     title: 'Saves You Time',
     Svg: require('../../static/img/index/undraw_time_management_sqrl.svg').default,
-    link: '/docs/getting-started/why-datasqrl#save-time',
+    link: '/docs/getting-started/concepts/why-datasqrl',
     linkText: 'Learn More',
     description: (
       <>
@@ -56,7 +42,7 @@ const WhyDataSQRLList = [
   {
     title: 'Easy to Use',
     Svg: require('../../static/img/index/undraw_programming_sqrl.svg').default,
-    link: '/docs/getting-started/why-datasqrl#easy-to-use',
+    link: '/docs/getting-started/concepts/why-datasqrl',
     linkText: 'Learn More',
     description: (
       <>
@@ -69,7 +55,7 @@ const WhyDataSQRLList = [
   {
     title: 'Fast & Efficient',
     Svg: require('../../static/img/index/undraw_fast_loading_sqrl.svg').default,
-    link: '/docs/getting-started/why-datasqrl#performance',
+    link: '/docs/getting-started/concepts/why-datasqrl',
     linkText: 'Learn More',
     description: (
       <>
@@ -82,24 +68,24 @@ const WhyDataSQRLList = [
 ];
 
 const sqrlScript =
-`IMPORT nutshop-small.Orders;  -- Import orders data stream
-IMPORT time.round_to_month;   -- Import time function
+`IMPORT seedshop.Orders;      -- Import orders data stream
+IMPORT time.round_to_month;  -- Import time function
 
-/* Create new table of unique customers */
-Customers := SELECT DISTINCT customerid AS id FROM Orders;
 /* Augment orders with aggregate calculations */
-Orders.items.total := quantity * unit_price - discount;
+Orders.items.total := quantity * unit_price - discount?0.0;
 Orders.totals := SELECT sum(total) as price,
                         sum(discount) as savings FROM @.items;
+/* Create new table of unique customers */
+Customers := SELECT DISTINCT customerid AS id FROM Orders;
 /* Create relationship between customers and orders */
 Customers.purchases := JOIN Orders ON Orders.customerid = @.id
-                                      ORDER BY Orders.time DESC;
-/* Aggregate the purchase history for each customer by month */
-Customers.spending_by_month :=
-    SELECT round_to_month(p.timestamp) AS month,
-           sum(t.price) AS spend, sum(t.savings) AS saved
-    FROM @.purchases p JOIN p.totals t
-    GROUP BY month ORDER BY month DESC;`;
+                                   ORDER BY Orders.time DESC;
+/* Aggregates the purchase history for each customer by month */
+Customers.spending :=
+         SELECT round_to_month(p.timestamp) AS month,
+                sum(t.price) AS spend, sum(t.savings) AS saved
+         FROM @.purchases p JOIN p.totals t
+         GROUP BY month ORDER BY month DESC;`;
 
 const graphqlScript =
 `type Query {
@@ -126,9 +112,9 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={siteConfig.title}
-      description={siteConfig.tagline}>
-      <HomepageHeader />
+      title={header.title}
+      description={header.tagline}>
+      <HomepageHeader {...header} />
       <main>
         <section className={styles.content}>
           <div className="container">
@@ -174,7 +160,8 @@ export default function Home() {
               <div className="col col--5 text--left">
                  <h2>Step 3</h2>
                  <p className="hero__subtitle">
-                 DataSQRL compiles your SQRL script and API specification into a fully integrated
+                 <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> compiles your
+                 SQRL script and API specification into a fully integrated
                  data pipeline and API server.
                  </p>
                  <p className="hero__subtitle">
@@ -183,8 +170,8 @@ export default function Home() {
                  <div className={styles.buttons}>
                    <Link
                      className="button button--primary button--lg"
-                     to="/docs/getting-started/nutshop-tutorial">
-                     See Running Example
+                     to="/docs/getting-started/quickstart">
+                     Run this Example
                    </Link>
                  </div>
               </div>

@@ -10,7 +10,7 @@ You have made it through the entire extended tutorial and want to keep learning 
 
 we are going to start with good-ol' boring functions. Functions are incredibly useful, can make your script more concise, and your life a lot easier.
 
-We used the function `function.time.fromEpochMillis` in the [nut shop tutorial](../nutshop-tutorial) and referenced the function by its fully qualified name. If you use a function repeatedly, you can import it to save you from typing the full name.
+We used the function `function.time.fromEpochMillis` in the [nut shop tutorial](../quickstart) and referenced the function by its fully qualified name. If you use a function repeatedly, you can import it to save you from typing the full name.
 
 ```sqrl
 IMPORT nutshop-data.Products;

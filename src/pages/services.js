@@ -4,44 +4,77 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
+import HomepageHeader from '../components/HomepageHeader';
 
-function HomepageHeader() {
-  const LogoSvg = require('../../static/img/index/undraw_contribute_sqrl.svg').default;
-  return (
-    <header className={clsx('hero hero--secondary', styles.heroBanner)}>
-      <div className="container">
-      <div className="row">
-        <div className={clsx('col col--8')}>
-            <h1 className="hero__title">Get Value From Your Data</h1>
-            <p className="hero__subtitle">
-                We help organizations build successful <Link to="">data services</Link> at a fraction of the time and cost
-                through innovative <Link to="">technology</Link> and a <Link to="">process</Link> focused on value delivery.
-            </p>
-            <div className={styles.buttons}>
-              <Link
-                className="button button--primary button--lg"
-                to="/contact">
-                Get in Touch
-              </Link>
-            </div>
-        </div>
-        <div className={clsx('col col--4')}>
-            <LogoSvg  className={styles.bannerSvg} alt="DataSQRL can help you build with data" />
-        </div>
-      </div>
-      </div>
-    </header>
-  );
-}
+const header =  {
+                   title: 'DataSQRL Services',
+                   tagLine: 'Get Value From Your Data',
+                   text: (
+                     <>
+                We help organizations build successful <Link to="/docs/reference/concepts/data-service">data services</Link> at
+                a fraction of the time and cost through innovative <Link to="/docs/getting-started/concepts/datasqrl">technology</Link> and
+                 a <Link to="/docs/process/intro">process</Link> focused on value delivery.
+                     </>
+                   ),
+                   buttonLink: '/contact',
+                   buttonText: 'Get in Touch',
+                   LogoSvg: require('../../static/img/index/undraw_contribute_sqrl.svg').default,
+                 }
 
 
-const WhyDataSQRLList = [
+const WhatDataSQRLServices = [
   {
-    title: 'Trusted Expertise',
-    Svg: require('../../static/img/index/undraw_active_support_sqrl.svg').default,
+    title: 'Workshops',
+    Svg: require('/static/img/index/undraw_online_shopping_sqrl.svg').default,
     description: (
       <>
-        With decades of experience, DataSQRL's recognized experts can jumpstart your
+        A 2-day workshop combines prototyping a data service for your choice of use case with a miniature training.
+        We run your team through the DataSQRL process to develop a working data service. It's hackathon
+        meets blitz-training. <br />
+        Plus, you get homework for free.
+      </>
+    ),
+    link: '/contact',
+    linkText: 'Book a Workshop',
+  },
+  {
+    title: 'Training',
+    Svg: require('/static/img/index/undraw_personal_training_sqrl.svg').default,
+    description: (
+      <>
+        A week-long training teaches your organization how to use DataSQRL technology to build data services
+        and how to apply our development process to produce results.
+        Through a series of lessons, exercises, and group work your team learns how to turn
+        your organization's data into valuable services. <br />
+        We promise: no death by Powerpoint.
+      </>
+    ),
+    link: '/contact',
+    linkText: 'Schedule a Training',
+  },
+  {
+    title: 'Consulting',
+    Svg: require('/static/img/index/undraw_active_support_sqrl.svg').default,
+    description: (
+      <>
+        Partner with us and we will embed with your team to build a data service from inception
+        through production to stable operations. This is the fastest way to jumpstart your
+        organization into a data powerhouse. We support all parts of your data journey from outside
+        guidance to pair-programming with your team.
+      </>
+    ),
+    link: '/contact',
+    linkText: 'Let\'s talk',
+  },
+];
+
+const WhyDataSQRLServices = [
+  {
+    title: 'Trusted Expertise',
+    Svg: require('../../static/img/generic/undraw_experts.svg').default,
+    description: (
+      <>
+        With decades of experience, DataSQRL's <Link to="/about">recognized experts</Link> can jumpstart your
         organizations ability to turn data assets into business drivers without a
         mountain of costs. Plus, we'll teach you data karaoke.
       </>
@@ -49,7 +82,7 @@ const WhyDataSQRLList = [
   },
   {
     title: 'Visible Results',
-    Svg: require('../../static/img/index/undraw_online_shopping_sqrl.svg').default,
+    Svg: require('../../static/img/generic/undraw_data_points.svg').default,
     description: (
       <>
         We are hands-on and work closely with your team to deliver working data
@@ -60,11 +93,11 @@ const WhyDataSQRLList = [
   },
   {
     title: 'Reliable Partner',
-    Svg: require('../../static/img/index/undraw_personal_training_sqrl.svg').default,
+    Svg: require('../../static/img/generic/undraw_partner.svg').default,
     description: (
       <>
-        Our mission is to help your organization build with data and we will support your
-        team all the way. But instead of piling up billable hours, our success is your team's
+        <Link to="/about">Our mission</Link> is to help your organization build with data and we will support your
+        team all the way. But instead of squeezing you dry for billable hours, our success is your team's
         self-sufficiency.
       </>
     ),
@@ -74,22 +107,22 @@ const WhyDataSQRLList = [
 export default function Services() {
   return (
     <Layout
-      title="DataSQRL Services"
-      description="Get Value from Your Data">
-      <HomepageHeader />
+      title={header.title}
+      description={header.tagLine}>
+      <HomepageHeader {...header} />
       <main>
         <section className={styles.content}>
           <div className="container">
             <div className="row margin-bottom--md">
               <div className="col col--6">
-                  <h2>Simplified Technology</h2>
+                  <h2>Simple Technology</h2>
                   <p>
                   To build data services, organizations assemble spaghetti bowls of complex technologies
                   into bespoke data pipelines that require specialized engineers and are expensive to maintain.
                   </p>
                   <p>
-                  DataSQRL technology enables small teams to quickly build powerful data services with low
-                  maintenance overhead by:
+                  <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL technology</Link> enables small teams
+                  to quickly build powerful data services with low maintenance overhead by:
                   <ul>
                   <li>Utilizing your developers' existing skills. No need to hire expensive specialists.</li>
                   <li>Eliminating bespoke data pipelines through a compiler so your devs can focus on adding value.</li>
@@ -97,7 +130,7 @@ export default function Services() {
                   </ul>
                   </p>
                   <div className="text--center">
-                    <Link className="button button--secondary" to="/">Learn More</Link>
+                    <Link className="button button--secondary" to="/docs/getting-started/concepts/why-datasqrl">Learn More</Link>
                   </div>
               </div>
               <div className="col col--6 text--left">
@@ -107,7 +140,7 @@ export default function Services() {
                   and detached from customer feedback.
                   </p>
                   <p>
-                  The DataSQRL process empowers organizations to build data services that deliver business outcomes by
+                  The <Link to="/docs/process/intro">DataSQRL process</Link> empowers organizations to build data services that deliver business outcomes by
                   following these principles:
                   <ul>
                   <li>Focus on customer satisfaction through early and continuous delivery of valuable data services.</li>
@@ -116,13 +149,14 @@ export default function Services() {
                   </ul>
                   </p>
                   <div className="text--center">
-                    <Link className="button button--secondary" to="/">Learn More</Link>
+                    <Link className="button button--secondary" to="/docs/process/intro">Learn More</Link>
                   </div>
               </div>
             </div>
           </div>
         </section>
-        <HomepageFeatures FeatureList={WhyDataSQRLList} />
+        <HomepageFeatures FeatureList={WhatDataSQRLServices} headline="What We Offer"/>
+        <HomepageFeatures FeatureList={WhyDataSQRLServices} headline="Why We Deliver"/>
         <section className={styles.closer}>
           <div className="container">
             <div className="row margin-bottom--md">
@@ -135,7 +169,6 @@ export default function Services() {
               </p>
               <div className="text--center">
                 <Link className="button button--primary button--lg" to="/contact">Get in Touch</Link>
-                <Link className="button button--primary button--lg" to="/contact">Find out How</Link>
               </div>
               </div>
               <div className="col col--2">

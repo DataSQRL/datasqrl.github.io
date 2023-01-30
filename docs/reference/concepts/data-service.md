@@ -159,7 +159,7 @@ modularity.
 
 ## Where to Go from Here?
 
-- Learn how to [build a data service in DataSQRL](/docs/getting-started/nutshop-tutorial) in 10 minutes.
-- Find out [why you should use DataSQRL](/docs/getting-started/why-datasqrl) to implement your data services.
+- Learn how to [build a data service in DataSQRL](/docs/getting-started/quickstart) in 10 minutes.
+- Find out [why you should use DataSQRL](/docs/getting-started/concepts/why-datasqrl) to implement your data services.
 - Read more about [data services](https://www.infoq.com/articles/narayanan-soa-data-services/) on InfoQ.
 - Learn more about [Microservice Architectures](https://martinfowler.com/articles/microservices.html) in general of which data services are a part.

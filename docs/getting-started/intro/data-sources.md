@@ -12,11 +12,11 @@ Before we can use data in our scripts, we have to connect the data source with D
 
 A data source is a system that holds data and allows access to the data. DataSQRL supports many types of data sources: filesystems, cloud storage, database systems, queues, logs, and more. Check out the [full list of supported data sources](/docs/guides/sources/overview) which links to detailed information on how to connect them to DataSQRL.
 
-A data source is connected to the DataSQRL server via the [command line utility](/docs/reference/cmd#sources) or through the [data source API](/docs/reference/sources/api). Connecting a data source tells the DataSQRL server where it can find data and how to access it. That's why connecting a data source is the first step for building data services with DataSQRL: without data sources there is no data to build with.
+A data source is connected to the DataSQRL server via the [command line utility](/docs/reference/operations/cmd#sources) or through the [data source API](/docs/reference/sources/api). Connecting a data source tells the DataSQRL server where it can find data and how to access it. That's why connecting a data source is the first step for building data services with DataSQRL: without data sources there is no data to build with.
 
 ## Data Source Basics {#basics}
 
-In our [introductory tutorial](../nutshop-tutorial#adding-data) we connected a folder as a data source to DataSQRL with the following command:
+In our [introductory tutorial](../quickstart#adding-data) we connected a folder as a data source to DataSQRL with the following command:
 ```bash
 datasqrl source folder nutshop-data
 ```
@@ -28,7 +28,7 @@ For example, the json file `orders_1.json` is made available in DataSQRL as the 
 
 Tables are grouped into datasets. A dataset usually consists of tables that are related or logically belong together like the `orders` and `products` tables in our tutorial.
 
-A data source provides access to one or multiple datasets. A folder data source adds a single dataset to the DataSQRL server which has the same name as the folder by default. Some data sources add multiple datasets. Datasets must be unique on a single server instance, i.e. if two data sources try to add datasets with the same name, you'll get an error and have to [specify a different](/docs/reference/cmd#sources) name for the duplicate dataset. <br />
+A data source provides access to one or multiple datasets. A folder data source adds a single dataset to the DataSQRL server which has the same name as the folder by default. Some data sources add multiple datasets. Datasets must be unique on a single server instance, i.e. if two data sources try to add datasets with the same name, you'll get an error and have to [specify a different](/docs/reference/operations/cmd#sources) name for the duplicate dataset. <br />
 Likewise, tables within a dataset must have unique names. 
 
 To use tables within your SQRL script, you import them through an import statement:
@@ -73,7 +73,7 @@ endless) stream of rows.
 To test this streaming feature of DataSQRL during development with static files, we
 can add additional data to the data source folder while our script is running. Here is how:
 
-First, make sure you followed the [nut shop tutorial](../nutshop-tutorial) and are still 
+First, make sure you followed the [nut shop tutorial](../quickstart) and are still 
 running the `customer360` SQRL script in development mode via the
 `datasqrl watch customer360.sqrl` command.
 
@@ -139,7 +139,7 @@ dive deeper:
  for many popular data systems. You can also [implement a data source connector](/docs/dev/architecture/data-source)
  to connect data sources that aren't supported yet.
 * **Data Source Customization**: The [data source API](/docs/reference/sources/api) and
- the [command line utility](/docs/reference/cmd#sources) have a number of configuration options
+ the [command line utility](/docs/reference/operations/cmd#sources) have a number of configuration options
  to customize how data sources are connected. You can change the default dataset name,
  the pattern DataSQRL uses to recognize part files, refresh intervals, and much, much more.
  Check out the respective reference pages to learn more.

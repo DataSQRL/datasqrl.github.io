@@ -93,8 +93,8 @@ const config = {
                 to: '/docs/reference/overview',
               },
               {
-                label: 'Developer Docs',
-                to: '/docs/dev/overview',
+                label: 'DataSQRL Process',
+                to: '/docs/process/intro',
               },
             ],
           },
@@ -102,16 +102,20 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Slack',
-                href: 'https://slack.com/invite/datasqrl',
-              },
-              {
                 label: 'Stack Overflow',
                 href: 'https://stackoverflow.com/questions/tagged/datasqrl',
               },
               {
+                label: 'Discord',
+                href: 'https://stackoverflow.com/questions/tagged/datasqrl',
+              },
+              {
                 label: 'GitHub',
-                href: 'https://github.com/DataSQRL/',
+                href: 'https://github.com/DataSQRL/sqrl',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://github.com/DataSQRL/sqrl',
               },
             ],
           },
@@ -120,7 +124,7 @@ const config = {
             items: [
               {
                 label: 'About',
-                to: '/blog',
+                to: '/about',
               },
               {
                 label: 'Services',

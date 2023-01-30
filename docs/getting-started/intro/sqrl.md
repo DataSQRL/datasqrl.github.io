@@ -7,7 +7,7 @@ title: "Implement SQRL Script"
 The logic and function of a data service is defined in the SQRL script.
 That's where the action is. We are going to dive deeper into
 the SQRL language and how to write SQRL scripts by reviewing and extending the
-[nut shop tutorial](../nutshop-tutorial).
+[nut shop tutorial](../quickstart).
 
 When you make it through this document, you will know the key concepts
 of SQRL, be ready to write your own SQRL scripts, and take the world by storm
@@ -54,7 +54,7 @@ You define most tables in SQRL using one of 3 ways: by import, by query, or incr
 ### Import
 
 An important statement adds the table you are importing to your SQRL script. 
-In the [nut shop tutorial](../nutshop-tutorial#adding-data) we imported the 
+In the [nut shop tutorial](../quickstart#adding-data) we imported the 
 `Products` and `Orders` tables.
 
 ```sqrl
@@ -84,7 +84,7 @@ We'll use the data in the `Nuts` table for our recommendation engine later on.
 Once you have imported tables, you build with the data they contain.
 You do this by defining new tables that query the data in existing ones.
 
-In the [intro tutorial](../nutshop-tutorial#structure) we defined the `Customers` table by querying
+In the [intro tutorial](../quickstart#structure) we defined the `Customers` table by querying
 for all the unique customer ids in the `Orders` table:
 
 ```sqrl
@@ -356,7 +356,7 @@ name of the first record on line 2. Then save the file. Because the
 data was modified, this triggers an update from the data source and
 DataSQRL ingests all the product records again.
 
-When we [query the API](../nutshop-tutorial#api) 
+When we [query the API](../quickstart#api) 
 for products with `id=1` we get
 two results with slightly different names.
 

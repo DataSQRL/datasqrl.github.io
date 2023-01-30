@@ -1,12 +1,12 @@
 matthias:
   name: Matthias Broecheler
-  title: Maintainer of DataSQRL
+  title: Founder of DataSQRL
   url: https://github.com/mbroecheler
-  image_url: https://github.com/mbroecheler.png
+  image_url: /img/headshots/matthias1.png
 
 henneberger:
   name: Daniel Henneberger
-  title: Maintainer of DataSQRL
+  title: Founder of DataSQRL
   url: https://github.com/henneberger
-  image_url: https://github.com/henneberger.png
+  image_url: /img/headshots/daniel1.png
 

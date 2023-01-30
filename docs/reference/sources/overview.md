@@ -10,7 +10,7 @@ To be written
 
 You can connect data sources to a DataSQRL server instance either through the 
 [data sources API](api) exposed by the server or using the
-[DataSQLR command line utility](../cmd#sources).
+[DataSQLR command line utility](../operations/cmd.md#sources).
 
 The command line utility is a wrapper around the [data sources API](api) which makes it 
 convenient and easy to use.

@@ -1,19 +1,110 @@
 ---
-title: "Intro Tutorial"
+title: "QuickStart Tutorial"
 ---
 
-# Customer 360 Tutorial
+# DataSQRL Intro in 5 Minutes
 
-<img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="320"/>
+<img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="250"/>
 
-Because we have the humor of middle schoolers on Adderall, this introductory tutorial
-will implement data-driven features for our online DataSQRL nut shop. Nuts and squirrels - 
+Because we have the humor of middle schoolers on Adderall, this quickstart tutorial
+implements data-driven features for our online DataSQRL seed shop. Seeds and squirrels - 
 how funny are we?
 
-The DataSQRL nut shop is a pretty basic online shop that processes and keeps track of orders 
-placed by customers. The shop wants to add Customer 360 functionality, which means giving 
-customers insights into their past orders and recommending products to purchase. This would use 
-the data the shop has about its customers to sell them nuts with a personalized touch.
+We want to build a data service that exposes a Customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
+
+## Run SQRL Script
+
+In the terminal or command line, create an empty folder for our script:
+
+```bash
+> mkdir seedshop; cd seedshop
+```
+
+Create a new file in that folder called `c360.sqrl` and paste the following content into the file:
+
+```sql
+IMPORT seedshop.Orders;      
+IMPORT time.round_to_month;
+
+Orders.items.total := quantity * unit_price - discount?0.0;
+Orders.totals := SELECT sum(total) as price,
+                        sum(discount) as savings FROM @.items;
+
+Customers := SELECT DISTINCT customerid AS id FROM Orders;
+Customers.purchases := JOIN Orders ON Orders.customerid = @.id
+                                   ORDER BY Orders.time DESC;
+Customers.spending :=
+         SELECT round_to_month(p.timestamp) AS month,
+                sum(t.price) AS spend, sum(t.savings) AS saved
+         FROM @.purchases p JOIN p.totals t
+         GROUP BY month ORDER BY month DESC;
+```
+
+Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
+
+```bash
+docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run c360.sqrl
+```
+
+:::note
+
+To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine.
+
+:::
+
+You can experiment with the GraphQL API of this data service by opening `http://localhost:8888/graphiql/ ` in your browser and writing GraphQL queries in the left-hand panel. For example, copy the following query:
+
+```graphql
+{
+Customers ( id: 10) {
+    purchases (limit: 10) {
+        id
+        totals {
+            price
+            savings
+        }
+    }    
+    spending {
+        month
+        spend
+        saved
+    }
+}}
+```
+
+When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. Pretty easy, right?
+
+## Introduction to SQRL
+
+Let's take a closer look at the SQRL script for our data service to understand what it does and how it compiles to the API.
+
+:::info
+
+SQRL is an extension of SQL and we are going to use some basic SQL syntax. If you are
+unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer)
+first.
+
+:::
+
+### Imports
+
+
+```sql
+IMPORT seedshop.Orders;      
+```
+
+The first line of the script imports the order stream data that we are building with. DataSQRL locates the data source for our seedshop orders based on this import definition.
+
+```sql
+IMPORT time.round_to_month;
+```
+
+Next, we import a time function that rounds a timestamp to the current month which we will later use in an aggregation. That's all the imports we need.
+
+### Data Augmentation
+
+
+
 
 
 ## Install {#setup}
@@ -132,13 +223,7 @@ hierarchical data like our `Orders` data.
 A Customer 360 application is all about the customer, so let's restructure our data with
 the customer at the center.
 
-:::info
 
-SQRL is an extension of SQL and we are going to use some basic SQL syntax. If you are
-unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer)
-first.
-
-:::
 
 First, we define a `Customers` table based on the
 unique customer ids from the `Orders` table.

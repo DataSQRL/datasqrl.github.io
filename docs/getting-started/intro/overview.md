@@ -5,10 +5,10 @@
 This extended tutorial introduces you to the core concepts of DataSQRL and provides enough
 context for you to start building your own data services in DataSQRL.
 
-We will extend our [Customer 360 data service](../nutshop-tutorial) for our nut shop to
+We will extend our [Customer 360 data service](../quickstart) for our nut shop to
 illustrate the concepts with examples. We are going to add product recommendations, a
 nutritional analysis, and more. It'll be a riot. Please read the
-[introductory tutorial](../nutshop-tutorial) first, so you can follow along. It only takes
+[introductory tutorial](../quickstart) first, so you can follow along. It only takes
 10 minutes.
 
 ## What is DataSQRL? {#whatis}
@@ -43,7 +43,7 @@ There are 3 steps to building a data service in DataSQLR:
  a GraphQL data API based on the result. You can customize the API and access it from your application in the programming language of your choice.
 
 Before we look more closely at those 3 steps, make sure that you have DataSQRL
-[installed](../install) and [running](../nutshop-tutorial#setup). Later, we'll look in
+[installed](../install) and [running](../quickstart#setup). Later, we'll look in
 more detail at [operating DataSQRL server](server).
 
 Alright, with all that preamble out of the way, let's buckle up and go on a ride.

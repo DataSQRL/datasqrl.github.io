@@ -2,7 +2,7 @@
 title: "Why DataSQRL?"
 ---
 
-# Why does DataSQRL exist?
+# Why use DataSQRL?
 
 We love building with data, but we got frustrated by how complicated it is to build data-driven features. That's why we built DataSQRL.
 
@@ -16,7 +16,9 @@ Thought you could quickly add a simple recommendation engine to the site but end
 
 Why can you build a production-grade web service in a few days, but it takes months to build a mediocre data service that looks like Frankenstein after a colonoscopy? We believe that a lack of developer tools for building with data has a lot to do with it
 
+<!--
 Playing with data used to be the realm of business intelligence and data analysts. When folks discovered that data-driven features in software are extremely valuable, they took their tools, methods, and approaches for compiling reports and dashboards and bolted software engineering on top. The result is like putting cheesecake into a Ramen soup - both make sense individually but thrown together it's a gross mess. 
+-->
 
 We are developing DataSQRL as a tool for developers to build data services. You connect your data sources to DataSQRL, implement the logic and structure of your data service in a scripting language that looks and feels like SQL, and DataSQRL generates a scalable and cost-efficient API that exposes your data service. It's as easy as 1-2-3. We cut out all the stuff developers don't need and focused on building a tool that integrates with your workflow.
 
@@ -44,7 +46,7 @@ In other words: DataSQRL handles all the time-consuming details for you. You imp
 Think of DataSQRL as a compiler for data services: DataSQRL saves you the time of implementing, integrating, and optimizing low level data abstractions. <br />
 You don't implement software in [machine code](https://en.wikipedia.org/wiki/Machine_code). You use a higher level language like Javascript, Python, Java, etc that compiles into machine code to save you that hassle. SQRL is a higher-level language for data services and DataSQRL the execution engine.
 
-Because DataSQRL abstracts much complexity of implementing data services it saves you a lot of time and allows you to [implement data services in 10 minutes](/docs/getting-started/nutshop-tutorial).
+Because DataSQRL abstracts much complexity of implementing data services it saves you a lot of time and allows you to [implement data services in 10 minutes](/docs/getting-started/quickstart).
 
 ### Easy to Use {#easy-to-use}
 
@@ -56,7 +58,7 @@ First, DataSQRL handles a lot of things for you that you don't have to worry abo
 
 You can focus entirely on the logic of your data service by defining data transformations and analytics. DataSQRL uses those definitions to figure out what the schema should look like, how the data should flow, and what the exposed API looks like. This simplifies implementing a data service and saves you a ton of "glue code" that holds a data service architecture together.
 
-Secondly, DataSQRL consolidates all elements of building a data service in one higher-level language called SQRL. That means you only have to learn one thing: [SQRL](/docs/getting-started/concepts/sqrl). SQRL is based on SQL, so if you know how to read a `SELECT ... FROM ... WHERE` clause you will pick up SQRL very quickly. SQRL extends SQL with a few constructs that make it easier to develop complex sequences of data transformations and define data structures. Take a look at our [introductory tutorial](/docs/getting-started/nutshop-tutorial) to get a feel for the language.
+Secondly, DataSQRL consolidates all elements of building a data service in one higher-level language called SQRL. That means you only have to learn one thing: [SQRL](/docs/getting-started/concepts/sqrl). SQRL is based on SQL, so if you know how to read a `SELECT ... FROM ... WHERE` clause you will pick up SQRL very quickly. SQRL extends SQL with a few constructs that make it easier to develop complex sequences of data transformations and define data structures. Take a look at our [introductory tutorial](/docs/getting-started/quickstart) to get a feel for the language.
 
 You implement your entire data service in SQRL and you only need to learn SQRL to build complex data services. Because data service architectures are usually comprised of many different components, that saves you from learning the ins-and-outs of all of those components and their respective languages.
 
@@ -82,6 +84,6 @@ If your data service becomes successful (fingers crossed 🤞) or the amount of 
 
 ## Learn more
 
-* To get a feel for DataSQRL and how easy it is to build data services, check out the [introductory tutorial](/docs/getting-started/nutshop-tutorial).
+* To get a feel for DataSQRL and how easy it is to build data services, check out the [introductory tutorial](/docs/getting-started/quickstart).
 * If you are trying to figure out if DataSQLR is the right choice for you, take a look at the [comparison to other data systems](/docs/getting-started/comparison/overview) to find out how DataSQRL compares.
 * To dive deeper into DataSQRL, explore the [SQRL language](/docs/getting-started/concepts/sqrl), how the [optimizer](/docs/reference/operations/optimizer) compiles SQRL scripts into efficient data architectures, or read the [documentation](/docs/intro) for all the things.

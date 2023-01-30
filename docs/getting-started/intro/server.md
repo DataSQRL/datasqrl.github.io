@@ -10,7 +10,7 @@ This last installment of our extended tutorial covers the operation of DataSQRL 
 
 ## Development Mode
 
-In the [nut shop tutorial](../nutshop-tutorial#setup) we started an instance of DataSQRL server with the command:
+In the [nut shop tutorial](../quickstart#setup) we started an instance of DataSQRL server with the command:
 
 ```bash
 datasqrl run dev &
@@ -18,7 +18,7 @@ datasqrl run dev &
 
 This runs DataSQRL in *development mode* as a background process. In development mode, DataSQRL optimizes for fast start-up times, quick script iteration, and ease of development.
 
-During development, we use the command `datasqrl watch customer360.sqrl` to submit our script to the server for execution whenever we save the script. This gives us quick feedback on our changes and allows us to iterate quickly. The command expects a local DataSQRL server instance running in development mode. You can also connect to a remote DataSQRL development server - take a look at the [datasqrl command](/docs/reference/cmd#scripts) for details. The important part is that the server is running in development mode to enable the quick resubmission of the SQRL script you are implementing that makes iterative development responsive.
+During development, we use the command `datasqrl watch customer360.sqrl` to submit our script to the server for execution whenever we save the script. This gives us quick feedback on our changes and allows us to iterate quickly. The command expects a local DataSQRL server instance running in development mode. You can also connect to a remote DataSQRL development server - take a look at the [datasqrl command](/docs/reference/operations/cmd#scripts) for details. The important part is that the server is running in development mode to enable the quick resubmission of the SQRL script you are implementing that makes iterative development responsive.
 
 ### Troubleshooting & Debugging
 

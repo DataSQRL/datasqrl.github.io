@@ -1,10 +1,12 @@
 ---
-title: "DataSQRL"
+title: "What is DataSQRL?"
 ---
 
 # What is DataSQRL?
 
-DataSQRL is a data system that makes it easy and productive to build [data services](data-service) from streaming data sources.
+Need to rewrite this!
+
+DataSQRL is a data system that makes it easy and productive to build [data services](/docs/reference/concepts/data-service.md) from streaming data sources.
 
 Implementing a data service with DataSQRL takes only 3 steps:
 
@@ -18,10 +20,10 @@ Developers use DataSQRL to implement streaming data services, i.e. data services
 DataSQRL accomplishes this combination of high responsiveness to incoming data and high responsiveness to many concurrent API requests by partially pre-computing results in the data pipeline so that API queries can be computed quickly and with little data movement in the database. <br />
 Since SQRL is a declarative language, the DataSQRL compiler determines how to implement the defined data transformations most effectively and which ones get pre-computed. This saves you a lot of work and the headache associated with sorting out low-level optimizations and data structures.
 
-DataSQRL is an implementation of a [view store](/docs/getting-started/concepts/view-store) that fills the gap between database systems and data warehouses for data services that need a bit of both: the analytic capabilities of a data warehouse and the high responsiveness and concurrency of a database.
+DataSQRL is an implementation of a view store that fills the gap between database systems and data warehouses for data services that need a bit of both: the analytic capabilities of a data warehouse and the high responsiveness and concurrency of a database.
 
 ## Learn More
 
-- Read the [introductory tutorial](../nutshop-tutorial) to get a feel for DataSQRL and the SQRL language while building an entire data service in 10 minutes.
-- Find out [Why DataSQRL Exists](../why-datasqrl) and what benefits it provides.
+- Read the [introductory tutorial](../quickstart) to get a feel for DataSQRL and the SQRL language while building an entire data service in 10 minutes.
+- Find out [Why DataSQRL Exists](why-datasqrl.md) and what benefits it provides.
 - [Compare DataSQRL](../comparison/overview) to other data technologies and see when to use it.

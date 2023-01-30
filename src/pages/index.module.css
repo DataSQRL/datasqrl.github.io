@@ -3,23 +3,11 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0 2rem 0;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 3px solid;
-}
-
 .pipelineSvg {
   height: 250px;
   width: 100%;
 }
 
-.bannerSvg {
-  height: 200px;
-  width: 300px;
-}
 
 .closer {
   border-top: 3px solid;
