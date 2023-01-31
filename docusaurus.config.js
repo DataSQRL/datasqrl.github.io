@@ -107,7 +107,7 @@ const config = {
               },
               {
                 label: 'Discord',
-                href: 'https://stackoverflow.com/questions/tagged/datasqrl',
+                href: 'https://discord.gg/Sz887Xrn5V',
               },
               {
                 label: 'GitHub',
@@ -115,7 +115,7 @@ const config = {
               },
               {
                 label: 'Twitter',
-                href: 'https://github.com/DataSQRL/sqrl',
+                href: 'https://twitter.com/DataSQRL',
               },
             ],
           },

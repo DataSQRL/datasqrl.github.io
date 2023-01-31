@@ -25,7 +25,7 @@ const Support = [
   {
     title: 'Stack Overflow',
     Svg: require('/static/img/community/stackoverflow_sqrl.svg').default,
-    link: './community',
+    link: 'https://stackoverflow.com/questions/tagged/datasqrl',
     linkText: 'Ask a Question',
     description: (
       <>
@@ -37,7 +37,7 @@ const Support = [
   {
     title: 'Discord',
     Svg: require('/static/img/community/discord.svg').default,
-    link: './community',
+    link: 'https://discord.gg/Sz887Xrn5V',
     linkText: 'Share Your Thoughts',
     description: (
       <>
@@ -49,7 +49,7 @@ const Support = [
   {
     title: 'GitHub',
     Svg: require('../../static/img/community/github.svg').default,
-    link: './community',
+    link: 'https://github.com/DataSQRL/sqrl',
     linkText: 'Contribute to DataSQRL',
     description: (
       <>
@@ -65,7 +65,7 @@ const Updates = [
   {
     title: 'Twitter',
     Svg: require('../../static/img/community/twitter.svg').default,
-    link: './community',
+    link: 'https://twitter.com/DataSQRL',
     linkText: 'Follow DataSQRL',
     description: (
       <>
@@ -90,7 +90,7 @@ const Updates = [
   {
     title: 'Youtube',
     Svg: require('../../static/img/community/youtube.svg').default,
-    link: './community',
+    link: 'https://www.youtube.com/@datasqrl',
     linkText: 'Subscribe',
     description: (
       <>
