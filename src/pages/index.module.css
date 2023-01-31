@@ -8,6 +8,32 @@
   width: 100%;
 }
 
+.verticalForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 100%;
+}
+
+.verticalForm input {
+   font-size: 1rem;
+}
+
+.verticalForm textarea {
+   font-size: 1rem;
+   height: 10rem;
+}
+
+.verticalForm button {
+   font-size: 1rem;
+   font-weight: bold;
+   height: 2.5rem;
+}
+
+.verticalForm p {
+   color: var(--ifm-color-secondary);
+   font-weight: bold;
+}
 
 .closer {
   border-top: 3px solid;

@@ -34,7 +34,7 @@ That does sound a bit wishy-washy. Unfortunately, there is some art in it. We wi
 
 The unique requirements of data service projects - like data acquisition, model building, or data architecture design - often do not fit into an organization's existing software development process, which leads to the adoption of specific data science or data engineering processes.
 
-While those processes are well-suited to address these unique requirements, they often loose focus of customer needs and value delivery because of their complexity, lengthy planning cycles, and high implementation cost. In addition, the misalignment with an organization's development process results in high friction and operational overhead which can further delay value delivery. You win the battle but loose the war - and usually a lot of money.
+While those processes are well-suited to address these unique requirements, they often lose focus of customer needs and value delivery because of their complexity, lengthy planning cycles, and high implementation cost. In addition, the misalignment with an organization's development process results in high friction and operational overhead which can further delay value delivery. You win the battle but loose the war - and usually a lot of money.
 
 The goal of the DataSQRL process is to shift the focus back to the needs of customers and value generation, while accommodating the unique requirements of data service projects and staying aligned with the existing development process. In other words, removing the distractions from building with data, so we can all have some fun again.
 
