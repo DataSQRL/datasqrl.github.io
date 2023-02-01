@@ -37,7 +37,7 @@ const Support = [
   {
     title: 'Discord',
     Svg: require('/static/img/community/discord.svg').default,
-    link: 'https://discord.gg/Sz887Xrn5V',
+    link: 'https://discord.gg/vYyREMNRmh',
     linkText: 'Share Your Thoughts',
     description: (
       <>
