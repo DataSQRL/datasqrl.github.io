@@ -4,26 +4,57 @@ title: "What is DataSQRL?"
 
 # What is DataSQRL?
 
-Need to rewrite this!
 
-DataSQRL is a data system that makes it easy and productive to build [data services](/docs/reference/concepts/data-service.md) from streaming data sources.
+DataSQRL is an open-source compiler for building data services. A [data service](/docs/reference/concepts/data-service) processes, transforms, or analyzes data from one or multiple sources (databases, data streams, file storage, etc.) and exposes the result through an API. <br />
+DataSQRL eliminates most of the laborious code of stitching together data pipelines and makes it easier for developers to build data services.
 
-Implementing a data service with DataSQRL takes only 3 steps:
+Building a data service with DataSQRL takes 3 steps:
 
-1. You connect your streaming data sources to DataSQRL. DataSQRL has connectors for files, database, queues, and logs.
-2. You combine, transform, and analyze the input data by implementing SQRL scripts. [SQRL](sqrl) is a language based on SQL with some added constructs that make it easy to express the logic and structure of your data service.
-3. DataSQRL compiles your SQRL script to a fully functioning data service that integrates a data pipeline, database, and API server. You can call the API from your applications or other backend services to implement data-driven features or other data-intensive functionality.
+1. **Implement SQRL script:** You combine, transform, and analyze the input data by implementing SQRL scripts. [SQRL](sqrl) is a language based on SQL with some added features that make it easy to express the logic and structure of your data service.
+2. **Customize API:** The transformed data is exposed through an API which you can customize to meet your data service requirements by editing the API specification. This step is optional since DataSQRL can also generate a default API spec for you.
+3. **Compile Data Pipeline:** DataSQRL compiles the SQRL script and API specification into a fully integrated data pipeline. The compiled pipeline ingests the imported data, processes it according to the transformations and analyses defined in the SQRL script, and serves the resulting data through the specified API.
 
-DataSQRL compiles SQRL into data services that ingest input data from connected sources, processes it according to the logic expressed in SQRL, and serves the result through an API. DataSQRL does all the laborious work of pipeline orchestration, data synchronization, schema management, and process optimization.
+In a nutshell, DataSQRL is an abstraction layer that takes care of the nitty-gritties of building efficient data pipelines and gives developers an easy-to-use tool to build custom data APIs.
 
-Developers use DataSQRL to implement streaming data services, i.e. data services that respond to new input data in realtime and serve the result through low latency, high throughput APIs to many concurrent users. <br />
-DataSQRL accomplishes this combination of high responsiveness to incoming data and high responsiveness to many concurrent API requests by partially pre-computing results in the data pipeline so that API queries can be computed quickly and with little data movement in the database. <br />
-Since SQRL is a declarative language, the DataSQRL compiler determines how to implement the defined data transformations most effectively and which ones get pre-computed. This saves you a lot of work and the headache associated with sorting out low-level optimizations and data structures.
+Follow the [quickstart tutorial](../quickstart) to build a data service in a few minutes and see how DataSQRL works in practice.
 
-DataSQRL is an implementation of a view store that fills the gap between database systems and data warehouses for data services that need a bit of both: the analytic capabilities of a data warehouse and the high responsiveness and concurrency of a database.
+## How DataSQRL Works
+
+<img src="/img/generic/general-pipeline.svg" alt="Compiled DataSQRL Pipeline" width="100%"/>
+
+DataSQRL compiles the SQRL script and API specification into a data pipeline that consists of a streaming engine, database engine, and API server [[1]](#footnotes). The streaming engine ingests the imported data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results. <br />
+It's like a harmonious orchestra of data technologies with DataSQRL as the conductor.
+
+The engines can be packaged together to run on a single instance or can be scaled independently for large deployments. <br />
+DataSQRL has a pluggable architecture which means it supports various streaming, database, and server engines such as [Apache Flink](https://flink.apache.org/), [Postgres](https://www.postgresql.org/), [Vertx](https://vertx.io/), [and more](/docs/reference/operations/engines). Feel free to contribute your favorite data technology as a DataSQRL engine to the open-source, wink wink.
+
+## What DataSQRL Does
+
+Okay, you get the idea of a compiler for data services that produces end-to-end data pipelines. But what exactly does DataSQRL do for you? Glad you asked.
+
+To produce fully integrated data pipelines, the DataSQLR compiler:
+* resolves data imports to data source connectors and generates input schemas for the stream ingestion,
+* synchronizes data schemas and data management across all engines in the pipeline,
+* aligns timestamps and watermarks across the engines,
+* orchestrates the pipeline for optimal data flow between engines,
+* translates the SQRL script to the respective engine for execution,
+* and generates an API server that implements the given API specification.
+
+To produce high-performance data services that respond to new input data in realtime and provide low latency, high throughput APIs to many concurrent users, DataSQRL optimizes the compiled data pipeline by:
+* partitioning the data flow and co-locating data where possible.
+* pruning the execution graph and consolidating repetitive computations.
+* determining when to pre-compute data transformations in the streaming engine to reduce response latencies versus computing result sets at request time in the database or server to avoid data staleness and combinatorial explosion in pre-computed results.
+* determining the optimal set of index structures to install in the database.
+
+In other words, DataSQRL can save you a lot of time and allows you to focus on what matters: implementing the logic and API of your data service. 
 
 ## Learn More
 
-- Read the [introductory tutorial](../quickstart) to get a feel for DataSQRL and the SQRL language while building an entire data service in 10 minutes.
+- Read the [quickstart tutorial](../quickstart) to get a feel for DataSQRL and the SQRL language while building an entire data service in 5 minutes.
 - Find out [Why DataSQRL Exists](why-datasqrl.md) and what benefits it provides.
 - [Compare DataSQRL](../comparison/overview) to other data technologies and see when to use it.
+- Learn more about the [DataSQRL Optimizer](/docs/reference/operations/optimizer) and how the DataSQRL compiler generates efficient data pipelines.
+
+## Footnotes
+
+**[1]** DataSQRL supports arbitrary DAG topologies for the underlying data pipeline and additional types of data engines. This is a simplification for the most common use cases.

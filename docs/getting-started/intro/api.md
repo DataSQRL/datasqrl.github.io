@@ -354,4 +354,4 @@ If you want to learn more about querying the API, here are a couple of resources
 * The [API reference documentation](/docs/reference/api/graphql-api) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
 * Learn how to query the API from [JVM/Android](/docs/guides/api/graphql-jvm) or [iOS](/docs/guides/api/graphql-ios) applications.
 * Learn more about [subscriptions](/docs/reference/sqrl/table#subscriptions) and how to [feed subscriptions to data sinks](/docs/reference/api/subscriptions).
-* The list of [supported data sinks](/docs/guides/sources/overview#sinks) in DataSQRL links to guides on how to connect various types of sinks to DataSQRL.
+* The list of [supported data sinks](/docs/reference/sources/overview#sinks) in DataSQRL links to guides on how to connect various types of sinks to DataSQRL.

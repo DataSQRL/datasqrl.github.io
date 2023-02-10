@@ -9,16 +9,27 @@ meat on the bone for you to play with DataSQRL and give us feedback
 but more work needs to be
 done before it is ready for prime-time and production use.
 
+<img src="/img/generic/undraw_roadmap.svg" alt="Roadmap >" width="300"/>
+
 This page is an overview of what lays ahead for DataSQRL and what
-features and functionality we are currently missing.
+features and functionality we are currently missing. To join the roadmap discussion or suggest a feature, join the [Discord channel](https://discord.gg/vYyREMNRmh).
 
 DataSQRL is open source. If you need one of the roadmap items below,
 you can always get your hands dirty and [implement it yourself](contribute). 
-Not only is your brain going to grow by 3.57% as a result of efforts, but you
-will also earn our eternal gratitude.
+Not only is your brain going to grow by 3.57% as a result of efforts, but you will also earn our eternal gratitude.
 
-## Data Sources
+## Data Sources and Sinks
 
+Support for the following data sources:
+
+* Postgres
+* MySQL
+* MongoDB
+* AWS Kinesis
+
+Support for the following data formats:
+
+* Parquet
 
 ## SQRL
 
@@ -73,9 +84,9 @@ represents clusters of rows in another table.
 
 ## API
 
-### REST {#rest}
+### REST and gRPC {#rest}
 
-DataSQRL should generate REST APIs similarly to how we currently
+DataSQRL can generate REST and gRPC APIs similarly to how we currently
 generate GraphQL APIs.
 
 ### GraphQL Subscriptions {#graphqlsubs}

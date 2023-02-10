@@ -10,7 +10,7 @@ Before we can use data in our scripts, we have to connect the data source with D
 
 ## What is a Data Source?
 
-A data source is a system that holds data and allows access to the data. DataSQRL supports many types of data sources: filesystems, cloud storage, database systems, queues, logs, and more. Check out the [full list of supported data sources](/docs/guides/sources/overview) which links to detailed information on how to connect them to DataSQRL.
+A data source is a system that holds data and allows access to the data. DataSQRL supports many types of data sources: filesystems, cloud storage, database systems, queues, logs, and more. Check out the [full list of supported data sources](/docs/reference/sources/overview) which links to detailed information on how to connect them to DataSQRL.
 
 A data source is connected to the DataSQRL server via the [command line utility](/docs/reference/operations/cmd#sources) or through the [data source API](/docs/reference/sources/api). Connecting a data source tells the DataSQRL server where it can find data and how to access it. That's why connecting a data source is the first step for building data services with DataSQRL: without data sources there is no data to build with.
 
@@ -64,7 +64,7 @@ for our getting started tutorials. It allows us to quickly iterate on our SQRL s
 without having to worry about changing data.
 
 However, DataSQRL is built specifically for realtime and streaming
-data and supports data sources like [queues, logs, and databases](/docs/guides/sources/overview)
+data and supports data sources like [queues, logs, and databases](/docs/reference/sources/overview)
 which store streaming or changing data. In DataSQRL every source table is a (potentially
 endless) stream of rows.
 
@@ -135,7 +135,7 @@ You've learned more than enough to get you started with data sources. Next, we a
 If you want to learn more about data sources in DataSQRL, here are a couple of topics to
 dive deeper:
 
-* **Other Types of Data Sources**: DataSQRL supports a range of [different data sources](/docs/guides/sources/overview)
+* **Other Types of Data Sources**: DataSQRL supports a range of [different data sources](/docs/reference/sources/overview)
  for many popular data systems. You can also [implement a data source connector](/docs/dev/architecture/data-source)
  to connect data sources that aren't supported yet.
 * **Data Source Customization**: The [data source API](/docs/reference/sources/api) and
@@ -147,4 +147,4 @@ dive deeper:
  discover the schema. DataSQRL supports flexible schemas and heterogeneous data types,
  which means you don't have to worry about schema in most cases. Learn more about
  [schema management](/docs/reference/sources/schema-management) in DataSQRL and how you can 
- [overwrite the schema](/docs/guides/sources/manual-schema) when you are dealing with complex or messy data.
+ [overwrite the schema](/docs/reference/sources/manual-schema) when you are dealing with complex or messy data.

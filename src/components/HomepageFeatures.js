@@ -3,12 +3,13 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import styles from './HomepageFeatures.module.css';
 
-function Feature({Svg, title, link, linkText, description}) {
-  let image;
-  if (Svg) {
-    image = <div className="text--center"><Svg className={styles.featureSvg} alt={title} /></div>;
+function Feature({image, title, link, linkText, description}) {
+  let imageHTML;
+  if (image) {
+    imageHTML = <div className="text--center"><img className={styles.featureSvg} src={image} alt={title} /></div>;
+    //image = <div className="text--center"><Svg className={styles.featureSvg} alt={title} /></div>;
   } else {
-    image = "";
+    imageHTML = "";
   }
   let linkContent;
   if (link) {
@@ -18,7 +19,7 @@ function Feature({Svg, title, link, linkText, description}) {
   }
   return (
     <div className={clsx('col col--4')}>
-      {image}
+      {imageHTML}
       <div className="padding-horiz--md">
         <h3 className="text--center">{title}</h3>
         <p className="text--left margin-bottom--sm">{description}</p>

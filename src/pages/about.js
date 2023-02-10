@@ -26,10 +26,12 @@ const Founders = [
     pic: '/img/headshots/matthias1.png',
     bio: (
       <>
-        Matthias is the former Chief Technologist at DataStax, the company behind the NoSQL Cassandra database.
-        He invented the JanusGraph database (formerly TitanDB) and is an author of O’Reilly’s “Practitioner’s Guide to Graph Data”. <br />
+        Matthias is the former Chief Technologist at <Link to="https://www.datastax.com/">DataStax</Link>, the company behind the
+        NoSQL <Link to="https://cassandra.apache.org/">Cassandra</Link> database.
+        He invented the <Link to="https://janusgraph.org/">JanusGraph</Link> database (formerly TitanDB) and is an author of
+        O’Reilly’s <Link to="https://www.oreilly.com/library/view/the-practitioners-guide/9781492044062/">“Practitioner’s Guide to Graph Data”</Link>. <br />
         He is a founder of the database company Aurelius which was acquired by DataStax in 2015. <br />
-        Matthias holds a PhD in database systems and machine learning from the University of Maryland where he developed the PSL machine learning framework.<br />
+        Matthias holds a PhD in database systems and machine learning from the University of Maryland where he developed the <Link to="https://psl.linqs.org/">PSL machine learning</Link> framework.<br />
         Matthias is too short to be a competitive rower but loves it anyways.
       </>
     ),
@@ -39,8 +41,9 @@ const Founders = [
     pic: '/img/headshots/daniel1.png',
     bio: (
       <>
-        Daniel has worked on data services for most of his career in the tech industry. He previously worked for companies such as
-         Oracle, Datastax (the company behind Apache Cassandra), and Datakin (the company behind LFAI OpenLineage). <br />
+        Daniel has worked on data services for most of his career in the tech industry. He previously worked for companies such
+         as <Link to="https://www.oracle.com/">Oracle</Link>, <Link to="https://www.datastax.com/">DataStax</Link> (the company behind Apache Cassandra), and <Link to="https://datakin.com/">Datakin</Link> (the
+         company behind <Link to="https://openlineage.io/">LFAI OpenLineage</Link>). <br />
         Daniel has worked on a number of open-source projects and (streaming) data systems. He is equally excited about
         index selection as fine-tuning engineering development processes. <br />
         Daniel's passion for hiking and fermented foods adds a unique perspective to his work.

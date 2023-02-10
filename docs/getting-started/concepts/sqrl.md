@@ -4,38 +4,60 @@ title: "What is SQRL?"
 
 # What is SQRL?
 
-DataSQRL uses a declarative language called SQRL to express the logic and structure of a data service. You implement a data service in SQRL by defining how to combine, transform, and analyze the input data through a sequence of SQL(ish) statements. DataSQRL compiles SQRL scripts into fully-integrated data pipelines and an API layer that serves the result.
+DataSQRL uses a declarative language called SQRL to express the logic and structure of a data service. You implement a data service in SQRL scripts by defining how to combine, transform, and analyze the input data through a sequence of SQL(ish) statements. DataSQRL compiles SQRL scripts into fully-integrated data pipelines and an API layer that serves the result.
 
 SQRL is based on SQL. If you know how to read a `SELECT ... FROM ... WHERE` query in SQL then you'll be able to read SQRL scripts with a few additional pointers. If you are unfamiliar with SQL, it's a good time to brush up on some SQL basics with our [SQL primer](/docs/reference/sqrl/sql-primer).
 
-You express the logic of your data service in SQRL through a sequence SQL statements that define how to transform and analyze the input data to produce the result data that you want to expose as an API. The tables and relationships you create along the way define the structure of the resulting API which allows DataSQRL to generate the API and API schema for you and keep everything in sync. Tables are exposed as API endpoints with filters and orders and relationships can be traversed through the API by selecting related records.
+SQRL stands for "Structured Query and Reaction Language" and is designed specifically for developers who are building streaming data services. It has a low learning curve because it is essentially "just" SQL but adds important features that SQL lacks and provides a convenient syntax to make it feel like a productive programming language and address the needs of streaming data services.
 
-SQRL is a loosely-typed language which infers data types from the input data. You can explicitly define data types and schemas if you want to, but in most cases you let DataSQRL handle all the type and schema management for you and save a lot of time.
+Check out the [quickstart tutorial](../quickstart) to get a feel for SQRL and how it enables building data services.
 
-SQRL stands for "Structured Query and Reaction Language" is designed specifically for developers who are building streaming data services. It has a low learning curve because it is essentially "just" SQL but adds enough convenience features to SQL to make it feel like a productive programming language. Check out the [introductory tutorial](../quickstart) to get a feel for the language and see how SQRL allows you to build data services in a few minutes.
 
 ## SQRL Features
 
-SQRL adds a few constructs and some syntactic sugar on top of SQL to make it feel more like a development language and less like a game of Russian dolls with sub-queries. <br />
-Here is a brief overview of how SQRL extends SQL:
+SQRL is a loosely-typed language which infers data types from the input data. You can explicitly define data types and schemas if you want to, but in most cases you let DataSQRL handle all the type and schema management for you and save a lot of time.
+
+SQRL adds a few features to SQL to make building data services a lot easier, like explicit support for nested data, streaming data, and relationships. The tables and relationships defined in the SQRL script map directly to the schema of the exposed data API which can be customized in the API specification. 
+
+SQRL provides some syntactic sugar on top of SQL to make it feel more like a development language and less like a game of Russian dolls with sub-queries.
+
+Here is a brief overview of the features SQRL provides:
 
 ### Import Management
 
 SQRL supports `IMPORT` statements to declare the data dependencies of your SQRL script like you would software dependencies in a programming language.
 
 ```sqrl
-IMPORT nutshop-data.Orders;`
+IMPORT datasqrl.seedshop.Orders;`
 ```
-This statement imports the `Orders` table from the connected dataset `nutshop-data` and makes it available in the script.
+This statement imports the `Orders` table from the dataset `datasqrl.seedshop` and makes it available in the script.
+
+Explicit imports allow us to treat external datasets as dependencies and manage them like we would other software dependencies that evolve over time.
+
+### Nested Tables
+
+A lot of data these days has a nested data structure. JSON is a prime example. SQRL supports nested data natively by mapping it onto nested tables with parent-child relationships between them. This allows you to treat nested data just like normal tables.
+
+For example, our imported `Orders` table comes from a connected stream of JSON order records that contain a nested array of `items`. Those items are mapped to the nested `Orders.items` table and link from an `Orders` record through the `items` relationship.
+
+Representing nested data as tables means that we don't need special data types or special access methods for nested data in SQRL. The DataSQRL compiler can figure out how to most efficiently represent such data.
+
+We can also create nested tables in SQRL:
+```sqrl
+Orders.totals := SELECT sum(total) as price, sum(discount) as savings FROM @.items;
+```
+`totals` is defined as a nested table under `Orders` to aggregate the price and discount of all the items in each order. The special table handle `@` refers to each row in the parent `Orders` table and is used to define *locally scoped queries*. That means, `totals` aggregates the price and discount of all the items of a *single* parent `Orders` record. We can think of the query definition as being applied to *each row* of the parent table. In contrast, `FROM Orders.items` would have aggregated over all items for *all* orders.
+
+Using nested tables and locally scoped queries makes it easy to define aggregations over subsets or partitions of data.
 
 ### Incremental Table Definition
 
 SQRL scripts are essentially a sequence of table and column definitions that allow you to incrementally build up the logic of your data service.
 
-You can add columns to existing tables, like this `date` column on our previously imported `Orders` table which transforms a timestamp column to a `DateTime` column:
+You can add columns to existing tables, like this `total` column on our previously imported `Orders.items` table which computes the total price for each item in the order:
 
 ```sqrl
-Orders.date := function.time.fromEpochMillis(time);
+Orders.items.total := quantity * unit_price - discount?0.0;
 ```
 
 Or we can define a new `Customers` table based on the rows in the `Orders` table:
@@ -50,77 +72,78 @@ By defining tables and columns incrementally, you can write shorter, more compre
 
 ### Relationships
 
-SQRL adds relationships to SQL so you can link tables to each other and explicitly label their relationship.
+SQRL adds relationships to SQL, so you can link tables to each other and explicitly label their relationship.
 Relationships are pre-defined `JOIN` clauses that you can reuse across your script.
 
 ```sqrl
 Customers.purchases := JOIN Orders ON Orders.customerid = @.id ORDER BY Orders.time DESC;
 ```
 
-We define the column `purchases` on the table `Customers` to be a relationship to the `Orders` table as defined by the `JOIN` clause on the right. The `purchases` relationship column links a record in the `Customers` table to all the records in the `Orders` table that have a matching `customerid`.
+We define the column `purchases` on the table `Customers` to be a relationship to the `Orders` table as defined by the `JOIN` clause on the right. The `purchases` relationship column links a record in the `Customers` table to all the records in the `Orders` table that have a matching `customerid`. Note, the use of the special table handle `@` to refer to the parent `Customers` table on the left-hand side.
 
-Defining relationships makes SQRL scripts easier to read because the structure of the data is explicitly labeled. We can reference previously defined relationships in `FROM` and `JOIN` clauses as well as expressions.  
-
-```sqrl
-Customers.total_orders := SUM(purchases.total);
-```
-
-Here, we define a new column `total_orders` on the `Customers` table as the sum over the total values of all the orders a customer has placed. SQRL automatically expands relationship references to their full `JOIN`. In this example, we are summing over `Orders.total` for all orders that match the `customerid` of the `Customers` record. Note, that when you define new columns in this way, their definition is local to the parent table like a nested query in `SELECT` clause.
-
-Relationships get exposed in the API as well which allows users of the API to flexibly query the result data of your data service.
-
-### Nested Tables
-
-A lot of data these days is hierarchical which means it has a nested data structure. JSON is a prime example. SQRL adds support for hierarchical data by mapping it onto nested tables with parent-child relationships between them. This allows you to treat nested data just like normal tables.
-
-For example, our imported `Orders` table comes from a connected stream of JSON order records that contain a nested array of items. Those items are mapped to the nested `Orders.items` table and link from an `Orders` record through the `items` relationship.
-
-We can treat the `Orders.items` table like any other and add a column to it that computes the total for each item:
-```sqrl
-Orders.items.total := quantity * unit_price - discount;
-```
-We can then reference that newly defined column as we compute the total for an order:
-```sqrl
-Orders.total := sum(items.total);
-```
-
-Treated hierarchical data as nested tables means that we don't need special data types or special access methods for nested data in SQRL. The DataSQRL compiler can figure out how to most efficiently represent such data. In our SQRL scripts we can focus on the logical representation and not worry about these optimization details.
-
-In addition to supporting hierarchical input data, nested tables also allow us to define locally scoped tables:
+Defining relationships makes SQRL scripts easier to read because the structure of the data is explicitly labeled. We can reference previously defined relationships in `FROM` and `JOIN` clauses as well as expressions.
 
 ```sqrl
-Customers.past_purchases :=
-         SELECT i.productid, count(i.*) as num_orders, sum(i.quantity) as total_quantity
-         FROM @.purchases.items i
-         GROUP BY i.productid
-         ORDER BY num_orders DESC, total_quantity DESC;
+Customers.spending :=
+         SELECT round_to_month(p.timestamp) AS month,
+                sum(t.price) AS spend, sum(t.savings) AS saved
+         FROM @.purchases p JOIN p.totals t
+         GROUP BY month ORDER BY month DESC
 ```
 
-The table `past_purchases` is defined as a nested table within `Customers`. The SQL query on the right-hand side is a *localized query* which means it is evaluated in the context of the `Customers` table. We can think of the query definition as being applied to *each row* of the parent table.
+Here, we define a nested table `spending` to aggregate the spending for each customer by month. We use `FROM @.purchases p` to select all the orders for each customer based on the previously defined `purchases` relationship and then join with the nested `totals` table in `Orders`. SQRL automatically expands relationship references to their full `JOIN` definition.
 
-SQRL introduces the special table handle `@` to refer to each row in the parent `Customers` table. The `FROM` clause `@.purchases.items` chains together the `purchases` relationship on `Customers` with the `items` relationship on `Orders` to retrieve all item records for all order records associated with a single customer record. Chaining together relationships allows us to avoid the complexity of multiple JOIN expressions in this query.
+Relationships get exposed in the API as well which allows users of the API to flexibly access the result data of your data service.
 
-### Subscription
+### Data Streams
 
-What makes DataSQRL "reactive" is that partially maintains the tables defined in SQRL and immediately updates partial results when new data comes in. That makes the API not only responsive to incoming requests but also to changes in the data.
+SQRL natively supports data streams and reacting to changes in data. That's what makes SQRL *reactive*. SQRL distinguishes between *streaming* and *state* tables. State tables are the classic relational tables where records are identified by key and update over time. Streaming tables are an append-only log of records that are ordered in time.
 
-To respond more directly to changes in the data, SQRL introduces the concept of a **subscription**. A subscription observes a table and creates an event record for certain changes.
+SQRL provides features to convert between streaming and state tables as well as react to changes in state tables.
 
-NewCustomerPromotion := SUBSCRIPTION ON ADD AS
-SELECT customerid, total_orders
-FROM Customers WHERE total_orders >= 100;
+For example, to convert a change-log of product updates to a products table that contains the most recent version of each product, we define:
+```sqrl
+IMPORT datasqrl.seedshop.Products AS ProductsChangeLog;
 
-This subscription observes a table that contains all the customer ids for customers who have spent more than a hundred dollars at our shop. The subscription triggers whenever a new record is added to the table (as defined by the `ON ADD`) and produces an event record that is stored in the table `NewCustomerPromotion`.
+Products := DISTINCT ProductsChangeLog ON productid ORDER BY updated DESC;
+```
 
-You can build on subscription tables like other tables. You can only connect subscriptions to sinks which means that triggered event records get pushed to downstream consumers like queues or event buses that can process the event further or kick off a workflow.
+This defines a `Products` state table keyed by `productid` which contains the most recent update.
 
-In addition to the responsive API, subscriptions are the other element that makes SQRL "reactive" and allows you to build complex data services with little effort.
+Sometimes, the conversion from stream to state is implicit such as for certain aggregates:
+```sqrl
+Customers.order_stats := SELECT sum(p.total.price) as total_spend, count(1) as num_orders FROM @.purchases p;
+```
+We are aggregating the orders stream for each customer to compute a total of the number of orders and total amount of money spent by customer. That aggregate is a state since it changes over time. SQRL is reactive in that it updates such aggregates immediately with each incoming order and the updated results are available through the API.
 
-### Learn More
+To convert from state to stream table, SQRL provides the `STREAM` constructor which allows us to react to changes in the data:
 
-Take a look at the [introductory tutorial](../quickstart) and the [DataSQRL training](../intro/overview) to see how these features work in practice while implementing a data service. <br />
-For a comprehensive and in-depth description of SQRL, check out the [reference documentation](/docs/reference/sqrl/overview).
+```sqrl
+NewCustomerPromotion := STREAM ON ADD AS
+SELECT c.customerid, o.total_spend, o.num_orders FROM Customer c JOIN c.order_stats o
+WHERE o.total_spend >= 100 OR o.num_orders >=3;
+```
 
+This creates a `NewCustomerPromotion` data stream to which SQRL appends a record whenever the `order_stats` aggregated state we just defined exceeds $100 spent or more than 3 orders placed by a given customer. 
+
+Data streams can be exported to other downstream systems or to trigger external actions. For example:
+```sqrl
+EXPORT NewCustomerPromotion TO email.NewCustomerPromotion;
+```
+This connects the data stream to an external data sink that sends an email to the customer offering a promotion coupon. Data sinks, like data sources, are treated as external dependencies by SQRL.
+
+Timestamps on data streams are important to synchronize records in time across systems and process them efficiently. SQRL provides automatic timestamp discovery, or you can define the timestamp column explicitly:
+```sqrl
+IMPORT datasqrl.seedshop.Orders TIMESTAMP time;`
+```
+
+## Learn More
+
+* Take a look at the [quickstart tutorial](../quickstart) to build a data service with SQRL in a few minutes.
+* For a comprehensive and in-depth description of SQRL, check out the [reference documentation](/docs/reference/sqrl/overview).
+
+
+<!--
 ## Why SQRL?
 
 Do we really need another language to build data services? We asked ourselves that question a lot. That's why we designed SQRL to be an upgrade to SQL rather than a new language. 
@@ -129,4 +152,6 @@ We think SQL is great. It is expressive and concise. It focuses on *what* you ne
 
 But for software development, SQL is just a bit awkward. It was designed for expressing one-off queries, doesn't have a lot of constructs to build incrementally, and complex queries often end up looking pretty harrowing. Plus, it's a bit outdated and doesn't support popular concepts like relationships.
 
-SQRL fixes that. It takes the good of SQL and adds some features that are missing or useful for developers implementing data services. But the extensions that SQRL adds are fully backwards compatible. In fact, you can take an SQRL script and compile it into vanilla SQL. That's essentially what the DataSQRL compiler does (plus some extra optimization). The result won't look pretty but it goes to show that there is nothing "magical" about SQRL. It's just a developer-focused upgrade to SQL. 
+SQRL fixes that. It takes the good of SQL and adds some features that are missing or useful for developers implementing data services. But the extensions that SQRL adds are fully backwards compatible. In fact, you can take an SQRL script and compile it into vanilla SQL. That's essentially what the DataSQRL compiler does (plus some extra optimization). The result won't look pretty but it goes to show that there is nothing "magical" about SQRL. It's just a developer-focused upgrade to SQL.
+
+-->

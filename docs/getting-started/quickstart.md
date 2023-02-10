@@ -48,7 +48,7 @@ docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run c360.sqrl
 
 :::note
 
-To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine.
+To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes a minute to download the compiler.
 
 :::
 

@@ -66,62 +66,6 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'How-to Guides',
-      link: {
-        type: 'doc',
-        id: 'guides/overview',
-      },
-      items: [
-        {
-          type: 'category',
-          label: 'Sources & Sinks',
-          link: {
-            type: 'doc',
-            id: 'guides/sources/overview',
-          },
-          items: [
-            'guides/sources/files',
-            'guides/sources/kafka',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'SQRL',
-          link: {
-            type: 'doc',
-            id: 'guides/sqrl/overview',
-          },
-          items: [
-            'guides/sqrl/deduplicate-stream',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'API',
-          link: {
-            type: 'doc',
-            id: 'guides/api/overview',
-          },
-          items: [
-            'guides/api/graphql-js',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Operations',
-          link: {
-            type: 'generated-index',
-            title: 'How to Operate and Maintain DataSQRL',
-            description: "These guides help you run DataSQRL in development and production."
-          },
-          items: [
-            'guides/operations/dev-mode',
-          ],
-        },
-      ],
-    },
-    {
-      type: 'category',
       label: 'Reference Documentation',
       link: {
         type: 'doc',
@@ -130,24 +74,12 @@ const sidebars = {
       items: [
         {
           type: 'category',
-          label: 'Sources & Sinks',
-          link: {
-            type: 'doc',
-            id: 'reference/sources/overview',
-          },
-          items: [
-            'reference/sources/api',
-          ],
-        },
-        {
-          type: 'category',
           label: 'SQRL',
           link: {
             type: 'doc',
             id: 'reference/sqrl/overview',
           },
           items: [
-            'reference/sqrl/grammar',
             'reference/sqrl/table',
             'reference/sqrl/relationship',
             'reference/sqrl/time',
@@ -183,15 +115,58 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Sources & Sinks',
+          link: {
+            type: 'doc',
+            id: 'reference/sources/overview',
+          },
+          items: [
+            'reference/sources/discovery',
+            {
+              type: 'category',
+              label: 'Data System',
+              link: {
+                type: 'generated-index',
+                title: 'Data Systems supported by DataSQRL',
+                description: 'DataSQRL supports the following data systems as data sources or sinks:'
+              },
+              items: [
+                'reference/sources/system/file',
+                'reference/sources/system/kafka',
+                'reference/sources/system/print',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Data Format',
+              link: {
+                type: 'generated-index',
+                title: 'Data Formats supported by DataSQRL',
+                description: 'DataSQRL supports the following data formats for data sources and sinks:'
+              },
+              items: [
+                'reference/sources/format/json',
+                'reference/sources/format/csv',
+                'reference/sources/format/avro',
+              ],
+            },
+            'reference/sources/schema',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Operations',
           link: {
             type: 'doc',
             id: 'reference/operations/overview',
           },
           items: [
-            'reference/operations/cmd',
-            'reference/operations/configuration',
-            'reference/operations/monitoring',
+            'reference/operations/build',
+            'reference/operations/package-config',
+            'reference/operations/commandline',
+            'reference/operations/engines',
+            'reference/operations/repository',
+            'reference/operations/secrets',
             'reference/operations/optimizer',
           ],
         },
@@ -205,6 +180,7 @@ const sidebars = {
                 Think Oxford dictionary for data nerds. Sounds fun? Read on! Doesn't? Then imagine Benedict Cumberbatch reading it to you with a British accent."
           },
           items: [
+            'reference/concepts/package',
             'reference/concepts/data-service',
           ],
         },
@@ -218,20 +194,9 @@ const sidebars = {
         id: 'dev/overview',
       },
       items: [
-        'dev/philosophy',
-        {
-          type: 'category',
-          label: 'DataSQRL Architecture',
-          link: {
-            type: 'doc',
-            id: 'dev/architecture/overview',
-          },
-          items: [
-            'dev/architecture/data-source',
-            'dev/architecture/ingest',
-          ],
-        },
-        'dev/contribute'
+        'dev/architecture',
+        'dev/roadmap',
+        'dev/contribute',
       ],
     },
     {

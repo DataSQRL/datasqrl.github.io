@@ -28,7 +28,7 @@ const header =  {
 const WhyDataSQRLList = [
   {
     title: 'Saves You Time',
-    Svg: require('../../static/img/index/undraw_time_management_sqrl.svg').default,
+    image: '/img/index/undraw_time_management_sqrl.svg',
     link: '/docs/getting-started/concepts/why-datasqrl',
     linkText: 'Learn More',
     description: (
@@ -41,7 +41,7 @@ const WhyDataSQRLList = [
   },
   {
     title: 'Easy to Use',
-    Svg: require('../../static/img/index/undraw_programming_sqrl.svg').default,
+    image: '/img/index/undraw_programming_sqrl.svg',
     link: '/docs/getting-started/concepts/why-datasqrl',
     linkText: 'Learn More',
     description: (
@@ -54,7 +54,7 @@ const WhyDataSQRLList = [
   },
   {
     title: 'Fast & Efficient',
-    Svg: require('../../static/img/index/undraw_fast_loading_sqrl.svg').default,
+    image: '/img/index/undraw_fast_loading_sqrl.svg',
     link: '/docs/getting-started/concepts/why-datasqrl',
     linkText: 'Learn More',
     description: (
@@ -68,22 +68,19 @@ const WhyDataSQRLList = [
 ];
 
 const sqrlScript =
-`IMPORT seedshop.Orders;      -- Import orders data stream
-IMPORT time.round_to_month;  -- Import time function
-
+`IMPORT datasqrl.seedshop.Orders;  -- Import orders stream
+IMPORT time.startOfMonth;         -- Import time function
 /* Augment orders with aggregate calculations */
 Orders.items.total := quantity * unit_price - discount?0.0;
 Orders.totals := SELECT sum(total) as price,
-                        sum(discount) as savings FROM @.items;
+                      sum(discount) as saving FROM @.items;
 /* Create new table of unique customers */
-Customers := SELECT DISTINCT customerid AS id FROM Orders;
+Users := SELECT DISTINCT customerid AS id FROM Orders;
 /* Create relationship between customers and orders */
-Customers.purchases := JOIN Orders ON Orders.customerid = @.id
-                                   ORDER BY Orders.time DESC;
-/* Aggregates the purchase history for each customer by month */
-Customers.spending :=
-         SELECT round_to_month(p.timestamp) AS month,
-                sum(t.price) AS spend, sum(t.savings) AS saved
+Users.purchases := JOIN Orders ON Orders.customerid = @.id;
+/* Aggregate the purchase history for each user by month */
+Users.spending := SELECT startOfMonth(p.time) AS month,
+              sum(t.price) AS spend, sum(t.saving) AS saved
          FROM @.purchases p JOIN p.totals t
          GROUP BY month ORDER BY month DESC;`;
 

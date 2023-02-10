@@ -1,6 +1,6 @@
 ---
 slug: sql-for-developers
-title: "SQRL: Updating SQL for Developers"
+title: "SQRL: SQL for Data Services"
 authors: [matthias]
 tags: [SQL, SQRL, database, developer]
 ---

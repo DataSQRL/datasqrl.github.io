@@ -6,7 +6,7 @@ title: "When to use DataSQRL"
 
 <img src="/img/index/undraw_decide_sqrl.svg" alt="When to use DataSQRL >" width="300"/>
 
-You get that [DataSQRL](../concepts/datasqrl) is a tool for building [data services](/docs/reference/concepts/data-service.md) from streaming data sources, but you are wondering if it's the right tool for your project. And how does it compare to other data technologies you are considering to get the work done?
+You get that [DataSQRL](../concepts/datasqrl) is a compiler for building [data services](/docs/reference/concepts/data-service.md) from streaming data sources, but you are wondering if it's the right tool for your project. And how does it compare to other options you are considering to get the work done?
 
 While it depends a lot on the specifics of your project, the following heuristics are generally useful:
 
@@ -19,7 +19,7 @@ Now, those are pretty conservative heuristics for projects where your career is 
 
 ## Database
 
-Here is the deal: For simple data services, a database is often good enough. Databases have been around for decades, are very robust, and widely available. If your data is already in a database (or it's trivial to get it there), then the database should be your first choice.
+Here is the deal: For simple data storage and retrieval, a database is good enough. Databases have been around for decades, are very robust, and widely available. If your data is already in a database (or it's trivial to get it there), then the database should be your first choice.
 
 If you cannot directly access the database or are concerned about adding another workload to it, then DataSQRL makes it easy to set up your data service on separate infrastructure with that database as the source.
 
@@ -50,3 +50,19 @@ DataSQRL is still young and may be missing a feature that you need for your data
 ## TL;DR
 
 If you need more than a CRUD app, don't have a database or data warehouse that's ready to go, and don't need Google-scale, then DataSQRL is a pragmatic choice that gets you good results quickly with little effort.
+
+## Wait, but what about X New Technology?
+
+There are a lot of new technologies coming to market that promise to make building data services easier. We are excited about the increased innovation in this space because it is desperately needed.
+
+As you evaluate new technologies that promise to be a one-stop-shop for building data services or APIs, keep the following in mind: Any such system needs to have a streaming component (for realtime data ingest and computation), a data storage component (for serving data), and an API layer (for serving API requests).
+
+* What are they using for each of those components? Are those proven technologies that have stood the test of time? Data technologies are notoriously hard to mature because there are so many failure conditions to address. It usually takes many years of intense development effort to mature a data technology to production quality.
+* Can those components be independently operated and scaled? Does your team already have operational expertise to manage those components or is it possible to outsource such management?
+* How are these components evolving over time? Are these independent projects that are widely used or is it one team that develops all of them?
+
+Instead of building a new data system, we believe that the compiler approach to building data services is more promising because:
+
+* It relies on existing, proven data technologies and benefits from continuous innovation that's happening in that space.
+* It doesn't burden your team with yet another data technology to learn, understand, and operate. Your data infrastructure is already complex enough.
+* More fundamentally, we don't need another data technology, we need an abstraction layer that makes existing technologies easier to use.

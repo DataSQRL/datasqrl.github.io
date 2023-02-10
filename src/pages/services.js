@@ -25,7 +25,7 @@ const header =  {
 const WhatDataSQRLServices = [
   {
     title: 'Workshops',
-    Svg: require('/static/img/index/undraw_online_shopping_sqrl.svg').default,
+    image: '/img/index/undraw_personal_training_sqrl.svg',
     description: (
       <>
         A 2-day workshop combines prototyping a data service for your choice of use case with a miniature training.
@@ -39,7 +39,7 @@ const WhatDataSQRLServices = [
   },
   {
     title: 'Training',
-    Svg: require('/static/img/index/undraw_personal_training_sqrl.svg').default,
+    image: '/img/index/undraw_personal_training_sqrl.svg',
     description: (
       <>
         A week-long training teaches your organization how to use DataSQRL technology to build data services
@@ -54,7 +54,7 @@ const WhatDataSQRLServices = [
   },
   {
     title: 'Consulting',
-    Svg: require('/static/img/index/undraw_active_support_sqrl.svg').default,
+    image: '/img/index/undraw_active_support_sqrl.svg',
     description: (
       <>
         Partner with us and we will embed with your team to build a data service from inception
@@ -71,7 +71,7 @@ const WhatDataSQRLServices = [
 const WhyDataSQRLServices = [
   {
     title: 'Trusted Expertise',
-    Svg: require('../../static/img/generic/undraw_experts.svg').default,
+    image: '/img/generic/undraw_experts.svg',
     description: (
       <>
         With decades of experience, DataSQRL's <Link to="/about">recognized experts</Link> can jumpstart your
@@ -82,7 +82,7 @@ const WhyDataSQRLServices = [
   },
   {
     title: 'Visible Results',
-    Svg: require('../../static/img/generic/undraw_data_points.svg').default,
+    image: '/img/generic/undraw_data_points.svg',
     description: (
       <>
         We are hands-on and work closely with your team to deliver working data
@@ -93,7 +93,7 @@ const WhyDataSQRLServices = [
   },
   {
     title: 'Reliable Partner',
-    Svg: require('../../static/img/generic/undraw_partner.svg').default,
+    image: '/img/generic/undraw_partner.svg',
     description: (
       <>
         <Link to="/about">Our mission</Link> is to help your organization build with data and we will support your

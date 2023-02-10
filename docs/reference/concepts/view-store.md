@@ -2,6 +2,8 @@
 title: "View Store"
 ---
 
+(don't use - kept just for reference)
+
 # What is a View Store?
 
 A view store is a data system that provides fast, concurrent access to partially maintained views over streaming sources of input data.

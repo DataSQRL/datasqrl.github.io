@@ -1,1 +1,0 @@
-# DataSQRL Architecture
