@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"SQRL: Updating SQL for Developers","permalink":"/blog/sql-for-developers"},{"title":"Hello, World!","permalink":"/blog/welcome"}]}')}}]);
