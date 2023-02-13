@@ -43,8 +43,7 @@ There are 3 steps to building a data service in DataSQLR:
  a GraphQL data API based on the result. You can customize the API and access it from your application in the programming language of your choice.
 
 Before we look more closely at those 3 steps, make sure that you have DataSQRL
-[installed](../install) and [running](../quickstart#setup). Later, we'll look in
-more detail at [operating DataSQRL server](server).
+[installed](../install) and [running](../quickstart#setup).
 
 Alright, with all that preamble out of the way, let's buckle up and go on a ride.
 First stop: **[Connecting data sources](data-sources.md)**.

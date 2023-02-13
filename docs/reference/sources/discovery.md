@@ -130,7 +130,7 @@ docker run -v $PWD:/build datasqrl/datasqrl-cmd discover datasystem.json
 
 This command inspects the configured data system and discovers all available tables and their schema. It requires that the machine on which you execute the command can connect to the data system with the provided configuration. 
 
-For more information about the `discover` command and its options, refer to the [command-line documentation](../operations/commandline#discover). If your data system configuration uses secrets, check out [secrets handling](../operations/secrets).
+For more information about the `discover` command and its options, refer to the [command-line documentation](../operations/command#discover). If your data system configuration uses secrets, check out [secrets handling](../operations/deploy/secrets.md).
 
 <!--
 ### Generate Statistics

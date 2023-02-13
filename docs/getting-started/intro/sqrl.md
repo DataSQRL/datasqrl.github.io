@@ -178,8 +178,8 @@ function.
 
 In most cases, type inference is obvious and you can let DataSQRL handle data types and schema for you.
 One less thing to worry about. \
-Read more about [schema management](/docs/reference/sources/schema-management)
-and how to [manually define data types](/docs/reference/sources/manual-schema) for 
+Read more about [schema management](/docs/reference/sources/schema)
+and how to [manually define data types](/docs/reference/sources/schema) for 
 datasets with heterogeneous or very messy data where it isn't obvious.
 
 ## Relationships
@@ -542,4 +542,3 @@ We've covered the 80% of SQRL you need in this document. If you want to know mor
  advice on solving specific problems in SQRL
 * Learn more about the key SQRL concepts of [tables](/docs/reference/sqrl/table),
   [relationships](/docs/reference/sqrl/relationship), and [time](/docs/reference/sqrl/time).
-* If you want to know it *all*, take a look at the [SQRL language reference](/docs/reference/sqrl/grammar).

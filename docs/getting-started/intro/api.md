@@ -8,7 +8,7 @@ DataSQRL generates an API for the data service you define in the SQRL script. Le
 
 :::info
 
-We will be accessing the generated GraphQL API. If you are new to the GraphQL API standard, take a quick look at the [GraphQL Primer](/docs/reference/api/graphql-primer) 
+We will be accessing the generated GraphQL API. If you are new to the GraphQL API standard, take a quick look at the GraphQL Primer.
 We [are working](/docs/dev/roadmap#rest) on REST support.
 
 :::
@@ -144,8 +144,7 @@ Create a sub-folder `queries` in the folder where you created the customer 360 S
 ### Invoking Queries in Application
 
 You can now use the query templates to retrieve data from the API in the programming language of your choice. \
-We are going to build a little react app in Javascript, but take a look at [Querying in JVM/Android](/docs/guides/api/graphql-jvm) or [Querying in iOS](/docs/guides/api/graphql-ios)
-to see how to query the API from a JVM based language (e.g. Android or Kotlin) or an iOS application. You can invoke the DataSQRL generated GraphQL API from any programming language with a GraphQL client.
+You can invoke the DataSQRL generated GraphQL API from any programming language with a GraphQL client.
 
 If you don't have the [Apollo GraphQL client](https://www.apollographql.com/docs/react/) and GraphQL support installed yet, let's get that out of the way first:
 
@@ -345,13 +344,15 @@ This annotation enables pagination for the nested `products_by_protein` table. W
 
 ## Next Steps
 
-You've built a small Customer 360 application in React and explored how to query the flexible GraphQL API that DataSQRL generates to get the result sets you need. You are ready to build application with DataSQRL. Before you run off and build a billion dollar app, take a quick look at the next section on [how to operate DataSQRL server](server).
+You've built a small Customer 360 application in React and explored how to query the flexible GraphQL API that DataSQRL generates to get the result sets you need. You are ready to build application with DataSQRL. Before you run off and build a billion dollar app, take a quick look at the next section on
 
 ---
 
 If you want to learn more about querying the API, here are a couple of resources you might find helpful:
 
-* The [API reference documentation](/docs/reference/api/graphql-api) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
-* Learn how to query the API from [JVM/Android](/docs/guides/api/graphql-jvm) or [iOS](/docs/guides/api/graphql-ios) applications.
-* Learn more about [subscriptions](/docs/reference/sqrl/table#subscriptions) and how to [feed subscriptions to data sinks](/docs/reference/api/subscriptions).
-* The list of [supported data sinks](/docs/reference/sources/overview#sinks) in DataSQRL links to guides on how to connect various types of sinks to DataSQRL.
+* The [API reference documentation](/docs/reference/api/graphql/design.md) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
+* Learn how to query the API from [JVM/Android](/docs/reference/api/graphql/query.md) or [iOS](/docs/reference/api/graphql/query.md) applications.
+
+<!--
+* Unless you run DataSQRL behind a firewall, you need to protect the generated API from unauthorized access. Learn more about [JWT based access control](/docs/reference/api/access-control) to set up authorization for your DataSQRL data service.
+-->

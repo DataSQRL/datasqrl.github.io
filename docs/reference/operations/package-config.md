@@ -2,4 +2,9 @@
 # Package Configuration
 
 
-## Dependencies
+
+
+## Dependencies {#dependency}
+
+
+## Package Information {#information}

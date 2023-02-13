@@ -77,7 +77,7 @@ However, DataSQRL doesn't slow you down initially with scalability concerns and 
 
 ## Footnotes
 
-[1] DataSQRL has a pluggable engine architecture. Check out [all the engines](/docs/reference/operations/engines) that DataSQRL supports.
+[1] DataSQRL has a pluggable engine architecture. Check out [all the engines](/docs/reference/operations/engines/overview) that DataSQRL supports.
 
 [2] You can also import functions implemented in other languages if you prefer.
 

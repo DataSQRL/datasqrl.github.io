@@ -39,7 +39,6 @@ const sidebars = {
             'getting-started/intro/data-sources',
             'getting-started/intro/sqrl',
             'getting-started/intro/api',
-            'getting-started/intro/server',
             'getting-started/intro/advanced',
           ],
         },
@@ -107,10 +106,18 @@ const sidebars = {
             id: 'reference/api/overview',
           },
           items: [
-            'reference/api/graphql-api',
-            'reference/api/subscriptions',
-            'reference/api/access-control',
-            'reference/api/graphql-primer',
+            {
+              type: 'category',
+              label: 'GraphQL',
+              link: {
+                type: 'doc',
+                id: 'reference/api/graphql/design',
+              },
+              items: [
+                'reference/api/graphql/query',
+                'reference/api/graphql/design',
+              ],
+            },
           ],
         },
         {
@@ -155,19 +162,42 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Operations',
+          label: 'Build',
           link: {
             type: 'doc',
-            id: 'reference/operations/overview',
+            id: 'reference/operations/build',
           },
           items: [
-            'reference/operations/build',
-            'reference/operations/package-config',
-            'reference/operations/commandline',
-            'reference/operations/engines',
+            'reference/operations/command',
             'reference/operations/repository',
-            'reference/operations/secrets',
             'reference/operations/optimizer',
+            'reference/operations/package-config',
+            {
+              type: 'category',
+              label: 'Engines',
+              link: {
+                type: 'doc',
+                id: 'reference/operations/engines/overview',
+              },
+              items: [
+                'reference/operations/engines/flink',
+                'reference/operations/engines/postgres',
+                'reference/operations/engines/vertx',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Deploy',
+              link: {
+                type: 'doc',
+                id: 'reference/operations/deploy/overview',
+              },
+              items: [
+                'reference/operations/deploy/aws',
+//                  'reference/operations/deploy/secrets',
+              ],
+            },
+
           ],
         },
         {

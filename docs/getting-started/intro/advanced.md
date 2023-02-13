@@ -173,15 +173,18 @@ Customers.products_by_protein.product := JOIN Products ON Products.id = _product
 
 With the `@optimizer` annotation we can pass hints to the optimizer. The boolean flag `materialize` tells the optimizer whether to incrementally update a table with changing data - i.e. to materialize a table as database folks would say - or to compute the table results at query time with each API request.
 
-Learn more about the [DataSQRL optimizer](/docs/reference/operations/optimizer) and how to provide hints to control the execution plan that it generates for your SQRL script. You can also learn more about the [architecture of DataSQRL](/docs/dev/architecture/overview) to dive deep into the internals of the system.
+Learn more about the [DataSQRL optimizer](/docs/reference/operations/optimizer) and how to provide hints to control the execution plan that it generates for your SQRL script. You can also learn more about the [architecture of DataSQRL](/docs/dev/architecture) to dive deep into the internals of the system.
 
 ## Next Steps
 
 Congratulations, you not only finished the extended tutorial but also completed the extra credit. What a champ! You are definitely ready to get started with DataSQRL.
 
 For additional information, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some. \
+
+<!--
 If you are running into a problem or wonder how to solve a particular issue in DataSQRL, take a look at [the how-to guides](/docs/guides/overview) which provide solutions for common questions. \
 If neither of those resources address your problem, reach out to the community for help. We'd love to hear about your problem and support you as best we can.
+-->
 
 Want to learn more about the internals of DataSQRL or contribute to the codebase? The [developer documentation](/docs/dev/overview) provides a detailed breakdown of the DataSQRL architecture and everything you need to know to extend DataSQRL yourself.
 

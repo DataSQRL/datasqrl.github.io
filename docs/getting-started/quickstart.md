@@ -12,7 +12,7 @@ how funny are we?
 
 We want to build a data service that exposes a Customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
 
-## Run SQRL Script
+## Run SQRL Script {#run}
 
 In the terminal or command line, create an empty folder for our script:
 

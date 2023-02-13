@@ -1,11 +1,59 @@
 ---
-title: "Optimization"
+title: "Optimizer"
 ---
 
-# DataSQRL Script Optimizer
+# DataSQRL Optimizer
 
-Discuss in a more detail how the optimizer produces a physical execution plan and how the user can guide the optimizer with hints
+The optimizer is part of the DataSQRL compiler and determines the optimal data pipeline to execute a SQRL script and serve a given API specification.
 
-```sqrl
--- @optimizer(materialize=true)
+The DataSQRL optimizer runs a global optimization for the entire data pipeline and local optimizations for each individual engine that is part of the pipeline topology.
+
+## Global Optimization
+
+The DataSQRL compiler produces a computation DAG (directed, acyclic graph) of all the tables defined in the SQRL script and the result sets computed from those tables that are accessible via the data API according to the API specification.
+
+The global optimizer determines which engine executes the computation of which table in the DAG.
+
+<img src="/img/dev/simple-pipeline.svg" alt="Simple DataSQRL pipeline topology" width="500"/>
+
+For example, suppose we are compiling a SQRL script against the pipeline topology shown above, which consist of a stream, database, and server engine in sequence. <br />
+If we precompute a table in the stream engine, those results are readily available at request time which leads to fast response times and good API performance compared to having to compute the results in the database. However, pre-computing all possible results for the API can be very wasteful or outright impossible due to the number of possible query combinations.
+
+The global compiler strives to find the right balance between pre-computing tables for high performance and computing results at request time to reduce waste in order to build efficient data pipelines.
+
+In addition, the global optimizer picks the engine most suitable to compute each table of the global DAG and prunes the DAG to eliminate redundant computations.
+
+## Local Optimization
+
+The local optimizer takes the physical execution plans for each engine and runs them through an engine specific optimizer.
+
+Local optimizers that are executed by DataSQRL include:
+
+* **DAG Optimization:** Consolidates repeated computations in the stream processing DAG.
+* **Index Selection:** Chooses an optimal set of indices for database engines to speed up queries executed for individual API calls.
+
+## Optimizer Hints
+
+Sometimes the optimizer makes the wrong decision and produces sub-optimal data pipelines. You can provide hints in the SQRL script to correct those errors by overwriting the optimizer.
+
+### Execution Engine Hint
+
+You annotate a table definition in SQRL with an execution engine hint to tell the optimizer which engine should compute the table.
+
+```sql
+/*+ EXEC_STREAM */
+OrdersByMonth := SELECT endOfmonth(p.time) AS month,
+              count(1) as num_orders
+         FROM Orders GROUP BY month;
+```
+
+The annotation `EXEC_STREAM` instructs the optimizer to compute the `OrdersByMonth` table in the stream engine.
+
+Use the `EXEC_DB` annotation to instruct the optimizer to choose the database engine:
+
+```sql
+/*+ EXEC_DB */
+OrdersByMonth := SELECT endOfmonth(p.time) AS month,
+              count(1) as num_orders
+         FROM Orders GROUP BY month;
 ```
