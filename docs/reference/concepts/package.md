@@ -20,4 +20,4 @@ A remote package is a dependency defined in the package manifest that is downloa
 
 An internal package is pre-loaded by the DataSQRL compiler and always available. It does not map to a directory in the local filesystem.
 
-For example, all [standard library functions](/docs/category/functions) are contained in internal packages. For example, `time` is an internal package that contains the [standard time functions](../sqrl/functions/time-fct) DataSQRL supports.
+For example, all [standard library functions](/docs/category/functions) are contained in internal packages. For example, `time` is an internal package that contains the [standard time functions](../sqrl/functions/time) DataSQRL supports.

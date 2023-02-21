@@ -81,6 +81,9 @@ const sidebars = {
           items: [
             'reference/sqrl/table',
             'reference/sqrl/relationship',
+            'reference/sqrl/stream',
+            'reference/sqrl/import',
+            'reference/sqrl/export',
             'reference/sqrl/time',
             {
               type: 'category',
@@ -89,13 +92,14 @@ const sidebars = {
                 type: 'generated-index',
                 title: 'Functions in SQRL',
                 description: "Functions make your life so much easier and your SQRL scripts so much shorter. If we could \
-                only remember them when we need them. Luckily you have this reference list of functions to look them up:"
+                only remember them when we need them. Luckily you have this reference list of SQRL function packages to look them up:"
               },
               items: [
-                'reference/sqrl/functions/string-fct',
-                'reference/sqrl/functions/time-fct',
+                'reference/sqrl/functions/string',
+                'reference/sqrl/functions/time',
               ],
             },
+            'reference/sqrl/sql-primer',
           ],
         },
         {

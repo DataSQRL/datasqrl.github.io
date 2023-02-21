@@ -7,12 +7,11 @@ title: "SQL Primer"
 Concepts to introduce:
 * SELECT (aggregations)
 * FROM
-* JOIN ON
+* JOIN (ON)
 * WHERE
-* GROUP BY and HAVING
+* GROUP BY
 * ORDER BY
 * LIMIT
-* 
 
 Introduce some common functions in SQL: COALESCE, AVG, MIN, MAX, SUM, CASE WHEN, COUNT (DISTINCT)
 In where clause: IN, INTERVAL
@@ -22,3 +21,5 @@ UNION ALL
 
 Link to full SQL tutorial and reference:
 CASE WHEN
+
+Standard SQL semantics apply to state tables. For stream tables there are some important differences.

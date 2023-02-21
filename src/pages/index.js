@@ -11,7 +11,7 @@ import HomepageHeader from '../components/HomepageHeader';
 
 const header =  {
                    title: 'DataSQRL',
-                   tagLine: 'Build Data Services In Minutes',
+                   tagLine: 'Build Data APIs In Minutes',
                    text: (
                      <>
                 <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> is a compiler
@@ -69,20 +69,20 @@ const WhyDataSQRLList = [
 
 const sqrlScript =
 `IMPORT datasqrl.seedshop.Orders;  -- Import orders stream
-IMPORT time.startOfMonth;         -- Import time function
-/* Augment orders with aggregate calculations */
+IMPORT time.endOfWeek;            -- Import time function
+/* Augment orders with total price */
 Orders.items.total := quantity * unit_price - discount?0.0;
 Orders.totals := SELECT sum(total) as price,
-                      sum(discount) as saving FROM @.items;
+                  sum(discount?0.0) as saving FROM @.items;
 /* Create new table of unique customers */
 Users := SELECT DISTINCT customerid AS id FROM Orders;
 /* Create relationship between customers and orders */
 Users.purchases := JOIN Orders ON Orders.customerid = @.id;
-/* Aggregate the purchase history for each user by month */
-Users.spending := SELECT startOfMonth(p.time) AS month,
-              sum(t.price) AS spend, sum(t.saving) AS saved
-         FROM @.purchases p JOIN p.totals t
-         GROUP BY month ORDER BY month DESC;`;
+/* Aggregate the purchase history for each user by week */
+Users.spending := SELECT endOfWeek(p.time) AS week,
+         sum(t.price) AS spend, sum(t.saving) AS saved
+      FROM @.purchases p JOIN p.totals t
+      GROUP BY week ORDER BY week DESC;`;
 
 const graphqlScript =
 `type Query {
@@ -92,11 +92,11 @@ const graphqlScript =
 type Customers {
   id: Int!
   purchases: [Orders]
-  spending_by_month(month: String): [spending_by_month]
+  spending(week: String): [spending]
 }
 
-type spending_by_month {
-  month: String!
+type spending {
+  week: String!
   spend: Float!
   saved: Float!
 }

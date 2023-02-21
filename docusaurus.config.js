@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DataSQRL',
-  tagline: 'Build Data Services In Minutes',
+  tagline: 'Build Data APIs In Minutes',
   url: 'https://datasqrl.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',

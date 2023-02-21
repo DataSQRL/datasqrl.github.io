@@ -41,8 +41,8 @@ SQRL includes a lot of useful functions. You can view the [complete listing of f
 
 * **iff** is an inline if-then-else function that evaluates the boolean expression given as the first argument and returns the second argument if it is true, otherwise it returns the third argument. Great for small conditionals where *case-when* statements are overkill.
 * **coalesce** returns the second argument if the first argument is null. Great for normalizing messy data.
-* If you are doing string transformations, take a look at the [string function package](/docs/reference/sqrl/functions/string-fct).
-* Working with timestamps, dates, and all matters of time gets a lot easier with the [time function package](/docs/reference/sqrl/functions/time-fct).
+* If you are doing string transformations, take a look at the [string function package](/docs/reference/sqrl/functions/string).
+* Working with timestamps, dates, and all matters of time gets a lot easier with the [time function package](/docs/reference/sqrl/functions/time).
 * geo, statistics
 
 
