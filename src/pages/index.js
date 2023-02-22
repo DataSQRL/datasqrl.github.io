@@ -86,13 +86,14 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 
 const graphqlScript =
 `type Query {
-  Customers(id: Int!): Customers
+  Users(id: Int!): Users
+  Orders(time: String): [Orders!]
 }
 
-type Customers {
+type Users {
   id: Int!
-  purchases: [Orders]
-  spending(week: String): [spending]
+  purchases: [Orders!]
+  spending(week: String): [spending!]
 }
 
 type spending {

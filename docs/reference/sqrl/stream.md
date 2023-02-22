@@ -8,6 +8,8 @@ link to time
 
 ## Join
 
+## Union
+
 ### Temporal Join
 
 
