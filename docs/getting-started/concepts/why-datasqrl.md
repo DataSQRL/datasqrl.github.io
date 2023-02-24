@@ -7,7 +7,7 @@ title: "Why Use DataSQRL?"
 We love building with data, but we got frustrated by how complicated it is to build data APIs. Why can you build a production-grade web service in a few days, but it takes months to build a mediocre data service that looks like Frankenstein on a bad hair day. We built [DataSQRL](datasqrl) to change that.   
 
 
-<img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="300"/>
+<img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="40%"/>
 
 
 We are developing DataSQRL as a tool for developers to build data services. You write an SQRL script that implements the logic of your data service, customize your API, and DataSQRL compiles a fully-integrated and efficient data pipeline for you. It's as easy as 1-2-3. We cut out all the stuff developers don't need and focused on building a tool that integrates with your workflow.
@@ -23,7 +23,7 @@ Sounds a little *marketing-y*? Let's break it down:
 To build a data service, you need an API layer that exposes and services the data service API, a database to serve the data returned by the API, and an ingest layer that collects all the data for your data service from various sources and stores it in the database. <br />
 And that's just the price of admission. If you want to do anything of value with your data beyond just compiling and serving it, you also need an analytics layer to transform and enrich the data as well as a data pipeline to glue all these pieces together. If you want to respond to data in realtime, you need a streaming architecture and low latency updates. And we haven't addressed scalability or robustness yet.
 
-<img src="/img/index/undraw_time_management_sqrl.svg" alt="DataSQRL saves you time >" width="300"/>
+<img src="/img/index/undraw_time_management_sqrl.svg" alt="DataSQRL saves you time >" width="40%"/>
 
 The point is: There are a lot of pieces to a data service architecture and assembling all these moving pieces yourself takes a ton of time, effort, and expertise.
 
@@ -36,7 +36,7 @@ You don't write your software in low-level languages like [Assembly](https://en.
 
 ### Easy to Use {#easy-to-use}
 
-<img src="/img/index/undraw_programming_sqrl.svg" alt="DataSQRL is easy to use >" width="300"/>
+<img src="/img/index/undraw_programming_sqrl.svg" alt="DataSQRL is easy to use >" width="40%"/>
 
 DataSQRL provides a higher-level of abstraction for implementing data services. That makes things easier in two ways:
 
@@ -58,7 +58,7 @@ If you are thinking "why are you boring me with these data service implementatio
 
 Building a data service prototype is one thing, but getting a data service to production successfully is a whole different ballgame. With DataSQRL you can rest assured that the data service you are building is robust, fast, low-cost, and scalable.
 
-<img src="/img/index/undraw_fast_loading_sqrl.svg" alt="DataSQRL is fast & efficient >" width="300"/>
+<img src="/img/index/undraw_fast_loading_sqrl.svg" alt="DataSQRL is fast & efficient >" width="40%"/>
 
 If you are dealing with a substantial amount of data, you need to handle the data efficiently. Otherwise, your data service is going to be costly, slow, and unstable. Even a trivial omission like a missing index structure can bring down an otherwise soundly engineered data service once you reach a few gigabytes of data with a handful of concurrent users. To make matters worse, you often don't find out about these issues until late in the game or after you've shipped to production, which ruins game night with tacos.
 

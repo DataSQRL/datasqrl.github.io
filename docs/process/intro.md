@@ -2,7 +2,7 @@
 
 Across many organizations, we observed that data service projects commonly struggle or fail because of:
 
-<img src="/img/generic/undraw_process.svg" alt="DataSQRL Process >" width="300"/>
+<img src="/img/generic/undraw_process.svg" alt="DataSQRL Process >" width="40%"/>
 
 * **Complex Technology**: The technologies and data architectures used are very complex and require specialists which causes delays, budget overruns, and missed requirements.
 * **Misaligned Process**: The process used to implement the data service is not focused on the needs of the customer.
@@ -16,7 +16,7 @@ The basic idea behind the DataSQRL process is to focus on value delivery and lim
 
 The DataSQRL process is based on three key principles:
 
-<img src="/img/generic/undraw_key_point.svg" alt="DataSQRL Process Key Principles >" width="300"/>
+<img src="/img/generic/undraw_key_point.svg" alt="DataSQRL Process Key Principles >" width="40%"/>
 
 1. [Customer-focused](./customer-focused): Focus on customer satisfaction through early and continuous delivery of valuable data services.
 2. [Responsive](./responsive): Harness changing requirements and creative input from all stakeholders for competitive advantage.

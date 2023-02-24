@@ -2,7 +2,7 @@
 
 DataSQRL is an open-source project, which means you can view the [entire source code](https://github.com/DataSQRL/sqrl), [fork](https://github.com/DataSQRL/sqrl/fork) and customize it, and make contributions to the project.
 
-<img src="/img/index/undraw_contribute_sqrl.svg" alt="Developer Documentation >" width="300"/>
+<img src="/img/index/undraw_contribute_sqrl.svg" alt="Developer Documentation >" width="40%"/>
 
 If you are interested to dive into the DataSQRL source code, here are some pointers to get you started:
 

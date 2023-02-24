@@ -1,10 +1,10 @@
 ---
-title: "QuickStart Tutorial"
+title: "Quickstart Tutorial"
 ---
 
-# DataSQRL Intro in 5 Minutes
+# DataSQRL Quickstart in 5 Minutes
 
-<img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="250"/>
+<img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="30%"/>
 
 Because we have the humor of middle schoolers on Adderall, this quickstart tutorial
 implements data-driven features for our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
@@ -13,13 +13,13 @@ We want to build a data service that exposes a Customer's purchase history and p
 
 ## Run SQRL Script {#run}
 
-In the terminal or command line, create an empty folder for our script:
+In the terminal or command line, create an empty folder for the SQRL script:
 
 ```bash
 > mkdir seedshop; cd seedshop
 ```
 
-Create a new file in that folder called `c360.sqrl` and paste the following content into the file:
+Create a new file in that folder called `seedshop.sqrl` and paste the following content into the file:
 
 ```sql
 IMPORT datasqrl.seedshop.Orders;  
@@ -42,7 +42,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run c360.sqrl
+docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sqrl
 ```
 
 :::note
@@ -51,7 +51,7 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::
 
-You can experiment with the GraphQL API of this data service by opening `http://localhost:8888/graphiql/ ` in your browser and writing GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/ ` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
@@ -71,46 +71,65 @@ Users ( id: 10) {
 }}
 ```
 
-When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. Pretty easy, right?
+When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You know have a working data API you can integrate into your application. Pretty easy, right?
 
-## Introduction to SQRL
+## Quick Tour of SQRL
 
-Let's take a closer look at the SQRL script for our data service to understand what it does and how it compiles to the API.
+The magic of our little seed-shop data service happens in the SQRL script we created above. The SQRL script imports data tables and defines new tables based on that data. Those tables are exposed in the API. Let's look at how that works.
 
 :::info
 
-SQRL is an extension of SQL, and we are going to use some basic SQL syntax. If you are unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer)
-first.
+SQRL is an extension of SQL, and we are going to use some basic SQL syntax. If you are unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer) first.
 
 :::
 
-### Imports
 
-
-```sql
-IMPORT seedshop.Orders;      
+```sql 
+IMPORT datasqrl.seedshop.Orders;  
 ```
 
-The first line of the script imports the order stream data that we are building with. DataSQRL locates the data source for our seedshop orders based on this import definition.
+The `import` statement imports the `Orders` table from the package `datasqrl.seedshop`. SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you.
+
+The `Orders` table has a nested `items` table to represent the nested items records for each order. SQRL supports nested tables to represent hierarchical data natively.
 
 ```sql
-IMPORT time.round_to_month;
+Orders.items.total := quantity * unit_price - discount?0.0;
 ```
 
-Next, we import a time function that rounds a timestamp to the current month which we will later use in an aggregation. That's all the imports we need.
+In SQRL we can add columns to existing tables via simple column expressions. Here, we are adding the `total` column to the nested `Orders.items` table to compute the total price for each item in an order.
 
-### Data Augmentation
+```sql 
+Orders.totals := SELECT sum(total) as price,
+                  sum(discount?0.0) as saving FROM @.items;
+```
 
+We are defining `totals` as a nested table underneath `Orders` to compute the total price and savings for each order by aggregating over all items in the order. Note the use of `@` in the `FROM` clause. `@` refers to each row in the parent `Orders` table and is used when defining localized queries. A localized query allows us to refer to the items for *each* order instead of aggregating across items for *all* orders.
 
+`Orders.items` is a nested table that is accessible via the relationship column `items` from each row in the `Orders` table to retrieve the items of that order.
 
+SQRL supports relationships as first-class citizens of the language, so we can express relationships in the data explicitly.
 
+```sql
+Users.purchases := JOIN Orders ON Orders.customerid = @.id;
+```
+This statement defines the relationship column `purchases` on the `Users` table which links a user to the orders they placed. The `@` refers to the parent `Users` table on the left-hand side.
 
+And, for the grand finale, we have the spending analysis that aggregates a user's total spending by week:
+
+```sql
+Users.spending := SELECT endOfWeek(p.time) AS week,
+         sum(t.price) AS spend, sum(t.saving) AS saved
+      FROM @.purchases p JOIN p.totals t
+      GROUP BY week ORDER BY week DESC;
+```
+`spending` is defined as a nested table underneath `Users` and uses the imported time-window function `endOfWeek` to aggregate the totals for all orders that fall within a given week.
+
+Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.
+
+There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and pipeline construction to make it work.
 
 ## Next Steps {#next}
 
-You just built and accessed a Customer 360 data service. Good work! 
-Give yourself a pat on the back.
+Read the [DataSQRL introduction](intro/overview) which extends our seedshop example and explains all the concepts we touched up here in more detail.
 
-This tutorial covered the basics of building data services in DataSQRL. Next, we recommend that
-you continue with the [DataSQRL Training](intro/overview) because it extends this tutorial and
-explains each of the concepts covered here in more detail. If you found this short tutorial too dense or missing information, the complete [DataSQRL Training](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
+If you found this short tutorial too dense or missing information, the [DataSQRL introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.

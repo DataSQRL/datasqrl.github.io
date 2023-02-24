@@ -322,7 +322,7 @@ relationships to access customers' shopping history, and we added a spending ana
 That's a great start for a Customer 360 data service. And it is all readily accessible
 through the GraphQL API.
 
-The final step is to access the API from your application. We'll look at an example in Javascript. Take a look at the [API guides](/docs/guides/api/overview) to learn how to query the API from your favorite language or framework.
+The final step is to access the API from your application. We'll look at an example in Javascript. Take a look at the [API guides](/docs/reference/api/graphql/query) to learn how to query the API from your favorite language or framework.
 
 Create the Javascript file `index.js` with the following code:
 ```js

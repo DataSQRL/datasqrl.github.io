@@ -4,7 +4,7 @@ title: "Connect Data Source"
 
 # Connecting Data Sources
 
-<img src="/img/index/undraw_connection_sqrl.svg" alt="Nut Shop Tutorial >" width="300"/>
+<img src="/img/index/undraw_connection_sqrl.svg" alt="Nut Shop Tutorial >" width="40%"/>
 
 Before we can use data in our scripts, we have to connect the data source with DataSQRL server so the server knows how to access the data.
 

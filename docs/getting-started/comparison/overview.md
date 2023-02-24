@@ -4,7 +4,7 @@ title: "When to use DataSQRL"
 
 # When should you use DataSQRL for your ?
 
-<img src="/img/index/undraw_decide_sqrl.svg" alt="When to use DataSQRL >" width="300"/>
+<img src="/img/index/undraw_decide_sqrl.svg" alt="When to use DataSQRL >" width="40%"/>
 
 You get that [DataSQRL](../concepts/datasqrl) is a compiler for building [data services](/docs/reference/concepts/data-service.md) from streaming data sources, but you are wondering if it's the right tool for your project. And how does it compare to other options you are considering to get the work done?
 

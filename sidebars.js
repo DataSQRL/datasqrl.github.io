@@ -30,7 +30,7 @@ const sidebars = {
         "getting-started/quickstart",
         {
           type: 'category',
-          label: 'DataSQRL Training',
+          label: 'DataSQRL Introduction',
           link: {
             type: 'doc',
             id: 'getting-started/intro/overview',
