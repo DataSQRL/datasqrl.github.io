@@ -82,9 +82,9 @@ const sidebars = {
             'reference/sqrl/table',
             'reference/sqrl/relationship',
             'reference/sqrl/stream',
+            'reference/sqrl/time',
             'reference/sqrl/import',
             'reference/sqrl/export',
-            'reference/sqrl/time',
             {
               type: 'category',
               label: 'Functions',
@@ -178,6 +178,18 @@ const sidebars = {
             'reference/operations/package-config',
             {
               type: 'category',
+              label: 'Deploy',
+              link: {
+                type: 'doc',
+                id: 'reference/operations/deploy/overview',
+              },
+              items: [
+//                'reference/operations/deploy/aws',
+//                'reference/operations/deploy/secrets',
+              ],
+            },
+            {
+              type: 'category',
               label: 'Engines',
               link: {
                 type: 'doc',
@@ -189,19 +201,6 @@ const sidebars = {
                 'reference/operations/engines/vertx',
               ],
             },
-            {
-              type: 'category',
-              label: 'Deploy',
-              link: {
-                type: 'doc',
-                id: 'reference/operations/deploy/overview',
-              },
-              items: [
-                'reference/operations/deploy/aws',
-//                  'reference/operations/deploy/secrets',
-              ],
-            },
-
           ],
         },
         {

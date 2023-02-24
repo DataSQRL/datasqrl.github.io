@@ -32,10 +32,11 @@ The `compile` command takes the path to the SQRL script and API specification as
 
 The `compile` command accepts these options:
 
-| Option/Flag Name   | Description   |
-|--------------|---------------|
-| `-a` or `--api` | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
-| `-t` or `--target`| Writes the deployment artifiacts of the compiled data pipeline into the target directory. `deploy/` by default. |
+| Option/Flag Name   | Description                                                                                                                                                                                                                                                                       |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `-a` or `--api`    | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
+| `-t` or `--target` | Writes the deployment artifiacts of the compiled data pipeline into the target directory. `deploy/` by default.                                                                                                                                                                   |
+| `--nolookup`       | Disables lookup of packages in the repository that cannot be resolved locally or as dependencies.                                                                                                                                                                                 |
 
 
 ## Run
