@@ -8,6 +8,8 @@ You have made it through the entire introduction tutorial and want to keep learn
 
 ## Subscriptions
 
+In a [previous chapter](data-sources) we talked a great deal about importing data sources as stream tables. You can also export stream tables to external data sinks.
+
 The last feature we want to implement in our customer 360 is a trigger or
 notification when a customer has more than $100 in purchases so that we can
 email them with a special coupon to reward their loyalty.

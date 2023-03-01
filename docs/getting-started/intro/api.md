@@ -259,6 +259,8 @@ As we navigate through relationships, we need to keep in mind that result set ca
 
 ## Next Steps
 
+And there we have our custom, polished data API in GraphQL. You can see the final GraphQL schema [here](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-user.graphqls).
+
 Wonderful, you have completed the 3 essential steps of building a data service with DataSQRL:
 * Writing SQRL scripts
 * Connecting data sources
