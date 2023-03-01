@@ -13,7 +13,7 @@ docker run -v $PWD:/build datasqrl/datasqrl-cmd compile myscript.sqrl -a graphql
 When you add the `-a graphql` option, the compiler writes a `schema.graphqls` GraphQL schema file to the local directory where the compiler was invoked.
 
 :::danger
-When you run the compiler with the `-a` option it will overwrite an existing schema file of the same filename.
+Change the name of the GraphQL schema file before you customize it. That way you avoid accidentally overwriting your changes if you run the command with the `-a` option again.
 :::
 
 The compiler generates *complete* GraphQL schemas, which means that the schema contains all tables, fields, and relationships defined in the SQRL script as well as field filters for all fields. You can create your own custom GraphQL schema by trimming the generated schema and only expose those tables, fields, relationships, and filters that are required by your data API.

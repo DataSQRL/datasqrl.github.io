@@ -27,11 +27,12 @@ Create the [package configuration](package-config) file `package.json` in the ro
 The configuration file specifies the package information and should contain at least the following information:
 
 ```json title="package.json"
+{
   "package":
   {
     "name": "yourOrganization.yourPackage",
     "version": "1.0.0",
-    "variant": "dev",
+    "variant": "dev"
   },
   ... other package content, if any
 }

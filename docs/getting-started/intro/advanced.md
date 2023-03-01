@@ -4,7 +4,44 @@ title: "Advanced Concepts"
 
 # Advanced Concepts in DataSQRL
 
-You have made it through the entire extended tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some advanced aspects of DataSQRL with pointers to more information so you can continue your journey to ninja SQRL status 🥇.
+You have made it through the entire introduction tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some advanced aspects of DataSQRL with pointers to more information, so you can continue your journey to ninja SQRL status 🥇.
+
+## Subscriptions
+
+The last feature we want to implement in our customer 360 is a trigger or
+notification when a customer has more than $100 in purchases so that we can
+email them with a special coupon to reward their loyalty.
+
+SQRL supports subscriptions which observe an underlying table and trigger
+events.
+
+```sqrl
+NewCustomerPromotion := SUBSCRIPTION ON ADD AS
+      SELECT customerid, total_orders 
+      FROM Customers WHERE total_orders >= 100;
+```
+
+We define the subscription `NewCustomerPromotion` which observes the table
+defined by the `SELECT` query for all customers with more than $100 in total
+purchases. The `ON ADD` qualifier for this subscription means that an event
+is triggered whenever a new row is added to that table.
+
+A subscription defines an event table that contains a row for every
+event that is triggered by the underlying table. We can treat it like any other
+table, for example, by defining a relationship to `Customers`:
+
+```sqrl
+NewCustomerPromotion.customer := JOIN Customers ON Customers.id = @.customerid;
+```
+
+However, subscriptions are special in that they are exposed as WebSockets in the
+API that proactively sent out events when they occur to subscribing users. In
+addition, we can register queues with DataSQRL server where subscription events
+get posted to notify downstream systems. We are going to look into
+both of those subscription access methods in more detail in the [next section](api).
+
+Subscriptions are a powerful feature to *react* to changes in the data and
+notify downstream systems or consumers of the API immediately.
 
 ## SQRL Functions
 
@@ -46,28 +83,52 @@ SQRL includes a lot of useful functions. You can view the [complete listing of f
 * geo, statistics
 
 
-## Pagination {#pagination}
+## Relationship Expressions
 
-By default, SQRL supports `limit` and `offset` arguments to paginate through large result sets. While simple, this approach has the downside that you may see duplicate records or miss records when navigating between pages as the underlying data - and hence offsets - change. Another downside is that you won't know if there is a "next page" until you run out of results.
+We can also access relationships when we define tables or columns in our
+SQRL script:
 
-To remedy these downsides, SQRL also supports cursor style navigation. When you configure cursor style navigation (WHERE EXACTLY??), results are returned in pages with extra page information:
-
-```graphql
-{
-    products(pageSize: 20, pageState: "") {
-        items {
-            name
-        }
-        pageInfo {
-            hasNextPage
-            nextPageState
-        }
-    } 
-}
+```sqrl
+Customer.total_orders := SUM(purchases.total);
 ```
 
-We added the `pageSize` argument to tell the API that we wish to page through the data with 20 rows per page. The empty `pageState` argument tells the API to return the first page. You can also omit that argument to retrieve the first page. \
-However, to access subsequent pages, we pass the `nextPageState` value that was returned on the previous request. The `hasNextPage` field is `true` if there is a subsequent page.
+In this incremental column definition from the nut shop tutorial, we are summing
+the total value of all orders related to a particular customer record by the
+`purchases` relationship.
+
+This expression is much easier to read and write than the equivalent
+definition:
+
+```sqrl
+Customers.total_orders := SELECT SUM(o.total) FROM Orders o WHERE o.customerid = @.id;
+```
+
+And we can reuse relationships across definitions. For instance, we can rewrite
+the definition of the `since` column on `Customers` as:
+
+```sqrl
+Customers.since := MIN(purchases.date);
+```
+
+## Table Schema
+
+If you peak into the `mySourcePackage` folder you'll see two files in there for the `Customers` table: `customers.table.json` and `customers.schema.yml`. The former file is the data source configuration DataSQRL uses to connect to the data. The latter specifies the schema of the data.
+
+Luckily, DataSQRL's `discover` command generates both files for us. You don't
+
+The data type of columns is inferred from the input data or definition of the table.
+In our example, the `time` column on the `Orders` table is of type `Number` which
+DataSQRL inferred from the records in the orders data. The data type of the `date` column
+defined above is `DateTime` which is inferred from the result type of the `fromEpochMillis`
+function.
+
+In most cases, type inference is obvious and you can let DataSQRL handle data types and schema for you.
+One less thing to worry about. \
+Read more about [schema management](/docs/reference/sources/schema)
+and how to [manually define data types](/docs/reference/sources/schema) for
+datasets with heterogeneous or very messy data where it isn't obvious.
+
+
 
 ## Hidden Fields and Utility Functions
 
@@ -101,39 +162,6 @@ SELECT uuid() AS event_id, now() AS event_time, customerid, total_orders
 FROM Customers WHERE total_orders >= 100;
 ```
 
-## Script Evolution
-
-You've successfully submitted your SQRL script to production and the data service is running smoothly. The project manager is super excited by the Customer 360 functionality and, after talking to some customers, wants to break customer spending down by week instead of by month.
-
-Easy enough for us. We replace `Customers.spending_by_month` with
-
-```sqrl
-Customers.spending_by_week :=
-         SELECT function.time.truncateToWeek(date) AS week,
-                sum(total) AS total_spend,
-                sum(discount) AS total_savings
-         FROM @.purchases
-         GROUP BY week ORDER BY week DESC;
-```
-
-We also update the queries, integrate it with the Customer 360 application, and run all our tests. We are ready to go to production. But if we submit this updated script, it would replace the existing data service API with an incompatible change which would break the currently running Customer 360 application that depends on the old API. Changing the data service and application at the same time is too cumbersome and could potentially result in some downtime.
-
-Instead, we are going to submit our updated script as a new version:
-```bash
-datasqrl submit customer360.sqrl -v v2 -q ./queries -s pre-schema.yml -r config.json
-```
-
-This is the same `submit` command we used before with an additional argument `-v v2` which instructs DataSQRL to deploy the newly generated API as version `v2` and keep the old script running under API version `v1`. Note, that DataSQRL uses the version `v1` by default when you don't specify a version.
-
-Now, we can carefully migrate the Customer 360 React application to the new API version `v2`. Once that migration is complete and everything is running smoothly, we can remove the old version:
-
-```bash
-datasqrl remove customer360.sqrl -v v1
-```
-
-Versioning is your friend as you evolve your data service and change things up. At some point, you may find that your SQRL script is getting too long and your API to overloaded. For instance, we may eventually split the Customer 360 API from the recommendation engine so we can develop those two components as separate services. \
-You can trim down the `customer360.sqrl` script and move the `Customers.past_purchases` and `Customers.products_by_protein` to a new `recommendation.sqrl` script. Make sure you also copy or move all the column, table, and import statements those tables depend on. \
-Now, you can submit a new version of the customer 360 script and also deploy the `recommendation.sqrl` script as a separate data service.
 
 ## Hints and Optimization {#hints}
 
@@ -177,14 +205,9 @@ Learn more about the [DataSQRL optimizer](/docs/reference/operations/optimizer) 
 
 ## Next Steps
 
-Congratulations, you not only finished the extended tutorial but also completed the extra credit. What a champ! You are definitely ready to get started with DataSQRL.
+Congratulations, you not only finished the introduction tutorial but also completed the extra credit. What a champ! You are definitely ready to get started with DataSQRL.
 
 For additional information, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some. \
-
-<!--
-If you are running into a problem or wonder how to solve a particular issue in DataSQRL, take a look at [the how-to guides](/docs/guides/overview) which provide solutions for common questions. \
-If neither of those resources address your problem, reach out to the community for help. We'd love to hear about your problem and support you as best we can.
--->
 
 Want to learn more about the internals of DataSQRL or contribute to the codebase? The [developer documentation](/docs/dev/overview) provides a detailed breakdown of the DataSQRL architecture and everything you need to know to extend DataSQRL yourself.
 

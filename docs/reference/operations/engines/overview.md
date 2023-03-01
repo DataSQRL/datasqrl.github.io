@@ -31,13 +31,9 @@ DataSQRL currently supports the following server engines:
 
 * [Vertx](vertx): Vertx is concurrent and asynchronous server engine for Java.
 
-## Search Engine
-
-coming soon
-
 ## Cache Engine
 
-coming soon
+Future development
 
 
 

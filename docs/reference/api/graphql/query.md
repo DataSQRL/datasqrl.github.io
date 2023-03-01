@@ -4,6 +4,10 @@ title: "Query"
 
 # Query GraphQL APIs
 
+:::danger
+This page is work-in-progress as we add additional languages. 
+:::
+
 GraphQL is a query language for APIs. DataSQRL exposes GraphQL APIs that can be queried from any programming language or application. This page provides examples for querying GraphQL APIs in various languages to help you get started. It is neither complete nor comprehensive. For a complete resource on GraphQL visit [graphql.org](https://graphql.org).
 
 If you are unfamiliar with GraphQL, we recommend that you [learn about GraphQL](https://graphql.org/learn/) before proceeding.

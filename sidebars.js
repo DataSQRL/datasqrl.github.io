@@ -36,8 +36,8 @@ const sidebars = {
             id: 'getting-started/intro/overview',
           },
           items: [
-            'getting-started/intro/data-sources',
             'getting-started/intro/sqrl',
+            'getting-started/intro/data-sources',
             'getting-started/intro/api',
             'getting-started/intro/advanced',
           ],
@@ -97,6 +97,7 @@ const sidebars = {
               items: [
                 'reference/sqrl/functions/string',
                 'reference/sqrl/functions/time',
+                'reference/sqrl/functions/custom-functions',
               ],
             },
             'reference/sqrl/sql-primer',

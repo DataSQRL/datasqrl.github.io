@@ -33,5 +33,5 @@ There are 3 steps to building a data service in DataSQLR:
 ## Next Step
 
 Alrighty, with those high-level concepts out of the way, let's buckle up and start building things.
-First stop: **[Introducing SQRL](basic)** as a language for building data APIs.
+First stop: **[Introducing SQRL](sqrl)** as a language for building data APIs.
 

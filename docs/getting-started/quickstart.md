@@ -42,7 +42,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sqrl
+docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sqrl
 ```
 
 :::note
@@ -51,27 +51,29 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::
 
-The running data pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/ ` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+## Query Data API {#query}
+
+The running data pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
-Users ( id: 10) {
-    purchases (limit: 10) {
+Users (id: 10) {
+    purchases {
         id
         totals {
             price
-            savings
+            saving
         }
     }    
     spending {
-        month
+        week
         spend
         saved
     }
 }}
 ```
 
-When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You know have a working data API you can integrate into your application. Pretty easy, right?
+When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You now have a working data API you can integrate into your application. Pretty easy, right?
 
 ## Quick Tour of SQRL
 

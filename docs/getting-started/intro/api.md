@@ -1,358 +1,271 @@
 ---
-title: "Access the API"
+title: "Design the API"
 ---
 
-# Accessing the API
+# Querying and Designing the API
 
-DataSQRL generates an API for the data service you define in the SQRL script. Let's play with those APIs to see how you can access the data from your application.
+<img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
+
+When we [run](../quickstart#run) our `seedshop.sqrl` script, DataSQRL compiles and executes a data pipeline that exposes an API to access the resulting data. We [queried](../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
-We will be accessing the generated GraphQL API. If you are new to the GraphQL API standard, take a quick look at the GraphQL Primer.
-We [are working](/docs/dev/roadmap#rest) on REST support.
+We will be accessing the generated GraphQL API. If you are new to the GraphQL API standard, take a quick look at the documentation for [querying GraphQL](/docs/reference/api/graphql/query). We [are working](/docs/dev/roadmap#rest) on REST support.
 
 :::
 
+## Querying the API
 
-## Retrieving Table Records
-
-DataSQRL generates an API endpoint for each table defined in the SQRL script that has the same name as the table.
-That'll be our starting point for any API request.
-
-We have seen this `Products` query a few times already:
-```graphql
-{
-    Products(id: "1") {
-        name
-        sizing
-        weight_in_grams
-    } 
-}
-```
-
-It asks for all products that have `id=1` and returns the product's `name`, `sizing`, and `weight_in_grams`.
-
-The easiest way to test GraphQL queries is through the GraphiQL IDE in your browser. Open the URL `localhost:7050/graphiql/`, enter queries you want to run on the left side, hit the run button, and observe the result on the right.
-
-GraphiQL is also useful for developing your own API queries. It provides auto-completion, syntax highlighting, and a schema browser that allows you to explore the API.
-
-### Custom Lookups
-
-You can use the query endpoints to return records from the underlying table by matching column values or filter condition. For example, we can query for all products of type "Nuts" that weight more than 1000 grams:
+In the [Quickstart tutorial](../quickstart#query) we retrieved the purchase history and spending analysis of the user with `id=10` by running the following query.
 
 ```graphql
 {
-    Products(type: "Nuts", weight_in_gram: {larger: 1000}) {
-        name
-        weight_in_gram
-    } 
-}
-```
-
-### Pagination
-
-To query for all products, you remove any argument that constrains the result set, i.e. `Products() {...}` . That's a lot of results, however. You can use `limit` and `offset` arguments to navigate through large result sets:
-
-```graphql
-{
-    Products(limit: 20, offset: 10) {
-        name
-    } 
-}
-```
-
-This limits the number of returned products to 20 starting at position 10 in the complete list of results. DataSQRL also supports [cursor-style navigation](./advanced#pagination) (as used by Relay, for example).
-
-### Ordering
-
-We can also control the order in which results are returned. To have the results of our previous "give me all nuts that are heavier than 1000 grams" query returned in the order of increasing weight, we add the `order` argument:
-
-```graphql
-{
-    Products(type: "Nuts", weight_in_gram: {larger: 1000},
-             order: {weight_in_gram: ASC}) {
-        name
-        weight_in_gram
-    } 
-}
-```
-
-## Navigating Relationships
-
-One of the benefits of defining relationships in SQRL is that we can navigate those relationships in the API and retrieve related records of data. 
-
-```graphql
-{
-    Customers(id: "50") {
-        purchases(ftime: {after: "2022-02-01"}, order: {time: DESC}, limit:100 ) {
-            id
-            time
-            items(limit: 50) {
-                quantity
-                product {
-                    name
-                    weight_in_grams
-                }
-            }
+Users (id: 10) {
+    purchases {
+        id
+        totals {
+            price
+            saving
         }
-    } 
-}
+    }    
+    spending {
+        week
+        spend
+        saved
+    }
+}}
 ```
 
-This queries navigates multiple relationships to fetch all the data we need to show a customer's purchase history of the last month. Let's dissect it. \
-At the top level, we are using the `Customers` endpoint to query for the customer with `id=50`. We then navigate through the `purchases` relationship and filter out all orders that were placed before February (i.e. last month). In addition, we want those purchases ordered by time decreasing and only fetch up to 100 of them. For each purchase order, we navigate through the `items` relationship to fetch up to 50 nested order items. And for each order item, we navigate through the `product` relationship to get the product information for the ordered product.
+At the root of this query, we are querying the `Users` table for rows that match the given id. We then navigate along the `purchases` and `spending` relationships to query for the related rows from the `Orders` and nested `Users.spending` tables, respectively.
+
+Defining relationships explicitly in SQRL allows us to query related data easily in the API. We can also use filters in relationships to select the related rows we want to retrieve.
+
+```graphql
+{
+Products (category: "acorns") {
+  name
+  weight_in_gram
+  category
+  volume_10day(country: "US") {
+    quantity
+    spend
+    weight
+  }
+}}
+```
+
+This query retrieves all products from the "acorns" category. Acorns are a favorite among squirrels. We then navigate to the nested `volume_10day` relationship to the nested table that aggregates orders of that product over the last 10 days and groups them by country. We filter those rows to only retrieve the aggregates for the US.
 
 Relationships allow us to construct complex queries which return all the data we need in a single request. We don't have to stitch our desired result set together by querying multiple tables. That saves you a ton of time and is also a lot faster.
 
-When you navigate through a relationship, you can filter records and use `limit` and `offset` in the same way you would when querying a table at the top level to specify which related records you want to be returned, in what order, and how many of them.
+## Customizing the API Specification
 
-Note, that these arguments are applied locally for each record that is returned. In the query above, `items(limit: 50)` means that we are asking for up to 50 order items *for each* purchase order and not 50 total for the entire request. Since this query can return up to 100 purchase orders, the result of this request could potentially return 5000 order items total in the worst case. \
-As we navigate through relationships, we need to keep in mind that result set cardinalities multiply and choose small enough page sizes to avoid huge responses from the server.
+By default, DataSQRL generates an API specification that exposes query endpoints for all tables defined in the SQRL script and makes all fields in those tables accessible, including relationships to navigate to related tables. In addition, DataSQRL generates field filters for all queries and relationships that give the user of the API the option to filter out rows.
 
-## Application Development
+DataSQRL writes the default API specification to the file `schema.graphqls` in the current directory when you invoke the compiler with the `-a graphql` option:
 
-Once we designed the queries we need, it's time to call them from our application.
+```bash
+docker run -v $PWD:/build datasqrl/datasqrl-cmd compile seedshop.sqrl -a graphql
+```
 
-### Creating Query Templates
+The default API specification is a great starting point for designing a custom data API because it exposes *all* the data. However, we'd almost never use the default API spec, because it is too general and cluttered. Let's customize it to fit our needs.
 
-The first step is to take our queries and convert them to generic query templates. For instance, we take the query for a customer's recent purchase history, give it a name, and introduce variables for those query conditions we want to set in our application.
+
+First, let's take a look at the API specification that DataSQRL generated for us as a GraphQL schema `schema.graphqls`.
 
 ```graphql
-query GetRecentPurchases($customerid: Int!, $after: DateTime!) {
-    Customers(id: $customerid) {
-        purchases(time: {after: $after}, order: {time: DESC}, limit:100 ) {
-            id
-            time
-            items(pageSize: 50) {
-                quantity
-                product {
-                    name
-                    weight_in_grams
-                }
-            }
-        }
-    } 
+type NumOrders {
+  count: Int!
+}
+
+type Products {
+  id: Int!
+  name: String!
+  sizing: String!
+  weight_in_gram: Int!
+  type: String!
+  category: String!
+  usda_id: Int!
+  updated: String!
+  ordered_items(productid: Int, quantity: Int, unit_price: Float, discount: Float, total: Float): [items!]
+  volume_10day(country: String, quantity: Int, spend: Float, weight: Int): [volume_10day!]
+}
+
+type Query {
+  NumOrders(count: Int): [NumOrders!]
+  Orders(id: Int, customerid: Int, time: String): [orders!]
+  Products(id: Int, name: String, sizing: String, weight_in_gram: Int, type: String, category: String, usda_id: Int, updated: String): [Products!]
+  Users(id: Int, first_name: String, last_name: String, email: String, ip_address: String, country: String, changed_on: Int, timestamp: String): [Users!]
+}
+
+type Users {
+  id: Int!
+  first_name: String!
+  last_name: String!
+  email: String!
+  ip_address: String
+  country: String
+  changed_on: Int!
+  timestamp: String!
+  purchases(id: Int, customerid: Int, time: String): [orders!]
+  spending(week: String, spend: Float, saved: Float): [spending!]
+  past_purchases(productid: Int, num_orders: Int, total_quantity: Int): [past_purchases!]
+}
+
+.... [truncated]
+```
+
+The GraphQL schema has one type for each table we defined in the SQRL script. The types have a field for each column in the associated table, including relationship columns. Tables map to types and columns map to fields based on name.
+
+The `Query` type contains one query endpoint for each (non-nested) table. The queries and relationships have one argument for each field in the queried or related table. When those arguments are provided by a user querying the API, they translate to a filter on the returned rows from the underlying table. In our query examples above, we filtered `Users` by id, `Products` by category, and the `volume_10day` relationship traversal by country.
+
+If we specify multiple arguments, only those rows are returned that match all filter conditions.
+
+However, most of the filters we don't need in the API, so we are going to remove them and trim down the API. We are also going to limit the query endpoints and remove some fields we don't want to expose in the API.
+
+Rename the `schema.graphqls` file to `seedshop.graphqls` and change it to the following.
+
+```graphql
+type Products {
+  id: Int!
+  name: String!
+  sizing: String!
+  category: String!
+  volume_10day(country: String): [volume_10day!]
+}
+
+type Query {
+  Products(id: Int, name: String, category: String): [Products!]
+  Users(id: Int!): Users
+}
+
+type Users {
+  id: Int!
+  first_name: String!
+  last_name: String!
+  country: String
+  purchases: [orders!]
+  spending: [spending!]
+  past_purchases(productid: Int): [past_purchases!]
+}
+
+type items {
+  quantity: Int!
+  unit_price: Float!
+  discount: Float!
+  total: Float!
+  product: Products!
+}
+
+type orders {
+  id: Int!
+  time: String!
+  items: [items!]
+  totals: totals
+}
+
+type past_purchases {
+  productid: Int!
+  num_orders: Int!
+  total_quantity: Int!
+}
+
+type spending {
+  week: String!
+  spend: Float!
+  saved: Float!
+}
+
+type totals {
+  price: Float!
+  saving: Float!
+}
+
+type volume_10day {
+  country: String
+  quantity: Int!
+  spend: Float!
+  weight: Int!
 }
 ```
 
-This is the exact same query we build above with two differences:
-1. We gave it the name `GetRecentPurchases` so we can reference it from our application.
-2. We introduced the variables `$customerid` for the customer id and `$after`for the date we are filtering customer purchases on. We will set those variables in the application code.
+Note, that we removed the entire `NumOrders` table because we don't need it for now.
+We changed the `Users` table query endpoint to `Users(id: Int!): Users` to make a user id required and return only a single user (which may be `null` if it doesn't exist) instead of a list of users `[Users!]`.
 
-Create a sub-folder `queries` in the folder where you created the customer 360 SQRL script and save the query template above in a file called `queries/GetRecentPurchases.graphql`. We store each of the query patterns we want to invoke from our application in a separate file that has the name of the query. That makes it obvious where things are and easy to develop.
-
-### Invoking Queries in Application
-
-You can now use the query templates to retrieve data from the API in the programming language of your choice. \
-You can invoke the DataSQRL generated GraphQL API from any programming language with a GraphQL client.
-
-If you don't have the [Apollo GraphQL client](https://www.apollographql.com/docs/react/) and GraphQL support installed yet, let's get that out of the way first:
+To instruct the DataSQRL compiler to use our custom API specification, we add it as a second argument to the command.
 
 ```bash
-npm install @apollo/client graphql
+docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sqrl seedshop.graphqls
 ```
 
-Create the Javascript file `index.js` in the same folder as the customer360.sqrl script and add the following code:
-```js
-import React from 'react';
-import { render } from 'react-dom';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
-} from "@apollo/client";
-import recentPurchasesQuery from 'queries/GetRecentPurchases.graphql';
+If refresh GraphiQL in the browser, you will see your custom API.
 
-const client = new ApolloClient({
-  uri: 'http://localhost:7050/graphql/customer360/v0',
-  cache: new InMemoryCache()
-});
-```
+Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data pipelines. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
 
-We import React, the Apollo GraphQL client, and our query. Then we connect the client to the DataSQRL GraphQL API. Importing GraphQL query templates requires a Webpack loader. Add the following rule to your webpack config file:
+### Pagination
 
-```js
-module: {
-  rules: [
-    {
-      test: /\.(graphql|gql)$/,
-      exclude: /node_modules/,
-      loader: 'graphql-tag/loader',
-    },
-  ],
-},
-```
+Our current API always returns all filtered results for queries or when navigating relationships. In some cases, those result sets can be very large, and we don't want to transfer huge result sets through the API. Instead, we want to allow consumers of our API to page through the results.
 
-With all this setup out of the way, let's build a React component that displays the purchase history for a customer.
+We are going to add limit+offset based pagination to our API. It only requires adding the `limit: Int, offset: Int` arguments to queries and relationship fields.
 
-```js
-function Purchase({id, time, items}) {
-    return (
-        <div>
-        <h2>Order No. {id}</h2>
-        <p>Order placed on {time}</p>
-        <h3>Order Entries</h3>
-        {items.map((props, idx) => (
-            <Entry key={idx} {...props} />
-        ))}
-        </div>
-    );
+```graphql
+type Products {
+  id: Int!
+  name: String!
+  sizing: String!
+  weight_in_gram: Int!
+  type: String!
+  category: String!
+  volume_10day(country: String, limit: Int, offset: Int): [volume_10day!]
 }
 
-function Entry({quantity, product}) {
-    return (
-        <div>
-        <p>{quantity} {product.name}</p>
-        </div>
-    );
+type Query {
+  Products(id: Int, name: String, category: String, limit: Int, offset: Int): [Products!]
+  Users(id: Int!): Users
 }
 
-function PurchaseHistory({customerid}) {
-  const dayInMillis = 24*60*60*1000;
-  const after = new Date(new Date().getTime() - 31*dayInMillis).toLocaleDateString()
-  const { loading, error, data } = useQuery(recentPurchasesQuery, {
-    variables : { customerid, after }
-  });
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
-  return data.items.map((props, idx) => (
-     <Purchase key={idx} {...props} />
-  ));
+type Users {
+  id: Int!
+  first_name: String!
+  last_name: String!
+  email: String!
+  country: String
+  purchases(limit: Int, offset: Int): [orders!]
+  spending: [spending!]
+  past_purchases(productid: Int): [past_purchases!]
 }
-
 ```
 
-We defined 3 React components: `Purchase`, `Entry`, and `PurchaseHistory`. The first two components wrap each order record and each item record into HTML. The real action is in `PurchaseHistory` where we invoke the method `useQuery` to submit the imported `recentPurchasesQuery` against the API via the configured client. We submit the variables `customerid` and `after` with the query. We compute `after` as the date that's 31 days prior to now whereas `customerid` is an attribute of the component.
+Update the `seedshop.graphqls` schema with limit+offset pagination as shown above, save the file, and re-run the script. You can now execute the following query.
 
-To wrap up our simple React application, we are going to define a React component that represents the entire webpage and contains the `PurchaseHistory` component.
-
-
-```js
-function Customer360() {
-  return (
-    <div>
-      <h2>Customer 360</h2>
-      <ExchangeRates customerid=50 />
-    </div>
-  );
-}
-
-render(
-  <ApolloProvider client={client}>
-    <Customer360 />
-  </ApolloProvider>,
-  document.getElementById('root'),
-);
-```
-
-The render method connects the GraphQL client to React and renders all the components.
-
-*How do you run this?*
-
-## Subscriptions
-
-In the [last section](sqrl), we defined the subscription event table `NewCustomerPromotion` to trigger an event whenever a customer spent more than $100 dollars with our nut shop.
-
-Subscriptions allow us to pass such events to other systems that need to be notified. We use the generated API to *pull* data out of DataSQRL and subscriptions to *push* data out to other systems.
-
-Before we can push data somewhere, we need to define a *data sink* to push data into. Data sinks are similar to data sources, but instead of being a system where we read data from it is a system we write data to. DataSQRL provides support for different types of sinks: queues, database, filesystem, and cloud storage.
-
-We are going to connect a filesystem sink to our DataSQRL server which writes subscription events to a file on disk inside the `output` folder in the current directory.
-
-```bash
-datasqrl sink folder output
-```
-
-You'll see the following response to confirm a successful connection.
-
-```bash
-Connected sink "output" to DataSQRL server "localhost:7050"
-```
-
-To link the  `NewCustomerPromotion` subscription in our Customer 360 script to `output` sink we just connected, we create a small configuration file called `subscriptions.json` in the same folder as our script with the following content:
-
-```json
-[
-  {
-    "subscription": "NewCustomerPromotion",
-    "sinks" : [{ "name" :  "output" }]
+```graphql
+{
+Products (category: "acorns", limit: 2, offset: 2) {
+  name
+  weight_in_gram
+  category
+  volume_10day(limit: 2) {
+    quantity
+    spend
+    weight
   }
-]
+}}
 ```
 
-If you are running the `customer360.sqrl` script in development mode, interrupt the process by pressing `CTRL-C`. Then restart it with the subscription configuration as an argument:
+This query limits the number of returned products to 5 starting after position 2 in the complete result set. When you navigate through a relationship, you can filter records and use `limit` and `offset` in the same way you would when querying a table at the top level to specify which related records you want to be returned, in what order, and how many of them.
 
-```bash
-datasqrl watch customer360.sqrl -s subscriptions.json
-```
-
-This runs our script in development with the subscription linked to the file sink. If you wait a few seconds for the server to process the script, you will see the file `newcustomerpromotion.json` appear in the `output` folder with json records for each customer that has spent more than $100 with us.
-
-:::info
-
-Subscriptions in the GraphQL API are currently [on the roadmap](/docs/dev/roadmap#graphqlsubs).
-
-:::
-
-
-## API Customization
-
-DataSQRL automatically generates the GraphQL API using the names of the tables, columns, and relationships you define the SQRL script. Often, that's good enough. Sometimes you want to overwrite those defaults to customize the API. Let's talk about the most common customizations.
-
-### Hide Elements
-
-Tables, columns, and relationships with names that start with an underscore `_` are not visible in the API. This allows you to define elements that are only accessible inside your script.
-
-For our recommendation engine, we defined the column `recent_avg_protein` on `Customers` so we could sort products by their similarity in protein content. We use that column only for our internal computation and don't want to expose it through the API. Hence, we should rename it to `_recent_avg_protein` (remember to also rename it inside the `products_by_protein` nested table definition). When you save the script, the field will disappear from the API.
-
-### Renaming
-
-When you define a table, column, or relationship you can add an `@api` annotation to specify the name that appears in the generated API for that element. Annotations are added above the statement they apply to as an SQL comment.
-
-```sqrl
--- @api(name="Product", query="getproducts")
-Products := DISTINCT Products ON id ORDER BY _ingest_time DESC;
-```
-
-This annotation changes the name of the `Products` type in the GraphQL API to `Product` (singluar). For tables, we can also specify the name of the query endpoint used to query the table.
-
-```sqrl
--- @api(name="Product", query="getproducts")
-Products := DISTINCT Products ON id ORDER BY _ingest_time DESC;
-```
-
-Save the script and you'll see both the query and type name change in the generated GraphQL API.
-
-
-
-### Nested Pagination
-
-The generated API does not provide nested pagination by default. That makes it simpler to query the API. But sometimes there are too many items returned when you navigate a relationship or query a nested table. In those cases, you can explicity enable pagination with the `@api` annotation.
-
-```sqrl
--- @api(paginate=true)
-Customers.products_by_protein :=
-        SELECT p.id AS productid, ABS(p.nutrition.protein - @._recent_avg_protein) AS protein_difference FROM Products p
-        ORDER BY protein_difference ASC LIMIT 20;
-```
-
-This annotation enables pagination for the nested `products_by_protein` table. When you refresh the API you can see that the `products_by_protein` field on `Customers` returns a page with `items` and `pageInfo` fields. 
+Note, that these arguments are applied locally for each record that is returned. In the query above, `volume_10day(limit: 2) ` means that we are asking for up to 2 results *for each* product and not 2 total for the entire request. <br />
+As we navigate through relationships, we need to keep in mind that result set cardinalities multiply and choose small enough page sizes to avoid huge responses from the server.
 
 ## Next Steps
 
-You've built a small Customer 360 application in React and explored how to query the flexible GraphQL API that DataSQRL generates to get the result sets you need. You are ready to build application with DataSQRL. Before you run off and build a billion dollar app, take a quick look at the next section on
+Wonderful, you have completed the 3 essential steps of building a data service with DataSQRL:
+* Writing SQRL scripts
+* Connecting data sources
+* Designing and querying the data API
 
----
+Now you can go off, build amazing data services, and [tell us](/community) about it.
 
-If you want to learn more about querying the API, here are a couple of resources you might find helpful:
+If you are eager to continue learning, [**the next chapter**](advanced) is going to cover some advanced topics and talk about how to take your data API to production. 
 
-* The [API reference documentation](/docs/reference/api/graphql/design.md) has all the details on the structure, query endpoints, and arguments of the generated GraphQL API.
-* Learn how to query the API from [JVM/Android](/docs/reference/api/graphql/query.md) or [iOS](/docs/reference/api/graphql/query.md) applications.
-
-<!--
-* Unless you run DataSQRL behind a firewall, you need to protect the generated API from unauthorized access. Learn more about [JWT based access control](/docs/reference/api/access-control) to set up authorization for your DataSQRL data service.
--->
+If you want to learn more about querying the data API from your application or favorite programming language, the [reference documentation](/docs/reference/api/graphql/query) has an overview. It also [covers API design](/docs/reference/api/graphql/design) in more detail.

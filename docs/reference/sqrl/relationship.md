@@ -12,7 +12,7 @@ Users.purchases := JOIN Orders ON Orders.customerid = @.id;
 
 This statement defines a relationship column `purchases` on the `Users` table that relates each user record to rows in the `Orders` table where the `customerid` is equal to the user `id`. In other words, `purchases` relates users to their orders.
 
-A relationship is defined via a `JOIN` expression in standard SQL syntax. Relationships are defined as [localized queries]{table#localized} which means the `JOIN` expression on the right-hand side of the statement is interpreted for each row of the table on which the relationship is defined and the at-sign `@` is used to refer to each row.
+A relationship is defined via a `JOIN` expression in standard SQL syntax. Relationships are defined as [localized queries](table#localized) which means the `JOIN` expression on the right-hand side of the statement is interpreted for each row of the table on which the relationship is defined and the at-sign `@` is used to refer to each row.
 
 Relationship columns are a convenient way to make relationships in the data explicit, simplify joins, and allow consumers of the data API to navigate through the data.
 
