@@ -32,7 +32,7 @@ Local optimizers that are executed by DataSQRL include:
 * **DAG Optimization:** Consolidates repeated computations in the stream processing DAG.
 * **Index Selection:** Chooses an optimal set of indices for database engines to speed up queries executed for individual API calls.
 
-## Optimizer Hints
+## Optimizer Hints {#hints}
 
 Sometimes the optimizer makes the wrong decision and produces sub-optimal data pipelines. You can provide hints in the SQRL script to correct those errors by overwriting the optimizer.
 

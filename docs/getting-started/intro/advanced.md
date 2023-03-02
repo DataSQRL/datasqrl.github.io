@@ -4,137 +4,110 @@ title: "Advanced Concepts"
 
 # Advanced Concepts in DataSQRL
 
-You have made it through the entire introduction tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some advanced aspects of DataSQRL with pointers to more information, so you can continue your journey to ninja SQRL status 🥇.
-
-## Subscriptions
-
-In a [previous chapter](data-sources) we talked a great deal about importing data sources as stream tables. You can also export stream tables to external data sinks.
-
-The last feature we want to implement in our customer 360 is a trigger or
-notification when a customer has more than $100 in purchases so that we can
-email them with a special coupon to reward their loyalty.
-
-SQRL supports subscriptions which observe an underlying table and trigger
-events.
-
-```sqrl
-NewCustomerPromotion := SUBSCRIPTION ON ADD AS
-      SELECT customerid, total_orders 
-      FROM Customers WHERE total_orders >= 100;
-```
-
-We define the subscription `NewCustomerPromotion` which observes the table
-defined by the `SELECT` query for all customers with more than $100 in total
-purchases. The `ON ADD` qualifier for this subscription means that an event
-is triggered whenever a new row is added to that table.
-
-A subscription defines an event table that contains a row for every
-event that is triggered by the underlying table. We can treat it like any other
-table, for example, by defining a relationship to `Customers`:
-
-```sqrl
-NewCustomerPromotion.customer := JOIN Customers ON Customers.id = @.customerid;
-```
-
-However, subscriptions are special in that they are exposed as WebSockets in the
-API that proactively sent out events when they occur to subscribing users. In
-addition, we can register queues with DataSQRL server where subscription events
-get posted to notify downstream systems. We are going to look into
-both of those subscription access methods in more detail in the [next section](api).
-
-Subscriptions are a powerful feature to *react* to changes in the data and
-notify downstream systems or consumers of the API immediately.
-
-## SQRL Functions
-
-we are going to start with good-ol' boring functions. Functions are incredibly useful, can make your script more concise, and your life a lot easier.
-
-We used the function `function.time.fromEpochMillis` in the [nut shop tutorial](../quickstart) and referenced the function by its fully qualified name. If you use a function repeatedly, you can import it to save you from typing the full name.
-
-```sqrl
-IMPORT nutshop-data.Products;
-IMPORT nutshop-data.Orders;
-
-IMPORT function.time.fromEpochMillis;
-
-Orders.date := fromEpochMillis(time);
-```
-
-You can also import all functions in a particular package:
-
-```sqrl
-IMPORT function.time.*;
-```
-
-Note, that the imported functions are placed in the same namespace as the imported tables and datasets, so you have to be careful that those names do not overlap. If they do, you can rename functions or tables on import.
-
-```sqrl
-IMPORT function.time.fromEpochMillis AS epoch2Millis;
-
-Orders.date := epoch2Millis(time);
-```
-
-As a side note, `function` is a reserved keyword in SQRL and you cannot name your datasets or tables `function` to avoid confusion.
-
-SQRL includes a lot of useful functions. You can view the [complete listing of function packages](/docs/category/functions). Here are some highlights:
-
-* **iff** is an inline if-then-else function that evaluates the boolean expression given as the first argument and returns the second argument if it is true, otherwise it returns the third argument. Great for small conditionals where *case-when* statements are overkill.
-* **coalesce** returns the second argument if the first argument is null. Great for normalizing messy data.
-* If you are doing string transformations, take a look at the [string function package](/docs/reference/sqrl/functions/string).
-* Working with timestamps, dates, and all matters of time gets a lot easier with the [time function package](/docs/reference/sqrl/functions/time).
-* geo, statistics
-
+You have made it through the entire introduction tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some additional aspects of DataSQRL with pointers to more information, so you can continue your journey to ninja SQRL status 🥇. 
 
 ## Relationship Expressions
 
-We can also access relationships when we define tables or columns in our
-SQRL script:
+In the [chapter on SQRL](sqrl) we introduced relationship columns and showed how they make relationships explicit, add structure to your data, and simplify joins. In addition, you can reference relationships in expressions to avoid joins entirely. Let's see how that works.
+
+First, we are going to create a nested table that aggregates order statistics for each user.
 
 ```sqrl
-Customer.total_orders := SUM(purchases.total);
+Users.order_stats := SELECT min(o.time) as first_order,
+         sum(t.price) as spend, sum(t.saving) as saved, count(1) as num_orders
+      FROM @.purchases o JOIN o.totals t;
 ```
 
-In this incremental column definition from the nut shop tutorial, we are summing
-the total value of all orders related to a particular customer record by the
-`purchases` relationship.
-
-This expression is much easier to read and write than the equivalent
-definition:
+We have seen such nested table aggregations before. We are aggregating over all orders for each user and are joining in the order totals via the `totals` relationship.
 
 ```sqrl
-Customers.total_orders := SELECT SUM(o.total) FROM Orders o WHERE o.customerid = @.id;
+HighSpendingUsers := SELECT id, email FROM Users WHERE order_stats.spend > 1000;
 ```
 
-And we can reuse relationships across definitions. For instance, we can rewrite
-the definition of the `since` column on `Customers` as:
+Next, we are defining the `HighSpendingUsers` table to keep track of our most valuable customers. Note, how we are using the `order_stats` relationship to the previously defined nested table to access the `spend` aggregate in the filter of our `WHERE` clause. This saved us an explicit join and makes the query more readable.
+
+Take a look at the [relationship documentation](/docs/reference/sqrl/relationship) to learn more.
+
+## Creating Stream Tables
+
+Recall that SQRL distinguishes between [stream and state tables](sqrl#stream-state) to represent event and entity data, respectively. In our example, we showed how to use `SELECT DISTINCT ... ` and `DISTINCT ... ON` queries to convert stream to state tables through deduplication. Likewise, we create state tables when we aggregate streams without time window.
+
+To go the other way and create a stream from a state table, we use define a `STREAM` query.
 
 ```sqrl
-Customers.since := MIN(purchases.date);
+UserPromotion := STREAM ON ADD AS
+  SELECT u.id, u.first_name, u.last_name, u.email, s.first_order, s.spend
+  FROM Users u JOIN u.order_stats s WHERE s.spend >= 100;
 ```
+
+This statement defines a new stream table `UserPromotion` as a stream of rows every time a row is added to the underlying state table defined by the `SELECT` query following `ON ADD AS`. In this example, the `UserPromotion` stream contains a row with user id, name, email, first order date, and total spending whenever a user has spent more than $100 in our seed shop.
+
+Defining stream allows us to react to changes in the data, implement triggers, and derive change-streams. Read more about stream tables in the [stream table documentation](/docs/reference/sqrl/stream).
+
+### Export Streams to Data Sinks
+
+One of the great things about stream tables is that we can synchronize stream tables with data sinks and external data systems.
+
+A data sink is the opposite of a data source: we import data from a source and export data to a sink.
+```sqrl
+EXPORT UserPromotion TO print.promotion;
+```
+
+This statement exports our `UserPromotion` stream table to a print data sink called `promotion`. The `print` data sink is a system library sink that prints all records to the command line. It's a great sink to use for debugging or analyzing your script.
+
+In our example we want to trigger an external action, so we can send the users who have spent more than $100 dollars a promotional offer. To do so, we are going to define our own data sink.
+
+Data sinks are defined like data sources as packages. To create a local package, we are going to create a folder called `mySinkPackage`: `mkdir mySinkPackage`. Inside that folder, create the file `datasystem.json` with the following configuration:
+
+```json
+{
+  "type": "sink",
+  "canonicalizer": "system",
+  "charset": "UTF-8",
+  "format": {
+    "formatType": "json"
+  },
+  "name": "mysink",
+  "datadiscovery": {
+    "directoryURI": "./mysink-output/",
+    "filenamePattern": "^([^\\.]+?)(?:_part.*)?$",
+    "systemType": "dir"
+  }
+}
+```
+
+This configuration defines a file system sink that writes all records to the folder specified by the directoryURI in Json format. Next, we need to make sure that the folder that we want our sink to write to actually exists. Go back to the folder containing the `seedshop.sqrl` script and create the sink folder `mkdir mysink-output`.
+
+Finally, add the following statement to export to our file system sink.
+
+```sqrl
+EXPORT UserPromotion TO mySinkPackage.promotion;
+```
+
+When you [run](../quickstart#run) the script, a folder with the name `promotion` (the name of our sink table we defined in the `EXPORT` statement) will appear inside the `mysink-output` folder that contains partitioned files with the `UserPromotion` records in them in Json format.
+
+Streams are a powerful feature to *react* to changes in the data and notify downstream systems immediately. DataSQRL supports various types of data sinks including logs. Check out the [data sources and sinks documentation](/docs/reference/sources/overview) for more information.
+
+## SQRL Functions
+
+Let's talk about good-ol' boring functions. Functions are incredibly useful, can make your script more concise, and your life a lot easier.
+
+We used functions from the built-in `time` function package in this introductory tutorial. 
+SQRL includes a lot of useful functions. You can view the [complete listing of function packages](/docs/category/functions). 
+
+If a function you need is missing, you can implement a [custom function package](/docs/reference/sqrl/functions/custom-functions).
 
 ## Table Schema
 
 If you peak into the `mySourcePackage` folder you'll see two files in there for the `Customers` table: `customers.table.json` and `customers.schema.yml`. The former file is the data source configuration DataSQRL uses to connect to the data. The latter specifies the schema of the data.
 
-Luckily, DataSQRL's `discover` command generates both files for us. You don't
+Luckily, DataSQRL's `discover` command generates both files for us by inferring the data source configuration and schema from the data. You may not ever have to care about those files or what they contain.
 
-The data type of columns is inferred from the input data or definition of the table.
-In our example, the `time` column on the `Orders` table is of type `Number` which
-DataSQRL inferred from the records in the orders data. The data type of the `date` column
-defined above is `DateTime` which is inferred from the result type of the `fromEpochMillis`
-function.
-
-In most cases, type inference is obvious and you can let DataSQRL handle data types and schema for you.
-One less thing to worry about. \
-Read more about [schema management](/docs/reference/sources/schema)
-and how to [manually define data types](/docs/reference/sources/schema) for
-datasets with heterogeneous or very messy data where it isn't obvious.
-
-
+If you are dealing with very messy input data or data discovery isn't working for you, it may be worth checking out how to define data source and sink packages manually. Take a look at the [data discovery documentation](/docs/reference/sources/discovery). To learn more about DataSQRL's flexible schema and how it represents semi-structured and messy data, we have [another documentation page](/docs/reference/sources/schema) for you.
 
 ## Hidden Fields and Utility Functions
 
-DataSQRL automatically adds a few hidden columns to all records from imported data source tables:
+DataSQRL automatically adds a few hidden columns to all stream table rows from imported data sources:
 
 * **_uuid**: A unique identifier for the record assigned by the DataSQRL server on ingest.
 * **_ingest_time**: A timestamp that marks the time when the record was ingested by DataSQRL server.
@@ -142,74 +115,29 @@ DataSQRL automatically adds a few hidden columns to all records from imported da
 
 The unique identifier is useful to distinguish records and track data lineage.
 
-The timestamps are often used when we transform a change-record event table into an entity table as discussed in [the previous section](sqrl#event-entity}) on entity and event tables. For example, we used `_ingest_time` in the entity table definition of the `Products` table:
+The timestamps that DataSQRL adds can be used as the stream timestamps when the data doesn't have a natural timestamp. However, be careful with `_ingest_time` since it changes every time you run the system and can therefore be unpredictable.
 
-```sqrl
-Products := DISTINCT Products ON id ORDER BY _ingest_time DESC;
-```
+Read more about [import timestamps](/docs/reference/sqrl/import#timestamp), [stream tables](/docs/reference/sqrl/stream), and how DataSQRL treats [time](/docs/reference/sqrl/time).
 
-This statement defines `Products` entity records as the last change event for each product id ordered by the time the events were ingested. We can also define *last* in terms of the source time of an event record:
+## Build and Deploy
 
-```sqrl
-Products := DISTINCT Products ON id ORDER BY _source_time DESC;
-```
+Okay, it's time to get serious: we are taking our data service to production. Here is what you need to know:
 
-In practice, the definitions lead to the same result unless records from the data source may arrive out of order when they are ingested by DataSQRL. In that case, it is better to use `_source_time` if the data source supports it.
+DataSQRL is a compiler that builds data pipelines which expose a data API for your data service. The [build documentation](/docs/reference/operations/build) describes the build process in detail.
 
-To assign unique ids and timestamps to the event tables we define via subscriptions, we can use the utility functions `uuid()` and `now()` in the `SELECT` clause of the subscription:
+The data pipeline executes across multiple [engines](/docs/reference/operations/engines/overview) that handle different parts of the pipeline. The DataSQRL [optimizer](/docs/reference/operations/optimizer) figures out what should execute where based on a cost model. That means you can focus on writing your business logic in the SQRL script and let DataSQRL optimize the data pipeline for you.
 
-```sqrl
-NewCustomerPromotion := SUBSCRIPTION ON ADD AS
-SELECT uuid() AS event_id, now() AS event_time, customerid, total_orders
-FROM Customers WHERE total_orders >= 100;
-```
+Sometimes, however, the optimizer gets it wrong, and you have to [provide hints](/docs/reference/operations/optimizer#hints) to set it straight.
 
+To compile, build, and run SQRL scripts, you use the DataSQRL command. The [command documentation](/docs/reference/operations/command) explains all the commands and their options in details. The build is configured through the [package configuration](/docs/reference/operations/package-config) which specifies compiler options, declares dependencies, configures the engines, and more. Check out the [package configuration documentation](/docs/reference/operations/package-config) to learn how to configure all aspects of the build process in DataSQRL.
 
-## Hints and Optimization {#hints}
-
-You can control how DataSQRL executes your scripts by providing annotation hints.
-
-Before we talk about those hints, let's take a short detour to discuss how DataSQRL executes SQRL scripts. DataSQRL is a combination of a stream processing engine and a database. The stream processing engine ingests data from the connected sources, validates it, and updates the tables defined in the SQRL script that are affected by the new data record. Table records are eventually written to the database where they can be queried by the API to answer API requests.
-
-*(insert schematic diagram visualizing it)*
-
-When DataSQRL converts an SQRL script to an execution plan, the optimizer determines which tables and columns should be incrementally computed by the stream processing engine when new data arrives or computed upon request inside the database for each API query. This decision has important implications for the performance and cost of the data service.
-
-For example, the column `Customers._recent_avg_protein` from our `customer360.sqrl` script would be very expensive to compute at query time when we request product recommendations from the API because it requires a multi-way `JOIN` starting from all orders that a customer placed in the last 6 month. If we computed this at query time, the database would have to fetch a lot of data which takes time and is costly. It is much cheaper to incrementally update this column value whenever the customer places a new order and store the result in the database so it is instantly available at query time. \
-On the other hand, incrementally computing the `Customers.products_by_protein` table when data changes would be very expensive since the ordering changes anytime the `Customers._recent_avg_protein` changes with a new order for that customer. Since we only have a couple hundred product records that don't change very often, it is much more efficient to compute `Customers.products_by_protein` at query time.
-
-DataSQRL collects statistics on the source data and analyzes your script to make the optimal decision on whether to incrementally compute a particular table and column or compute it at query time. However, sometimes the optimizer gets it wrong. When that happens, you can provide a hint to DataSQRL to dictate that decision to the optimizer.
-
-:::caution
-
-Please send us example SQRL scripts where the optimizer makes the wrong decision and produces suboptimal results. We are actively working on improving the optimizer and your input is super valuable to us.
-
-:::
-
-```sqrl
--- @optimizer(materialize=true)
-Customers._recent_avg_protein :=
-        SELECT SUM(e.quantity * p.weight_in_gram * n.protein)/SUM(e.quantity * p.weight_in_gram)
-        FROM @.purchases.items e JOIN e.product p JOIN p.nutrition n
-        WHERE e.parent.date > now() - INTERVAL 6 MONTH;
-
--- @api(paginate=true)
--- @optimizer(materialize=false)
-Customers.products_by_protein :=
-        SELECT p.id AS productid, ABS(p.nutrition.protein - @._recent_avg_protein) AS protein_difference FROM Products p
-        ORDER BY protein_difference ASC LIMIT 20;
-Customers.products_by_protein.product := JOIN Products ON Products.id = _productid LIMIT 1;
-```
-
-With the `@optimizer` annotation we can pass hints to the optimizer. The boolean flag `materialize` tells the optimizer whether to incrementally update a table with changing data - i.e. to materialize a table as database folks would say - or to compute the table results at query time with each API request.
-
-Learn more about the [DataSQRL optimizer](/docs/reference/operations/optimizer) and how to provide hints to control the execution plan that it generates for your SQRL script. You can also learn more about the [architecture of DataSQRL](/docs/dev/architecture) to dive deep into the internals of the system.
+Last but not least, take a look at the [deployment documentation](/docs/reference/operations/deploy/overview) to learn how to run DataSQRL in production.
 
 ## Next Steps
 
 Congratulations, you not only finished the introduction tutorial but also completed the extra credit. What a champ! You are definitely ready to get started with DataSQRL.
 
-For additional information, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some. \
+For additional information, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some.
 
 Want to learn more about the internals of DataSQRL or contribute to the codebase? The [developer documentation](/docs/dev/overview) provides a detailed breakdown of the DataSQRL architecture and everything you need to know to extend DataSQRL yourself.
 

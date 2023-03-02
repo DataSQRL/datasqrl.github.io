@@ -243,7 +243,7 @@ on `Orders` to retrieve all item records for all order records associated
 with a single customer record. Chaining together relationships allows us to
 avoid the complexity of multiple JOIN expressions in this query.
 
-## Stream vs State Tables {#event-entity}
+## Stream vs State Tables {#stream-state}
 
 We distinguish between stream and state tables in SQRL.
 
@@ -256,7 +256,7 @@ In a **state table** the column values of rows change over time and rows
 are added to and deleted from the table. The `Users` table is a state
 table because it represents our current list of users based on the set of unique `customerid`.
 
-Why is this distinction important? Because stream tables have special features in SQRL and are treated differently from state tables. Stream tables give SQRL the ability to *react* to data and synchronize with arbitrary data sources.
+Why is this distinction important? Because [stream tables](/docs/reference/sqrl/stream) have special features in SQRL and are treated differently from state tables. Stream tables give SQRL the ability to *react* to data and synchronize with arbitrary data sources.
 
 All tables imported from external data sources are stream tables. In case of our imported `Products` table, we get a change stream of product updates.
 
@@ -343,4 +343,4 @@ We've built a complete e-commerce data service with customer analysis, recommend
 In the [**next chapter**](data-sources), we are going to define our own data source and looks at imports in more detail.
 
 We covered many aspects of SQRL in this document. If you want to explore SQRL in more detail, take a look at the [SQRL reference documentation](/docs/reference/sqrl/overview), which provides detailed explanations of key SQRL concepts like [tables](/docs/reference/sqrl/table),
-  [relationships](/docs/reference/sqrl/relationship), and [time](/docs/reference/sqrl/time).
+  [relationships](/docs/reference/sqrl/relationship), [stream tables](/docs/reference/sqrl/stream), and [time](/docs/reference/sqrl/time).
