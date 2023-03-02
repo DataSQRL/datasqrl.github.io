@@ -11,11 +11,11 @@ import HomepageHeader from '../components/HomepageHeader';
 
 const header =  {
                    title: 'DataSQRL',
-                   tagLine: 'Build Data APIs In Minutes',
+                   tagLine: 'Build Data Services In Minutes',
                    text: (
                      <>
                 <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> is a compiler
-                for building data services from data streams
+                for building data APIs from data streams
                 and data stores using an <Link to="/docs/getting-started/concepts/sqrl">enhanced version of SQL</Link> developers
                 call “not awful”.
                      </>
