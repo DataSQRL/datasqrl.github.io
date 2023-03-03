@@ -18,7 +18,7 @@ function Feature({image, title, link, linkText, description}) {
     linkContent = "";
   }
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx('col col--4', styles.feature)}>
       {imageHTML}
       <div className="padding-horiz--md">
         <h3 className="text--center">{title}</h3>

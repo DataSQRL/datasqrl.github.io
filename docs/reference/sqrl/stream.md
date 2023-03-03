@@ -84,9 +84,9 @@ Learn more about how SQRL executes time windows on the [timeline](time).
 Stream tables can be filtered on recency which is useful when aggregating over a recent period of time.
 
 ```sql
-RecentTotal := SELECT sum(i.total) AS total, count(1) AS num
+RecentTotal := SELECT sum(i.total) AS total, sum(i.quantity) AS quantity
       FROM Orders o JOIN o.items i
-      WHERE time > now() - INTERVAL 7 DAY;
+      WHERE o.time > now() - INTERVAL 7 DAY;
 ```
 This statement defines the `RecentTotal` state table an aggregation over all orders that were placed in the last 7 days. Recency filters use the special function `now()` to restrict the timestamp of stream records to a period specified by an interval.
 
