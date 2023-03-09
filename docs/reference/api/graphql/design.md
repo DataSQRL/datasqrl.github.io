@@ -16,8 +16,6 @@ When you add the `-a graphql` option, the compiler writes a `schema.graphqls` Gr
 Change the name of the GraphQL schema file before you customize it. That way you avoid accidentally overwriting your changes if you run the command with the `-a` option again.
 :::
 
-The compiler generates *complete* GraphQL schemas, which means that the schema contains all tables, fields, and relationships defined in the SQRL script as well as field filters for all fields. You can create your own custom GraphQL schema by trimming the generated schema and only expose those tables, fields, relationships, and filters that are required by your data API.
-
 ## Script to GraphQL Schema Mapping
 
 DataSQRL maps the tables, fields, and relationships defined in the SQRL script to a GraphQL schema which exposes the data through a GraphQL API.
@@ -28,24 +26,115 @@ Relationship columns of a table map to fields of the type associated with the ta
 
 The mapping between tables and types and (relationship) columns and fields is established by case-insensitive name. That means, to expose the table `Orders` in the API we have to create a type `Orders` or `orders` in the GraphQL schema.
 
-Non-nested table in the script can also map onto query entry-points of the same name as the table which can be used to query the table.
+For example, the `Orders` table we imported in the [Quickstart tutorial](../../../getting-started/quickstart) maps onto the following type in GraphQL
+```graphql
+type Orders {
+  id: Int!
+  customerid: Int!
+  time: String!
+  items(productid: Int, quantity: Int, unit_price: Float, discount: Float, total: Float): [items!]
+  totals: totals
+}
+```
+The type has one field for each column in the table with the same name as the column. The data type of the field is determined by the data type of the column. The exclamation mark `!` indicates that a field is non-null, which is also inferred from the data type of the column.
 
-Query fields and relationship fields accept arguments of the returned type which map onto equality predicate filters.
+The type has a relationship field `items` that links to the nested `Orders.items` table which is mapped to the type `items` in the GraphQL schema. For nested tables, the type name is equal to the name of the table and not the full table path.
 
-## Example GraphQL Schema
+The field `totals` is a relationship field to the nested `Orders.totals` table that aggregates the total price and savings for each order. The compiler infers whether a relationship has a to-one or to-many multiplicity. The `totals` relationship returns a single object of type `totals` whereas the `items` relationship returns an array of `[items!]`. For to-one relationships, no optional argument filters are generated. 
 
-The following is a GraphQL schema for the [Quickstart tutorial](../../../getting-started/quickstart).
+The relationship field accepts optional arguments for each field of the related type to filter on. That means, if we traverse the `items` relationship and provide an argument for product id `productid: 10`, then the relationship field only returns those items where the product id is equal to `10`.
+
+The nested table `Users.spending` is mapped to the following type in GraphQL
+```graphql
+type spending {
+  week: String!
+  spend: Float!
+  saved: Float!
+  parent: Users!
+}
+```
+The type has a field for each column in the table. In addition, it has the relationship field `parent` that relates a nested table record to its parent record from the `Users` table.
+
+Non-nested tables in the script  map onto query entry-points of the same name as the table which can be used to query the table. In our [Quickstart example](../../../getting-started/quickstart), we have the root (i.e. non-nested) tables `Orders` and `Users` which are exposed through the following query endpoints:
+```graphl
+type Query {
+  Orders(id: Int, customerid: Int, time: String): [orders!]
+  Users(id: Int): [Users!]
+}
+```
+
+Like relationship fields, query fields have optional arguments for each field of the returned type to filter on. For example, `Users(id: 5)` returns the user with id equal to `5`.
+
+## GraphQL Schema Customization
+
+The compiler generates *complete* GraphQL schemas, which means that the schema contains all tables, fields, and relationships defined in the SQRL script as well as field filters for all fields. In most cases, we don't want to expose all of those in the data API.
+
+You can create your own custom GraphQL schema by trimming the generated schema and only expose those tables, fields, relationships, and filters that are required by your data API.
+
+In our [Quickstart example](../../../getting-started/quickstart) we don't need any filters for the items in each order, so we remove all the arguments from that field.
+```graphql
+type Orders {
+  id: Int!
+  customerid: Int!
+  time: String!
+  items: [items!]
+  totals: totals
+}
+```
+We also don't need to navigate from the nested `Users.spending` back to `Users` so we remove the `parent` relationship field.
+```graphql
+type spending {
+  week: String!
+  spend: Float!
+  saved: Float!
+}
+```
+For the query endpoints, we only want to filter `Orders` by `time` and return a single user by id, with the `id` being a required argument:
+```graphql
+type Query {
+  Orders(time: String): [Orders!]
+  Users(id: Int!): Users
+}
+```
+
+### Adding Pagination
+
+Pagination allows the user of an API to page through the results when there are too many results to return them all at once.
+For our example, we might have thousands of orders and wouldn't want to return all of them when the user accesses the `Orders()` query end point of our API.
+
+To limit the number of results the API returns and allow the user to page through the results to retrieve them incrementally, we add `limit` and `offset` arguments to query endpoints and relationship fields in GraphQL schema.
+```graphql
+type Query {
+  Orders(time: String, limit: Int!, offset: Int = 0): [Orders!]
+  Users(id: Int!): Users
+}
+```
+The `Orders()` query endpoint requires a limit and an optional offset which defaults to `0`.
+
+```graphql
+type Users {
+  id: Int!
+  purchases(limit: Int!, offset: Int): [Orders!]
+  spending(week: String, limit: Int = 20): [spending!]
+}
+```
+In the type definition for `Users` above, we use `limit` and `offset` arguments to allow users of the API to page through the purchase history of a user and return a limited amount of spending analysis.
+
+
+### Full Example GraphQL Schema
+
+The following is the final customized GraphQL schema for our [Quickstart example](../../../getting-started/quickstart).
 
 ```graphqls
 type Query {
-  Orders(time: String): [Orders!]
+  Orders(time: String, limit: Int!, offset: Int = 0): [Orders!]
   Users(id: Int!): Users
 }
 
 type Users {
   id: Int!
-  purchases: [Orders!]
-  spending(week: String): [spending!]
+  purchases(limit: Int!, offset: Int): [Orders!]
+  spending(week: String, limit: Int = 20): [spending!]
 }
 
 type spending {
@@ -75,3 +164,7 @@ type totals {
   saving: Float!
 }
 ```
+
+## Additional Reading
+
+Refer to the [API chapter](../../../getting-started/intro/api) of the intro tutorial for a step-by-step guide to customizing GraphQL APIs.

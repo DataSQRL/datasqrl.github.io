@@ -216,11 +216,11 @@ type Products {
   weight_in_gram: Int!
   type: String!
   category: String!
-  volume_10day(country: String, limit: Int, offset: Int): [volume_10day!]
+  volume_10day(country: String, limit: Int = 20, offset: Int = 0): [volume_10day!]
 }
 
 type Query {
-  Products(id: Int, name: String, category: String, limit: Int, offset: Int): [Products!]
+  Products(id: Int, name: String, category: String, limit: Int!, offset: Int = 0): [Products!]
   Users(id: Int!): Users
 }
 
@@ -230,11 +230,14 @@ type Users {
   last_name: String!
   email: String!
   country: String
-  purchases(limit: Int, offset: Int): [orders!]
+  purchases(limit: Int = 20, offset: Int = 0): [orders!]
   spending: [spending!]
   past_purchases(productid: Int): [past_purchases!]
 }
 ```
+
+The `limit` argument limits the size of the returned result set to the given number. The `offset` argument moves to the given position in the result set before starting to retrieve records.
+Both arguments can be made required and given a default value as shown in the example above.
 
 Update the `seedshop.graphqls` schema with limit+offset pagination as shown above, save the file, and re-run the script. You can now execute the following query.
 
