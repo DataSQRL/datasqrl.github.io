@@ -79,7 +79,7 @@ Time window aggregations can be used to compute arbitrary roll-ups of stream dat
 
 Learn more about how SQRL executes time windows on the [timeline](time). 
 
-### Recency Filters
+### Recency Filters {#recency}
 
 Stream tables can be filtered on recency which is useful when aggregating over a recent period of time.
 
