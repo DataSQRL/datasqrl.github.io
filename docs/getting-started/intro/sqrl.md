@@ -27,7 +27,7 @@ the resulting language variant **SQRL**.
 
 If you are unfamiliar with SQL, we recommend you read the
 [SQL Primer](/docs/reference/sqrl/sql-primer) which introduces
-the basic concepts of SQL.
+the basic concepts of SQL. You'll have to learn SQL eventually, might as well start now.
 
 :::
 

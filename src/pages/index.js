@@ -160,10 +160,10 @@ export default function Home() {
                  <p className="hero__subtitle">
                  <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> compiles your
                  SQRL script and API specification into a fully integrated
-                 data pipeline and API server.
+                 data pipeline and API server that just works.
                  </p>
                  <p className="hero__subtitle">
-                 Seriously, that's all there is to it.
+                 With all that saved time, you can rewatch Game of Thrones.
                  </p>
                  <div className={styles.buttons}>
                    <Link

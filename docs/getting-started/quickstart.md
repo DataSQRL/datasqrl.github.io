@@ -4,7 +4,7 @@ title: "Quickstart Tutorial"
 
 # DataSQRL Quickstart in 5 Minutes
 
-<img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="30%"/>
+<img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>
 
 Because we have the humor of middle schoolers on Adderall, this quickstart tutorial
 implements data-driven features for our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
@@ -47,7 +47,7 @@ docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sq
 
 :::note
 
-To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes a minute to download the compiler.
+To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes an eternity to download the compiler.
 
 :::
 
@@ -73,11 +73,11 @@ Users (id: 10) {
 }}
 ```
 
-When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You now have a working data API you can integrate into your application. Pretty easy, right?
+When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You now have a working data API you can integrate into your application. That took less time than installing a software update.
 
 ## Quick Tour of SQRL
 
-The magic of our little seed-shop data service happens in the SQRL script we created above. The SQRL script imports data tables and defines new tables based on that data. Those tables are exposed in the API. Let's look at how that works.
+The magic of our little seed-shop data service happens in the SQRL script we created above. The SQRL script imports data tables and defines new tables based on that data. Those tables are exposed in the API. If you have another few minutes to spare, let's look at how that works.
 
 :::info
 
@@ -128,10 +128,10 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 
 Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.
 
-There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and pipeline construction to make it work.
+There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and pipeline construction to make it work. What are you going to build next?
 
 ## Next Steps {#next}
 
-Read the [DataSQRL introduction](intro/overview) which extends our seedshop example and explains all the concepts we touched up here in more detail.
+Read the [DataSQRL introduction](intro/overview) which extends our seed shop example and explains all the concepts we touched up here in more detail.
 
 If you found this short tutorial too dense or missing information, the [DataSQRL introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
