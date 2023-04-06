@@ -99,7 +99,7 @@ If a function you need is missing, you can implement a [custom function package]
 
 ## Table Schema
 
-If you peak into the `mySourcePackage` folder you'll see two files in there for the `Customers` table: `customers.table.json` and `customers.schema.yml`. The former file is the data source configuration DataSQRL uses to connect to the data. The latter specifies the schema of the data.
+If you peak into the `mysourcepackage` folder you'll see two files in there for the `Customers` table: `customers.table.json` and `customers.schema.yml`. The former file is the data source configuration DataSQRL uses to connect to the data. The latter specifies the schema of the data.
 
 Luckily, DataSQRL's `discover` command generates both files for us by inferring the data source configuration and schema from the data. You may not ever have to care about those files or what they contain.
 

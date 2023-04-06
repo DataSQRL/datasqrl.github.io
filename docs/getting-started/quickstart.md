@@ -90,7 +90,7 @@ SQRL is an extension of SQL, and we are going to use some basic SQL syntax. If y
 IMPORT datasqrl.seedshop.Orders;  
 ```
 
-The `import` statement imports the `Orders` table from the package `datasqrl.seedshop`. SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you.
+The `import` statement imports the `Orders` table from the package [datasqrl.seedshop](https://dev.datasqrl.com/package/datasqrl.seedshop). SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you.
 
 The `Orders` table has a nested `items` table to represent the nested items records for each order. SQRL supports nested tables to represent hierarchical data natively.
 

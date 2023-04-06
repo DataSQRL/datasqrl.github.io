@@ -39,13 +39,13 @@ The last element of the import path specifies the table `Orders` we are importin
 
 DataSQRL first attempts to resolve a package as a folder path relative to where the DataSQRL compiler is invoked. In our example, DataSQRL looks for the folder `datasqrl/seedshop` (on Unix based systems) relative to where you placed the `seedshop.sqrl` script.
 
-When a local folder for the package does not exist, DataSQRL looks up the package in the repository and downloads it if it exists. That's what happens in our example.
+When a local folder for the package does not exist, DataSQRL looks up the package in the [repository](https://dev.datasqrl.com) and downloads it if it exists. That's what happens in our example.
 
-DataSQRL uses the latest version of the package in the repository. You can also [declare package dependencies](/docs/reference/sources/overview#remote) explicitly with version.
+DataSQRL uses the latest version of the package in the [repository](https://dev.datasqrl.com). You can also [declare package dependencies](/docs/reference/sources/overview#remote) explicitly with version.
 
 ## Creating a Data Package
 
-If the repository does not contain the data you need, or you want to import data from your own data source, you create a new data package.
+If the [repository](https://dev.datasqrl.com) does not contain the data you need, or you want to import data from your own data source, you create a new data package.
 
 For example, we want to add user data from our customer database to our seed shop data API.
 First, download the customer data and place it into a sub-folder.
@@ -57,17 +57,17 @@ cd ..
 
 We are going to use DataSQRL's data discovery command to create a data package for us.
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover mydata -o mySourcePackage
+docker run -v $PWD:/build datasqrl/datasqrl-cmd discover mydata -o mysourcepackage
 ```
-The `discover` command takes the directory in which we placed the data as an argument. It inspects the files in the directory and creates table configurations for them. Those configurations are written to the output directory `mySourcePackage` specified via the `-o` option.
+The `discover` command takes the directory in which we placed the data as an argument. It inspects the files in the directory and creates table configurations for them. Those configurations are written to the output directory `mysourcepackage` specified via the `-o` option.
 
 ## Table Timestamps
 
 We can now import the `Customer` table from our custom package into our script:
 ```sqrl
-IMPORT mySourcePackage.Customers AS Users TIMESTAMP epochMilliToTimestamp(changed_on) AS timestamp;
+IMPORT mysourcepackage.Customers AS Users TIMESTAMP epochMilliToTimestamp(changed_on) AS timestamp;
 ```
-The package name is `mySourcePackage` which maps onto the folder we just created that contains the data package configuration files.
+The package name is `mysourcepackage` which maps onto the folder we just created that contains the data package configuration files.
 
 We are renaming the table as `Users` in our script to match the previously defined `Users` table.
 
@@ -92,7 +92,7 @@ In addition, we need the `epochMilliToTimestamp` for the timestamp conversion. R
 IMPORT datasqrl.seedshop.Orders;
 IMPORT datasqrl.seedshop.Products;
 IMPORT time.*;
-IMPORT mySourcePackage.Customers AS Users TIMESTAMP epochMilliToTimestamp(changed_on) AS timestamp;
+IMPORT mysourcepackage.Customers AS Users TIMESTAMP epochMilliToTimestamp(changed_on) AS timestamp;
 ```
 
 ## Updating the SQRL Script

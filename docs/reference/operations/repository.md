@@ -6,11 +6,8 @@ title: "Repository"
 
 A repository contains DataSQRL packages. When compiling an SQRL script, the DataSQRL compiler retrieves dependencies declared in the [package configuration](package-config#dependency) and unpacks them in the build directory. 
 
-The remote DataSQRL directory is hosted at [https://repo.datasqrl.com](https://repo.datasqrl.com). Packages in the remote repository can be retrieved from any machine running the DataSQRL compiler with access to the internet.
+The remote DataSQRL directory is hosted at [https://dev.datasqrl.com](https://dev.datasqrl.com). Packages in the remote repository can be retrieved from any machine running the DataSQRL compiler with access to the internet.
 
-<!--
-Take a look at the public packages in the [DataSQRL repository](https://repo.datasqrl.com) and use them in your SQRL project.
--->
 
 DataSQRL keeps a local repository in the hidden `~/.datasqrl/` directory in the user's home directory. The local repository is only accessible from the local machine. It caches packages downloaded from the remote repository and contains packages that are only published locally.
 

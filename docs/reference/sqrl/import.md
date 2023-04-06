@@ -28,9 +28,9 @@ If this directory exists, imported tables and functions are located inside that 
 
 Dependencies are declared in the [package configuration](../operations/package-config#dependency) and downloaded from a [repository](../operations/repository) at compile time.
 
-By default, DataSQRL looks up any missing packages in the repository. A package is missing if it is not declared as dependencies and cannot be resolved locally. If the missing package can be located in the repository, a dependency on the most recent version of that package is added to the package configuration.
+By default, DataSQRL looks up any missing packages in the [repository](https://dev.datasqrl.com). A package is missing if it is not declared as dependencies and cannot be resolved locally. If the missing package can be located in the repository, a dependency on the most recent version of that package is added to the package configuration.
 
-Take a look at the DataSQRL repository to find public packages you can import into your script. (coming soon)
+Take a look at the DataSQRL [repository](https://dev.datasqrl.com) to find public packages you can import into your script. (coming soon)
 
 You can [publish](../operations/repository) your own packages to the repository, so they can be used as dependencies in your SQRL scripts.
 

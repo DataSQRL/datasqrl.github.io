@@ -46,21 +46,18 @@ const sidebars = {
         'getting-started/concepts/sqrl',
         "getting-started/concepts/why-datasqrl",
         'getting-started/comparison/overview',
-
-
-/*        {
+        {
           type: 'category',
-          label: 'Tutorials',
+          label: 'DataSQRL Tutorials',
           link: {
-            type: 'generated-index',
-            title: 'DataSQRL Tutorials',
-            description: "These tutorials apply DataSQRL to various use cases and industries."
+            type: 'doc',
+            id: 'getting-started/tutorials/overview',
           },
           items: [
-            'getting-started/tutorials/telco',
+            'getting-started/tutorials/clickstream/intro',
+            'getting-started/tutorials/sensors/intro',
           ],
         },
-*/
       ],
     },
     {

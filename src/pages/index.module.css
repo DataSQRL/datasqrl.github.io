@@ -5,14 +5,23 @@
 
 .pipelineSvg {
   height: 250px;
-  width: 100%;
+  width: 90%;
+}
+
+.usecase {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.usecase select {
+    font-size: 1rem;
 }
 
 .verticalForm {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 100%;
 }
 
 .verticalForm input {

@@ -72,6 +72,12 @@ img[alt$="<|"] {
   border-color: var(--ifm-text-color);
 }
 
+@media screen and (max-width: 996px) {
+  .hide-small-screens {
+    display: none;
+  }
+}
+
 .tabs--hero .tabs__item {
     border-bottom-width: 0px;
 }

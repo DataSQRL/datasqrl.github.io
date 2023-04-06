@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -7,6 +7,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 import HomepageFeatures from '../components/HomepageFeatures';
 import HomepageHeader from '../components/HomepageHeader';
+import LinkRotation from "../components/LinkRotation";
+import FeatureGrid from "../components/FeatureGrid";
 
 
 const header =  {
@@ -25,12 +27,50 @@ const header =  {
                    LogoSvg: require('../../static/img/full_squirrel.svg').default,
                  };
 
+
+const DataSQRLFeaturesList = [
+    {
+        title: 'Customizable',
+        image: '/img/generic/undraw_building_blocks.svg',
+        linkText: 'Learn More',
+        description: (
+            <>
+                Edit the API, connect any data source, bring your own functions -- DataSQRL
+                is fully customizable to address your needs.
+                Say goodbye to generic data APIs and let your creativity roam freely like a squirrel.
+            </>
+        ),
+    },
+    {
+        title: 'Open Source',
+        image: '/img/generic/undraw_code.svg',
+        linkText: 'Learn More',
+        description: (
+            <>
+                DataSQRL is an open-soure project. It's free to use, you can view the
+                entire source code, and all development happens in the open.
+                If you are in a giving mood, you could even <Link to="docs/dev/contribute">contribute</Link> to DataSQRL yourself.
+            </>
+        ),
+    },
+    {
+        title: 'Robust & Scalable',
+        image: '/img/generic/undraw_secure_server.svg',
+        linkText: 'Learn More',
+        description: (
+            <>
+                The DataSQRL compiler produces code that runs on proven data technologies like
+                Apache Flink and Postgres. That means you can verify the output and rest assured
+                that your data API is resilient and scalable.
+            </>
+        ),
+    },
+];
+
 const WhyDataSQRLList = [
   {
     title: 'Saves You Time',
     image: '/img/index/undraw_time_management_sqrl.svg',
-    link: '/docs/getting-started/concepts/why-datasqrl',
-    linkText: 'Learn More',
     description: (
       <>
         DataSQRL allows you to focus on your data logic because it handles all the annoying
@@ -42,33 +82,33 @@ const WhyDataSQRLList = [
   {
     title: 'Easy to Use',
     image: '/img/index/undraw_programming_sqrl.svg',
-    link: '/docs/getting-started/concepts/why-datasqrl',
-    linkText: 'Learn More',
     description: (
       <>
         Express your data logic, transformations, and analytics with the SQL you already know.
         Development with SQL sounds like eating soup with a sword but a bit of syntactic
-        sugar makes it productive, easy to debug, and simple to maintain. <br />&nbsp;
+        sugar makes it productive, easy to debug, and simple to maintain.
       </>
     ),
   },
   {
     title: 'Fast & Efficient',
     image: '/img/index/undraw_fast_loading_sqrl.svg',
-    link: '/docs/getting-started/concepts/why-datasqrl',
-    linkText: 'Learn More',
     description: (
       <>
         DataSQRL compiles efficient data architectures that optimize partitioning,
-        data flows, index selection, and query execution on top of Apache Flink and Postgres.
-        There actually is some neat technology behind this buzzword bingo. <br />&nbsp;
+        data flows, index selection, materialization, denormalization, and query execution.
+        There actually is some neat technology behind this buzzword bingo.
       </>
     ),
   },
 ];
 
-const sqrlScript =
-`IMPORT datasqrl.seedshop.Orders;  -- Import orders stream
+const scriptExamples = [
+  {
+    name: "Seedshop",
+    annotation: "Ecommerce",
+    script:
+      `IMPORT datasqrl.seedshop.Orders;  -- Import orders stream
 IMPORT time.endOfWeek;            -- Import time function
 /* Augment orders with total price */
 Orders.items.total := quantity * unit_price - discount?0.0;
@@ -82,31 +122,105 @@ Users.purchases := JOIN Orders ON Orders.customerid = @.id;
 Users.spending := SELECT endOfWeek(p.time) AS week,
          sum(t.price) AS spend, sum(t.saving) AS saved
       FROM @.purchases p JOIN p.totals t
-      GROUP BY week ORDER BY week DESC;`;
+      GROUP BY week ORDER BY week DESC;`,
+    queryURL: "?query=query%20UserSpending(%24userid%3A%20Int!)%20%7B%0A%09Users(id%3A%20%24userid)%20%7B%0A%20%20%20%20spending%20%7B%0A%20%20%20%20%20%20week%0A%20%20%20%20%20%20spend%0A%20%20%20%20%20%20saved%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D&operationName=UserSpending&variables=%7B%0A%20%20\"userid\"%3A%202%0A%7D",
+    link: "/docs/getting-started/quickstart",
+  },
+  {
+    name: "Clickstream",
+    annotation: "Content Recommendation",
+    script:
+      `IMPORT datasqrl.example.clickstream.Click;  -- Import data
+/* Most visited pages in the last day */
+Trending := SELECT url, count(1) AS total
+    FROM Click WHERE timestamp > now() - INTERVAL 1 DAY
+    GROUP BY url ORDER BY total DESC;
+/* Find next page visits within 10 minutes */
+VisitAfter := SELECT b.url AS beforeURL, a.url AS afterURL,
+    a.timestamp AS timestamp
+    FROM Click b JOIN Click a ON b.userid=a.userid AND
+        b.timestamp <= a.timestamp AND
+        b.timestamp >= a.timestamp - INTERVAL 10 MINUTE;
+/* Recommend pages that are visited shortly after */
+Recommendation := SELECT beforeURL AS url, afterURL AS rec,
+    count(1) AS frequency FROM VisitAfter
+    GROUP BY url, rec ORDER BY url ASC, frequency DESC;`,
+    queryURL: "?query=query%20ContentRecommendation(%24pageURL%3A%20String!)%20%7B%0A%09Recommendation(url%3A%20%24pageURL)%20%7B%0A%20%20%20%20rec%0A%20%20%20%20frequency%0A%20%20%7D%0A%7D&operationName=ContentRecommendation&variables=%7B%0A%20%20\"pageURL\"%3A%20\"mascot_books%2Fa_time_of_gifts\"%0A%7D",
+    link: "docs/getting-started/tutorials/clickstream/intro",
+  },
+  {
+    name: "Sensors",
+    annotation: "Internet of Things",
+    script:
+      `IMPORT datasqrl.example.sensors.*;     -- Import all data
+IMPORT time.*;                -- Import all time functions
+/* Aggregate sensor readings to minute */
+MinReadings := SELECT sensorid, endOfMinute(time) as timeMin,
+        avg(temperature) as temp FROM SensorReading
+    GROUP BY sensorid, timeMin;
+/* Create table of sensors and relate to readings */
+Sensors := DISTINCT Sensors ON id  ORDER BY placed DESC;
+Sensors.readings := JOIN MinReadings r ON r.sensorid = @.id;
+/* Create table of machines with recent temperature */
+Machine := SELECT s.machineid, max(temp) as maxTemp,
+    avg(temp) as avgTemp
+    FROM Sensors s JOIN s.readings
+    WHERE timeMin >= now() - INTERVAL 1 HOUR
+    GROUP BY s.machineid;`,
+    queryURL: "?query=query%20MachineTemperature(%24machine%3A%20Int!)%20%7B%0A%09Machine(machineid%3A%20%24machine)%20%7B%0A%20%20%20%20maxTemp%0A%20%20%20%20avgTemp%0A%20%20%7D%0A%7D&variables=%7B%0A%20%20\"machine\"%3A%202%0A%7D",
+    link: "docs/getting-started/tutorials/sensors/intro",
+  }
+];
 
-const graphqlScript =
-`type Query {
-  Users(id: Int!): Users
-  Orders(time: String): [Orders!]
+const getScriptName = (name) => {
+  return name.toLowerCase() + ".sqrl";
 }
 
-type Users {
-  id: Int!
-  purchases: [Orders!]
-  spending(week: String): [spending!]
+const getOptionName = (name, annotation) => {
+  let result = getScriptName(name);
+  if (annotation) {
+    result = result + " (" + annotation + ")";
+  }
+  return result;
 }
 
-type spending {
-  week: String!
-  spend: Float!
-  saved: Float!
-}
-...
-`;
+const LearnMoreLinks = [
+    { url: '/docs/getting-started/concepts/why-datasqrl', text: 'Benefits of DataSQRL' },
+    { url: '/docs/getting-started/quickstart', text: 'Getting Started with DataSQRL' },
+    { url: 'docs/getting-started/concepts/datasqrl', text: 'How DataSQRL Works' },
+    { url: 'docs/getting-started/concepts/sqrl', text: 'The SQRL Language' },
+    { url: 'docs/getting-started/comparison/overview', text: 'When to Use DataSQRL' },
+];
 
-const PipelineSvg = require('../../static/img/index/pipeline.svg').default;
+const SupportedLanguages = [
+  { image: '/img/external/nodejs_logo.svg', title: 'NodeJS' },
+  { image: '/img/external/react_logo.svg', title: 'React' },
+  { image: '/img/external/vue_logo.svg', title: 'Vue' },
+  { image: '/img/external/python_logo.svg', title: 'Python' },
+  { image: '/img/external/java_logo.svg', title: 'Java' },
+  { image: '/img/external/spring_logo.svg', title: 'Spring' },
+  { image: '/img/external/kotlin_logo.svg', title: 'Kotlin' },
+  { image: '/img/external/scala_logo.svg', title: 'Scala' },
+];
+
+const SupportedDeployments = [
+  { image: '/img/external/aws_logo.svg', title: 'AWS' },
+  { image: '/img/external/gcp_logo.svg', title: 'GCP' },
+  { image: '/img/external/azure_logo.svg', title: 'Azure' },
+  { image: '/img/external/awsflink_logo.png', title: 'Kinesis Data Analytics' },
+  { image: '/img/external/flink_logo.svg', title: 'Apache Flink' },
+  { image: '/img/external/postgres_logo.svg', title: 'Postgres' },
+  { image: '/img/external/awsrds_logo.svg', title: 'AWS RDS' },
+  { image: '/img/external/cloudsql_logo.png', title: 'Cloud SQL' },
+];
 
 export default function Home() {
+  const [exampleIndex, setExampleIndex] = useState(0);
+  const handleExampleChange = (event) => {
+    const index = event.target.selectedIndex;
+    setExampleIndex(index);
+  };
+
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
@@ -116,70 +230,99 @@ export default function Home() {
       <main>
         <section className={styles.content}>
           <div className="container">
-            <div className="row margin-bottom--md">
+            <div className="row margin-bottom--lg">
               <div className="col col--6">
-              <CodeBlock language="sql">
-                {sqrlScript}
-              </CodeBlock>
+                  <div class={styles.usecase}>
+                      Pick a Use Case:&nbsp;
+                    <select onChange={handleExampleChange}>
+                      {scriptExamples.map((option, index) => (
+                        <option key={index} value={option.name}>
+                          {getOptionName(option.name, option.annotation)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <CodeBlock language="sql">
+                    {scriptExamples[exampleIndex].script}
+                  </CodeBlock>
               </div>
               <div className="col col--5 text--left">
-                 <h2>Step 1</h2>
+                 <h2>Step 1: Implement SQRL Script</h2>
                  <p className="hero__subtitle">
                  Import the data and functions you need. <br />
                  Integrate, transform, and analyze the data to get the results you want.
                  </p>
                   <p className="hero__subtitle">
-                  The <Link to="/docs/getting-started/concepts/sqrl">SQRL language</Link> extends SQL
-                  to support streams of data, relationships, nested data, and other knick-knacks.
+                  The <Link to="/docs/getting-started/concepts/sqrl">SQRL language</Link> is a SQL dialect
+                  that supports data streams, relationships, nested data, and other useful knick-knacks.
                   </p>
               </div>
             </div>
-            <div className="row margin-bottom--md">
-              <div className="col col--1"></div>
-              <div className="col col--5 text--left">
-                 <h2>Step 2</h2>
-                 <p className="hero__subtitle">
-                 Fine-tune your data API by customizing the GraphQL schema.
-                 </p>
-                 <p className="hero__subtitle">
-                 Or get a triple-shot of espresso and let DataSQRL generate it for you.
-                 </p>
+            <div className="row margin-bottom--lg">
+              <div className="col col--6 text--center">
+                    <img className={styles.pipelineSvg} src="/img/generic/highlevel_pipeline.svg" alt="DataSQRL compiled pipeline" />
               </div>
-              <div className="col col--6">
-              <CodeBlock language="graphql">
-                {graphqlScript}
-              </CodeBlock>
-              </div>
-            </div>
-            <div className="row margin-bottom--md">
-              <div className="col col--6">
-              <PipelineSvg className={styles.pipelineSvg} alt="DataSQRL compiled pipeline" />
-              </div>
-              <div className="col col--5 text--left">
-                 <h2>Step 3</h2>
+              <div className="col col--6 text--left">
+                 <h2>Step 2: Run DataSQRL</h2>
+                 <CodeBlock language="bash" wrap="true">
+                  docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run {getScriptName(scriptExamples[exampleIndex].name)}
+                 </CodeBlock>
                  <p className="hero__subtitle">
-                 <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> compiles your
-                 SQRL script and API specification into a fully integrated
-                 data pipeline and API server that just works.
+                     DataSQRL compiles your script into a data pipeline that ingests,
+                     processes, stores, and queries your data to serve it as a GraphQL API.
                  </p>
-                 <p className="hero__subtitle">
-                 With all that saved time, you can rewatch Game of Thrones.
-                 </p>
-                 <div className={styles.buttons}>
-                   <Link
-                     className="button button--primary button--lg"
-                     to="/docs/getting-started/quickstart">
-                     Run this Example
-                   </Link>
-                 </div>
+                  <p className="hero__subtitle">
+                      With all that saved time, you can rewatch Game of Thrones.
+                  </p>
               </div>
             </div>
+            <div className="row margin-bottom--lg">
+              <div className="col col--6 hide-small-screens">
+                <FeatureGrid FeatureList={SupportedLanguages} columnBase={3} />
+              </div>
+              <div className="col col--5 text--left">
+                 <h2>Step 3: Query API</h2>
+                 <p className="hero__subtitle">
+                 Query the API from your favorite language, framework,
+                   or directly <Link to={"http://localhost:8888/graphiql/" + scriptExamples[exampleIndex].queryURL} target="_blank">in the browser</Link>.
+                 </p>
+                 <p className="hero__subtitle">
+                     Then repeat the cycle until your data feature is complete - it's seriously addictive.
+                 </p>
+              </div>
+            </div>
+          <div className="row margin-bottom--md">
+              <div className="col col--6 hide-small-screens">
+                <FeatureGrid FeatureList={SupportedDeployments} columnBase={3} />
+              </div>
+              <div className="col col--5 text--left">
+                  <h2>Step 4: Deploy Data Pipeline</h2>
+                  <p className="hero__subtitle">
+                      Ready to ship? DataSQRL builds optimized deployment artifacts that run on your preferred cloud,
+                      managed service, or self-hosted.
+                  </p>
+                  <p className="hero__subtitle">
+                      Let's have some fun building with data!
+                  </p>
+                  <div className={styles.buttons}>
+                      <Link
+                          className="button button--primary button--lg"
+                          to={scriptExamples[exampleIndex].link}>
+                          Build {scriptExamples[exampleIndex].name} Example
+                      </Link>
+                  </div>
+              </div>
+          </div>
           </div>
         </section>
+
+        <HomepageFeatures FeatureList={DataSQRLFeaturesList} />
 
 
 
         <HomepageFeatures FeatureList={WhyDataSQRLList} />
+
+        <LinkRotation teaser="Learn more: " links={LearnMoreLinks} />
       </main>
     </Layout>
   );

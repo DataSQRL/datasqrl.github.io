@@ -56,7 +56,7 @@ IMPORT datasqrl.seedshop.Orders;
 `Orders` is contained in the `datasqrl.seedshop` package. When importing tables, we specify the full
 path to the table, including the package, so DataSQRL can locate it.
 
-The `datasqrl.seedshop` package we are using for this example is downloaded from the DataSQRL repository as a dependency. In the [next chapter](data-sources) we will define a custom data source package and table.
+The `datasqrl.seedshop` package we are using for this example is downloaded from the DataSQRL [repository](https://dev.datasqrl.com) as a dependency. In the [next chapter](data-sources) we will define a custom data source package and table.
 
 Let's add more data to our script by importing the products data from our seedshop:
 ```sqrl

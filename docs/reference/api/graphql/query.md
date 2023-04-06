@@ -34,10 +34,11 @@ Import and configure the [Apollo GraphQL client](https://www.apollographql.com/d
 If you don't have the client installed, run `npm install @apollo/client graphql` first.
 
 ```js title="index.js"
-import { ApolloClient, gql} from "@apollo/client";
+import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
 
-const client = new ApolloClient({ 
-  uri: 'http://localhost:8888/graphql/'
+const client = new ApolloClient({
+    uri: "http://localhost:8888/graphql",
+    cache: new InMemoryCache(),
 });
 ```
 
