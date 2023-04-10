@@ -47,7 +47,7 @@ const DataSQRLFeaturesList = [
         linkText: 'Learn More',
         description: (
             <>
-                DataSQRL is an open-soure project. It's free to use, you can view the
+                DataSQRL is an open-source project. It's free to use, you can view the
                 entire source code, and all development happens in the open.
                 If you are in a giving mood, you could even <Link to="docs/dev/contribute">contribute</Link> to DataSQRL yourself.
             </>
@@ -269,7 +269,7 @@ export default function Home() {
                  </CodeBlock>
                  <p className="hero__subtitle">
                      DataSQRL compiles your script into a data pipeline that ingests,
-                     processes, stores, and queries your data to serve it as a GraphQL API.
+                     processes, stores, and retrieves your data to serve it as a GraphQL API.
                  </p>
                   <p className="hero__subtitle">
                       With all that saved time, you can rewatch Game of Thrones.
