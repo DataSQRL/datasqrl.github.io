@@ -272,7 +272,7 @@ export default function Home() {
                      processes, stores, and retrieves your data to serve it as a GraphQL API.
                  </p>
                   <p className="hero__subtitle">
-                      With all that saved time, you can rewatch Game of Thrones.
+                      With all that saved time, you can start another side project.
                   </p>
               </div>
             </div>
@@ -287,7 +287,7 @@ export default function Home() {
                    or directly <Link to={"http://localhost:8888/graphiql/" + scriptExamples[exampleIndex].queryURL} target="_blank">in the browser</Link>.
                  </p>
                  <p className="hero__subtitle">
-                     Then repeat the cycle until your data feature is complete - it's seriously addictive.
+                     Then repeat the cycle until your data feature is complete or you run out of Mountain Dew.
                  </p>
               </div>
             </div>
