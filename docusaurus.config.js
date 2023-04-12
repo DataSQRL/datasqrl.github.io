@@ -148,6 +148,22 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+  themes: [
+    [
+      "@easyops-cn/docusaurus-search-local",
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      ({
+        hashed: true,
+        language: ["en"],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        indexPages: true,
+        searchResultLimits: 10,
+        searchResultContextMaxLength: 50
+      }),
+    ],
+  ]
 };
 
 module.exports = config;
