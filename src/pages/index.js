@@ -13,13 +13,11 @@ import FeatureGrid from "../components/FeatureGrid";
 
 const header =  {
                    title: 'DataSQRL',
-                   tagLine: 'Build Data Services In Minutes',
+                   tagLine: 'Build Data APIs In Minutes',
                    text: (
                      <>
-                <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL</Link> is a compiler
-                for building data APIs from data streams
-                and data stores using an <Link to="/docs/getting-started/concepts/sqrl">enhanced version of SQL</Link> developers
-                call “not awful”.
+                         Turn your data into customer-facing APIs without the brain-numbing orchestration of
+                         stream processors, databases, and API servers.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -36,8 +34,8 @@ const DataSQRLFeaturesList = [
         description: (
             <>
                 Edit the API, connect any data source, bring your own functions -- DataSQRL
-                is fully customizable to address your needs.
-                Say goodbye to generic data APIs and let your creativity roam freely like a squirrel.
+                is fully customizable.
+                Say goodbye to generic data APIs and let your creativity roam free like a squirrel.
             </>
         ),
     },
@@ -47,8 +45,8 @@ const DataSQRLFeaturesList = [
         linkText: 'Learn More',
         description: (
             <>
-                DataSQRL is an open-source project. It's free to use, you can view the
-                entire source code, and all development happens in the open.
+                DataSQRL is an open-source project. It's free to use and you can view the
+                entire source code.
                 If you are in a giving mood, you could even <Link to="docs/dev/contribute">contribute</Link> to DataSQRL yourself.
             </>
         ),
@@ -230,6 +228,14 @@ export default function Home() {
       <main>
         <section className={styles.content}>
           <div className="container">
+            <div className="row margin-bottom--xs">
+              <div className="col col--8">
+                <p className="hero__subtitle">
+                  DataSQRL is a compiler and build tool for streaming data pipelines. <br />
+                  Build data services in 4 steps:
+                </p>
+              </div>
+            </div>
             <div className="row margin-bottom--lg">
               <div className="col col--6">
                   <div class={styles.usecase}>
@@ -247,14 +253,13 @@ export default function Home() {
                   </CodeBlock>
               </div>
               <div className="col col--5 text--left">
-                 <h2>Step 1: Implement SQRL Script</h2>
+                 <h2>Step 1</h2>
                  <p className="hero__subtitle">
-                 Import the data and functions you need. <br />
-                 Integrate, transform, and analyze the data to get the results you want.
+                 Implement the logic of your data service in SQRL.
                  </p>
                   <p className="hero__subtitle">
-                  The <Link to="/docs/getting-started/concepts/sqrl">SQRL language</Link> is a SQL dialect
-                  that supports data streams, relationships, nested data, and other useful knick-knacks.
+                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is a SQL dialect developers call "not awful"
+                  that supports data streams, relationships, and nested data.
                   </p>
               </div>
             </div>
@@ -263,17 +268,17 @@ export default function Home() {
                     <img className={styles.pipelineSvg} src="/img/generic/highlevel_pipeline.svg" alt="DataSQRL compiled pipeline" />
               </div>
               <div className="col col--6 text--left">
-                 <h2>Step 2: Run DataSQRL</h2>
-                 <CodeBlock language="bash" wrap="true">
+                <h2>Step 2</h2>
+                <p className="hero__subtitle">
+                  DataSQRL compiles your script into a data pipeline that serves the processed data
+                  as a GraphQL API.
+                </p>
+                <CodeBlock language="bash" wrap="true">
                   docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run {getScriptName(scriptExamples[exampleIndex].name)}
-                 </CodeBlock>
-                 <p className="hero__subtitle">
-                     DataSQRL compiles your script into a data pipeline that ingests,
-                     processes, stores, and retrieves your data to serve it as a GraphQL API.
-                 </p>
-                  <p className="hero__subtitle">
-                      With all that saved time, you can start another side project.
-                  </p>
+                </CodeBlock>
+                <p className="hero__subtitle">
+                    Save the SQRL script, run the command above, and see the magic with your own eyes.
+                </p>
               </div>
             </div>
             <div className="row margin-bottom--lg">
@@ -281,7 +286,7 @@ export default function Home() {
                 <FeatureGrid FeatureList={SupportedLanguages} columnBase={3} />
               </div>
               <div className="col col--5 text--left">
-                 <h2>Step 3: Query API</h2>
+                 <h2>Step 3</h2>
                  <p className="hero__subtitle">
                  Query the API from your favorite language, framework,
                    or directly <Link to={"http://localhost:8888/graphiql/" + scriptExamples[exampleIndex].queryURL} target="_blank">in the browser</Link>.
@@ -291,12 +296,12 @@ export default function Home() {
                  </p>
               </div>
             </div>
-          <div className="row margin-bottom--md">
+          <div className="row margin-bottom--xs">
               <div className="col col--6 hide-small-screens">
                 <FeatureGrid FeatureList={SupportedDeployments} columnBase={3} />
               </div>
               <div className="col col--5 text--left">
-                  <h2>Step 4: Deploy Data Pipeline</h2>
+                  <h2>Step 4</h2>
                   <p className="hero__subtitle">
                       Ready to ship? DataSQRL builds optimized deployment artifacts that run on your preferred cloud,
                       managed service, or self-hosted.
@@ -308,9 +313,16 @@ export default function Home() {
                       <Link
                           className="button button--primary button--lg"
                           to={scriptExamples[exampleIndex].link}>
-                          Build {scriptExamples[exampleIndex].name} Example
+                          Read {scriptExamples[exampleIndex].name} Tutorial
                       </Link>
                   </div>
+                  {/*<div className={styles.buttons}>*/}
+                  {/*  <Link*/}
+                  {/*    className="button button--primary button--lg"*/}
+                  {/*    to={scriptExamples[exampleIndex].link}>*/}
+                  {/*    Build {scriptExamples[exampleIndex].name} in Playground*/}
+                  {/*  </Link>*/}
+                  {/*</div>*/}
               </div>
           </div>
           </div>
