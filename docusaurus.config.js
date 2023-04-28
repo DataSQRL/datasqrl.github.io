@@ -35,6 +35,10 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        gtag: {
+          trackingID: 'G-Y4XLW4QZYX',
+          anonymizeIP: false,
+        },
       }),
     ],
   ],
@@ -141,7 +145,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} DataSQRL, Inc.`,
+        copyright: `Copyright © ${new Date().getFullYear()} DataSQRL, Inc.<br /><a href="/docs/attribution">Image Attributions</a>`,
       },
       prism: {
         theme: lightCodeTheme,

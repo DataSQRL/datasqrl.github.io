@@ -9,6 +9,8 @@ import HomepageFeatures from '../components/HomepageFeatures';
 import HomepageHeader from '../components/HomepageHeader';
 import LinkRotation from "../components/LinkRotation";
 import FeatureGrid from "../components/FeatureGrid";
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 
 const header =  {
@@ -219,6 +221,16 @@ export default function Home() {
     setExampleIndex(index);
   };
 
+  const [withoutDataSQRLRowVisible, setWithoutDataSQRLRowVisible] = useState(false);
+
+  const handleWithoutDataSQRLButtonClick = () => {
+    setWithoutDataSQRLRowVisible(true);
+  };
+
+  const handleWithDataSQRLButtonClick = () => {
+    setWithoutDataSQRLRowVisible(false);
+  };
+
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
@@ -289,7 +301,11 @@ export default function Home() {
                  <h2>Step 3</h2>
                  <p className="hero__subtitle">
                  Query the API from your favorite language, framework,
-                   or directly <Link to={"http://localhost:8888/graphiql/" + scriptExamples[exampleIndex].queryURL} target="_blank">in the browser</Link>.
+                   or directly <Link id="localhost-link-id" to={"http://localhost:8888/graphiql/" + scriptExamples[exampleIndex].queryURL} target="_blank">in the browser</Link>.
+                   <Tooltip anchorSelect="#localhost-link-id" className="tooltip" clickable>
+                     Run the command above first for this link to work
+                     {/*<br />Otherwise, use the online <Link to="." target="_blank">DataSQRL playground</Link>*/}
+                   </Tooltip>
                  </p>
                  <p className="hero__subtitle">
                      Then repeat the cycle until your data feature is complete or you run out of Mountain Dew.
@@ -330,7 +346,58 @@ export default function Home() {
 
         <HomepageFeatures FeatureList={DataSQRLFeaturesList} />
 
-
+        <section className={styles.content}>
+          <div className="container">
+            <h2>
+              How to build data APIs
+              <button id="withDataSQRLButton" className={clsx(
+                "button button--secondary", styles.headerButton, withoutDataSQRLRowVisible && "button--outline")}
+                      onClick={handleWithDataSQRLButtonClick}
+              >with DataSQRL</button>
+              <button id="withoutDataSQRLButton" className={clsx(
+                "button button--secondary", styles.headerButton, !withoutDataSQRLRowVisible && "button--outline")}
+                      onClick={handleWithoutDataSQRLButtonClick}
+              >without DataSQRL</button>
+            </h2>
+            <div id="withDataSQRLRow" className={clsx("row", withoutDataSQRLRowVisible && styles.notVisible)}>
+              <div className="col col--8">
+                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL.svg" alt="Building Data APIs with DataSQRL" />
+              </div>
+              <div className="col col--4">
+                <p className="text--left margin-bottom--sm">
+                  The DataSQRL compiler does the laborious "data plumbing" work and builds optimized data pipelines that run smoothly in production.
+                </p>
+                <p className="text--left margin-bottom--sm">
+                  Wanna know exactly what the DataSQRL compiler does and how it works? Click below!
+                </p>
+                <div className="text--center">
+                  <Link className="button button--primary" to=".">
+                    How the Sausage Is Made
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div id="withoutDataSQRLRow" className={clsx("row", !withoutDataSQRLRowVisible && styles.notVisible)}>
+              <div className="col col--8">
+                Pic
+              </div>
+              <div className="col col--4">
+                <p className="text--left margin-bottom--sm">
+                  Without DataSQRL you have to orchestrate multiple data technologies, scripts, and configurations into a coherent
+                  data pipeline.
+                </p>
+                <p className="text--left margin-bottom--sm">
+                  For a more detailed breakdown of all the steps you need to take, check out our guide on:
+                </p>
+                <div className="text--center">
+                  <Link className="button button--primary" to=".">
+                    How to Build a Data Pipeline
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <HomepageFeatures FeatureList={WhyDataSQRLList} />
 
