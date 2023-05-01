@@ -35,6 +35,11 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+html[data-theme='dark'] .tooltip {
+  background-color: var(--rt-color-white);
+  color: var(--rt-color-dark);
+}
+
 .button {
     margin-left: 1rem;
     margin-right: 1rem;

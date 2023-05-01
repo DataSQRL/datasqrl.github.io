@@ -20,7 +20,7 @@ Follow the [quickstart tutorial](../quickstart) to build a data service in a few
 
 ## How DataSQRL Works
 
-<img src="/img/generic/general-pipeline.svg" alt="Compiled DataSQRL Pipeline" width="100%"/>
+<img src="/img/generic/general_pipeline.svg" alt="Compiled DataSQRL Pipeline" width="100%"/>
 
 DataSQRL compiles the SQRL script and API specification into a data pipeline that consists of a streaming engine, database engine, and API server [[1]](#footnotes). The streaming engine ingests the imported data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results. <br />
 It's like a harmonious orchestra of data technologies with DataSQRL as the conductor.
