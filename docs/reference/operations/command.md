@@ -25,7 +25,7 @@ The package configuration configures the compiler, pipeline topology, [engines](
 The `compile` command compiles an SQRL script and optional API specification to a data pipeline. The deployment artifacts for the data pipeline are written to the target directory.
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd compile myscript.sqrl myapischema.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 ```
 
 The `compile` command takes the path to the SQRL script and API specification as first and second argument, respectively. The API specification is optional. If none is provided, DataSQRL generates it from the script. 
@@ -44,7 +44,7 @@ The `compile` command accepts these options:
 The `run` command compiles an SQRL script and optional API specification to a data pipeline and then executes the pipeline locally. That means, the `run` command starts all engines in the pipeline and deploys the compiled pipeline artifacts on them. In particular, it starts the API server which can be accessed and queried on localhost with the configured port.
 
 ```bash
-docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run  myscript.sqrl myapischema.graphqls
+docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run  myscript.sqrl myapischema.graphqls
 ```
 
 The `run` command takes the same arguments and options as the `compile` command. It also accepts these additional options:
@@ -59,7 +59,7 @@ The `run` command takes the same arguments and options as the `compile` command.
 The `discover` command creates new data source and sink packages by inspecting a configured data system.
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover system.discovery.table.json
+docker run --rm -v $PWD:/build datasqrl/cmd discover system.discovery.table.json
 ```
 
 The `discover` command takes the [data system configuration file](../../sources/discovery#datasystem) as an argument and supports the following options:
@@ -80,7 +80,7 @@ The `publish` command is executed in the root directory of the package to be pub
 The `publish` command does not auto-generate a package configuration and expects the [package configuration](../package-config) in the local file `package.json` or configured via [option](#common). The package configuration must include the package information which specifies the name, version, and variant of the package. 
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd publish
+docker run --rm -v $PWD:/build datasqrl/cmd publish
 ```
 
 The `publish` command supports the following options:

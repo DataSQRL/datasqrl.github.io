@@ -11,7 +11,7 @@ You can either deploy DataSQRL scripts in standalone mode or deploy each engine 
 To deploy a SQRL script and API specification in standalone mode, execute the `run` command:
 
 ```bash
-docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run  myscript.sqrl myapischema.graphqls
+docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run  myscript.sqrl myapischema.graphqls
 ```
 
 See the [command documentation](../../command#run) for more information.
@@ -22,7 +22,7 @@ See the [command documentation](../../command#run) for more information.
 To deploy each engine separately, execute the `compile` command for the SQRL script and optional API specification:
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd compile myscript.sqrl myapischema.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 ```
 
 The command writes the deployment artifacts into the `deploy/` directory. See the `compile` [command documentation](../../command#compile) for more information.

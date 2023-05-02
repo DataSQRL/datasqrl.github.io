@@ -75,7 +75,7 @@ Data discovery reads the data files to determine the schema if a schema is not s
 Data discovery provides an easy shortcut for adding a data source from a directory with having to create a connector configuration: 
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover ~/datasqrl/datasets/mydata
+docker run --rm -v $PWD:/build datasqrl/cmd discover ~/datasqrl/datasets/mydata
 ```
 
 Pass the path to a local directory or the URI for a remote directory as the first argument to the `discover` command, and it generates the data system configuration with default options before running data discovery.

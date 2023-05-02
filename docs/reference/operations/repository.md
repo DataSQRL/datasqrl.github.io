@@ -57,7 +57,7 @@ If you have multiple variants of the same package, we recommend that you use the
 Run the `publish` command in the root directory of your package to publish the package to the local repository:
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd publish
+docker run --rm -v $PWD:/build datasqrl/cmd publish
 ```
 
 ### Publish to Remote Repository {#publish-remote}

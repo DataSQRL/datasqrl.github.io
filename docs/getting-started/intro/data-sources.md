@@ -57,7 +57,7 @@ cd ..
 
 We are going to use DataSQRL's data discovery command to create a data package for us.
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover mydata -o mysourcepackage
+docker run --rm -v $PWD:/build datasqrl/cmd discover mydata -o mysourcepackage
 ```
 The `discover` command takes the directory in which we placed the data as an argument. It inspects the files in the directory and creates table configurations for them. Those configurations are written to the output directory `mysourcepackage` specified via the `-o` option.
 

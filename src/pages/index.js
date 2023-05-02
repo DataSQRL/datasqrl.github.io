@@ -289,7 +289,7 @@ export default function Home() {
                   as a GraphQL API.
                 </p>
                 <CodeBlock language="bash" wrap="true">
-                  docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run {getScriptName(scriptExamples[exampleIndex].name)}
+                  docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run {getScriptName(scriptExamples[exampleIndex].name)}
                 </CodeBlock>
                 <p className="hero__subtitle">
                     Save the SQRL script, run the command above, and see the magic with your own eyes.

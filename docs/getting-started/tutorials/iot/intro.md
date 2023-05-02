@@ -41,7 +41,7 @@ Machine := SELECT s.machineid, max(temp) as maxTemp,
 Now run the DataSQRL compiler to build an IoT data service from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run sensors.sqrl
+docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run sensors.sqrl
 ```
 
 ## Query Data API {#query}

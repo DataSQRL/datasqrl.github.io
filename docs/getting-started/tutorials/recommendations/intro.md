@@ -42,7 +42,7 @@ Recommendation := SELECT beforeURL AS url, afterURL AS rec,
 Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run clickstream.sqrl
+docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run clickstream.sqrl
 ```
 
 ## Query Data API {#query}
