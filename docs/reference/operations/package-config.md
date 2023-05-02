@@ -11,24 +11,21 @@ The package configuration is the central configuration file used by the [DataSQR
       "variant" : "dev"
     }
   },
-  "engines" : [
-    {
-    "savepoint" : false,
-    "engineName" : "flink"
+  "engines" : {
+    "stream" : {
+      "name" : "flink"
     }, 
-    {
-    "dbURL" : "postgresql://localhost:5432/datasqrl",
-    "driverName" : "org.postgresql.Driver",
-    "dialect" : "postgres",
-    "database" : "datasqrl",
-    "systemType" : "jdbc",
-    "engineName" : "jdbc"
-    } ],
+    "database" : {
+      "name" : "jdbc",
+      "url" : "postgresql://localhost:5432/datasqrl",
+      "driverName" : "org.postgresql.Driver",
+      "dialect" : "postgres",
+      "database" : "datasqrl"
+    } 
+  },
   "compiler" : {
     "errorSink" : "print.errors",
-    "debug" : {
-      "debugSink" : "print"
-    }
+    "debugSink" : "print"
   },
   "package": {
     "name": "datasqrl.tutorials.Quickstart",
@@ -63,7 +60,7 @@ Learn more about the [repository](repository) and how dependencies are retrieved
 
 ## Engines {#engine}
 
-`engines` is a list of engine configurations that the compiler uses to instantiate the engines in the data pipeline. The DataSQRL compiler produces an integrated data pipeline against those engines. DataSQRL expects that a stream and database engine is configured as shown in the example above.
+`engines` is a map of engine configurations by engine name that the compiler uses to instantiate the engines in the data pipeline. The DataSQRL compiler produces an integrated data pipeline against those engines. DataSQRL expects that a stream and database engine is configured as shown in the example above.
 
 When you use the [DataSQRL command](command) without specifying an engine, DataSQRL will instantiate default engines for you. Learn more about the [build process](build).
 
@@ -73,11 +70,11 @@ The engine configuration depends on each engine. [Look up the engine](engines/ov
 
 The `compiler` configuration contains options to control the behavior of the compiler.
 
-| Field Name      | Description                                                                                                                                                   | Required? |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| errorSink       | Errors in the ingested input data are produced to the table sink defined by this export path. Defaults to `print.errors`                                      | No        |
-| debug.debugSink | When debugging is enabled, change streams of all tables defined in the SQRL script are exported to the sink defined by this export path. Defaults to `print`. | No        |
-| debug.tables    | Limits the exported change streams during debugging to the tables in this list, if the list is non-empty.                                                     | No        |
+| Field Name  | Description                                                                                                                                                   | Required? |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| errorSink   | Errors in the ingested input data are produced to the table sink defined by this export path. Defaults to `print.errors`                                      | No        |
+| debugSink   | When debugging is enabled, change streams of all tables defined in the SQRL script are exported to the sink defined by this export path. Defaults to `print`. | No        |
+| debugTables | Limits the exported change streams during debugging to the tables in this list, if the list is non-empty.                                                     | No        |
 
 
 ## Package Information {#information}

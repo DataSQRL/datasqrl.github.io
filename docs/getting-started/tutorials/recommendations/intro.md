@@ -1,5 +1,5 @@
 ---
-title: "Content Recommendation"
+title: "Recommendations"
 ---
 
 # Content Recommendation through Clickstream Analysis
@@ -19,7 +19,7 @@ In the terminal or command line, create an empty folder for the SQRL script:
 > mkdir clickstream; cd clickstream
 ```
 
-Create a new file in that folder called `clickstream.sqrl` and paste the following content into the file:
+Create a new file in that folder called `clickstream.sqrl` and paste the following content into the file (we'll explain it line-by-line [below](#sqrl)):
 
 ```sql
 IMPORT datasqrl.example.clickstream.Click;   -- Import data
@@ -61,7 +61,7 @@ The running data pipeline compiled by DataSQRL exposes a GraphQL data API which 
 When you hit the "run" button you get the recommendations for the given page URL ordered by the frequency of correlated visit. 
 You now have a working recommendation engine you can integrate into your application.
 
-## Description of SQRL Script
+## Description of SQRL Script {#sqrl}
 
 Let's have a closer look at the SQRL script for our content recommendation engine and dissect what it does.
 

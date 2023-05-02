@@ -4,11 +4,11 @@ The file data system reads and writes data from a file system. That can be a loc
 
 ## File System Connector
 
-```json title="datasystem.json"
+```json title="system.discovery.table.json"
 {
   "type": "source",
   "connector": {
-    "systemType": "file",
+    "name": "file",
     "directoryURI": "~/datasqrl/datasets/mydata",
     "fileURIs": [],
     "filenamePattern": "^([^\\.]+?)(?:_part.*)?$",
@@ -78,10 +78,10 @@ Data discovery provides an easy shortcut for adding a data source from a directo
 docker run -v $PWD:/build datasqrl/datasqrl-cmd discover ~/datasqrl/datasets/mydata
 ```
 
-Just pass the path to a local directory or the URI for a remote directory as the first argument to the `discover` command, and it generates the data system configuration with default options before running data discovery.
+Pass the path to a local directory or the URI for a remote directory as the first argument to the `discover` command, and it generates the data system configuration with default options before running data discovery.
 
 ## Data Sink
 
 File system can be configured as a data sink by setting the `type` to `sink` or `source_and_sink`. `directoryURI` and `format` are required fields when using the file system as a sink. The exported stream table is written in batches to partitioned files inside the configured directory using the table name as sub-directory.
 
-File system supports dynamic table sinks which means you only need to configure the `datasystem.json` file and DataSQRL creates table sinks at compile time. You don't need to run data discovery or configure individual table sinks when using file system as a dynamic sink.
+File system supports dynamic table sinks which means you only need to configure the `system.discovery.table.json` file and DataSQRL creates table sinks at compile time. You don't need to run data discovery or configure individual table sinks when using file system as a dynamic sink.

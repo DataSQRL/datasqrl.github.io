@@ -12,9 +12,9 @@ The Postgres database engine is configured as an engine in the [package configur
 
 | Field Name | Description                                   | Required? |
 |------------|-----------------------------------------------|-----------|
-| engineName | `jdbc` string literal                         | Yes       |
-| dbURL      | The JDBC URL for connecting to the database.  | Yes       |
-| driveName  | Use the string `org.postgresql.Driver`.       | Yes       |
+| name       | `jdbc` string literal                         | Yes       |
+| url        | The JDBC URL for connecting to the database.  | Yes       |
+| driver     | Use the string `org.postgresql.Driver`.       | Yes       |
 | dialect    | Use the string `postgres`.                    | Yes       |
 | database   | Name of the database to use for storing data. | Yes       |
 | user       | User name for authentication.                 | No        |

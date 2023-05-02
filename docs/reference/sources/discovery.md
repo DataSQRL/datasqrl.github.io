@@ -12,21 +12,20 @@ Data discovery is done in 2 steps:
 
 ## 1. Configure Data System {#datasystem}
 
-First, create a configuration file with the connection details for the data system you want to use as a source or sink. In an empty directory, create a configuration file with the file name `datasystem.json`.
+First, create a configuration file with the connection details for the data system you want to use as a source or sink. In an empty directory, create a configuration file with the file name `system.discovery.table.json`.
 
-The following is an example data system configuration file for a data source that reads data from the local file system. Copy the content into the `datasystem.json` file to use as a starting point.
+The following is an example data system configuration file for a data source that reads data from the local file system. Copy the content into the `system.discovery.table.json` file to use as a starting point.
 
-```json title="datasystem.json"
+```json title="system.discovery.table.json"
 {
   "type": "source",
-  "name": "ecommerce-data",
-  "charset": "UTF-8",
   "connector": {
-    "systemType": "file",
+    "name": "file",
     "directoryURI": "~/datasqrl/datasets/mydata"
   },
   "format": {
-    "formatType": "json"
+    "charset": "UTF-8",
+    "name": "json"
   }
 }
 ```
@@ -37,13 +36,12 @@ Change the value of the fields to configure your own data source or sink. The fo
 |-----------|--------------------------------------------------------------------------------------------------------------|------------------------------|
 | type      | One of `source`, `sink`, or `source_and_sink` to specify whether this data system is a source, sink, or both. <br /> DataSQRL imports data from sources and exports data to sinks. | Yes                          |
 | name      | Name of the data system. Used in debugging output to identify a source/sink.                                                                                       | No                           |
-| charset   | The charset encoding to use if imported or exported data is text. Defaults to `UTF-8`.                       | No                           |
 | connector | Connection configuration for the data system. [See below](#connector) for more details. | Yes                          |
 | format    | Data format configuration that specifies how to read and write data. [See below](#format) for more details.                              | Depends on connector |
 
 ### Connection Configuration {#connector}
 
-The `connector` field contains the configuration for connecting to a particular data system. The connector configuration depends on the type of data system you want to connect to. The `systemType` field in the connector configuration determines which data system is configured.
+The `connector` field contains the configuration for connecting to a particular data system. The connector configuration depends on the type of data system you want to connect to. The `name` field in the connector configuration determines which data system is configured.
 
 DataSQRL currently supports the following types of data systems:
 
@@ -64,7 +62,7 @@ Click on the data system type to learn how to configure the connection and addit
 
 ### Data Format {#format}
 
-The `format` field specifies the data format to use for reading and writing data. The `formatType` field in the format configuration determines which data format is configured.
+The `format` field specifies the data format to use for reading and writing data. The `name` field in the format configuration determines which data format is configured.
 
 DataSQRL currently supports the following data formats:
 
@@ -103,8 +101,11 @@ If you have schema definitions for the tables in your data source or sink, you c
 DataSQRL supports the following types of schema:
 
 * [**DataSQRL Schema**](schema): Flexible schema for [CSV](format/csv) and [JSON](format/json). Extension `.schema.yml`.
+
+<!--
 * [**JSON Schema**](format/json#schema): Standard schema for [JSON](format/json). Extension `.schema.json`.
 * [**Avro Schema**](format/avro#schema): Standard schema for [Avro](format/avro). Extension `.schema.avsc`.
+-->
 
 <!-- (add when database supported)
 * [**SQL DDL**](format/sql#schema): Standard schema for [SQL](format/sql). Extension `.schema.sql`.
@@ -114,7 +115,7 @@ DataSQRL supports the following types of schema:
 Providing schemas is optional, and you can skip the next step, unless the [data format](#format) requires a schema.
 :::
 
-If you want to or have to provide a schema for the tables in your data source or sink, place a schema file for each table in the data source/sink in the same directory as the `datasystem.json` file. The file name of the schema file is the name of the table (in lowercase) with the extension of the schema type.
+If you want to or have to provide a schema for the tables in your data source or sink, place a schema file for each table in the data source/sink in the same directory as the `system.discovery.table.json` file. The file name of the schema file is the name of the table (in lowercase) with the extension of the schema type.
 
 For example, the file name of the DataSQRL schema for the table `Orders` is `orders.schema.yml`. 
 
@@ -122,10 +123,10 @@ Refer to the documentation pages of each schema type for their extension and mor
 
 ## 2. Run Data Discovery
 
-Invoke the DataSQRL discovery command to run data discovery for the data source or sink configured in the `datasystem.json` file. Run the command in the same directory as the configuration file.
+Invoke the DataSQRL discovery command to run data discovery for the data source or sink configured in the `system.discovery.table.json` file. Run the command in the same directory as the configuration file.
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover datasystem.json
+docker run -v $PWD:/build datasqrl/datasqrl-cmd discover system.discovery.table.json
 ```
 
 This command inspects the configured data system and discovers all available tables and their schema. It requires that the machine on which you execute the command can connect to the data system with the provided configuration. 
@@ -175,13 +176,13 @@ For example, to define the source for the `Orders` table with a [DataSQRL schema
   "type": "source",
   "name": "orders",
   "identifier": "orders",
-  "charset": "UTF-8",
   "connector": {
     "directoryURI": "~/datasqrl/datasets/mydata",
-    "systemType": "file"
+    "name": "file"
   },
   "format": {
-    "formatType": "json"
+    "charset": "UTF-8",
+    "name": "json"
   }
 }
 ```
@@ -198,7 +199,7 @@ Defining a data sink is analogous to defining a data source.
 
 However, table schemas are optional when defining a data sink. If a table schema is provided, DataSQRL validates that the exported data is compatible with the schema of the table sink at compile time. If no schema is provided, DataSQRL assumes that the sink can consume the exported data which may lead to runtime issues.
 
-Some data systems, such as [file system](system/file) and [print](system/print), can dynamically generate table sinks at compile time, which means defining a data sink only requires the data system configuration `datasystem.json` and no table configurations. Refer to the [data system](#connector) documentation for data systems that support dynamic sink table generation.
+Some data systems, such as [file system](system/file) and [print](system/print), can dynamically generate table sinks at compile time, which means defining a data sink only requires the data system configuration `system.discovery.table.json` and no table configurations. Refer to the [data system](#connector) documentation for data systems that support dynamic sink table generation.
 
 
 <!--

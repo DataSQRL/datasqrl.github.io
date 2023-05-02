@@ -1,5 +1,5 @@
 ---
-title: "IoT Analytics"
+title: "Internet of Things"
 ---
 
 # Aggregating Sensor Data
@@ -18,7 +18,7 @@ In the terminal or command line, create an empty folder for the SQRL script:
 > mkdir sensors; cd sensors
 ```
 
-Create a new file in that folder called `sensors.sqrl` and paste the following content into the file:
+Create a new file in that folder called `sensors.sqrl` and paste the following content into the file (we'll explain the script line-by-line [below](#sqrl)):
 
 ```sql
 IMPORT datasqrl.example.sensors.*;     -- Import all data
@@ -60,7 +60,7 @@ The running data pipeline compiled by DataSQRL exposes a GraphQL data API which 
 When you hit the "run" button you get the average and maximum temperature for the given machine in the last hour.
 You now have a working IoT application.
 
-## Description of SQRL Script
+## Description of SQRL Script {#sqrl}
 
 Let's have a closer look at the SQRL script for our IoT application and describe what it does.
 

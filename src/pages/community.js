@@ -37,12 +37,12 @@ const Support = [
   {
     title: 'Discord',
     image: '/img/community/discord.svg',
-    link: 'https://discord.gg/vYyREMNRmh',
+    link: 'https://discord.gg/49AnhVY2w9',
     linkText: 'Share Your Thoughts',
     description: (
       <>
         If you want to brainstorm with the community or tune into the development process behind DataSQRL,
-        join us <Link to="https://discord.gg/vYyREMNRmh">on Discord</Link>. Share your thoughts and feedback while watching how the sausage gets made.
+        join us <Link to="https://discord.gg/49AnhVY2w9">on Discord</Link>. Share your thoughts and feedback while watching how the sausage gets made.
       </>
     ),
   },

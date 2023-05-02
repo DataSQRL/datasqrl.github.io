@@ -57,21 +57,18 @@ This statement exports our `UserPromotion` stream table to a print data sink cal
 
 In our example we want to trigger an external action, so we can send the users who have spent more than $100 dollars a promotional offer. To do so, we are going to define our own data sink.
 
-Data sinks are defined like data sources as packages. To create a local package, we are going to create a folder called `mySinkPackage`: `mkdir mySinkPackage`. Inside that folder, create the file `datasystem.json` with the following configuration:
+Data sinks are defined like data sources as packages. To create a local package, we are going to create a folder called `mySinkPackage`: `mkdir mySinkPackage`. Inside that folder, create the file `system.discovery.table.json` with the following configuration:
 
 ```json
 {
   "type": "sink",
-  "canonicalizer": "system",
-  "charset": "UTF-8",
   "format": {
-    "formatType": "json"
+    "name": "json"
   },
-  "name": "mysink",
   "datadiscovery": {
     "directoryURI": "./mysink-output/",
     "filenamePattern": "^([^\\.]+?)(?:_part.*)?$",
-    "systemType": "dir"
+    "name": "file"
   }
 }
 ```

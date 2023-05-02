@@ -4,12 +4,12 @@ DataSQRL supports [JSON](https://en.wikipedia.org/wiki/JSON) as a data format.
 
 ## Configuration
 
-```json title="datasystem.json"
+```json title="system.discovery.table.json"
 {
   "type": "source",
   "connector": { ... }
   "format" : {
-    "formatType": "json",
+    "name": "json",
   }
 }
 ```

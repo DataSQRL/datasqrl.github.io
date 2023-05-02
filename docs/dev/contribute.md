@@ -6,7 +6,7 @@ title: "How to Contribute"
 
 We appreciate your contribution to DataSQRL - together we can build something great.
 
-Whether you submit a [bug report](https://github.com/DataSQRL/sqrl/issues), help [answer questions](https://stackoverflow.com/questions/tagged/datasqrl) from the community, [share your opinion](https://discord.gg/vYyREMNRmh), write a tutorial, or make code contributions, you are doing a great service to the [DataSQRL community](/community).
+Whether you submit a [bug report](https://github.com/DataSQRL/sqrl/issues), help [answer questions](https://stackoverflow.com/questions/tagged/datasqrl) from the community, [share your opinion](https://discord.gg/49AnhVY2w9), write a tutorial, or make code contributions, you are doing a great service to the [DataSQRL community](/community).
 
 If you want to make a code contribution, we'd like to suggest the following:
 * reach out on the [development channel](https://discord.gg/49AnhVY2w9) to make sure nobody is working on the same thing. We'd hate for your development effort to be wasted.

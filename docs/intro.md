@@ -16,7 +16,7 @@ The [reference documentation](reference/overview) covers all aspects of DataSQRL
 
 DataSQRL is an open-source project. If you want to learn more about the internals or contribute to the project, take a look at the [developer documentation](dev/overview).
 
-Technology is only piece to a successful data service. Learn more about the [DataSQRL process](process/intro) for building data services that deliver value and keep your team sane.
+Technology is only one piece to a successful data service. Learn more about the [DataSQRL process](process/intro) for building [data services](reference/concepts/data-service) that deliver value and keep your team sane.
 
 ## Getting Help
 

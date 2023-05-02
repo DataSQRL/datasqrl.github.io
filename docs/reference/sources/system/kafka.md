@@ -4,23 +4,24 @@ DataSQRL supports [Apache Kafka](https://kafka.apache.org/) as a data source and
 
 ## Kafka Connector
 
-```json title="datasystem.json"
+```json title="system.discovery.table.json"
 {
   "type": "source",
   "connector": {
-    "systemType": "kafka",
-    "servers": ["111.0.0.100"],
+    "name": "kafka",
+    "bootstrap.servers": "111.0.0.100"
   }
 }
 ```
 
 The Kafka connector has the following configuration options:
 
-| Field Name   | Description   | Required?     |
-|--------------|---------------|---------------|
-| servers | List of server IPs for Kafka instances to connect to | Yes  |
-| topicPrefix | Limits data discovery to topic with the given prefix | No  |
+| Field Name        | Description   | Required?     |
+|-------------------|---------------|---------------|
+| bootstrap.servers | List of server IPs for Kafka instances to connect to | Yes  |
+| prefix            | Limits data discovery to topic with the given prefix | No  |
 
+You can add additional Kafka consumer or producer configuration options to the Kafka connector configuration. 
 
 ### Data Format {#format}
 
@@ -38,8 +39,3 @@ Data discovery reads part of the data stream for each topic to determine the sch
 ## Data Sink
 
 Kafka can be configured as a data sink by setting the `type` to `sink` or `source_and_sink`. `format` is a required field when using the Kafka as a sink. The exported stream table published to the topic with the name of the table sink.
-
-<!--
-
-Kafka supports dynamic table sinks which means you only need to configure the `datasystem.json` file and DataSQRL creates table sinks at compile time. You don't need to run data discovery or configure individual table sinks when using Kafka as a dynamic sink.
--->

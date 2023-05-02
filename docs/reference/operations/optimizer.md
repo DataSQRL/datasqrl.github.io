@@ -38,18 +38,18 @@ Sometimes the optimizer makes the wrong decision and produces sub-optimal data p
 
 ### Execution Engine Hint
 
-You annotate a table definition in SQRL with an execution engine hint to tell the optimizer which engine should compute the table.
+You annotate a table definition in SQRL with the name of an execution engine as a hint to tell the optimizer which engine should compute the table.
 
 ```sql
-/*+ EXEC_STREAM */
+/*+ EXEC(stream) */
 OrdersByMonth := SELECT endOfmonth(p.time) AS month,
               count(1) as num_orders
          FROM Orders GROUP BY month;
 ```
 
-The annotation `EXEC_STREAM` instructs the optimizer to compute the `OrdersByMonth` table in the stream engine.
+The annotation `EXEC(stream)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](package-config).
 
-Use the `EXEC_DB` annotation to instruct the optimizer to choose the database engine:
+Similarly, the `EXEC(database)` annotation instructs the optimizer to choose the engine with the name `database`:
 
 ```sql
 /*+ EXEC_DB */

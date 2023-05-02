@@ -11,10 +11,11 @@
 .usecase {
   margin-bottom: 0.5rem;
   font-weight: bold;
+    font-size: 1.3rem;
 }
 
 .usecase select {
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
 
 .verticalForm {

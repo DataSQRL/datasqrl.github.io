@@ -59,7 +59,7 @@ The `run` command takes the same arguments and options as the `compile` command.
 The `discover` command creates new data source and sink packages by inspecting a configured data system.
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover datasystem.json
+docker run -v $PWD:/build datasqrl/datasqrl-cmd discover system.discovery.table.json
 ```
 
 The `discover` command takes the [data system configuration file](../sources/discovery#datasystem) as an argument and supports the following options:

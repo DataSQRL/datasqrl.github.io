@@ -6,7 +6,7 @@ title: "Data Service"
 
 A data service processes, transforms, or analyzes data from one or multiple sources and exposes the result through an API.
 
-A data service is a type of backend service focused on adding value to data by combining, enriching, and analyzing the raw source data for consumers of the service. A data service is used by frontend applications to provide the value to an end-users or by business services that further process the value-added data.
+A data service is a type of backend service focused on adding value to data by combining, enriching, and analyzing the raw source data for consumers of the service. A data service is used by frontend applications to provide value to end-users or by business services that further process the value-added data.
 
 In modern software architectures data services are distinct from other backend services to separate concerns, provide agility for changes to the data logic, increase robustness, and decrease costs.
 In other words, encapsulating all your data logic in a service makes your life a lot easier and ensures that your data spaghetti and your application or business spaghetti doesn't get mixed up in one giant bowl of impenetrable code spaghetti. You hungry yet?
@@ -27,8 +27,7 @@ The benefit of a data service is providing all of this value behind a well-defin
 
 ## What distinguishes a Data Service from a Backend Service? {#difference}
 
-A data service is a special type of backend service focused on data transformation and analytics
-to provide additional value from raw data.
+A data service is a special type of backend service focused on data transformation and analytics to provide additional value from raw data.
 A data service is a backend service that's all about data.
 
 It's useful to distinguish between data and other type of backend services because
@@ -147,9 +146,7 @@ data service and use the right tool for the job.
 ### Reasons Not to Build a Data Service
 
 If you are building a backend service that executes CRUD 
-(i.e. Create, Read, Update, Delete) operations or transactional operations against a 
-database, you are better off using one of the gazillion ORM framework to interface
-with the database instead of a dedicated data service.
+(i.e. Create, Read, Update, Delete) operations or transactional (i.e. ACID) operations against a database, you are better off using one of the gazillion ORM framework to interface with the database instead of a dedicated data service.
 
 Likewise, if you have simple data logic sprinkled across your backend service
 don't pull it out into a data service until you expect significant benefits from that

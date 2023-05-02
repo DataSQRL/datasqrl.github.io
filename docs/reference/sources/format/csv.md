@@ -4,12 +4,12 @@ DataSQRL supports [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) as
 
 ## Configuration
 
-```json title="datasystem.json"
+```json title="system.discovery.table.json"
 {
   "type": "source",
   "connector": { ... }
   "format" : {
-    "formatType": "csv",
+    "name": "csv",
     "delimiter": ",",
   }
 }

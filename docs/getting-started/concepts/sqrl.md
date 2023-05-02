@@ -152,6 +152,6 @@ We think SQL is great. It is expressive and concise. It focuses on *what* you ne
 
 But for software development, SQL is just a bit awkward. It was designed for expressing one-off queries, doesn't have a lot of constructs to build incrementally, and complex queries often end up looking pretty harrowing. Plus, it's a bit outdated and doesn't support popular concepts like relationships.
 
-SQRL fixes that. It takes the good of SQL and adds some features that are missing or useful for developers implementing data services. But the extensions that SQRL adds are fully backwards compatible. In fact, you can take an SQRL script and compile it into vanilla SQL. That's essentially what the DataSQRL compiler does (plus some extra optimization). The result won't look pretty but it goes to show that there is nothing "magical" about SQRL. It's just a developer-focused upgrade to SQL.
+SQRL fixes that. It takes the good of SQL and adds some features that are missing or useful for developers implementing data services. But the extensions that SQRL adds are fully backwards compatible. In fact, you can take an SQRL script and compile it into vanilla SQL. That's essentially what the DataSQRL compiler does (plus some extra optimization). The result won't look pretty but it goes to show that there is nothing "magical" about SQRL. It's a developer-focused upgrade to SQL.
 
 -->

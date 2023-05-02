@@ -25,7 +25,7 @@ Users := SELECT DISTINCT customerid AS id FROM Orders;
 This statement defines the table `Users` by the SQL query that selects all distinct `customerid` from the `Orders` table.
 SQRL tables are usually defined by SQL queries over previously defined tables as in this example. You can use standard SQL syntax for the table queries. 
 
-For the SQL nerds: SQRL tables are just view definitions with a more developer-friendly syntax.
+For the SQL nerds: SQRL tables are view definitions with a more developer-friendly syntax.
 
 Tables can also be defined incrementally by adding column definitions to existing tables:
 ```sql

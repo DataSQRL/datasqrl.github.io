@@ -40,6 +40,7 @@ const sidebars = {
             'getting-started/intro/data-sources',
             'getting-started/intro/api',
             'getting-started/intro/advanced',
+            'getting-started/intro/compiler',
           ],
         },
         'getting-started/concepts/datasqrl',
@@ -54,8 +55,8 @@ const sidebars = {
             id: 'getting-started/tutorials/overview',
           },
           items: [
-            'getting-started/tutorials/clickstream/intro',
-            'getting-started/tutorials/sensors/intro',
+            'getting-started/tutorials/recommendations/intro',
+            'getting-started/tutorials/iot/intro',
           ],
         },
       ],
@@ -213,6 +214,7 @@ const sidebars = {
           items: [
             'reference/concepts/package',
             'reference/concepts/data-service',
+            'reference/concepts/data-pipeline',
           ],
         },
       ],

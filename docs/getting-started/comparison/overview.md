@@ -4,18 +4,25 @@ title: "When to use DataSQRL"
 
 # When should you use DataSQRL for your ?
 
-<img src="/img/index/undraw_decide_sqrl.svg" alt="When to use DataSQRL >" width="40%"/>
+<img src="/img/reference/datasqrl_decision_tree.svg" alt="When to use DataSQRL >" width="40%"/>
+
+## TL;DR
+
+If you are building a CRUD app or need ACID transactions, use a database. If you don't need an API or react to data in real-time, use a data warehouse or data lake. <br />
+Otherwise, start with DataSQRL.
+
+## Full Version
 
 You get that [DataSQRL](../concepts/datasqrl) is a compiler for building [data services](/docs/reference/concepts/data-service.md) from streaming data sources, but you are wondering if it's the right tool for your project. And how does it compare to other options you are considering to get the work done?
 
-While it depends a lot on the specifics of your project, the following heuristics are generally useful:
+While it depends a lot on the specifics of your project, the decision tree shown in the figure on the left is a good heuristic:
 
-1. If your data needs are mostly met by mapping database records onto objects, then use a database with an ORM.
-2. If all the data you need is in a single database you have access to it, try to build a data service directly on top of that database and evaluate if the performance is good enough.
-3. If all the data is already prepared for you in a data warehouse and you don't need to be responsive to data changes, then regularly export the data from the warehouse to a database and use an ORM.
-4. For anything else, try DataSQRL.
+1. If you are building a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) application or need [ACID](https://en.wikipedia.org/wiki/ACID) transaction, then use a database with an ORM library.
+2. If you don't need to expose the result data through an API or trigger actions in real-time based on incoming data, then use a data warehouse or data lake.
+3. Otherwise, start building a prototype of your data API in DataSQRL. With DataSQRL you can build streaming data APIs in a fraction of the time and iterate much quicker than building custom data pipelines. If you find DataSQRL lacking of features you need, you can still build a custom pipeline once you have narrowed down your requirements.
+4. If DataSQRL is good enough for your use case, you can take your project to production without much extra work.
 
-Now, those are pretty conservative heuristics for projects where your career is on the line. If you are working on an exploratory project, you should definitely play around with DataSQRL.
+As with any heuristic, this decision tree simplifies the decision process and it doesn't account for specifics of your project. You can find more details for each of the decision points below.
 
 ## Database
 
@@ -27,7 +34,7 @@ If your data needs are complex enough that a database will be taxed significantl
 
 You also want to start with DataSQRL if you need to integrate data from multiple sources. Doing so in a database is a lot of pain. DataSQRL's data connectors, import manager, automatic data type discovery, and schema management will save you a lot of time and manual effort.
 
-## Data Warehouse
+## Data Warehouse / Lake
 
 Before you chose DataSQRL, check whether your data warehouse (or data lake or analytics engine) already has all the data you need integrated and processed. Many organizations have a central data warehouse/lake. If your data service does not need to be responsive to data changes (i.e. serving stale data is ok), then you can avoid the complexity of streaming data and do a regularly scheduled export from the data warehouse into a database and put an ORM on top to serve the API. Such batch processing into a serving layer is a common choice for data services that don't need to respond to data changes in realtime. If you already have all that infrastructure and data integration inside your organization, that might be the quickest way to a data service implementation.
 
@@ -35,7 +42,7 @@ Unlike a data warehouse, DataSQRL immediately processes incoming data streams so
 
 Going through a data warehouse can also be a pain if the data isn't already processed for your needs. Before you start hacking together a bunch of SQL queries, give DataSQRL a try because the convenience of [SQRL](../concepts/sqrl) and the fully automated data management could save you a lot of time. DataSQRL can use the same data pipelines that your data warehouse uses as a data source.
 
-## Custom Data Architecture
+## Custom Data Pipeline
 
 On the other end of the spectrum, your data needs may be so complex that they require a team of data scientists, data engineers, ML specialist, and MLOps to be satisfied. In that case, you likely need a custom data pipeline that glues together multiple data systems and are looking at a pretty big project. 
 
@@ -47,9 +54,9 @@ DataSQRL is still young and may be missing a feature that you need for your data
 
 :::
 
-## TL;DR
+## Conclusion
 
-If you need more than a CRUD app, don't have a database or data warehouse that's ready to go, and don't need Google-scale, then DataSQRL is a pragmatic choice that gets you good results quickly with little effort.
+If you are building a data API that doesn't need ACID transactions, give DataSQRL a try. It's a pragmatic choice that gets you good results quickly with little effort.
 
 ## Wait, but what about X New Technology?
 

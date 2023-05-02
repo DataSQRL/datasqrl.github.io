@@ -7,9 +7,9 @@ title: "Quickstart Tutorial"
 <img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>
 
 Because we have the humor of middle schoolers on Adderall, this quickstart tutorial
-implements data-driven features for our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
+implements a Customer 360 API for our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
 
-We want to build a data service that exposes a Customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
+We want to build a data API that exposes a Customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
 
 ## Run SQRL Script {#run}
 
@@ -19,7 +19,7 @@ In the terminal or command line, create an empty folder for the SQRL script:
 > mkdir seedshop; cd seedshop
 ```
 
-Create a new file in that folder called `seedshop.sqrl` and paste the following content into the file:
+Create a new file in that folder called `seedshop.sqrl` and paste the following content into the file (we will explain the script line-by-line [below](#sqrl)):
 
 ```sql
 IMPORT datasqrl.seedshop.Orders;  
@@ -75,7 +75,7 @@ Users (id: 10) {
 
 When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You now have a working data API you can integrate into your application. That took less time than installing a software update.
 
-## Quick Tour of SQRL
+## Quick Tour of SQRL {#sqrl}
 
 The magic of our little seed-shop data service happens in the SQRL script we created above. The SQRL script imports data tables and defines new tables based on that data. Those tables are exposed in the API. If you have another few minutes to spare, let's look at how that works.
 

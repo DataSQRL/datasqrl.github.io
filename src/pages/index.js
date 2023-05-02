@@ -15,11 +15,11 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 const header =  {
                    title: 'DataSQRL',
-                   tagLine: 'Build Data APIs In Minutes',
+                   tagLine: 'Build Streaming Data APIs In Minutes',
                    text: (
                      <>
-                         Turn your data into customer-facing APIs without the brain-numbing orchestration of
-                         stream processors, databases, and API servers.
+                         Real-time analytics on data streams and datasets served through fast APIs without the
+                         brain-numbing orchestration of data pipelines.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -106,7 +106,8 @@ const WhyDataSQRLList = [
 const scriptExamples = [
   {
     name: "Seedshop",
-    annotation: "Ecommerce",
+    usecase: "Customer 360",
+    description: "Integrate and aggregate customer data streams into a customer 360 with SQRL.",
     script:
       `IMPORT datasqrl.seedshop.Orders;  -- Import orders stream
 IMPORT time.endOfWeek;            -- Import time function
@@ -128,7 +129,8 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
   },
   {
     name: "Clickstream",
-    annotation: "Content Recommendation",
+    usecase: "Recommendations",
+    description: "Analyze click stream data for content recommendations with SQRL.",
     script:
       `IMPORT datasqrl.example.clickstream.Click;  -- Import data
 /* Most visited pages in the last day */
@@ -146,11 +148,12 @@ Recommendation := SELECT beforeURL AS url, afterURL AS rec,
     count(1) AS frequency FROM VisitAfter
     GROUP BY url, rec ORDER BY url ASC, frequency DESC;`,
     queryURL: "?query=query%20ContentRecommendation(%24pageURL%3A%20String!)%20%7B%0A%09Recommendation(url%3A%20%24pageURL)%20%7B%0A%20%20%20%20rec%0A%20%20%20%20frequency%0A%20%20%7D%0A%7D&operationName=ContentRecommendation&variables=%7B%0A%20%20\"pageURL\"%3A%20\"mascot_books%2Fa_time_of_gifts\"%0A%7D",
-    link: "docs/getting-started/tutorials/clickstream/intro",
+    link: "docs/getting-started/tutorials/recommendations/intro",
   },
   {
     name: "Sensors",
-    annotation: "Internet of Things",
+    usecase: "Internet of Things",
+    description: "Monitor and aggregate metrics data with SQRL.",
     script:
       `IMPORT datasqrl.example.sensors.*;     -- Import all data
 IMPORT time.*;                -- Import all time functions
@@ -168,7 +171,7 @@ Machine := SELECT s.machineid, max(temp) as maxTemp,
     WHERE timeMin >= now() - INTERVAL 1 HOUR
     GROUP BY s.machineid;`,
     queryURL: "?query=query%20MachineTemperature(%24machine%3A%20Int!)%20%7B%0A%09Machine(machineid%3A%20%24machine)%20%7B%0A%20%20%20%20maxTemp%0A%20%20%20%20avgTemp%0A%20%20%7D%0A%7D&variables=%7B%0A%20%20\"machine\"%3A%202%0A%7D",
-    link: "docs/getting-started/tutorials/sensors/intro",
+    link: "docs/getting-started/tutorials/iot/intro",
   }
 ];
 
@@ -176,10 +179,10 @@ const getScriptName = (name) => {
   return name.toLowerCase() + ".sqrl";
 }
 
-const getOptionName = (name, annotation) => {
+const getOptionName = (name, usecase) => {
   let result = getScriptName(name);
-  if (annotation) {
-    result = result + " (" + annotation + ")";
+  if (usecase) {
+    result = usecase + ": " + result;
   }
   return result;
 }
@@ -255,7 +258,7 @@ export default function Home() {
                     <select onChange={handleExampleChange}>
                       {scriptExamples.map((option, index) => (
                         <option key={index} value={option.name}>
-                          {getOptionName(option.name, option.annotation)}
+                          {getOptionName(option.name, option.usecase)}
                         </option>
                       ))}
                     </select>
@@ -267,7 +270,7 @@ export default function Home() {
               <div className="col col--5 text--left">
                  <h2>Step 1</h2>
                  <p className="hero__subtitle">
-                 Implement the logic of your data service in SQRL.
+                   {scriptExamples[exampleIndex].description}
                  </p>
                   <p className="hero__subtitle">
                   <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is a SQL dialect developers call "not awful"
@@ -329,7 +332,7 @@ export default function Home() {
                       <Link
                           className="button button--primary button--lg"
                           to={scriptExamples[exampleIndex].link}>
-                          Read {scriptExamples[exampleIndex].name} Tutorial
+                          Read {scriptExamples[exampleIndex].usecase} Tutorial
                       </Link>
                   </div>
                   {/*<div className={styles.buttons}>*/}
@@ -371,7 +374,7 @@ export default function Home() {
                   Wanna know exactly what the DataSQRL compiler does and how it works? Click below!
                 </p>
                 <div className="text--center">
-                  <Link className="button button--primary" to=".">
+                  <Link className="button button--primary" to="/docs/getting-started/intro/compiler">
                     How the Sausage Is Made
                   </Link>
                 </div>
@@ -379,7 +382,7 @@ export default function Home() {
             </div>
             <div id="withoutDataSQRLRow" className={clsx("row", !withoutDataSQRLRowVisible && styles.notVisible)}>
               <div className="col col--8">
-                Pic
+                <img className={styles.pipelineSvg} src="/img/index/withoutDataSQRL.svg" alt="Building Data APIs without DataSQRL" />
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
@@ -387,10 +390,10 @@ export default function Home() {
                   data pipeline.
                 </p>
                 <p className="text--left margin-bottom--sm">
-                  For a more detailed breakdown of all the steps you need to take, check out our guide on:
+                  For a more detailed breakdown of all the work DataSQRL saves you from, check out:
                 </p>
                 <div className="text--center">
-                  <Link className="button button--primary" to=".">
+                  <Link className="button button--primary" to="/docs/reference/concepts/data-pipeline">
                     How to Build a Data Pipeline
                   </Link>
                 </div>

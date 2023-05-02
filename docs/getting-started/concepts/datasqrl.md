@@ -5,7 +5,7 @@ title: "What is DataSQRL?"
 # What is DataSQRL?
 
 
-DataSQRL is an open-source compiler for building data services. A [data service](/docs/reference/concepts/data-service) processes, transforms, or analyzes data from one or multiple sources (databases, data streams, file storage, etc.) and exposes the result through an API. <br />
+DataSQRL is an open-source compiler and build tool for developing data services. A [data service](/docs/reference/concepts/data-service) processes, transforms, or analyzes data from one or multiple sources (databases, data streams, file storage, etc.) and exposes the result through an API. <br />
 DataSQRL eliminates most of the laborious code of stitching together data pipelines and makes it easier for developers to build data services.
 
 Building a data service with DataSQRL takes 3 steps:
@@ -14,7 +14,7 @@ Building a data service with DataSQRL takes 3 steps:
 2. **Customize API:** The transformed data is exposed through an API which you can customize to meet your data service requirements by editing the API specification. This step is optional since DataSQRL can also generate a default API spec for you.
 3. **Compile Data Pipeline:** DataSQRL compiles the SQRL script and API specification into a fully integrated data pipeline. The compiled pipeline ingests the imported data, processes it according to the transformations and analyses defined in the SQRL script, and serves the resulting data through the specified API.
 
-In a nutshell, DataSQRL is an abstraction layer that takes care of the nitty-gritties of building efficient data pipelines and gives developers an easy-to-use tool to build custom data APIs.
+In a nutshell, DataSQRL is an abstraction layer that takes care of the nitty-gritties of building efficient streaming data pipelines and gives developers an easy-to-use tool to build custom data APIs.
 
 Follow the [quickstart tutorial](../quickstart) to build a data service in a few minutes and see how DataSQRL works in practice.
 

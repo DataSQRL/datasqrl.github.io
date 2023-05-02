@@ -14,8 +14,9 @@ The Flink stream engine is configured as an engine in the [package configuration
 
 | Field Name | Description                                                | Required? |
 |------------|------------------------------------------------------------|-----------|
-| engineName | `flink` string literal                                     | Yes       |
-| savepoint  | Whether to savepoint Flink execution. Defaults to `false`. | No        |
+| name       | `flink` string literal                                     | Yes       |
+
+You can add additional Flink configuration options to this configuration and those options are passed through to Flink. Refer to the [Flink configuration documentation](https://nightlies.apache.org/flink/flink-docs-stable/docs/deployment/config/) for a list of options.
 
 
 ## Deploy
