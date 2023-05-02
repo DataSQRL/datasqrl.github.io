@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>DataSQRL Blog</title>
-        <link>https://datasqrl.github.io/blog</link>
+        <link>https://www.datasqrl.com/blog</link>
         <description>DataSQRL Blog</description>
         <lastBuildDate>Thu, 26 Jan 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -10,8 +10,8 @@
         <language>en</language>
         <item>
             <title><![CDATA[Hello, World!]]></title>
-            <link>https://datasqrl.github.io/blog/welcome</link>
-            <guid>https://datasqrl.github.io/blog/welcome</guid>
+            <link>https://www.datasqrl.com/blog/welcome</link>
+            <guid>https://www.datasqrl.com/blog/welcome</guid>
             <pubDate>Thu, 26 Jan 2023 00:00:00 GMT</pubDate>
             <description><![CDATA[" width="40%"/>]]></description>
             <content:encoded><![CDATA[<img loading="lazy" src="/img/generic/undraw_launch.svg" alt="Launching DataSQRL >" width="40%" class="img_ev3q"><p>We are excited to launch <a href="/about/">DataSQRL</a> with the mission to help developers and organizations build with data.</p><p>Collectively, we have spent decades building or helping others build data services. We have seen many struggles, failures, and piles of money being thrown out the window and figured that there must be a better way. We started DataSQRL to find it.</p><p>We believe that the technologies used to build data services are too complex and that the engineering processes used to build them are broken. Here is how we plan to fix these issues.</p><p>We developed <a href="/">DataSQRL</a> which  compiles a developer-friendly version of SQL - called <a href="/docs/getting-started/concepts/sqrl/">SQRL</a> - into a fully integrated and optimized data pipeline and API server. It takes care of all the laborious plumbing, data massaging, and stitching together of technologies that makes building data services so harrowing. Check out <a href="/docs/getting-started/quickstart/">this short tutorial</a> to see how it works - it only takes a few minutes to build an end-to-end data service.</p><p>In addition, we are refining a value-focused process for implementing data services that we have developed over the years while working with development teams and organizations. The basic idea is to apply the same software engineering principles that have proven to be successful to implementing data services. That means you don't need a dedicated team of specialists to implement data services and can keep your customers and stakeholders in the feedback loop. <a href="/docs/process/intro/">Click here</a> to learn more about our process.</p><p>That's our starting point for enabling developers to build successful data services quickly and efficiently. We think we got some good ideas, but have been building data technologies long enough to realize that there is a fine line between innovation and wishful thinking.<br>
