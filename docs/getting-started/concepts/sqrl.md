@@ -4,7 +4,7 @@ title: "What is SQRL?"
 
 # What is SQRL?
 
-DataSQRL uses a declarative language called SQRL to express the logic and structure of a data service. You implement a data service in SQRL scripts by defining how to combine, transform, and analyze the input data through a sequence of SQL(ish) statements. DataSQRL compiles SQRL scripts into fully-integrated data pipelines and an API layer that serves the result.
+SQRL is a declarative language to express the logic and structure of a data service. You implement a data service in SQRL scripts by defining how to combine, transform, and analyze the input data through a sequence of SQL(ish) statements. DataSQRL compiles SQRL scripts into fully-integrated data pipelines and an API layer that serves the result.
 
 SQRL is based on SQL. If you know how to read a `SELECT ... FROM ... WHERE` query in SQL then you'll be able to read SQRL scripts with a few additional pointers. If you are unfamiliar with SQL, it's a good time to brush up on some SQL basics with our [SQL primer](/docs/reference/sqrl/sql-primer).
 

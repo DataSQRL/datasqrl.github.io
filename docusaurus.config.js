@@ -11,6 +11,7 @@ const config = {
   url: 'https://datasqrl.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
+  trailingSlash: true,
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'datasqrl', // Usually your GitHub org/user name.
