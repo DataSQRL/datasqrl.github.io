@@ -8,7 +8,7 @@ title: "Postgres"
 
 ## Configure
 
-The Postgres database engine is configured as an engine in the [package configuration](../package-config#engine) with the following configuration options.
+The Postgres database engine is configured as an engine in the [package configuration](../../package-config#engine) with the following configuration options.
 
 | Field Name | Description                                   | Required? |
 |------------|-----------------------------------------------|-----------|

@@ -13,7 +13,7 @@ IMPORT time.x; -- imports single time function
 
 ## Reference
 
-The following table lists all the functions in the time package with a short description. The table also specifies whether a function is a [time-window](../stream##aggregation) function.
+The following table lists all the functions in the time package with a short description. The table also specifies whether a function is a [time-window](../../stream##aggregation) function.
 
 | Function Name         | Description   | Time Window? |
 |-----------------------|---------------|--------------|

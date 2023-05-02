@@ -107,4 +107,4 @@ And that's all you need to build a basic recommendation engine that recommends t
 
 ## Next Steps {#next}
 
-Read the [DataSQRL introduction](../../intro/overview) which is an in-depth tutorial of DataSQRL and gives you all the information you need to extend this recommendation engine and suit it to your needs.
+Read the [DataSQRL introduction](../../../intro/overview) which is an in-depth tutorial of DataSQRL and gives you all the information you need to extend this recommendation engine and suit it to your needs.

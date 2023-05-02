@@ -6,7 +6,7 @@ title: "Design the API"
 
 <img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
 
-When we [run](../quickstart#run) our `seedshop.sqrl` script, DataSQRL compiles and executes a data pipeline that exposes an API to access the resulting data. We [queried](../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
+When we [run](../../quickstart#run) our `seedshop.sqrl` script, DataSQRL compiles and executes a data pipeline that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
@@ -16,7 +16,7 @@ We will be accessing the generated GraphQL API. If you are new to the GraphQL AP
 
 ## Querying the API
 
-In the [Quickstart tutorial](../quickstart#query) we retrieved the purchase history and spending analysis of the user with `id=10` by running the following query.
+In the [Quickstart tutorial](../../quickstart#query) we retrieved the purchase history and spending analysis of the user with `id=10` by running the following query.
 
 ```graphql
 {
@@ -271,6 +271,6 @@ Wonderful, you have completed the 3 essential steps of building a data service w
 
 Now you can go off, build amazing data services, and [tell us](/community) about it.
 
-If you are eager to continue learning, [**the next chapter**](advanced) is going to cover some advanced topics and talk about how to take your data API to production. 
+If you are eager to continue learning, [**the next chapter**](../advanced) is going to cover some advanced topics and talk about how to take your data API to production. 
 
 If you want to learn more about querying the data API from your application or favorite programming language, the [reference documentation](/docs/reference/api/graphql/query) has an overview. It also [covers API design](/docs/reference/api/graphql/design) in more detail.

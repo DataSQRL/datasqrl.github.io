@@ -6,7 +6,7 @@ title: "Internet of Things"
 
 <img src="/img/generic/undraw_factory.svg" alt="Machine Sensor Data >" width="40%"/>
 
-The goods we sell in our [seed shop](../../quickstart) are produced in the seed factory. There are lots of big machines in our factory washing, shelling, and roasting seeds for our hungry squirrels. Each machine is equipped with multiple sensors that report temperature and humidity measurements in real-time.
+The goods we sell in our [seed shop](../../../quickstart) are produced in the seed factory. There are lots of big machines in our factory washing, shelling, and roasting seeds for our hungry squirrels. Each machine is equipped with multiple sensors that report temperature and humidity measurements in real-time.
 
 We are building an IoT application that aggregates all this sensor data and gives us an overview of how our machines are doing.
 
@@ -110,5 +110,5 @@ Now, we have full oversight over our seed factory. This is a good starting point
 
 ## Next Steps {#next}
 
-Read the [DataSQRL introduction](../../intro/overview) which is an in-depth tutorial of DataSQRL and gives you all the information you need to extend this IoT application to monitor and automate your business.
+Read the [DataSQRL introduction](../../../intro/overview) which is an in-depth tutorial of DataSQRL and gives you all the information you need to extend this IoT application to monitor and automate your business.
 

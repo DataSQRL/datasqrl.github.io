@@ -8,7 +8,7 @@ You have made it through the entire introduction tutorial and want to keep learn
 
 ## Relationship Expressions
 
-In the [chapter on SQRL](sqrl) we introduced relationship columns and showed how they make relationships explicit, add structure to your data, and simplify joins. In addition, you can reference relationships in expressions to avoid joins entirely. Let's see how that works.
+In the [chapter on SQRL](../sqrl) we introduced relationship columns and showed how they make relationships explicit, add structure to your data, and simplify joins. In addition, you can reference relationships in expressions to avoid joins entirely. Let's see how that works.
 
 First, we are going to create a nested table that aggregates order statistics for each user.
 
@@ -30,7 +30,7 @@ Take a look at the [relationship documentation](/docs/reference/sqrl/relationshi
 
 ## Creating Stream Tables
 
-Recall that SQRL distinguishes between [stream and state tables](sqrl#stream-state) to represent event and entity data, respectively. In our example, we showed how to use `SELECT DISTINCT ... ` and `DISTINCT ... ON` queries to convert stream to state tables through deduplication. Likewise, we create state tables when we aggregate streams without time window.
+Recall that SQRL distinguishes between [stream and state tables](../sqrl#stream-state) to represent event and entity data, respectively. In our example, we showed how to use `SELECT DISTINCT ... ` and `DISTINCT ... ON` queries to convert stream to state tables through deduplication. Likewise, we create state tables when we aggregate streams without time window.
 
 To go the other way and create a stream from a state table, we use define a `STREAM` query.
 
@@ -81,7 +81,7 @@ Finally, add the following statement to export to our file system sink.
 EXPORT UserPromotion TO mySinkPackage.promotion;
 ```
 
-When you [run](../quickstart#run) the script, a folder with the name `promotion` (the name of our sink table we defined in the `EXPORT` statement) will appear inside the `mysink-output` folder that contains partitioned files with the `UserPromotion` records in them in Json format.
+When you [run](../../quickstart#run) the script, a folder with the name `promotion` (the name of our sink table we defined in the `EXPORT` statement) will appear inside the `mysink-output` folder that contains partitioned files with the `UserPromotion` records in them in Json format.
 
 Streams are a powerful feature to *react* to changes in the data and notify downstream systems immediately. DataSQRL supports various types of data sinks including logs. Check out the [data sources and sinks documentation](/docs/reference/sources/overview) for more information.
 

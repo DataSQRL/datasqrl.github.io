@@ -27,10 +27,10 @@ The CSV data format configuration supports the following options:
 
 When using the CSV data format for data discovery, you should *not* specify the header. Data discovery will read the first line of each CSV file and automatically extract the header for each table source in the data source.
 
-If your CSV files do not have a header, or you are not running data discovery to extract it, you will have to [define each table source manually](../discovery#manual) and configure the header with the array of field names for the CSV file.
+If your CSV files do not have a header, or you are not running data discovery to extract it, you will have to [define each table source manually](../../discovery#manual) and configure the header with the array of field names for the CSV file.
 
 ## Schema
 
-Data discovery automatically determines the [schema](../schema) for a table source when using the CSV data format.
+Data discovery automatically determines the [schema](../../schema) for a table source when using the CSV data format.
 
 The CSV data format does not support any other schema types.

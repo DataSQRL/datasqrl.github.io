@@ -4,7 +4,7 @@ title: "Why Use DataSQRL?"
 
 # Why Use DataSQRL?
 
-We love building with data, but we got frustrated by how complicated it is to build data APIs. Why can you build a production-grade web service in a few days, but it takes months to build a mediocre data service that looks like Frankenstein on a bad hair day. We built [DataSQRL](datasqrl) to change that.   
+We love building with data, but we got frustrated by how complicated it is to build data APIs. Why can you build a production-grade web service in a few days, but it takes months to build a mediocre data service that looks like Frankenstein on a bad hair day. We built [DataSQRL](../datasqrl) to change that.   
 
 
 <img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="40%"/>
@@ -27,7 +27,7 @@ And that's just the price of admission. If you want to do anything of value with
 
 The point is: There are a lot of pieces to a data service architecture and assembling all these moving pieces yourself takes a ton of time, effort, and expertise.
 
-DataSQRL compiles fully integrated data pipelines based on proven data technologies like [Apache Flink](https://flink.apache.org/), [Postgres](https://www.postgresql.org/), and [Vertx](https://vertx.io/) [[1]](#footnotes). That means you get a fast, robust data service without the laborious work of implementing each of the components and plugging them together. DataSQRL synchronizes schemas and data management, orchestrates data flows, manages failures, provides visibility into and across components, and [so much more](datasqrl#what-datasqrl-does).
+DataSQRL compiles fully integrated data pipelines based on proven data technologies like [Apache Flink](https://flink.apache.org/), [Postgres](https://www.postgresql.org/), and [Vertx](https://vertx.io/) [[1]](#footnotes). That means you get a fast, robust data service without the laborious work of implementing each of the components and plugging them together. DataSQRL synchronizes schemas and data management, orchestrates data flows, manages failures, provides visibility into and across components, and [so much more](../datasqrl#what-datasqrl-does).
 
 In other words: DataSQRL handles all the time-consuming details for you. You implement the logic of your data service in [SQRL](/docs/getting-started/concepts/sqrl), a simple language based on SQL to define data transformations and analytics, and DataSQRL compiles that logic into a fully orchestrated data pipeline for data ingest, transformation, analytics, and database storage as well as an API serving layer.
 

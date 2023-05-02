@@ -6,7 +6,7 @@ title: "SQL Primer"
 
 [SQL](https://en.wikipedia.org/wiki/SQL) (Structured Query Language) is the standard query language used by relational database systems.
 
-[SQRL](../overview) is based on SQL and this documentation assumes basic familiarity with SQL for writing queries.
+[SQRL](../../overview) is based on SQL and this documentation assumes basic familiarity with SQL for writing queries.
 
 ## SQL Tutorials {#tutorials}
 
@@ -22,7 +22,7 @@ We listed a number of tutorials we like. Pick one of those or choose your own. T
 
 ## SQL Refresher {#refresher}
 
-SQRL uses SQL `SELECT` queries to define [tables](table). A `SELECT` query has the structure:
+SQRL uses SQL `SELECT` queries to define [tables](../table). A `SELECT` query has the structure:
 
 ```sql
 SELECT columns FROM table JOIN otherTable ON joinCondition 

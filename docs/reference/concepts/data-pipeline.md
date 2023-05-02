@@ -6,7 +6,7 @@ title: "Data Pipeline"
 
 A data pipeline is an automated, scalable system that facilitates the efficient flow, processing, and transformation of data from various sources to designated destinations like API endpoints or other data systems.
 
-Many [data services](data-service) and streaming data APIs are implemented as data pipelines.
+Many [data services](../data-service) and streaming data APIs are implemented as data pipelines.
 
 ## How to Build a Data Pipeline
 

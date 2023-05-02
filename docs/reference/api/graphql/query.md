@@ -18,7 +18,7 @@ For the example code snippets below, we are following the [Quickstart tutorial](
 
 DataSQRL includes [GraphiQL](https://github.com/graphql/graphiql) which allows you to create, execute, and profile queries as well as inspect the GraphQL API directly in your browser.
 
-After you [run](../../operations/command#run) your SQRL script on your machine, open the URL `http://localhost:8888/graphiql/` in a browser to access GraphiQL.
+After you [run](../../../operations/command#run) your SQRL script on your machine, open the URL `http://localhost:8888/graphiql/` in a browser to access GraphiQL.
 
 Now, you can paste GraphQL queries into the left-hand panel and hit the play button `▸` in the middle to see the result in the right-hand panel.
 

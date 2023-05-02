@@ -2,7 +2,7 @@
 
 The print data sink prints the data records in a stream to standard output.
 
-The print data sink is always available as an [internal package](../../concepts/package#internal-package) and does not need to be configured or included in a project.
+The print data sink is always available as an [internal package](../../../concepts/package#internal-package) and does not need to be configured or included in a project.
 
 ```sql
 EXPORT NewCustomerPromotion TO print.Promotion; 

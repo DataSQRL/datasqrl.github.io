@@ -50,7 +50,7 @@ The timestamp of a stream table determines how stream records are associated wit
 
 In many cases, the DataSQRL compiler automatically determines the timestamp column based on the query or how the table is used.
 
-For stream tables that are imported from a data source, the timestamp can be configured explicitly in the [import statement](import#timestamp).
+For stream tables that are imported from a data source, the timestamp can be configured explicitly in the [import statement](../import#timestamp).
 
 Stream tables that are imported from a data source have a hidden column `_ingest_time` which captures the system time when a given record was ingested by the system. In addition, the table has a hidden `_source_time` column if the system from which the record was ingested produces a timestamp for each record.
 

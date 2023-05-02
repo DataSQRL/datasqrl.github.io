@@ -4,9 +4,9 @@ title: "Stream Table"
 
 # Stream Table
 
-Stream tables contain immutable rows of data that have a timestamp. All tables [imported](import) from [data sources](../sources/overview) are stream tables and stream tables can be [exported](export) to [data sinks]((../sources/overview).
+Stream tables contain immutable rows of data that have a timestamp. All tables [imported](../import) from [data sources](../../sources/overview) are stream tables and stream tables can be [exported](../export) to [data sinks](../(../sources/overview).
 
-This documentation covers how to convert between stream and [state tables](table#stateVsStream) and documents the differences in query semantics for certain queries over stream tables.
+This documentation covers how to convert between stream and [state tables](../table#stateVsStream) and documents the differences in query semantics for certain queries over stream tables.
 
 ## Convert Stream to State
 
@@ -63,7 +63,7 @@ Queries over stream tables differ in semantics from standard SQL queries over st
 
 ### Time Window Aggregation {#aggregation} 
 
-SQRL provides a number of time-preserving functions which aggregate timestamps into time windows. Time windows are a means to divide the [timeline](time) into discrete buckets and aggregate all stream records within each bucket to produce a new stream table that contains one row for each aggregate.
+SQRL provides a number of time-preserving functions which aggregate timestamps into time windows. Time windows are a means to divide the [timeline](../time) into discrete buckets and aggregate all stream records within each bucket to produce a new stream table that contains one row for each aggregate.
 
 ```sql
 Users.spending := SELECT endOfWeek(p.time) AS week,
@@ -71,13 +71,13 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
       FROM @.purchases p JOIN p.totals t
       GROUP BY week ORDER BY week DESC;
 ```
-This statement defines the nested `spending` table that aggregates money spent and saved for all the orders that a user placed per week. `endOfWeek` is a time window function that groups timestamps by week and returns the end of the week. The time window functions are contained in the [time package](functions/time).
+This statement defines the nested `spending` table that aggregates money spent and saved for all the orders that a user placed per week. `endOfWeek` is a time window function that groups timestamps by week and returns the end of the week. The time window functions are contained in the [time package](../functions/time).
 
 `Users.spending` is a stream table that contains one record per user per week for their spending totals.
 
 Time window aggregations can be used to compute arbitrary roll-ups of stream data.
 
-Learn more about how SQRL executes time windows on the [timeline](time). 
+Learn more about how SQRL executes time windows on the [timeline](../time). 
 
 ### Recency Filters {#recency}
 
@@ -90,7 +90,7 @@ RecentTotal := SELECT sum(i.total) AS total, sum(i.quantity) AS quantity
 ```
 This statement defines the `RecentTotal` state table an aggregation over all orders that were placed in the last 7 days. Recency filters use the special function `now()` to restrict the timestamp of stream records to a period specified by an interval.
 
-Learn more about `now()` and how SQRL processes [time](time).
+Learn more about `now()` and how SQRL processes [time](../time).
 
 ### Temporal Join
 

@@ -27,7 +27,7 @@ You can add additional Kafka consumer or producer configuration options to the K
 
 The Kafka connector supports all streaming [data formats](/docs/category/data-format).
 
-The Kafka connector supports automatic data format discovery based on the topic name extension. For example, a topic name that ends in `.json` is assumed to have the [JSON data format](../format/json). Unless your Kafka topics use this particular naming convention, you have to configure a data format in the data system configuration.
+The Kafka connector supports automatic data format discovery based on the topic name extension. For example, a topic name that ends in `.json` is assumed to have the [JSON data format](../../format/json). Unless your Kafka topics use this particular naming convention, you have to configure a data format in the data system configuration.
 
 ## Data Discovery
 

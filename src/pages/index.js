@@ -49,7 +49,7 @@ const DataSQRLFeaturesList = [
             <>
                 DataSQRL is an open-source project. It's free to use and you can view the
                 entire source code.
-                If you are in a giving mood, you could even <Link to="docs/dev/contribute">contribute</Link> to DataSQRL yourself.
+                If you are in a giving mood, you could even <Link to="/docs/dev/contribute">contribute</Link> to DataSQRL yourself.
             </>
         ),
     },

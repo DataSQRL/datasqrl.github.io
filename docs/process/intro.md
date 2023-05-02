@@ -18,9 +18,9 @@ The DataSQRL process is based on three key principles:
 
 <img src="/img/generic/undraw_key_point.svg" alt="DataSQRL Process Key Principles >" width="40%"/>
 
-1. [Customer-focused](./customer-focused): Focus on customer satisfaction through early and continuous delivery of valuable data services.
-2. [Responsive](./responsive): Harness changing requirements and creative input from all stakeholders for competitive advantage.
-3. [Integrated](./integrated): Integrate with existing software development processes, tools, and frameworks.
+1. [Customer-focused](../customer-focused): Focus on customer satisfaction through early and continuous delivery of valuable data services.
+2. [Responsive](../responsive): Harness changing requirements and creative input from all stakeholders for competitive advantage.
+3. [Integrated](../integrated): Integrate with existing software development processes, tools, and frameworks.
 
 We distilled these principles from our work on a broad range of data service projects. We think of these as "light houses" that we use regularly to make sure a data service project is oriented correctly and reposition if necessary.
 

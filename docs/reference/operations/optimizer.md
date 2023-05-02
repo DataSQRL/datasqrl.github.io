@@ -47,7 +47,7 @@ OrdersByMonth := SELECT endOfmonth(p.time) AS month,
          FROM Orders GROUP BY month;
 ```
 
-The annotation `EXEC(stream)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](package-config).
+The annotation `EXEC(stream)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](../package-config).
 
 Similarly, the `EXEC(database)` annotation instructs the optimizer to choose the engine with the name `database`:
 

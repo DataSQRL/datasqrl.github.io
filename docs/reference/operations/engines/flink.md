@@ -10,7 +10,7 @@ Apache Flink is DataSQRL's reference implementation for a stream engine and supp
 
 ## Configure
 
-The Flink stream engine is configured as an engine in the [package configuration](../package-config#engine) with the following configuration options.
+The Flink stream engine is configured as an engine in the [package configuration](../../package-config#engine) with the following configuration options.
 
 | Field Name | Description                                                | Required? |
 |------------|------------------------------------------------------------|-----------|

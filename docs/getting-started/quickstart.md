@@ -132,6 +132,6 @@ There you have it: a whole data service packed into a little script. And DataSQR
 
 ## Next Steps {#next}
 
-Read the [DataSQRL introduction](intro/overview) which extends our seed shop example and explains all the concepts we touched up here in more detail.
+Read the [DataSQRL introduction](../intro/overview) which extends our seed shop example and explains all the concepts we touched up here in more detail.
 
-If you found this short tutorial too dense or missing information, the [DataSQRL introduction](intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
+If you found this short tutorial too dense or missing information, the [DataSQRL introduction](../intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.

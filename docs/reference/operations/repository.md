@@ -4,7 +4,7 @@ title: "Repository"
 
 # DataSQRL Repository
 
-A repository contains DataSQRL packages. When compiling an SQRL script, the DataSQRL compiler retrieves dependencies declared in the [package configuration](package-config#dependency) and unpacks them in the build directory. 
+A repository contains DataSQRL packages. When compiling an SQRL script, the DataSQRL compiler retrieves dependencies declared in the [package configuration](../package-config#dependency) and unpacks them in the build directory. 
 
 The remote DataSQRL directory is hosted at [https://dev.datasqrl.com](https://dev.datasqrl.com). Packages in the remote repository can be retrieved from any machine running the DataSQRL compiler with access to the internet.
 
@@ -19,7 +19,7 @@ To publish a package, follow these steps:
 
 ### Prepare Package Configuration
 
-Create the [package configuration](package-config) file `package.json` in the root directory of the package if it does not already exist.
+Create the [package configuration](../package-config) file `package.json` in the root directory of the package if it does not already exist.
 
 The configuration file specifies the package information and should contain at least the following information:
 

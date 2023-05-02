@@ -11,7 +11,7 @@ To create a new function package, first create a sub-folder `myFunctionPackage` 
 
 Then follow the instructions below for implementing a function package in the language of your choice.
 
-Note, that function packages can be [published to the repository](../../operations/repository#publish), so you can reuse your functions across scripts.
+Note, that function packages can be [published to the repository](../../../operations/repository#publish), so you can reuse your functions across scripts.
 
 ## Functions in Java
 

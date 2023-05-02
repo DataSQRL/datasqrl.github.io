@@ -4,7 +4,7 @@ title: "Add Source/Sink"
 
 # Adding a Data Source or Sink
 
-Data discovery is the easiest way to connect a data source or sink to DataSQRL and add a [data source/sink package](overview).
+Data discovery is the easiest way to connect a data source or sink to DataSQRL and add a [data source/sink package](../overview).
 
 Data discovery inspects a data system to discover available data sources and sinks and generates the configuration files for the data source/sink package that allows DataSQRL to ingest data from and export data to the system.
 
@@ -45,17 +45,17 @@ The `connector` field contains the configuration for connecting to a particular 
 
 DataSQRL currently supports the following types of data systems:
 
-* [**File System**](system/file) *(source and sink, dynamic table sinks)*: Local file system, cloud storage, HDFS and other file based storage
-* [**Apache Kafka**](system/kafka) *(source and sink)*
-* [**Print**](system/print) *(sink only, dynamic table sinks)*
+* [**File System**](../system/file) *(source and sink, dynamic table sinks)*: Local file system, cloud storage, HDFS and other file based storage
+* [**Apache Kafka**](../system/kafka) *(source and sink)*
+* [**Print**](../system/print) *(sink only, dynamic table sinks)*
 
 <!-- (add once databases are supported)
-* [**AWS Kinesis**](system/kinesis) (source and sink)
-* [**Postgres**](system/database#postgres) (source and sink)
-* [**MySQL**](system/database#mysql) (source and sink)
-* [**MongoDB**](system/mongodb) (source and sink)
-* [**Oracle**](system/database#oracle) (source and sink)
-* [**SQLServer**](system/database#sqlserver) (source and sink)
+* [**AWS Kinesis**](../system/kinesis) (source and sink)
+* [**Postgres**](../system/database#postgres) (source and sink)
+* [**MySQL**](../system/database#mysql) (source and sink)
+* [**MongoDB**](../system/mongodb) (source and sink)
+* [**Oracle**](../system/database#oracle) (source and sink)
+* [**SQLServer**](../system/database#sqlserver) (source and sink)
 -->
 
 Click on the data system type to learn how to configure the connection and additional information about using a particular data system.
@@ -66,12 +66,12 @@ The `format` field specifies the data format to use for reading and writing data
 
 DataSQRL currently supports the following data formats:
 
-* [**JSON**](format/json) *(discovers schema)*
-* [**CSV**](format/csv) *(discovers schema)*
-* [**Avro**](format/avro) *(requires schema)*
+* [**JSON**](../format/json) *(discovers schema)*
+* [**CSV**](../format/csv) *(discovers schema)*
+* [**Avro**](../format/avro) *(requires schema)*
 
 <!-- (add once databases are supported)
-* [**SQL**](format/sql): extracts schema
+* [**SQL**](../format/sql): extracts schema
 -->
 
 Click on a data format to learn how to configure it and what configuration options are available.
@@ -88,27 +88,27 @@ Are you missing a data system connector or data format? You can [contribute](/do
 
 DataSQRL has a pluggable and flexible schema manager for structuring and validating data. Each table in a data source package must have a flexible or strict schema.
 
-DataSQRL supports automatic schema discovery for data formats that have a flexible schema, such as [JSON](format/json) and [CSV](format/csv). In those cases, DataSQRL inspects the data to discover the data structure and configures a flexible schema for each table using the DataSQRL-specific [schema format](schema).
+DataSQRL supports automatic schema discovery for data formats that have a flexible schema, such as [JSON](../format/json) and [CSV](../format/csv). In those cases, DataSQRL inspects the data to discover the data structure and configures a flexible schema for each table using the DataSQRL-specific [schema format](../schema).
 
 <!-- (add once databases are supported)
-When schema information is stored inside the data system, DataSQRL extracts the schema and configures it for each table. For example, DataSQRL retrieves the [SQL DDL](format/sql#schema) for each table in a relational database and uses it as the schema.
+When schema information is stored inside the data system, DataSQRL extracts the schema and configures it for each table. For example, DataSQRL retrieves the [SQL DDL](../format/sql#schema) for each table in a relational database and uses it as the schema.
 -->
 
-Some formats, such as [Avro](format/avro), require a user-provided schema to read and write data in that format. Check the [data format](#format) to see if it requires a user-provided schema. 
+Some formats, such as [Avro](../format/avro), require a user-provided schema to read and write data in that format. Check the [data format](#format) to see if it requires a user-provided schema. 
 
 If you have schema definitions for the tables in your data source or sink, you can provide it to data discovery in order to use your schema definitions for the data source configuration and disable automatic schema discovery. The benefit of using an existing schema is that DataSQRL can use it for data validation and optimization of the data pipeline.
 
 DataSQRL supports the following types of schema:
 
-* [**DataSQRL Schema**](schema): Flexible schema for [CSV](format/csv) and [JSON](format/json). Extension `.schema.yml`.
+* [**DataSQRL Schema**](../schema): Flexible schema for [CSV](../format/csv) and [JSON](../format/json). Extension `.schema.yml`.
 
 <!--
-* [**JSON Schema**](format/json#schema): Standard schema for [JSON](format/json). Extension `.schema.json`.
-* [**Avro Schema**](format/avro#schema): Standard schema for [Avro](format/avro). Extension `.schema.avsc`.
+* [**JSON Schema**](../format/json#schema): Standard schema for [JSON](../format/json). Extension `.schema.json`.
+* [**Avro Schema**](../format/avro#schema): Standard schema for [Avro](../format/avro). Extension `.schema.avsc`.
 -->
 
 <!-- (add when database supported)
-* [**SQL DDL**](format/sql#schema): Standard schema for [SQL](format/sql). Extension `.schema.sql`.
+* [**SQL DDL**](../format/sql#schema): Standard schema for [SQL](../format/sql). Extension `.schema.sql`.
 -->
 
 :::note
@@ -131,12 +131,12 @@ docker run -v $PWD:/build datasqrl/datasqrl-cmd discover system.discovery.table.
 
 This command inspects the configured data system and discovers all available tables and their schema. It requires that the machine on which you execute the command can connect to the data system with the provided configuration. 
 
-For more information about the `discover` command and its options, refer to the [command-line documentation](../operations/command#discover). If your data system configuration uses secrets, check out [secrets handling](../operations/deploy/secrets.md).
+For more information about the `discover` command and its options, refer to the [command-line documentation](../../operations/command#discover). If your data system configuration uses secrets, check out [secrets handling](../../operations/deploy/secrets).
 
 <!--
 ### Generate Statistics
 
-Data discovery can analyze the data of source tables to produce statistical information that the [DataSQRL optimizer](../operations/optimizer) uses to produce more efficient data pipelines.
+Data discovery can analyze the data of source tables to produce statistical information that the [DataSQRL optimizer](../../operations/optimizer) uses to produce more efficient data pipelines.
 
 To produce statistics for your data source package, run the data discovery command with the `-s` flag.
 
@@ -144,9 +144,9 @@ To produce statistics for your data source package, run the data discovery comma
 
 ### Data Analysis
 
-If data discovery is set up to discover the schema <!-- or generate table statistics -->, the `discover` command will run data analysis. Data Analysis ingests (a subset of) the data from the configured data source and computes a profile of the data. Data discovery then generates a [flexible schema](schema) <!-- and table statistics--> for each discovered table from the data profile.  
+If data discovery is set up to discover the schema <!-- or generate table statistics -->, the `discover` command will run data analysis. Data Analysis ingests (a subset of) the data from the configured data source and computes a profile of the data. Data discovery then generates a [flexible schema](../schema) <!-- and table statistics--> for each discovered table from the data profile.  
 
-Data analysis runs a full data pipeline as part of data discovery. The data pipeline is generated by DataSQRL and executed on the local machine where the command is executed. The data pipeline can be configured like any other pipeline through the [DataSQRL configuration](../operations/package-config).
+Data analysis runs a full data pipeline as part of data discovery. The data pipeline is generated by DataSQRL and executed on the local machine where the command is executed. The data pipeline can be configured like any other pipeline through the [DataSQRL configuration](../../operations/package-config).
 
 If the data source contains a lot of data or is unbounded (e.g. a Kafka stream), then data analysis can take a long time to analyze the data. By default, data analysis runs for an hour before it terminates. Use the `-l` to specify the runtime for data analysis in seconds.
 
@@ -157,7 +157,7 @@ When data discovery generates the table schemas, we recommend that you review th
 
 The table schemas are stored in files that end in `.schema.yml`. For the `Orders` table the schema is stored in `orders.schema.yml`.
 
-Review the [DataSQRl schema](schema) for more information on the schema format and how to modify it.
+Review the [DataSQRl schema](../schema) for more information on the schema format and how to modify it.
 
 ## Manual Data Source/Sink Definition {#manual}
 
@@ -169,7 +169,7 @@ You can manually define a data source/sink package, if it is not possible to run
 
 A data source is a set of tables. Each table is defined by a table configuration and schema file. To define a data source, we create a configuration and schema file for each table. The files have the name of the table (in lowercase) and end in `.table.json` for the configuration file and the schema type extension for the schema file (refer to the [schema type](#schema) for the extension).
 
-For example, to define the source for the `Orders` table with a [DataSQRL schema](schema), we create the `orders.table.json` configuration file and `orders.schema.yml` schema file.
+For example, to define the source for the `Orders` table with a [DataSQRL schema](../schema), we create the `orders.table.json` configuration file and `orders.schema.yml` schema file.
 
 ```json title="orders.table.json"
 {
@@ -199,7 +199,7 @@ Defining a data sink is analogous to defining a data source.
 
 However, table schemas are optional when defining a data sink. If a table schema is provided, DataSQRL validates that the exported data is compatible with the schema of the table sink at compile time. If no schema is provided, DataSQRL assumes that the sink can consume the exported data which may lead to runtime issues.
 
-Some data systems, such as [file system](system/file) and [print](system/print), can dynamically generate table sinks at compile time, which means defining a data sink only requires the data system configuration `system.discovery.table.json` and no table configurations. Refer to the [data system](#connector) documentation for data systems that support dynamic sink table generation.
+Some data systems, such as [file system](../system/file) and [print](../system/print), can dynamically generate table sinks at compile time, which means defining a data sink only requires the data system configuration `system.discovery.table.json` and no table configurations. Refer to the [data system](#connector) documentation for data systems that support dynamic sink table generation.
 
 
 <!--

@@ -6,7 +6,7 @@ title: "Connect Data Source"
 
 <img src="/img/index/undraw_connection_sqrl.svg" alt="Connecting Data Sources >" width="40%"/>
 
-SQRL scripts import data from external data sources into tables. [In the last chapter](sqrl) we imported `Orders` and `Products` data.
+SQRL scripts import data from external data sources into tables. [In the last chapter](../sqrl) we imported `Orders` and `Products` data.
 
 In this chapter, we'll take a closer look at importing data and creating a custom data package for importing our own data.
 
@@ -29,7 +29,7 @@ That's a lot of concepts to throw around. Let's summarize:
 
 ## Resolving Imports
 
-In the [Quickstart tutorial](../quickstart) we imported the `Orders` table.
+In the [Quickstart tutorial](../../quickstart) we imported the `Orders` table.
 
 ```sqrl
 IMPORT datasqrl.seedshop.Orders;
@@ -71,7 +71,7 @@ The package name is `mysourcepackage` which maps onto the folder we just created
 
 We are renaming the table as `Users` in our script to match the previously defined `Users` table.
 
-We are also adding an explicit timestamp column to our table. As we discussed in the [previous chapter](sqrl), all tables imported from data sources are stream tables. Each row of a stream table must have a timestamp that places the row on the timeline. This is important because DataSQRL needs to know when the row "happened" for realtime processing.
+We are also adding an explicit timestamp column to our table. As we discussed in the [previous chapter](../sqrl), all tables imported from data sources are stream tables. Each row of a stream table must have a timestamp that places the row on the timeline. This is important because DataSQRL needs to know when the row "happened" for realtime processing.
 
 In many cases, the DataSQRL compiler can automatically figure out what the timestamp column of a table is. For `Orders` and `Products` DataSQRL correctly inferred the timestamp column based on how we used the tables in the scripts.
 
@@ -158,7 +158,7 @@ DataSQRL is built specifically for realtime and streaming data and supports data
 
 Our seed shop data service now includes user data and improved business intelligence. Nicely done. Take a look at the resulting [seedshop.sqrl](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-user.sqrl) script.
 
-You've already learned about SQRL and how to create custom data packages. [**In the next chapter**](api) we are going to complete the trifecta and design the API for our data service.
+You've already learned about SQRL and how to create custom data packages. [**In the next chapter**](../api) we are going to complete the trifecta and design the API for our data service.
 
 If you want to learn more about data sources in more detail, check out the [data sources documentation](/docs/reference/sources/overview). In this introduction, we only covered file system sources. Check out the other [data systems](/docs/category/data-system) that DataSQRL supports and how to use data discovery to create data packages from them.
 

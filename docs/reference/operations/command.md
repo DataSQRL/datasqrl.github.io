@@ -16,9 +16,9 @@ All following commands accept these options:
 
 | Option/Flag Name   | Description   |
 |--------------|---------------|
-| `-c` or `--config` | Path to one or more [package configuration](package-config) files. If multiple files are provided, the contents are merged into a single configuration file in the order listed. If this option is omitted, the `package.json` file in the current directory is used. If no such file exists, DataSQRL generates a default package configuration. |
+| `-c` or `--config` | Path to one or more [package configuration](../package-config) files. If multiple files are provided, the contents are merged into a single configuration file in the order listed. If this option is omitted, the `package.json` file in the current directory is used. If no such file exists, DataSQRL generates a default package configuration. |
 
-The package configuration configures the compiler, pipeline topology, [engines](engines/overview), and dependencies among other aspects. Review the [package configuration documentation](package-config) for more information.
+The package configuration configures the compiler, pipeline topology, [engines](../engines/overview), and dependencies among other aspects. Review the [package configuration documentation](../package-config) for more information.
 
 ## Compile
 
@@ -62,22 +62,22 @@ The `discover` command creates new data source and sink packages by inspecting a
 docker run -v $PWD:/build datasqrl/datasqrl-cmd discover system.discovery.table.json
 ```
 
-The `discover` command takes the [data system configuration file](../sources/discovery#datasystem) as an argument and supports the following options:
+The `discover` command takes the [data system configuration file](../../sources/discovery#datasystem) as an argument and supports the following options:
 
 | Option/Flag Name   | Description   |
 |--------------|---------------|
 | `-o` or `--output` | Data discovery writes the package configuration files to this directory. Defaults to the current directory.  |
 | `-l` or `--limit`| The maximum time (in seconds) for data analysis. Data discovery terminates data analysis after this amount of time. Defaults to 3600 seconds (1 hour).  |
 
-Read the [data discovery documentation](../sources/discovery) to learn more about adding data sources and sinks for DataSQRL.
+Read the [data discovery documentation](../../sources/discovery) to learn more about adding data sources and sinks for DataSQRL.
 
 ## Publish
 
-The `publish` command publishes a local package to the repository so that it can be used as a [dependency](package-config#dependency) in other SQRL scripts and projects.
+The `publish` command publishes a local package to the repository so that it can be used as a [dependency](../package-config#dependency) in other SQRL scripts and projects.
 
 The `publish` command is executed in the root directory of the package to be published. It archives all files in the package and submits the archive to the repository under the name, version, and variant of the package as configured in the package configuration. The command publishes to the local repository by default.
 
-The `publish` command does not auto-generate a package configuration and expects the [package configuration](package-config) in the local file `package.json` or configured via [option](#common). The package configuration must include the package information which specifies the name, version, and variant of the package. 
+The `publish` command does not auto-generate a package configuration and expects the [package configuration](../package-config) in the local file `package.json` or configured via [option](#common). The package configuration must include the package information which specifies the name, version, and variant of the package. 
 
 ```bash
 docker run -v $PWD:/build datasqrl/datasqrl-cmd publish
@@ -87,9 +87,9 @@ The `publish` command supports the following options:
 
 | Option/Flag Name   | Description   |
 |--------------|---------------|
-| `--remote` | Publishes the package to the remote repository in addition to the local one. Publishing to the remote repository requires user credentials for authentication. Read more about [publishing to remote repository](repository#publish-remote). |
+| `--remote` | Publishes the package to the remote repository in addition to the local one. Publishing to the remote repository requires user credentials for authentication. Read more about [publishing to remote repository](../repository#publish-remote). |
 
-Read the [repository documentation](repository#publish) to learn more about publishing packages to the repository.
+Read the [repository documentation](../repository#publish) to learn more about publishing packages to the repository.
 
 <!--
 ## Serve

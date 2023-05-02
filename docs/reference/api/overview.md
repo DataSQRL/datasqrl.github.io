@@ -1,6 +1,6 @@
 # Data API
 
-DataSQRL compiles a data API that exposes the data processed by your [SQRL](../sqrl/overview) script.
+DataSQRL compiles a data API that exposes the data processed by your [SQRL](../../sqrl/overview) script.
 
 Currently, DataSQRL can compile GraphQL APIs with REST and gRPC on the [roadmap](/docs/dev/roadmap).
 
@@ -8,7 +8,7 @@ Currently, DataSQRL can compile GraphQL APIs with REST and gRPC on the [roadmap]
 
 DataSQRL compiles standard-compliant data APIs that can be accessed from any programming language or application. To learn more about accessing and querying the data API, click on the API type below:
 
-* [**GraphQL**](graphql/query)
+* [**GraphQL**](../graphql/query)
 
 ## Design Data API {#design}
 
@@ -26,7 +26,7 @@ DataSQRL generates API specifications that expose all visible tables, fields, an
 
 To customize the API specification, read about API design for:
 
-* [**GraphQL Schema**](graphql/design)
+* [**GraphQL Schema**](../graphql/design)
 
 When you have finished designing the API, use the resulting API specification file as the second argument after the SQRL script when compiling or running your SQRL project:
 

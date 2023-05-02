@@ -10,10 +10,10 @@ A SQRL script defines a set of tables.
 
 ## Table Definitions {#definition}
 
-A table is defined via [import](import) statement at the beginning of a SQRL script or via a SQL query.
+A table is defined via [import](../import) statement at the beginning of a SQRL script or via a SQL query.
 
 :::info
-This documentation assumes that you are familiar with SQL and know how to write a `SELECT .. FROM .. WHERE .. GROUP BY` query. If you want to refresh your SQL knowledge, take a look at the [SQL primer](sql-primer).
+This documentation assumes that you are familiar with SQL and know how to write a `SELECT .. FROM .. WHERE .. GROUP BY` query. If you want to refresh your SQL knowledge, take a look at the [SQL primer](../sql-primer).
 :::
 
 Use the assignment operator `:=` to define the table on the left-hand of the assignment by the SQL query on the right-hand side. 
@@ -35,7 +35,7 @@ This statement adds a new column `weight_in_oz` to the existing `Products` table
 
 ## Nested Tables {#nested}
 
-SQRL supports nested tables through table paths to represent nested or hierarchical data. The `Orders` data stream from the [Quickstart Seedshop example](../../getting-started/quickstart) has nested `items` for each item in an order. Such nested data maps onto nested tables in SQRL. `Orders.items` is the table path that accesses the nested `items` data for the `Orders` example.
+SQRL supports nested tables through table paths to represent nested or hierarchical data. The `Orders` data stream from the [Quickstart Seedshop example](../../../getting-started/quickstart) has nested `items` for each item in an order. Such nested data maps onto nested tables in SQRL. `Orders.items` is the table path that accesses the nested `items` data for the `Orders` example.
 
 We can use and query nested tables like any other table in SQRL.
 ```sql
@@ -43,7 +43,7 @@ Orders.items.total := quantity * unit_price - discount?0.0;
 ```
 This statement adds a new `total` column to the `Orders.items` table that computes the total price for each item.
 
-Nested tables are special in that each row in a nested table is associated with exactly one *parent* row in the parent table. The parent row can be accessed through the `parent` [relationship column](relationship) that is implicitly defined for all nested tables. Likewise, all child rows of a parent row can be accessed through a relationship column on the parent row of the same name as the nested table.
+Nested tables are special in that each row in a nested table is associated with exactly one *parent* row in the parent table. The parent row can be accessed through the `parent` [relationship column](../relationship) that is implicitly defined for all nested tables. Likewise, all child rows of a parent row can be accessed through a relationship column on the parent row of the same name as the nested table.
 
 ### Localized Queries {#localized}
 
@@ -80,25 +80,25 @@ SQRL distinguishes between *state* and *stream* tables. State tables hold record
 
 State tables have the standard set semantics of SQL. A row in a state table is uniquely identified by a key (i.e. one or multiple key columns) and the column values of that row can change over time as the record is modified. Rows in state tables represent entities, objects, or anything that can be identified independent of time. You define and treat state tables as "normal" SQL tables.
 
-Stream tables contain immutable rows of data that map onto a timeline. Rows in stream tables represent events or things that occur at a point in time. A row in a stream table has an explicit or implicit timestamp that anchors the record at a certain point in time. The notion of time, how timestamps are attached to stream records, and how time is handled is important to stream tables. SQRL uses slightly different semantics when querying stream tables to account for time. You can read more about [stream tables](stream) and how SQRL handles [time](time).
+Stream tables contain immutable rows of data that map onto a timeline. Rows in stream tables represent events or things that occur at a point in time. A row in a stream table has an explicit or implicit timestamp that anchors the record at a certain point in time. The notion of time, how timestamps are attached to stream records, and how time is handled is important to stream tables. SQRL uses slightly different semantics when querying stream tables to account for time. You can read more about [stream tables](../stream) and how SQRL handles [time](../time).
 
-State and stream tables are like two sides of the same coin by giving you different views of your data. A state table represents the data as it currently is whereas a stream table represents data over time. Each state table has an underlying change stream and stream tables can be transformed to state through aggregation or deduplication. Those transformations are covered in the [stream tables](stream) documentation.
+State and stream tables are like two sides of the same coin by giving you different views of your data. A state table represents the data as it currently is whereas a stream table represents data over time. Each state table has an underlying change stream and stream tables can be transformed to state through aggregation or deduplication. Those transformations are covered in the [stream tables](../stream) documentation.
 
 ## SQL Compatibility
 
 SQRL tables are defined as SQL queries over previously defined or imported tables.
 
-SQRL supports the standardized syntax and semantics of SQL and adds some convenience features like [relationships](relationship) and [nested tables](#nested).
+SQRL supports the standardized syntax and semantics of SQL and adds some convenience features like [relationships](../relationship) and [nested tables](#nested).
 
 SQRL differs from SQL in the following ways:
-* Aggregations, default joins, and unions have a different semantics for [stream tables](stream).
-* SQRL does not use LEFT joins. Use [relationship expressions](relationship#expressions) instead.
+* Aggregations, default joins, and unions have a different semantics for [stream tables](../stream).
+* SQRL does not use LEFT joins. Use [relationship expressions](../relationship#expressions) instead.
 * SQRL does not use WINDOWs. Use [nested tables](#nested) instead.
 * UNION between state tables require that the tables have the same key columns. UNION between different types of tables is not supported.
-* SQRL has restricted support for sub-queries and encourages developers to use [relationship expressions](relationship#expressions) or break sub-queries out into separate intermediate tables instead. 
+* SQRL has restricted support for sub-queries and encourages developers to use [relationship expressions](../relationship#expressions) or break sub-queries out into separate intermediate tables instead. 
 * SQRL does not support OUTER, ANTI, or SEMI joins.
 
-Most of the differences to SQL serve the purpose to make SQRL easier to use and understand. In addition, there are some temporary limitations of SQL syntax that SQRL does not yet support. See the [roadmap](../../dev/roadmap) to learn more.
+Most of the differences to SQL serve the purpose to make SQRL easier to use and understand. In addition, there are some temporary limitations of SQL syntax that SQRL does not yet support. See the [roadmap](../../../dev/roadmap) to learn more.
 
 ## Visibility
 

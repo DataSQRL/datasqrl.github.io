@@ -47,7 +47,7 @@ DataSQRL supports both local and remote file systems for reading and writing dat
 
 The file system connector supports all [data formats](/docs/category/data-format).
 
-The file system connector supports automatic data format discovery based on the file name extension. For example, a file that ends in `.json` is assumed to have the [JSON data format](../format/json). That means, it is not necessary to configure a data format in the data system configuration.
+The file system connector supports automatic data format discovery based on the file name extension. For example, a file that ends in `.json` is assumed to have the [JSON data format](../../format/json). That means, it is not necessary to configure a data format in the data system configuration.
 
 If a data format is configured, automatic data format discovery is disabled and the format is applied to all files in the directory.
 

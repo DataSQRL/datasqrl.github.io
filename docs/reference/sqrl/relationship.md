@@ -12,7 +12,7 @@ Users.purchases := JOIN Orders ON Orders.customerid = @.id;
 
 This statement defines a relationship column `purchases` on the `Users` table that relates each user record to rows in the `Orders` table where the `customerid` is equal to the user `id`. In other words, `purchases` relates users to their orders.
 
-A relationship is defined via a `JOIN` expression in standard SQL syntax. Relationships are defined as [localized queries](table#localized) which means the `JOIN` expression on the right-hand side of the statement is interpreted for each row of the table on which the relationship is defined and the at-sign `@` is used to refer to each row.
+A relationship is defined via a `JOIN` expression in standard SQL syntax. Relationships are defined as [localized queries](../table#localized) which means the `JOIN` expression on the right-hand side of the statement is interpreted for each row of the table on which the relationship is defined and the at-sign `@` is used to refer to each row.
 
 Relationship columns are a convenient way to make relationships in the data explicit, simplify joins, and allow consumers of the data API to navigate through the data.
 
@@ -29,7 +29,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 
 This statement defines a nested table `spending` underneath `Users` which aggregates over the nested order `totals` for all purchases of each user. Relationships used in `FROM` and `JOIN` are expanded to their original definition. That means, `FROM @.purchases` gets expanded to `FROM @ JOIN Orders p ON p.customerid = @.id`.
 
-Relationships are particularly useful in the context of nested tables because they make it easy to navigate between parent and child. In the [Quickstart tutorial](../../getting-started/quickstart) we define the nested `Orders.totals` table as an aggregation over all items.
+Relationships are particularly useful in the context of nested tables because they make it easy to navigate between parent and child. In the [Quickstart tutorial](../../../getting-started/quickstart) we define the nested `Orders.totals` table as an aggregation over all items.
 
 When defining a nested table, each child row has a relationship column `parent` to relates the child row to its parent row. Likewise, the parent table has a relationship column with the name of the nested table that provides access to all child rows of the parent.
 
@@ -43,7 +43,7 @@ Relationships can be used inside expressions in a query.
 UsersWithSpending := SELECT id, email, order_stats.spend AS spend 
                      FROM Users;
 ```
-This statement defines a new table `UsersWithSpending` that combines user information with their total spending from the nested `order_stats` table we defined in the [intro tutorial](../../getting-started/intro/advanced).
+This statement defines a new table `UsersWithSpending` that combines user information with their total spending from the nested `order_stats` table we defined in the [intro tutorial](../../../getting-started/intro/advanced).
 
 Using relationships in expressions simplifies the query by eliminating a join. 
 
@@ -70,7 +70,7 @@ This table contains user information for those users who have spent more than a 
 
 The relationships defined in a SQRL script can be exposed in the resulting data API to give consumers of the API the ability to navigate through the data and retrieve related records. Relationships make it possible to represent complex data efficiently through the API.
 
-To learn more about how to expose and navigate relationships in the data API, refer to the [API documentation](../api/overview).
+To learn more about how to expose and navigate relationships in the data API, refer to the [API documentation](../../api/overview).
 
 ## Multiplicity
 

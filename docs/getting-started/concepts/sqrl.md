@@ -10,7 +10,7 @@ SQRL is based on SQL. If you know how to read a `SELECT ... FROM ... WHERE` quer
 
 SQRL stands for "Structured Query and Reaction Language" and is designed specifically for developers who are building streaming data services. It has a low learning curve because it is essentially "just" SQL but adds important features that SQL lacks and provides a convenient syntax to make it feel like a productive programming language and address the needs of streaming data services.
 
-Check out the [quickstart tutorial](../quickstart) to get a feel for SQRL and how it enables building data services.
+Check out the [quickstart tutorial](../../quickstart) to get a feel for SQRL and how it enables building data services.
 
 
 ## SQRL Features
@@ -139,7 +139,7 @@ IMPORT datasqrl.seedshop.Orders TIMESTAMP time;`
 
 ## Learn More
 
-* Take a look at the [quickstart tutorial](../quickstart) to build a data service with SQRL in a few minutes.
+* Take a look at the [quickstart tutorial](../../quickstart) to build a data service with SQRL in a few minutes.
 * For a comprehensive and in-depth description of SQRL, check out the [reference documentation](/docs/reference/sqrl/overview).
 
 

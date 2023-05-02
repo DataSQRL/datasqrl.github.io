@@ -4,7 +4,7 @@ title: "DataSQRL Compiler"
 
 # How DataSQRL Compiles Data Pipelines
 
-You've gone through the [introductory tutorial](overview) and seen how DataSQRL compiles SQRL scripts and API specifications into end-to-end streaming data pipelines that ingest data, process it, and serve the results through an API.
+You've gone through the [introductory tutorial](../overview) and seen how DataSQRL compiles SQRL scripts and API specifications into end-to-end streaming data pipelines that ingest data, process it, and serve the results through an API.
 
 But how exactly does DataSQRL do this? What does it mean to "compile" streaming data pipelines? Let's dig into the internals and see how the sausage is made.
 
@@ -12,7 +12,7 @@ But how exactly does DataSQRL do this? What does it mean to "compile" streaming 
 
 :::info
 
-We are using the [Quickstart example](../quickstart) to illustrate how the compiler works. Make sure you have the `seedshop.sqrl` script in your local directory.
+We are using the [Quickstart example](../../quickstart) to illustrate how the compiler works. Make sure you have the `seedshop.sqrl` script in your local directory.
 
 :::
 

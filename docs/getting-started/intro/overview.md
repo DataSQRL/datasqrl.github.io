@@ -4,11 +4,11 @@
 
 This extended tutorial introduces you to the core concepts of DataSQRL and teaches you how to build your own data services in DataSQRL. It's only three chapters plus extra credit.
 
-We will extend the [Quickstart tutorial](../quickstart) for our seed shop to
+We will extend the [Quickstart tutorial](../../quickstart) for our seed shop to
 illustrate the concepts with examples and provide more details and background. We are going to add more data-driven features, customize the data API, and export data. It'll be a riot. 
 
 Please read the
-[quickstart tutorial](../quickstart) first, so you can follow along. It only takes
+[quickstart tutorial](../../quickstart) first, so you can follow along. It only takes
 a few minutes, and we'll wait right here.
 
 ## What is DataSQRL? {#whatis}
@@ -29,5 +29,5 @@ There are 3 steps to building a data service in DataSQLR:
 ## Next Step
 
 Alrighty, with those high-level concepts out of the way, let's buckle up and start building things.
-First stop: **[Introducing SQRL](sqrl)** as a language for building data APIs.
+First stop: **[Introducing SQRL](../sqrl)** as a language for building data APIs.
 
