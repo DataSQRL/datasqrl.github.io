@@ -7,8 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DataSQRL',
-  tagline: 'Build Data Services In Minutes',
-  url: 'https://datasqrl.github.io',
+  tagline: 'Build Streaming Data APIS In Minutes',
+  url: 'https://www.datasqrl.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   trailingSlash: true,
@@ -152,6 +152,10 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      metadata: [
+        {name: 'keywords', content: 'data, API, data service, data pipeline, database, streaming, real-time analytics'},
+        {name: 'description', content: 'DataSQRL is a compiler and build tool for streaming data pipelines to build data APIs in minutes.'}
+      ],
     }),
 
   themes: [
