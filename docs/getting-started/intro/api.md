@@ -65,7 +65,7 @@ By default, DataSQRL generates an API specification that exposes query endpoints
 DataSQRL writes the default API specification to the file `schema.graphqls` in the current directory when you invoke the compiler with the `-a graphql` option:
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd compile seedshop.sqrl -a graphql
+docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl -a graphql
 ```
 
 The default API specification is a great starting point for designing a custom data API because it exposes *all* the data. However, we'd almost never use the default API spec, because it is too general and cluttered. Let's customize it to fit our needs.
@@ -195,7 +195,7 @@ We changed the `Users` table query endpoint to `Users(id: Int!): Users` to make 
 To instruct the DataSQRL compiler to use our custom API specification, we add it as a second argument to the command.
 
 ```bash
-docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sqrl seedshop.graphqls
+docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl seedshop.graphqls
 ```
 
 If refresh GraphiQL in the browser, you will see your custom API.

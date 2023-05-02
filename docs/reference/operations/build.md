@@ -12,7 +12,7 @@ The [command documentation](../command) has a complete reference of the DataSQRL
 To compile an SQRL script, you invoke the DataSQRL `compile` command:
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd compile myscript.sqrl myapischema.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 ```
 
 The `compile` command takes the SQRL script to compile as the first argument and an API specification as an optional second argument. If no API specification is provided, DataSQRL generates one. See [API Design](../../api/overview#design) for more details.
@@ -40,7 +40,7 @@ The package configuration contains additional compiler options and declares the 
 To run a SQRL script locally, execute the command:
 
 ```bash
-docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run  myscript.sqrl myapischema.graphqls
+docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run  myscript.sqrl myapischema.graphqls
 ```
 
 This command compiles the SQRL script, starts the configured engines, and deploys the produced deployments artifacts of the compiled data pipeline on the engines to run the entire pipeline locally.
@@ -57,7 +57,7 @@ Use the keystroke `CTRL-C` to stop the running pipeline. This will stop all engi
 To debug a SQRL script, run it with the `-d` flag:
 
 ```bash
-docker run -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run -d  myscript.sqrl myapischema.graphqls
+docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run -d  myscript.sqrl myapischema.graphqls
 ```
 
 In debug mode, the stream engine exports a change log of each computed table to the configured [debug sink](../package-config#debug) which is the [print sink](../../sources/system/print) by default.

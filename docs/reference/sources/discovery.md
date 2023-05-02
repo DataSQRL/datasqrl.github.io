@@ -126,7 +126,7 @@ Refer to the documentation pages of each schema type for their extension and mor
 Invoke the DataSQRL discovery command to run data discovery for the data source or sink configured in the `system.discovery.table.json` file. Run the command in the same directory as the configuration file.
 
 ```bash
-docker run -v $PWD:/build datasqrl/datasqrl-cmd discover system.discovery.table.json
+docker run --rm -v $PWD:/build datasqrl/cmd discover system.discovery.table.json
 ```
 
 This command inspects the configured data system and discovers all available tables and their schema. It requires that the machine on which you execute the command can connect to the data system with the provided configuration. 

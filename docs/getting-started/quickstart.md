@@ -42,7 +42,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run -it -p 8888:8888 -v $PWD:/build datasqrl/datasqrl-cmd run seedshop.sqrl
+docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl
 ```
 
 :::note
