@@ -6,7 +6,7 @@ import styles from './HomepageFeatures.module.css';
 function Feature({image, title, link, linkText, description}) {
   let imageHTML;
   if (image) {
-    imageHTML = <div className="text--center"><img className={styles.featureSvg} src={image} alt={title} /></div>;
+    imageHTML = <div className="text--center"><img className={styles.featureSvg} loading="lazy" src={image} alt={title} /></div>;
     //image = <div className="text--center"><Svg className={styles.featureSvg} alt={title} /></div>;
   } else {
     imageHTML = "";

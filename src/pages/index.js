@@ -364,7 +364,7 @@ export default function Home() {
             </h2>
             <div id="withDataSQRLRow" className={clsx("row", withoutDataSQRLRowVisible && styles.notVisible)}>
               <div className="col col--8">
-                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL.svg" alt="Building Data APIs with DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
@@ -382,7 +382,7 @@ export default function Home() {
             </div>
             <div id="withoutDataSQRLRow" className={clsx("row", !withoutDataSQRLRowVisible && styles.notVisible)}>
               <div className="col col--8">
-                <img className={styles.pipelineSvg} src="/img/index/withoutDataSQRL.svg" alt="Building Data APIs without DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withoutDataSQRL.svg" loading="lazy" alt="Building Data APIs without DataSQRL" />
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">

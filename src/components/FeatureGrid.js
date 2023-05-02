@@ -12,7 +12,7 @@ function Feature({image, title, link}) {
   }
   return (
     <div className="text--center">
-      <div><img className={styles.featureSvg} src={image} alt={title} /></div>
+      <div><img className={styles.featureSvg} src={image} loading="lazy" alt={title}  /></div>
       <div className={styles.featureText}>
         {textHTML}
       </div>
