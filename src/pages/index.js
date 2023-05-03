@@ -374,7 +374,7 @@ export default function Home() {
                   Wanna know exactly what the DataSQRL compiler does and how it works? Click below!
                 </p>
                 <div className="text--center">
-                  <Link className="button button--primary" to="/docs/getting-started/intro/compiler">
+                  <Link className="button button--primary" to="/docs/getting-started/intro/deploy">
                     How the Sausage Is Made
                   </Link>
                 </div>

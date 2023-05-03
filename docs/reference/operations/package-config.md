@@ -3,7 +3,7 @@
 
 The package configuration is the central configuration file used by the [DataSQRL command](../command). The package configuration declares dependencies, configures the engines in the data pipeline, sets compiler options, and provides package information.
 
-```json
+```json title="package.json"
 {
   "dependencies" : {
     "datasqrl.seedshop" : {

@@ -40,7 +40,7 @@ const sidebars = {
             'getting-started/intro/data-sources',
             'getting-started/intro/api',
             'getting-started/intro/advanced',
-            'getting-started/intro/compiler',
+            'getting-started/intro/deploy',
           ],
         },
         'getting-started/concepts/datasqrl',
