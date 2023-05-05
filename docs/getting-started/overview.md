@@ -22,9 +22,9 @@ There are a million technologies out there so why should you spend your time on 
 
 <img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="40%"/>
 
-DataSQRL makes it easier and faster to build [data services](/docs/reference/concepts/data-service) from streaming data sources. [Read more about](../concepts/why-datasqrl) why building data services is so difficult and how DataSQRL tries to make it less painful.
+DataSQRL makes it easier and faster to build [data services](/docs/reference/concepts/data-service) from streaming data sources, i.e. process data streams into data APIs. [Read more about](../concepts/why-datasqrl) why building data services is so difficult and how DataSQRL tries to make it less painful.
 
-DataSQRL is a compiler, optimizer, and build tool for an SQL-based language called [SQRL](/docs/getting-started/concepts/sqrl) that extends SQL with features and syntax to make it developer friendly. You implement the logic and structure of your data service in SQRL and DataSQRL compiles it into ingest layers, data transformations, analytics, schemas, databases, and APIs for you. The result is an end-to-end streaming data pipeline with an API serving layer. [Learn more about](/docs/getting-started/concepts/datasqrl) DataSQRL and all the plumbing and integration work it takes off your shoulders.
+DataSQRL is a compiler, optimizer, and build tool for an SQL-based language called [SQRL](/docs/getting-started/concepts/sqrl) that extends SQL with features to "react" to streaming data. You implement the logic and structure of your data service in SQRL and DataSQRL compiles it into ingest layers, data transformations, analytics, schemas, databases, and APIs for you. The result is an end-to-end streaming data pipeline with an API serving layer. [Learn more about](/docs/getting-started/concepts/datasqrl) DataSQRL and all the plumbing and integration work it takes off your shoulders.
 
 If you are deciding between different pieces of technology for your data API project, find out how [DataSQRL compares](../comparison/overview) to other data technologies and why you should add DataSQRL to your data tool belt.
 

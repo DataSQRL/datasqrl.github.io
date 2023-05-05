@@ -61,11 +61,3 @@ Finally, deploy the executables for each engine. This step depends on the infras
 * **Existing infrastructure**: Check the [engine documentation](../../engines/overview) on how to deploy the executables on existing data infrastructure (an existing Flink cluster, database cluster, etc).
 
 Take a look at the [documentation for each engine](../../engines/overview) to learn more about deploying the engine executable.
-
-### Deployment Artifacts
-
-The compiler populates the `build/` directory with all the build artifacts needed to compile the data pipeline. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines we configured above:
-
-* `flink-plan.json` defines all the data ingestion and stream computation logic that gets executed in Flink.
-* `server-model.json` defines how API requests get executed in the server.
-* `database-schema.sql` defines the schema and index structures for the database.

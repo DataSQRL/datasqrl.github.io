@@ -10,7 +10,7 @@ We love building with data, but we got frustrated by how complicated it is to bu
 <img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="40%"/>
 
 
-We are developing DataSQRL as a tool for developers to build data services. You write an SQRL script that implements the logic of your data service, customize your API, and DataSQRL compiles a fully-integrated and efficient data pipeline for you. It's as easy as 1-2-3. We cut out all the stuff developers don't need and focused on building a tool that integrates with your workflow.
+We are developing DataSQRL as a tool for developers to build data services. You write an SQRL script that implements the logic of your data service, customize your API, and DataSQRL compiles a fully-integrated and efficient streaming data pipeline for you. We cut out all the stuff developers don't need and focused on building a tool that integrates with your workflow.
 
 ## Benefits of DataSQLR
 
