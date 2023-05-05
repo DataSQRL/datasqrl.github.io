@@ -18,7 +18,7 @@ The package configuration is the central configuration file used by the [DataSQR
     "database" : {
       "name" : "jdbc",
       "url" : "postgresql://localhost:5432/datasqrl",
-      "driverName" : "org.postgresql.Driver",
+      "driver" : "org.postgresql.Driver",
       "dialect" : "postgres",
       "database" : "datasqrl"
     } 
