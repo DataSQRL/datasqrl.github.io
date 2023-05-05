@@ -17,13 +17,13 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.gr
 
 The `compile` command takes the SQRL script to compile as the first argument and an API specification as an optional second argument. If no API specification is provided, DataSQRL generates one. See [API Design](../../api/overview#design) for more details.
 
-The command compiles the script and API specification into an integrated data pipeline and produces the deployment artifacts for the compiled pipeline in the `deploy/` directory. 
+The command compiles the script and API specification into an end-to-end streaming data pipeline. The command creates a `build` with all the build artifacts that are used during the compilation and build process (e.g. dependencies). The command writes the deployment artifacts for the compiled data pipeline into the `build/deploy` directory. Read more about deployment artifacts in the [deployment documentation](../deploy/overview).
 
-DataSQRL supports [multiple engines](../engines/overview) and pipeline topologies. That means, you can configure the structure of the resulting data pipeline and what systems you want to execute individual components of the pipeline.
+DataSQRL supports [multiple engines](../engines/overview) and pipeline topologies. That means, you can configure the topology of the targeted data pipeline and what systems will execute individual components of the compiled data pipeline.
 
 <img src="/img/dev/simple-pipeline.svg" alt="Simple DataSQRL pipeline topology" width="500"/>
 
-The figure above shows an example pipeline topology that consists of a stream engine, database engine, and API server. The stream engine ingests the imported data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
+The figure above shows an simple pipeline topology that consists of a stream engine, database engine, and API server. The stream engine ingests the imported data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
 
 The pipeline topology and engines are configured in the [package configuration](../package-config). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../command) for all command line options.
 

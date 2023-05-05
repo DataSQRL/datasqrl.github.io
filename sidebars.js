@@ -40,7 +40,7 @@ const sidebars = {
             'getting-started/intro/data-sources',
             'getting-started/intro/api',
             'getting-started/intro/advanced',
-            'getting-started/intro/compiler',
+            'getting-started/intro/deploy',
           ],
         },
         'getting-started/concepts/datasqrl',
@@ -183,7 +183,7 @@ const sidebars = {
                 id: 'reference/operations/deploy/overview',
               },
               items: [
-//                'reference/operations/deploy/aws',
+                'reference/operations/deploy/docker'
 //                'reference/operations/deploy/secrets',
               ],
             },

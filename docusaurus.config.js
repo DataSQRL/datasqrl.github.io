@@ -153,7 +153,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       metadata: [
-        {name: 'keywords', content: 'data, API, data service, data pipeline, database, streaming, real-time analytics'},
+        {name: 'keywords', content: 'data, API, SQRL, DataSQRL, data service, data pipeline, database, streaming, real-time analytics'},
         {name: 'description', content: 'DataSQRL is a compiler and build tool for streaming data pipelines to build data APIs in minutes.'}
       ],
     }),

@@ -116,25 +116,13 @@ The timestamps that DataSQRL adds can be used as the stream timestamps when the 
 
 Read more about [import timestamps](/docs/reference/sqrl/import#timestamp), [stream tables](/docs/reference/sqrl/stream), and how DataSQRL treats [time](/docs/reference/sqrl/time).
 
-## Build and Deploy
-
-Okay, it's time to get serious: we are taking our data service to production. Here is what you need to know:
-
-DataSQRL is a compiler that builds data pipelines which expose a data API for your data service. The [build documentation](/docs/reference/operations/build) describes the build process in detail.
-
-The data pipeline executes across multiple [engines](/docs/reference/operations/engines/overview) that handle different parts of the pipeline. The DataSQRL [optimizer](/docs/reference/operations/optimizer) figures out what should execute where based on a cost model. That means you can focus on writing your business logic in the SQRL script and let DataSQRL optimize the data pipeline for you.
-
-Sometimes, however, the optimizer gets it wrong, and you have to [provide hints](/docs/reference/operations/optimizer#hints) to set it straight.
-
-To compile, build, and run SQRL scripts, you use the DataSQRL command. The [command documentation](/docs/reference/operations/command) explains all the commands and their options in details. The build is configured through the [package configuration](/docs/reference/operations/package-config) which specifies compiler options, declares dependencies, configures the engines, and more. Check out the [package configuration documentation](/docs/reference/operations/package-config) to learn how to configure all aspects of the build process in DataSQRL.
-
-Last but not least, take a look at the [deployment documentation](/docs/reference/operations/deploy/overview) to learn how to run DataSQRL in production.
-
 ## Next Steps
 
-Congratulations, you not only finished the introduction tutorial but also completed the extra credit. What a champ! You are definitely ready to get started with DataSQRL.
+Congratulations, you not only finished the introduction tutorial but also completed the extra credit. What a champ! You are definitely ready to get started with DataSQRL. Now go off and build data APIs.
 
-For additional information, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some.
+If you wanna keep reading, we have [one more chapter](../deploy) for you on deployment and taking your data API to production.
+
+For any topics we haven't covered thus far, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some.
 
 Want to learn more about the internals of DataSQRL or contribute to the codebase? The [developer documentation](/docs/dev/overview) provides a detailed breakdown of the DataSQRL architecture and everything you need to know to extend DataSQRL yourself.
 

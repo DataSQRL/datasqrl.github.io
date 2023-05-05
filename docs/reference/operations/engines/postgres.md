@@ -23,4 +23,16 @@ The Postgres database engine is configured as an engine in the [package configur
 
 ## Deploy
 
-Coming soon
+### Deployment Artifacts
+
+The DataSQRL compiler generates a database schema for Postgres that includes all table definitions and optimal index structures. The schema is generated in the `build/deploy/database-schema.sql` file. 
+
+### Build Executable
+
+The Postgres database engine does not require building an executable. You can install the schema directly in the database.
+
+### Deploy Executable
+
+Install the database schema from the sql file in the database by running the SQL DDL statements contained in the file.
+
+Take a look at the [docker documentation](../../deploy/docker) for using docker to automate the setup of a Postgres database and using Postgres initialization to install the schema.

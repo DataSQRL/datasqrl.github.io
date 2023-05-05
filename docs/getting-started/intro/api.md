@@ -271,6 +271,6 @@ Wonderful, you have completed the 3 essential steps of building a data service w
 
 Now you can go off, build amazing data services, and [tell us](/community) about it.
 
-If you are eager to continue learning, [**the next chapter**](../advanced) is going to cover some advanced topics and talk about how to take your data API to production. 
+If you are eager to continue learning, [the next chapter](../advanced) is going to cover some advanced topics for extra credit. If you want to learn how to take your SQRL script to production and how exactly DataSQRL compiles data pipelines, take a look at the [last chapter in this tutorial](../deploy).
 
 If you want to learn more about querying the data API from your application or favorite programming language, the [reference documentation](/docs/reference/api/graphql/query) has an overview. It also [covers API design](/docs/reference/api/graphql/design) in more detail.
