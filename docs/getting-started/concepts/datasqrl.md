@@ -6,7 +6,7 @@ title: "What is DataSQRL?"
 
 
 DataSQRL is an open-source compiler and build tool for developing data services. A [data service](/docs/reference/concepts/data-service) processes, transforms, or analyzes data from one or multiple sources (databases, data streams, file storage, etc.) and exposes the result through an API. <br />
-DataSQRL eliminates most of the laborious code of stitching together data pipelines and makes it easier for developers to build data services.
+DataSQRL eliminates most of the laborious code of stitching together data pipelines and makes it easier for developers to build streaming data services.
 
 Building a data service with DataSQRL takes 3 steps:
 

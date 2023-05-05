@@ -18,7 +18,7 @@ const header =  {
                    tagLine: 'Build Streaming Data APIs In Minutes',
                    text: (
                      <>
-                         Real-time analytics on data streams and datasets served through fast APIs without the
+                         Process data streams into responsive APIs without the
                          brain-numbing orchestration of data pipelines.
                      </>
                    ),
@@ -59,7 +59,7 @@ const DataSQRLFeaturesList = [
         linkText: 'Learn More',
         description: (
             <>
-                The DataSQRL compiler produces code that runs on proven data technologies like
+                DataSQRL builds optimized code that runs on proven data technologies like
                 Apache Flink and Postgres. That means you can verify the output and rest assured
                 that your data API is resilient and scalable.
             </>
@@ -74,8 +74,8 @@ const WhyDataSQRLList = [
     description: (
       <>
         DataSQRL allows you to focus on your data logic because it handles all the annoying
-        parts of building data services that make you want to choke on your keyboard:
-        pipeline plumbing, schema management, error handling, data serving, API generation, and so on.
+        parts of building data pipelines that make you want to choke on your keyboard:
+        data plumbing, schema management, error handling, data serving, API generation, and so on.
       </>
     ),
   },
@@ -95,8 +95,8 @@ const WhyDataSQRLList = [
     image: '/img/index/undraw_fast_loading_sqrl.svg',
     description: (
       <>
-        DataSQRL compiles efficient data architectures that optimize partitioning,
-        data flows, index selection, materialization, denormalization, and query execution.
+        DataSQRL builds efficient data pipelines that optimize data processing,
+        partitioning, index selection, materialization, denormalization, and query execution.
         There actually is some neat technology behind this buzzword bingo.
       </>
     ),
@@ -246,8 +246,8 @@ export default function Home() {
             <div className="row margin-bottom--xs">
               <div className="col col--8">
                 <p className="hero__subtitle">
-                  DataSQRL is a compiler and build tool for streaming data pipelines. <br />
-                  Build data services in 4 steps:
+                  DataSQRL is a build tool for streaming data pipelines. <br />
+                  Process data streams into data APIs in 4 steps:
                 </p>
               </div>
             </div>
@@ -273,8 +273,8 @@ export default function Home() {
                    {scriptExamples[exampleIndex].description}
                  </p>
                   <p className="hero__subtitle">
-                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is a SQL dialect developers call "not awful"
-                  that supports data streams, relationships, and nested data.
+                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is an SQL dialect for reactive data
+                    processing that developers call "not awful".
                   </p>
               </div>
             </div>
@@ -311,7 +311,7 @@ export default function Home() {
                    </Tooltip>
                  </p>
                  <p className="hero__subtitle">
-                     Then repeat the cycle until your data feature is complete or you run out of Mountain Dew.
+                     Then repeat the cycle until your data API is complete or you run out of Mountain Dew.
                  </p>
               </div>
             </div>
@@ -322,7 +322,7 @@ export default function Home() {
               <div className="col col--5 text--left">
                   <h2>Step 4</h2>
                   <p className="hero__subtitle">
-                      Ready to ship? DataSQRL builds optimized deployment artifacts that run on your preferred cloud,
+                      Ready to ship? DataSQRL builds optimized data pipelines that run on your preferred cloud,
                       managed service, or self-hosted.
                   </p>
                   <p className="hero__subtitle">
@@ -368,10 +368,10 @@ export default function Home() {
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
-                  The DataSQRL compiler does the laborious "data plumbing" work and builds optimized data pipelines that run smoothly in production.
+                  DataSQRL does the laborious "data plumbing" work and builds optimized data pipelines that run smoothly in production.
                 </p>
                 <p className="text--left margin-bottom--sm">
-                  Wanna know exactly what the DataSQRL compiler does and how it works? Click below!
+                  Wanna know exactly what DataSQRL does and how it works? Click below!
                 </p>
                 <div className="text--center">
                   <Link className="button button--primary" to="/docs/getting-started/intro/deploy">
