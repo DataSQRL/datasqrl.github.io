@@ -15,11 +15,11 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 const header =  {
                    title: 'DataSQRL',
-                   tagLine: 'Build Streaming Data APIs In Minutes',
+                   tagLine: 'Build Data APIs In Minutes',
                    text: (
                      <>
-                         Process data streams into responsive APIs without the
-                         brain-numbing orchestration of data pipelines.
+                         Process data streams and datasets into responsive APIs without the
+                         mind-numbing integration of data architectures.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -74,7 +74,7 @@ const WhyDataSQRLList = [
     description: (
       <>
         DataSQRL allows you to focus on your data logic because it handles all the annoying
-        parts of building data pipelines that make you want to choke on your keyboard:
+        parts of building data architectures that make you want to choke on your keyboard:
         data plumbing, schema management, error handling, data serving, API generation, and so on.
       </>
     ),
@@ -95,7 +95,7 @@ const WhyDataSQRLList = [
     image: '/img/index/undraw_fast_loading_sqrl.svg',
     description: (
       <>
-        DataSQRL builds efficient data pipelines that optimize data processing,
+        DataSQRL builds efficient data architectures that optimize data processing,
         partitioning, index selection, materialization, denormalization, and query execution.
         There actually is some neat technology behind this buzzword bingo.
       </>
@@ -244,10 +244,10 @@ export default function Home() {
         <section className={styles.content}>
           <div className="container">
             <div className="row margin-bottom--xs">
-              <div className="col col--8">
+              <div className="col col--6">
                 <p className="hero__subtitle">
-                  DataSQRL is a build tool for streaming data pipelines. <br />
-                  Process data streams into data APIs in 4 steps:
+                  DataSQRL is a build tool for your application's data stack when you need more than just a database. <br />
+                  Build data APIs in 4 steps:
                 </p>
               </div>
             </div>
@@ -273,19 +273,19 @@ export default function Home() {
                    {scriptExamples[exampleIndex].description}
                  </p>
                   <p className="hero__subtitle">
-                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is an SQL dialect for reactive data
+                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is a SQL dialect for reactive data
                     processing that developers call "not awful".
                   </p>
               </div>
             </div>
             <div className="row margin-bottom--lg">
               <div className="col col--6 text--center">
-                    <img className={styles.pipelineSvg} src="/img/generic/highlevel_pipeline.svg" alt="DataSQRL compiled pipeline" />
+                    <img className={styles.pipelineSvg} src="/img/index/compiledDataStack.svg" alt="DataSQRL compiled pipeline" />
               </div>
               <div className="col col--6 text--left">
                 <h2>Step 2</h2>
                 <p className="hero__subtitle">
-                  DataSQRL compiles your script into a data pipeline that serves the processed data
+                  DataSQRL compiles your script into a data stack that serves the processed data
                   as a GraphQL API.
                 </p>
                 <CodeBlock language="bash" wrap="true">
@@ -322,7 +322,7 @@ export default function Home() {
               <div className="col col--5 text--left">
                   <h2>Step 4</h2>
                   <p className="hero__subtitle">
-                      Ready to ship? DataSQRL builds optimized data pipelines that run on your preferred cloud,
+                      Ready to ship? DataSQRL builds optimized data architectures that run on your preferred cloud,
                       managed service, or self-hosted.
                   </p>
                   <p className="hero__subtitle">
@@ -364,11 +364,11 @@ export default function Home() {
             </h2>
             <div id="withDataSQRLRow" className={clsx("row", withoutDataSQRLRowVisible && styles.notVisible)}>
               <div className="col col--8">
-                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withDataSQRLStack.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
-                  DataSQRL does the laborious "data plumbing" work and builds optimized data pipelines that run smoothly in production.
+                  DataSQRL does the laborious "data plumbing" work and builds optimized data architectures that run smoothly in production.
                 </p>
                 <p className="text--left margin-bottom--sm">
                   Wanna know exactly what DataSQRL does and how it works? Click below!
@@ -387,14 +387,14 @@ export default function Home() {
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
                   Without DataSQRL you have to orchestrate multiple data technologies, scripts, and configurations into a coherent
-                  data pipeline.
+                  data architecture.
                 </p>
                 <p className="text--left margin-bottom--sm">
                   For a more detailed breakdown of all the work DataSQRL saves you from, check out:
                 </p>
                 <div className="text--center">
                   <Link className="button button--primary" to="/docs/reference/concepts/data-pipeline">
-                    How to Build a Data Pipeline
+                    How to Build a Data Stack
                   </Link>
                 </div>
               </div>
