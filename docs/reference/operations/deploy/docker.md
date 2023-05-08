@@ -4,7 +4,7 @@ title: "Docker"
 
 # Deploying with Docker
 
-Use [this docker compose](https://github.com/DataSQRL/sqrl/blob/main/docker-compose.yml) template to run all the engines in a data pipeline and deploy the engine executables.
+Use [this docker compose](https://github.com/DataSQRL/sqrl/blob/main/docker-compose.yml) template to run all the engines in a data layer and deploy the engine executables.
 
 Copy the template into the `build/deploy/` directory created by the DataSQRL compiler, modify it to suit your needs and run it with:
 

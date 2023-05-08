@@ -6,7 +6,7 @@ Welcome to DataSQRL! You have found the DataSQRL documentation - your gateway to
 
 ## Getting Started
 
-If you are new to DataSQRL, start with the [Getting Started](../getting-started/overview) section of this documentation. It contains the [Quickstart tutorial](../getting-started/quickstart) that only takes a few minutes and an extended [DataSQRL introduction](../getting-started/intro/overview) which teaches you everything you need to know to start building streaming data APIs with DataSQRL.
+If you are new to DataSQRL, start with the [Getting Started](../getting-started/overview) section of this documentation. It contains the [Quickstart tutorial](../getting-started/quickstart) that only takes a few minutes and an extended [DataSQRL introduction](../getting-started/intro/overview) which teaches you everything you need to know to start building data APIs with DataSQRL.
 
 You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), [why it exists](../getting-started/concepts/why-datasqrl), and [whether to use DataSQRL](../getting-started/comparison/overview) for your next data service implementation.
 

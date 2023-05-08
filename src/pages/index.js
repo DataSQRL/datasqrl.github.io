@@ -19,7 +19,7 @@ const header =  {
                    text: (
                      <>
                          Process data streams and datasets into responsive APIs without the
-                         mind-numbing implementation of data architectures.
+                         mind-numbing implementation of data layers.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -50,7 +50,7 @@ const WhyDataSQRLList = [
     description: (
       <>
         DataSQRL allows you to focus on your data logic because it handles all the annoying
-        parts of implementing data architectures that make you want to choke on your keyboard:
+        parts of implementing data layers that make you want to choke on your keyboard:
         data plumbing, schema management, error handling, data serving, API generation, and so on.
       </>
     ),
@@ -71,7 +71,7 @@ const WhyDataSQRLList = [
     image: '/img/index/undraw_fast_loading_sqrl.svg',
     description: (
       <>
-        DataSQRL builds efficient data architectures that optimize data processing,
+        DataSQRL builds efficient data layers that optimize data processing,
         partitioning, index selection, view materialization, denormalization, and query execution.
         There actually is some neat technology behind this buzzword bingo.
       </>
@@ -222,7 +222,7 @@ export default function Home() {
             <div className="row margin-bottom--xs">
               <div className="col col--6">
                 <p className="hero__subtitle">
-                  DataSQRL is a build tool for your application's data stack when you need more than just a database. <br />
+                  DataSQRL is a build tool for your application's data layer when you need more than just a data store. <br />
                   Build data APIs in 4 steps:
                 </p>
               </div>
@@ -256,12 +256,12 @@ export default function Home() {
             </div>
             <div className="row margin-bottom--lg">
               <div className="col col--6 text--center">
-                    <img className={styles.pipelineSvg} src="/img/index/compiledDataStack.svg" alt="DataSQRL compiled pipeline" />
+                    <img className={styles.pipelineSvg} src="/img/index/compiledDataLayer.svg" alt="DataSQRL compiled pipeline" />
               </div>
               <div className="col col--6 text--left">
                 <h2>Step 2</h2>
                 <p className="hero__subtitle">
-                  DataSQRL compiles your script into a data stack that serves the processed data
+                  DataSQRL compiles your script into a data layer that serves the processed data
                   as a GraphQL API.
                 </p>
                 <CodeBlock language="bash" wrap="true">
@@ -294,7 +294,7 @@ export default function Home() {
               <div className="col col--5 text--left">
                   <h2>Step 4</h2>
                   <p className="hero__subtitle">
-                      Ready to ship? DataSQRL builds all the components of your data stack which run on your preferred cloud,
+                      Ready to ship? DataSQRL builds optimized components for your data layer which run on your preferred cloud,
                       managed service, or self-hosted.
                   </p>
                   <p className="hero__subtitle">
@@ -336,7 +336,7 @@ export default function Home() {
             </h2>
             <div id="withDataSQRLRow" className={clsx("row", withoutDataSQRLRowVisible && styles.notVisible)}>
               <div className="col col--8">
-                <img className={styles.pipelineSvg} src="/img/index/withDataSQRLStack.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withDataSQRLLayer.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
@@ -366,8 +366,8 @@ export default function Home() {
                   For a more detailed breakdown of all the work DataSQRL saves you from, check out:
                 </p>
                 <div className="text--center">
-                  <Link className="button button--primary" to="/docs/reference/concepts/data-pipeline">
-                    How to Build a Data Stack
+                  <Link className="button button--primary" to="/docs/reference/concepts/data-layer">
+                    How to Build a Data Layer
                   </Link>
                 </div>
               </div>

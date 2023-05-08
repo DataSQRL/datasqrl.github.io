@@ -4,11 +4,11 @@ title: "What is SQRL?"
 
 # What is SQRL?
 
-SQRL is a declarative language to express the logic and structure of a data service. You implement a data service in SQRL scripts by defining how to combine, transform, and analyze the input data through a sequence of SQL(ish) statements. DataSQRL compiles SQRL scripts into fully-integrated data pipelines and an API layer that serves the result.
+SQRL is a declarative language to express the logic and structure of a data service. You implement a data service in SQRL scripts by defining how to combine, transform, and analyze the input data through a sequence of SQL(ish) statements. DataSQRL compiles SQRL scripts into integrated data layers that serves the results through an API.
 
 SQRL is based on SQL. If you know how to read a `SELECT ... FROM ... WHERE` query in SQL then you'll be able to read SQRL scripts with a few additional pointers. If you are unfamiliar with SQL, it's a good time to brush up on some SQL basics with our [SQL primer](/docs/reference/sqrl/sql-primer).
 
-SQRL stands for "Structured Query and Reaction Language" and is designed specifically for developers who are building streaming data services. It extends SQL with reactive features so you can implement data services that "react" to streaming data. SQRL has a low learning curve because it is essentially "just" SQL but adds important features that SQL lacks and provides a convenient syntax to make it feel like a productive programming language.
+SQRL stands for "Structured Query and Reaction Language" and is designed specifically for developers who are building data services. It extends SQL with reactive features so you can implement data services that "react" to streaming data. SQRL has a low learning curve because it is essentially "just" SQL but adds important features that SQL lacks and provides a convenient syntax to make it feel like a productive programming language.
 
 Check out the [quickstart tutorial](../../quickstart) to get a feel for SQRL and how it enables building data services.
 

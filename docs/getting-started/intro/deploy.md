@@ -1,14 +1,14 @@
 ---
-title: "Deploy Pipeline"
+title: "Deploy Data Layer"
 ---
 
-# Deploying DataSQRL Pipelines
+# Deploying the Data Layer
 
-You've gone through the [introductory tutorial](../overview) and seen DataSQRL compile SQRL scripts and API specifications into end-to-end streaming data pipelines that ingest, process, and serve data through an API.
+You've gone through the [introductory tutorial](../overview) and seen DataSQRL compile SQRL scripts and API specifications into integrated data layers that ingest, process, and serve data through an API.
 
-Now we are going to take a closer look at **how** DataSQRL compiles those pipelines in order to deploy them.
+Now we are going to take a closer look at **how** DataSQRL builds those data layers in order to deploy them.
 
-So far, we have used the DataSQRL `run` command to run our SQRL scripts. The `run` command is great for developing and testing our SQRL scripts because it compiles, builds, and deploys data pipelines in a single process. To deploy SQRL scripts into production, we want more control over how the pipeline gets deployed. And if you are using DataSQRL for the first time, you probably want to know exactly how the sausage gets made.
+So far, we have used the DataSQRL `run` command to run our SQRL scripts. The `run` command is great for developing and testing our SQRL scripts because it compiles, builds, and deploys data layers in a single process. To deploy SQRL scripts into production, we want more control over how the data layer gets deployed. And if you are using DataSQRL for the first time, you probably want to know exactly how the sausage gets made.
 
 Let's dive right in and peak behind the curtain of DataSQRL's compilation process.
 
@@ -18,7 +18,7 @@ Let's dive right in and peak behind the curtain of DataSQRL's compilation proces
 
 The DataSQRL compiler is configured through the `package.json` configuration file placed in the same directory as your SQRL script. If no configuration file is provided, DataSQRL will generate a default one for you.
 
-Since we want to control exactly how our pipeline gets deployed, we are going to create a custom compiler configuration for the [Quickstart example](../../quickstart). Create a file called `package.json` in the same folder as the `seedshop.sqrl` script with the following content:
+Since we want to control exactly how our data layer gets deployed, we are going to create a custom compiler configuration for the [Quickstart example](../../quickstart). Create a file called `package.json` in the same folder as the `seedshop.sqrl` script with the following content:
 
 ```json
 {
@@ -42,25 +42,25 @@ Since we want to control exactly how our pipeline gets deployed, we are going to
 }
 ```
 
-This configures the engines we want to run our data pipeline on: [Apache Flink](https://flink.apache.org/) (a distributed stream processor) as the stream engine, [H2](https://www.h2database.com/) (an in-memory database) as the database engine, and [Vertx](https://vertx.io/) (a reactive JVM server) as the server engine.
+This configures the engines we want in our data layer: [Apache Flink](https://flink.apache.org/) (a distributed stream processor) as the stream processing engine, [Postgres](https://www.postgresql.org/) (a relational database) as the database engine, and [Vertx](https://vertx.io/) (a reactive JVM server) as the server engine.
 
-DataSQRL defines a data pipeline as a sequence of engines. Each engine executes one part of the pipeline. DataSQRL compiles your SQRL script into executables that run on each engine. 
+DataSQRL defines a data layer as a stack of engines. Each engine processes data and passes it to the next engine in the stack. DataSQRL compiles your SQRL script into executables that run on each engine. 
 
 Specifically, DataSQRL takes the table computations you define in your SQRL scripts and the query endpoints defined in the API specification and compiles them into one comprehensive data flow graph. The data flow graph abstractly represents how the data flows from the sources you import into your SQRL script to the query endpoints exposed by your API and all the processing that has to happen in between.
 
-The "magic" of DataSQRL is the optimizer which maps the processing steps from the data flow graph to the engines in the data pipeline. The optimizer determines which computation should happen in which engine to produce the most efficient data pipeline. It then generates deployment artifacts that execute those computations in the respective engines and makes sure that the data flows smoothly into and between the engines.
+The "magic" of DataSQRL is the optimizer which maps the processing steps from the data flow graph to the engines in the data layer. The optimizer determines which computation should happen in which engine to produce the most efficient data layer. It then generates deployment artifacts that execute those computations in the respective engines and makes sure that the data flows smoothly into and between the engines.
 
-Invoke DataSQRL to compile the `seedshop.sqrl` script against the pipeline of engines we just configured:
+Invoke DataSQRL to compile the `seedshop.sqrl` script into a data layer that consists of the engines we just configured:
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl
 ```
 
-The compiler populates the `build/` directory with all the build artifacts needed to compile the data pipeline. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines we configured above.
+The compiler populates the `build/` directory with all the build artifacts needed to compile the data layer. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines we configured above.
 
-## Execute Data Pipeline
+## Build Executables
 
-Finally, we are going to turn our deployment artifacts into executables that we can run.
+Finally, we are going to turn our deployment artifacts into executables that we can run on the configured engines. We build executables in a separate step to generate the most efficient executables for the targeted infrastructure.
 
 To create a Flink executable for the stream processing, we run the following docker command in the directory of the `seedshop.sqrl` script:
 ```bash
@@ -72,7 +72,7 @@ Similarly, this command creates a Vertx executable for the server:
 docker run -it --rm -v $PWD/build:/build datasqrl/engine-vertx
 ```
 
-Now, we can deploy our executables against the engines we configured for our pipeline. For this tutorial, we are going to stand up the engines and deploy the executables with docker compose:
+Now, we can deploy our executables against the engines we configured for our data layer. For this tutorial, we are going to stand up the engines and deploy the executables with docker compose:
 
 ```yaml title:docker-compose.yml
 version: "3.8"
@@ -152,7 +152,7 @@ Save this file in the `build/deploy/` directory and execute the following comman
 docker-compose up
 ```
 
-This launches all the engines and deploys our executables. You are running a custom data pipeline compiled by DataSQRL. Adjust it for your own infrastructure, run it on Kubernetes, or use managed cloud services if you want to outsource operations. Take a look at the [deployment documentation](/docs/reference/operations/deploy/overview) for more information.
+This launches all the engines and deploys our executables. You are running a custom data layer compiled by DataSQRL. Adjust it for your own infrastructure, run it on Kubernetes, or use managed cloud services if you want to outsource operations. Take a look at the [deployment documentation](/docs/reference/operations/deploy/overview) for more information.
 
 Enjoy building with data(sqrl)!
 
@@ -161,4 +161,4 @@ Enjoy building with data(sqrl)!
 * For more information, refer to the reference documentation for [building](/docs/reference/operations/build) and [deploying](/docs/reference/operations/deploy/overview) with DataSQRL as well as the [DataSQRL command documentation](/docs/reference/operations/command) for all the command line options.
 * Check out all the options in the [package configuration](/docs/reference/operations/package-config).
 * Take a look at [all the engines](/docs/reference/operations/engines/overview) that DataSQRL supports.
-* The [DataSQRL optimizer](/docs/reference/operations/optimizer) uses a cost model to generate the most efficient data pipeline. You can use [provide hints](/docs/reference/operations/optimizer#hints) when the optimizer makes the wrong choice.
+* The [DataSQRL optimizer](/docs/reference/operations/optimizer) uses a cost model to generate the most efficient data layer. You can use [provide hints](/docs/reference/operations/optimizer#hints) when the optimizer makes the wrong choice.

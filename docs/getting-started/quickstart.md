@@ -7,9 +7,9 @@ title: "Quickstart Tutorial"
 <img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>
 
 Because we have the humor of middle schoolers on Adderall, this quickstart tutorial
-implements a Customer 360 API for our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
+implements a Customer 360 API for the customers of our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
 
-We want to build a data API that exposes a Customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
+We want to build a realtime data API that exposes a customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
 
 ## Run SQRL Script {#run}
 
@@ -39,7 +39,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
       GROUP BY week ORDER BY week DESC;
 ```
 
-Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
+Now run the DataSQRL compiler to build a data layer from the data transformations and aggregations defined in the script:
 
 ```bash
 docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl
@@ -53,7 +53,7 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 ## Query Data API {#query}
 
-The running data pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
@@ -128,7 +128,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 
 Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.
 
-There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and pipeline construction to make it work. What are you going to build next?
+There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and data layer construction to make it work. What are you going to build next?
 
 ## Next Steps {#next}
 

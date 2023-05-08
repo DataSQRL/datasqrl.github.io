@@ -1,8 +1,8 @@
 # Deploy on AWS
 
-This documentation walks you through the steps of deploying a data pipeline compiled by DataSQLR on AWS managed services. Using managed services eliminates most of the operational burden of running a data pipeline, auto-scales each engine based on the amount of incoming data and API workload, and gets you up and running with a production-grade data pipeline in an under an hour.
+This documentation walks you through the steps of deploying a data layer compiled by DataSQLR on AWS managed services. Using managed services eliminates most of the operational burden of running a data layer, auto-scales each engine based on the amount of incoming data and API workload, and gets you up and running with a production-grade data layer in an under an hour.
 
-To set up a DataSQRL data pipeline on AWS managed services, follow these 3 steps.
+To set up a DataSQRL data layer on AWS managed services, follow these 3 steps.
 
 :::warn
 This documentation is work in progress. Please check back soon.
