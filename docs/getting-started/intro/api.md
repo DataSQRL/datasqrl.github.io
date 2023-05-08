@@ -6,7 +6,7 @@ title: "Design the API"
 
 <img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
 
-When we [run](../../quickstart#run) our `seedshop.sqrl` script, DataSQRL compiles and executes a data pipeline that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
+When we [run](../../quickstart#run) our `seedshop.sqrl` script, DataSQRL compiles and executes a data layer that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
@@ -200,7 +200,7 @@ docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl s
 
 If refresh GraphiQL in the browser, you will see your custom API.
 
-Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data pipelines. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
+Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data layers. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
 
 ### Pagination
 
@@ -271,6 +271,6 @@ Wonderful, you have completed the 3 essential steps of building a data service w
 
 Now you can go off, build amazing data services, and [tell us](/community) about it.
 
-If you are eager to continue learning, [the next chapter](../advanced) is going to cover some advanced topics for extra credit. If you want to learn how to take your SQRL script to production and how exactly DataSQRL compiles data pipelines, take a look at the [last chapter in this tutorial](../deploy).
+If you are eager to continue learning, [the next chapter](../advanced) is going to cover some advanced topics for extra credit. If you want to learn how to take your SQRL script to production and how exactly DataSQRL builds data layers, take a look at the [last chapter in this tutorial](../deploy).
 
 If you want to learn more about querying the data API from your application or favorite programming language, the [reference documentation](/docs/reference/api/graphql/query) has an overview. It also [covers API design](/docs/reference/api/graphql/design) in more detail.

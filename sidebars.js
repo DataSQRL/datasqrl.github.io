@@ -214,7 +214,7 @@ const sidebars = {
           items: [
             'reference/concepts/package',
             'reference/concepts/data-service',
-            'reference/concepts/data-pipeline',
+            'reference/concepts/data-layer',
           ],
         },
       ],

@@ -111,7 +111,7 @@ To define arrays of scalar types, wrap the type in square brackets. For instance
 
 ## Data Constraints
 
-The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build vmore efficient data pipelines.
+The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build more efficient data layers.
 
 DataSQRL schema supports the following test constraints:
 

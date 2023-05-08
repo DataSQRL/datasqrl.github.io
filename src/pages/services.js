@@ -118,15 +118,15 @@ export default function Services() {
                   <h2>Simple Technology</h2>
                   <p>
                   To build data services, organizations assemble spaghetti bowls of complex technologies
-                  into bespoke data pipelines that require specialized engineers and are expensive to maintain.
+                  into bespoke data layers that require specialized engineers and are expensive to maintain.
                   </p>
                   <p>
                   <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL technology</Link> enables small teams
                   to quickly build powerful data services with low maintenance overhead by:
                   <ul>
                   <li>Utilizing your developers' existing skills. No need to hire expensive specialists.</li>
-                  <li>Eliminating bespoke data pipelines through a compiler so your devs can focus on adding value.</li>
-                  <li>Automatically optimizing data pipelines to reduce maintenance, cost, and outages.</li>
+                  <li>Eliminating bespoke data layers through a compiler so your devs can focus on adding value.</li>
+                  <li>Automatically optimizing data layerss to reduce maintenance, cost, and outages.</li>
                   </ul>
                   </p>
                   <div className="text--center">

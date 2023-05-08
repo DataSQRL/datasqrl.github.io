@@ -9,17 +9,17 @@ import HomepageFeatures from '../components/HomepageFeatures';
 import HomepageHeader from '../components/HomepageHeader';
 import LinkRotation from "../components/LinkRotation";
 import FeatureGrid from "../components/FeatureGrid";
-import { Tooltip } from 'react-tooltip';
-import 'react-tooltip/dist/react-tooltip.css';
+// import { Tooltip } from 'react-tooltip';
+// import 'react-tooltip/dist/react-tooltip.css';
 
 
 const header =  {
                    title: 'DataSQRL',
-                   tagLine: 'Build Streaming Data APIs In Minutes',
+                   tagLine: 'Build Data Services In Minutes',
                    text: (
                      <>
-                         Process data streams into responsive APIs without the
-                         brain-numbing orchestration of data pipelines.
+                         Process data streams and datasets into responsive APIs without the
+                         mind-numbing implementation of data layers.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -30,40 +30,16 @@ const header =  {
 
 const DataSQRLFeaturesList = [
     {
-        title: 'Customizable',
-        image: '/img/generic/undraw_building_blocks.svg',
-        linkText: 'Learn More',
-        description: (
-            <>
-                Edit the API, connect any data source, bring your own functions -- DataSQRL
-                is fully customizable.
-                Say goodbye to generic data APIs and let your creativity roam free like a squirrel.
-            </>
-        ),
+        title: 'Fully Customizable',
+        image: '/img/generic/undraw_building_blocks.svg'
     },
     {
         title: 'Open Source',
         image: '/img/generic/undraw_code.svg',
-        linkText: 'Learn More',
-        description: (
-            <>
-                DataSQRL is an open-source project. It's free to use and you can view the
-                entire source code.
-                If you are in a giving mood, you could even <Link to="/docs/dev/contribute">contribute</Link> to DataSQRL yourself.
-            </>
-        ),
     },
     {
         title: 'Robust & Scalable',
         image: '/img/generic/undraw_secure_server.svg',
-        linkText: 'Learn More',
-        description: (
-            <>
-                DataSQRL builds optimized code that runs on proven data technologies like
-                Apache Flink and Postgres. That means you can verify the output and rest assured
-                that your data API is resilient and scalable.
-            </>
-        ),
     },
 ];
 
@@ -74,7 +50,7 @@ const WhyDataSQRLList = [
     description: (
       <>
         DataSQRL allows you to focus on your data logic because it handles all the annoying
-        parts of building data pipelines that make you want to choke on your keyboard:
+        parts of implementing data layers that make you want to choke on your keyboard:
         data plumbing, schema management, error handling, data serving, API generation, and so on.
       </>
     ),
@@ -95,8 +71,8 @@ const WhyDataSQRLList = [
     image: '/img/index/undraw_fast_loading_sqrl.svg',
     description: (
       <>
-        DataSQRL builds efficient data pipelines that optimize data processing,
-        partitioning, index selection, materialization, denormalization, and query execution.
+        DataSQRL builds efficient data layers that optimize data processing,
+        partitioning, index selection, view materialization, denormalization, and query execution.
         There actually is some neat technology behind this buzzword bingo.
       </>
     ),
@@ -130,7 +106,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
   {
     name: "Clickstream",
     usecase: "Recommendations",
-    description: "Analyze click stream data for content recommendations with SQRL.",
+    description: "Analyze click stream data for real-time content recommendations with SQRL.",
     script:
       `IMPORT datasqrl.example.clickstream.Click;  -- Import data
 /* Most visited pages in the last day */
@@ -244,10 +220,10 @@ export default function Home() {
         <section className={styles.content}>
           <div className="container">
             <div className="row margin-bottom--xs">
-              <div className="col col--8">
+              <div className="col col--6">
                 <p className="hero__subtitle">
-                  DataSQRL is a build tool for streaming data pipelines. <br />
-                  Process data streams into data APIs in 4 steps:
+                  DataSQRL is a build tool for your application's data layer when you need more than just a data store. <br />
+                  Build data APIs in 4 steps:
                 </p>
               </div>
             </div>
@@ -273,19 +249,19 @@ export default function Home() {
                    {scriptExamples[exampleIndex].description}
                  </p>
                   <p className="hero__subtitle">
-                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is an SQL dialect for reactive data
+                  <Link to="/docs/getting-started/concepts/sqrl">SQRL</Link> is a SQL dialect for reactive data
                     processing that developers call "not awful".
                   </p>
               </div>
             </div>
             <div className="row margin-bottom--lg">
               <div className="col col--6 text--center">
-                    <img className={styles.pipelineSvg} src="/img/generic/highlevel_pipeline.svg" alt="DataSQRL compiled pipeline" />
+                    <img className={styles.pipelineSvg} src="/img/index/compiledDataLayer.svg" alt="DataSQRL compiled pipeline" />
               </div>
               <div className="col col--6 text--left">
                 <h2>Step 2</h2>
                 <p className="hero__subtitle">
-                  DataSQRL compiles your script into a data pipeline that serves the processed data
+                  DataSQRL compiles your script into a data layer that serves the processed data
                   as a GraphQL API.
                 </p>
                 <CodeBlock language="bash" wrap="true">
@@ -304,11 +280,7 @@ export default function Home() {
                  <h2>Step 3</h2>
                  <p className="hero__subtitle">
                  Query the API from your favorite language, framework,
-                   or directly <Link id="localhost-link-id" to={"http://localhost:8888/graphiql/" + scriptExamples[exampleIndex].queryURL} target="_blank">in the browser</Link>.
-                   <Tooltip anchorSelect="#localhost-link-id" className="tooltip" clickable>
-                     Run the command above first for this link to work
-                     {/*<br />Otherwise, use the online <Link to="." target="_blank">DataSQRL playground</Link>*/}
-                   </Tooltip>
+                   or directly in the browser.
                  </p>
                  <p className="hero__subtitle">
                      Then repeat the cycle until your data API is complete or you run out of Mountain Dew.
@@ -322,11 +294,11 @@ export default function Home() {
               <div className="col col--5 text--left">
                   <h2>Step 4</h2>
                   <p className="hero__subtitle">
-                      Ready to ship? DataSQRL builds optimized data pipelines that run on your preferred cloud,
+                      Ready to ship? DataSQRL builds optimized components for your data layer which run on your preferred cloud,
                       managed service, or self-hosted.
                   </p>
                   <p className="hero__subtitle">
-                      Let's have some fun building with data!
+                      Let's have fun building with data!
                   </p>
                   <div className={styles.buttons}>
                       <Link
@@ -352,7 +324,7 @@ export default function Home() {
         <section className={styles.content}>
           <div className="container">
             <h2>
-              How to build data APIs
+              How to build data services
               <button id="withDataSQRLButton" className={clsx(
                 "button button--secondary", styles.headerButton, withoutDataSQRLRowVisible && "button--outline")}
                       onClick={handleWithDataSQRLButtonClick}
@@ -364,11 +336,12 @@ export default function Home() {
             </h2>
             <div id="withDataSQRLRow" className={clsx("row", withoutDataSQRLRowVisible && styles.notVisible)}>
               <div className="col col--8">
-                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withDataSQRLLayer.svg" loading="lazy" alt="Building Data APIs with DataSQRL" />
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
-                  DataSQRL does the laborious "data plumbing" work and builds optimized data pipelines that run smoothly in production.
+                  DataSQRL builds optimized database deployments and handles the laborious "data plumbing"
+                  work of getting data into and out of your database.
                 </p>
                 <p className="text--left margin-bottom--sm">
                   Wanna know exactly what DataSQRL does and how it works? Click below!
@@ -386,15 +359,15 @@ export default function Home() {
               </div>
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
-                  Without DataSQRL you have to orchestrate multiple data technologies, scripts, and configurations into a coherent
-                  data pipeline.
+                  Without DataSQRL you have to implement the many steps from data ingestion to data serving across
+                  multiple technologies and different languages.
                 </p>
                 <p className="text--left margin-bottom--sm">
                   For a more detailed breakdown of all the work DataSQRL saves you from, check out:
                 </p>
                 <div className="text--center">
-                  <Link className="button button--primary" to="/docs/reference/concepts/data-pipeline">
-                    How to Build a Data Pipeline
+                  <Link className="button button--primary" to="/docs/reference/concepts/data-layer">
+                    How to Build a Data Layer
                   </Link>
                 </div>
               </div>
