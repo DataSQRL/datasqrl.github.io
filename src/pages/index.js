@@ -222,7 +222,7 @@ export default function Home() {
             <div className="row margin-bottom--xs">
               <div className="col col--6">
                 <p className="hero__subtitle">
-                  DataSQRL is a build tool for your application's data layer when you need more than just a data store. <br />
+                  DataSQRL is a build tool for your application's data layer when you need more than just a database. <br />
                   Build data APIs in 4 steps:
                 </p>
               </div>
