@@ -48,11 +48,11 @@ Going through a data warehouse can also be a pain if the data isn't already proc
 
 On the other end of the spectrum, your data needs may be so complex that they require a team of data scientists, data engineers, ML specialist, and MLOps to be satisfied. In that case, you likely need a custom data layer that glues together multiple data systems and are looking at a pretty big project. 
 
-However, give DataSQRL a quick try and see if it can get the job done. That can save you a lot of trouble. We frequently see organizations that think they need to bring in the whole caboodle of data scientists, data engineers, MLOps, etc to build some simple data analytics into their product. Don't call the Navy to shoot a sparrow.
+However, give DataSQRL a quick try and see if it can get the job done. That can save you a lot of trouble. We frequently see organizations that think they need to bring in the whole caboodle of data scientists, data engineers, MLOps, etc to build some simple data analytics into their product. Don't use a sledgehammer to crack a nut.
 
 :::tip
 
-DataSQRL is still young and may be missing a feature that you need for your data service. If that's the case, [place a feature request](/) and we'll get on it.
+DataSQRL is still young and may be missing a feature that you need for your data service. If that's the case, [place a feature request](https://github.com/DataSQRL/sqrl/issues) and we'll get on it.
 
 :::
 

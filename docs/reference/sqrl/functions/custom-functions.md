@@ -3,7 +3,7 @@
 
 A custom function package contains function definitions and implementations that the DataSQRL compiler can import into a script.
 
-::: info
+:::info
 Before implementing a custom function package, check if the function you need is part of the [system function library](/docs/category/functions) or can be found in the [repository](https://dev.datasqrl.com).
 :::
 

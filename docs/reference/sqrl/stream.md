@@ -4,7 +4,7 @@ title: "Stream Table"
 
 # Stream Table
 
-Stream tables contain immutable rows of data that have a timestamp. All tables [imported](../import) from [data sources](../../sources/overview) are stream tables and stream tables can be [exported](../export) to [data sinks](../(../sources/overview).
+Stream tables contain immutable rows of data that have a timestamp. All tables [imported](../import) from [data sources](../../sources/overview) are stream tables and stream tables can be [exported](../export) to [data sinks](../../sources/overview).
 
 This documentation covers how to convert between stream and [state tables](../table#stateVsStream) and documents the differences in query semantics for certain queries over stream tables.
 
