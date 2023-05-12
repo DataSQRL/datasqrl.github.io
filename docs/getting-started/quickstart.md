@@ -53,7 +53,7 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::note
 
-To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings. 
+To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 5gb. 
 
 :::
 
