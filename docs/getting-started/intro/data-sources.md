@@ -51,7 +51,7 @@ For example, we want to add user data from our customer database to our seed sho
 First, download the customer data and place it into a sub-folder.
 ```bash
 mkdir mydata; cd mydata; 
-wget https://github.com/DataSQRL/sqrl/raw/main/sqrl-examples/quickstart/data/customers.json.gz;
+wget https://github.com/DataSQRL/sqrl/raw/main/sqrl-examples/quickstart/data/customers.json.gz
 cd ..
 ```
 
@@ -115,7 +115,7 @@ This preparation work allows us to refine the product analysis we added at the e
 ```sqrl
 Products.volume_10day := SELECT u.country, sum(i.quantity) as quantity,
          sum(i.total) as spend, sum(i.quantity * @.weight_in_gram) as weight
-      FROM @.ordered_items i JOIN i.parent o  JOIN o.user u
+      FROM @.ordered_items i JOIN i.parent o TEMPORAL JOIN o.user u
       WHERE o.time > now() - INTERVAL 10 DAY GROUP BY u.country;
 ```
 
