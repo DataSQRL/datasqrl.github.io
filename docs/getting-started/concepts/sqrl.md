@@ -28,7 +28,7 @@ Here is a brief overview of the features SQRL provides:
 SQRL supports `IMPORT` statements to declare the data dependencies of your SQRL script like you would software dependencies in a programming language.
 
 ```sqrl
-IMPORT datasqrl.seedshop.Orders;`
+IMPORT datasqrl.seedshop.Orders;
 ```
 This statement imports the `Orders` table from the dataset `datasqrl.seedshop` and makes it available in the script.
 
@@ -134,7 +134,7 @@ This connects the data stream to an external data sink that sends an email to th
 
 Timestamps on data streams are important to synchronize records in time across systems and process them efficiently. SQRL provides automatic timestamp discovery, or you can define the timestamp column explicitly:
 ```sqrl
-IMPORT datasqrl.seedshop.Orders TIMESTAMP time;`
+IMPORT datasqrl.seedshop.Orders TIMESTAMP time;
 ```
 
 ## Learn More
