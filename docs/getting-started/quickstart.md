@@ -51,6 +51,13 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::
 
+:::note
+
+To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 5gb. 
+
+:::
+
+
 ## Query Data API {#query}
 
 The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
