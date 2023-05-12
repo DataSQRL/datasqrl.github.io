@@ -4,32 +4,44 @@ title: "Data Layer"
 
 # What is a Data Layer?
 
-A data layer is an abstraction within a software application that manages data storage, retrieval, and manipulation, separating these concerns from the application's core logic for modularity and maintainability.
+A data layer is an abstraction within a software application that manages data storage, retrieval, and manipulation. It separates these concerns from the application's core logic for modularity and maintainability.
 
-Many [data services](../data-service) and data APIs are implemented by a data layer.
+For managing application state, you use a transactional data layer with a database and an object-relational mapper (ORM) or database abstraction library.
 
-## How to Build a Data Layer
+For [data services](../data-service) that require executing data-intensive computations quickly in response to events or external data, you use a reactive data layer. 
 
-The exact implementation steps for building a data layer depend on the chosen technologies that form the building blocks of the data layer like stream processors, databases, and API servers.
+This page outlines the architecture and implementations steps for building a reactive data layer.
 
-A high-level blueprint for implementing data layers consists of three layers in a stack:
+## How to Design a Reactive Data Layer
 
-1. **Ingestion and Processing**: Retrieving or consuming data from external sources and preprocessing the data to fit use case requirements.
-2. **Database**: Storing, analyzing, and querying the data.
-3. **Server**: Serving the data through an API.
+To efficiently and quickly execute data-intensive computations, a data layer consists of the following components:
 
-Each sub-layer may be implemented with one or multiple technologies, languages, frameworks, and tools.
+<img src="/img/reference/reactive_data_layer.svg" alt="Data Layer Architecture >" width="30%"/>
 
-Let's break down in more detail what needs to be done at each sub-layer of a data layer.
+* **Stream Processor**: A framework for running the consecutive data processing steps from data ingestion (i.e. reading data off the queue or from external data systems), via data transformation, to writing the results to the database. A processing framework handles all the scheduling and execution of tasks.
+* **Database**: Stores the pre-processed data and computes results to queries on demand.
+* **Server**: Exposes the results through an API and writes incoming data to the queue.
+* **Queue**: A persisted message queue (or log) is a robust and scalable piece of data infrastructure to temporarily store data and process it asynchronously.
+
+
+The diagram shows how the components combine into the architecture of a data layer. The data flows through the architecture as follows: 
+* The server writes incoming data to the queue. 
+* The stream processor picks data off the queue, processes the data, writes intermediate computations back to the queue, and the pre-processed result into the database. 
+* The server queries the database for the final result which is served back to the user or external consumer.
+
+## How to Implement a Reactive Data Layer
+
+The exact implementation steps for building a data layer depend on the chosen technologies for each of the four components of the data layer.
+
+Below, we outline a high-level blueprint for the implementation steps you take to implement a data layer.
 
 <img src="/img/index/withoutDataSQRL.svg" alt="Steps for Building a Data layer" width="100%"/>
 
+### Stream Processor: Ingestion and Processing
 
-### Ingestion and Processing
+The following steps need to be implemented for retrieving and preprocessing the data:
 
-In the first sub-layer, the following steps need to be implemented for retrieving and preprocessing the data:
-
-1. Implement or configure access to data sources: Identify and access various data sources like databases, APIs, or files, and configure connection settings, authentication, and authorization as required.
+1. Implement or configure access to data sources: Connect to the queue or log carrying the input data. In addition, identify and access additional data sources like databases, APIs, or files, needed for data processing. Configure connection settings, authentication, and authorization as required.
 
 2. Implement data synchronization: Develop mechanisms to retrieve data in real-time, determine timestamps and order, and handle data delays and retrieval failures to ensure data consistency and reliability.
 
@@ -41,7 +53,7 @@ In the first sub-layer, the following steps need to be implemented for retrievin
 
 ### Database
 
-To implement the "Database" sub-layer of a data layer, one has to:
+The database component stores the pre-processed data and makes it available for querying by the server. These are the steps to set up and configure the database:
 
 6. Design database schema: Create an organized and optimized structure to store data, considering factors like normalization, data types, and relationships among entities.
 
@@ -66,6 +78,8 @@ Finally, to serve the processed data to users or consuming systems requires the 
 ## Deploying a Data layer
 
 There is more work we need to do to get our data layer ready for production:
+
+14. Queue Optimization: To ensure smooth operations in production configure the queue for the expected workload. If high performance is required, use a schema (e.g. Avro) to encode the messages in the queue for faster serialization and smaller message size.
 
 14. Scale Testing and optimization: Conduct performance tests simulating real-world conditions, including varying levels of data volume, velocity, and complexity, to ensure the data layer can handle expected workloads. Identify and address potential bottlenecks, optimize processing and storage operations, and fine-tune configuration settings to achieve optimal performance and resource utilization. Perform load and stress tests to assess the layer's resilience under high loads and determine its breaking points.
 

@@ -53,7 +53,7 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 ## Query Data API {#query}
 
-The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

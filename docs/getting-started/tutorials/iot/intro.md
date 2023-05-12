@@ -46,7 +46,7 @@ docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run sensors.sqrl
 
 ## Query Data API {#query}
 
-The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening `http://localhost:8888/graphiql/` in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
