@@ -338,7 +338,7 @@ And that, my friend, is a pretty good start for our seed shop data API.
 
 ## Next Steps
 
-We've built a complete e-commerce data service with customer analysis, recommendation engine, and business intelligence. Good work 💪! Take a look at the [final SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-basic.sqrl) that includes the changes and additions we discussed in this chapter. You've learned enough about SQRL to start building data services on your own. 
+We've built a complete e-commerce data service with customer analysis, recommendation engine, and business intelligence. Good work 💪! Take a look at the [final SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl) that includes the changes and additions we discussed in this chapter. You've learned enough about SQRL to start building data services on your own. 
 
 In the [**next chapter**](../data-sources), we are going to define our own data source and looks at imports in more detail.
 
