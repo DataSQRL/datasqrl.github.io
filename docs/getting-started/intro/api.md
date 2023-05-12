@@ -6,7 +6,7 @@ title: "Design the API"
 
 <img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
 
-When we [run](../../quickstart#run) our `seedshop.sqrl` script, DataSQRL compiles and executes a data layer that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
+When we [run](../../quickstart#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compiles and executes a data layer that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
@@ -62,10 +62,15 @@ Relationships allow us to construct complex queries which return all the data we
 
 By default, DataSQRL generates an API specification that exposes query endpoints for all tables defined in the SQRL script and makes all fields in those tables accessible, including relationships to navigate to related tables. In addition, DataSQRL generates field filters for all queries and relationships that give the user of the API the option to filter out rows.
 
-DataSQRL writes the default API specification to the file `schema.graphqls` in the current directory when you invoke the compiler with the `-a graphql` option:
+DataSQRL writes the default API specification to the file `schema.graphqls` in the build directory when you invoke the compiler:
 
 ```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl -a graphql
+docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl
+```
+
+Copy the schema from the build directory to your current folder.
+```bash
+cp build/schema.graphqls .
 ```
 
 The default API specification is a great starting point for designing a custom data API because it exposes *all* the data. However, we'd almost never use the default API spec, because it is too general and cluttered. Let's customize it to fit our needs.
@@ -234,6 +239,7 @@ type Users {
   spending: [spending!]
   past_purchases(productid: Int): [past_purchases!]
 }
+.... [truncated]
 ```
 
 The `limit` argument limits the size of the returned result set to the given number. The `offset` argument moves to the given position in the result set before starting to retrieve records.
