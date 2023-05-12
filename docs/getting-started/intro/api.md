@@ -218,8 +218,6 @@ type Products {
   id: Int!
   name: String!
   sizing: String!
-  weight_in_gram: Int!
-  type: String!
   category: String!
   volume_10day(country: String, limit: Int = 20, offset: Int = 0): [volume_10day!]
 }
@@ -233,7 +231,6 @@ type Users {
   id: Int!
   first_name: String!
   last_name: String!
-  email: String!
   country: String
   purchases(limit: Int = 20, offset: Int = 0): [orders!]
   spending: [spending!]
@@ -251,7 +248,6 @@ Update the `seedshop.graphqls` schema with limit+offset pagination as shown abov
 {
 Products (category: "acorns", limit: 2, offset: 2) {
   name
-  weight_in_gram
   category
   volume_10day(limit: 2) {
     quantity
