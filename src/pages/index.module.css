@@ -45,6 +45,20 @@
    font-weight: bold;
 }
 
+
+.emailForm input {
+    font-size: 1rem;
+    height: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.emailForm button {
+    font-size: 1rem;
+    font-weight: bold;
+    height: 1.5rem;
+    margin: 0 0.5rem;
+}
+
 .closer {
   border-top: 3px solid;
   padding: 1rem 0;

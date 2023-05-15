@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -102,6 +102,40 @@ const Updates = [
   },
 ];
 
+
+const FORMSPARK_ACTION_URL = "https://submit-form.com/G3sDjB0p";
+
+function EmailSubscribe() {
+  const [email, setEmail] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const onSubmit = async (e) => {
+    setFeedback("Adding your email to list...")
+    e.preventDefault();
+    await fetch(FORMSPARK_ACTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        "email" : email,
+      }),
+    });
+    setFeedback("You are subscribed!");
+    setEmail("");
+  };
+
+  return (
+    <form onSubmit={onSubmit} className={styles.emailForm}>
+      <label for="email">Enter your email for monthly updates (no spam guaranteed): </label>
+      <input type="email" id="email" name="email" required="" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <button type="submit">Subscribe</button>
+      { feedback ? feedback : null }
+    </form>
+  );
+}
+
 export default function Community() {
   return (
     <Layout
@@ -111,6 +145,16 @@ export default function Community() {
       <main>
         <HomepageFeatures FeatureList={Support} />
         <HomepageFeatures FeatureList={Updates} />
+        <section>
+          <div className="container">
+            <h2 className="margin-bottom--md">Email List</h2>
+            <div className="row">
+              <div className={clsx('col col--12 margin-bottom--lg')}>
+                <EmailSubscribe />
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </Layout>
   );
