@@ -348,7 +348,7 @@ export default function Home() {
                 </p>
                 <div className="text--center">
                   <Link className="button button--primary" to="/docs/getting-started/intro/deploy">
-                    How the Sausage Is Made
+                    How DataSQRL Builds your Data Layer
                   </Link>
                 </div>
               </div>
