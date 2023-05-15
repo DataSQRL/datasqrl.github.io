@@ -8,7 +8,7 @@ You've gone through the [introductory tutorial](../overview) and seen DataSQRL c
 
 Now we are going to take a closer look at **how** DataSQRL builds those data layers in order to deploy them.
 
-So far, we have used the DataSQRL `run` command to run our SQRL scripts. The `run` command is great for developing and testing our SQRL scripts because it compiles, builds, and deploys data layers in a single process. To deploy SQRL scripts into production, we want more control over how the data layer gets deployed. And if you are using DataSQRL for the first time, you probably want to know exactly how the sausage gets made.
+So far, we have used the DataSQRL `run` command to run our SQRL scripts. The `run` command is great for developing and testing our SQRL scripts because it compiles, builds, and deploys data layers in a single process. To deploy SQRL scripts into production, we want more control over how the data layer gets deployed. And if you are using DataSQRL for the first time, you probably want to peek behind the curtain.
 
 Let's dive right in and peak behind the curtain of DataSQRL's compilation process.
 
