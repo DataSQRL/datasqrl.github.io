@@ -9,6 +9,10 @@ tags: [DataSQRL, community]
 
 **We need to make it easier to build data-driven applications.** Databases are great if all your application needs is storing and retrieving data. But if you want to build anything more interesting with data - like serving users recommendations based on the pages they are visiting, detecting fraudulent transactions on your site, or computing real-time features for your machine learning model - you end up building a ton of custom code and infrastructure around the database.
 
+<a href="https://www.youtube.com/watch?v=m5uYtBFSmUs&ab_channel=DataSQRL" target="_blank">
+<img src="/img/blog/uplevel_play_image.jpg" alt="Watch the video version >|" width="50%"/>
+</a>
+
 You need a queue like Kafka to hold your events, a stream processor like Flink to process data, a database like Postgres to store and query the result data, and an API layer to tie it all together.
 
 And that’s just the price of admission. To get a functioning data layer, you need to make sure that all these components talk to each other and that data flows smoothly between them. Schema synchronization, data model tuning, index selection, query batching … all that fun stuff.
