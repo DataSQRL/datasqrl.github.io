@@ -14,7 +14,7 @@ import FeatureGrid from "../components/FeatureGrid";
 
 
 const header =  {
-                   title: 'DataSQRL',
+                   title: 'Build Data Services In Minutes',
                    tagLine: 'Build Data Services In Minutes',
                    text: (
                      <>

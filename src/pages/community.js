@@ -22,18 +22,18 @@ const header =  {
 
 
 const Support = [
-  {
-    title: 'Stack Overflow',
-    image: '/img/community/stackoverflow_sqrl.svg',
-    link: 'https://stackoverflow.com/questions/tagged/datasqrl',
-    linkText: 'Ask a Question',
-    description: (
-      <>
-        If you have an implementation question or need somebody to point you in the right direction, <Link to="https://stackoverflow.com/questions/tagged/datasqrl">Stack Overflow</Link> is the place
-        to ask your question and get help from the community. Even the supposedly "stupid" questions.
-      </>
-    ),
-  },
+  // {
+  //   title: 'Stack Overflow',
+  //   image: '/img/community/stackoverflow_sqrl.svg',
+  //   link: 'https://stackoverflow.com/questions/tagged/datasqrl',
+  //   linkText: 'Ask a Question',
+  //   description: (
+  //     <>
+  //       If you have an implementation question or need somebody to point you in the right direction, <Link to="https://stackoverflow.com/questions/tagged/datasqrl">Stack Overflow</Link> is the place
+  //       to ask your question and get help from the community. Even the supposedly "stupid" questions.
+  //     </>
+  //   ),
+  // },
   {
     title: 'Discord',
     image: '/img/community/discord.svg',
@@ -56,6 +56,19 @@ const Support = [
         <Link to="https://github.com/DataSQRL/sqrl">GitHub</Link> is where all open-source development on DataSQRL takes place.&nbsp;
         <Link to="https://github.com/DataSQRL/sqrl/issues">File a bug</Link>, star DataSQRL, or contribute to the codebase. That's the beauty of open-source: when
         everybody contributes a little, something great can happen.
+      </>
+    ),
+  },
+  {
+    title: 'Youtube',
+    image: '/img/community/youtube.svg',
+    link: 'https://www.youtube.com/@datasqrl',
+    linkText: 'Subscribe',
+    description: (
+      <>
+        We publish tutorial videos, DataSQRL examples, and how-tos on the <Link to="https://www.youtube.com/@datasqrl">DataSQRL Youtube channel</Link>.
+        If you like to learn by watching, this is the place to go.
+        And yes, we are too uncool for TikTok.
       </>
     ),
   },
@@ -84,19 +97,6 @@ const Updates = [
       <>
         The <Link to="/blog">DataSQRL blog</Link> regularly publishes articles on the development of
         DataSQRL, how to implement data services, and lessons we learned along the way. Great morning reading.
-      </>
-    ),
-  },
-  {
-    title: 'Youtube',
-    image: '/img/community/youtube.svg',
-    link: 'https://www.youtube.com/@datasqrl',
-    linkText: 'Subscribe',
-    description: (
-      <>
-        We publish tutorial videos, DataSQRL examples, and how-tos on the <Link to="https://www.youtube.com/@datasqrl">DataSQRL Youtube channel</Link>.
-        If you like to learn by watching, this is the place to go.
-        And yes, we are too uncool for TikTok.
       </>
     ),
   },
