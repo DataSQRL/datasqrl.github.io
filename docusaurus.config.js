@@ -152,9 +152,12 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      image: 'img/logo.png',
       metadata: [
         {name: 'keywords', content: 'data, API, SQRL, DataSQRL, data service, data pipeline, database, streaming, real-time analytics'},
-        {name: 'description', content: 'DataSQRL is a compiler and build tool for streaming data pipelines to build data APIs in minutes.'}
+        {name: 'description', content: 'DataSQRL is a compiler and build tool for streaming data pipelines to build data APIs in minutes.'},
+        {name: 'twitter:card', content: 'summary'},
+        {name: 'twitter:site', content: '@DataSQRL'}
       ],
     }),
 

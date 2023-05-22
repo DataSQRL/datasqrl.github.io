@@ -22,18 +22,6 @@ const header =  {
 
 
 const Support = [
-  // {
-  //   title: 'Stack Overflow',
-  //   image: '/img/community/stackoverflow_sqrl.svg',
-  //   link: 'https://stackoverflow.com/questions/tagged/datasqrl',
-  //   linkText: 'Ask a Question',
-  //   description: (
-  //     <>
-  //       If you have an implementation question or need somebody to point you in the right direction, <Link to="https://stackoverflow.com/questions/tagged/datasqrl">Stack Overflow</Link> is the place
-  //       to ask your question and get help from the community. Even the supposedly "stupid" questions.
-  //     </>
-  //   ),
-  // },
   {
     title: 'Discord',
     image: '/img/community/discord.svg',
@@ -43,6 +31,18 @@ const Support = [
       <>
         If you want to brainstorm with the community or tune into the development process behind DataSQRL,
         join us <Link to="https://discord.gg/49AnhVY2w9">on Discord</Link>. Share your thoughts and feedback while watching how the sausage gets made.
+      </>
+    ),
+  },
+  {
+    title: 'Stack Overflow',
+    image: '/img/community/stackoverflow_sqrl.svg',
+    link: 'https://stackoverflow.com/questions/tagged/datasqrl',
+    linkText: 'Ask a Question',
+    description: (
+      <>
+        If you have an implementation question or need somebody to point you in the right direction, <Link to="https://stackoverflow.com/questions/tagged/datasqrl">Stack Overflow</Link> is the place
+        to ask your question and get help from the community. Even the supposedly "stupid" questions.
       </>
     ),
   },
@@ -59,6 +59,21 @@ const Support = [
       </>
     ),
   },
+];
+
+const Updates = [
+  {
+    title: 'Blog',
+    image: '/img/generic/undraw_blog.svg',
+    link: '/blog',
+    linkText: 'Read the Blog',
+    description: (
+      <>
+        The <Link to="/blog">DataSQRL blog</Link> regularly publishes articles on the development of
+        DataSQRL, how to implement data services, and lessons we learned along the way. Great morning reading.
+      </>
+    ),
+  },
   {
     title: 'Youtube',
     image: '/img/community/youtube.svg',
@@ -72,9 +87,6 @@ const Support = [
       </>
     ),
   },
-];
-
-const Updates = [
   {
     title: 'Twitter',
     image: '/img/community/twitter.svg',
@@ -88,18 +100,7 @@ const Updates = [
       </>
     ),
   },
-  {
-    title: 'Blog',
-    image: '/img/generic/undraw_blog.svg',
-    link: '/blog',
-    linkText: 'Read the Blog',
-    description: (
-      <>
-        The <Link to="/blog">DataSQRL blog</Link> regularly publishes articles on the development of
-        DataSQRL, how to implement data services, and lessons we learned along the way. Great morning reading.
-      </>
-    ),
-  },
+
 ];
 
 
