@@ -44,14 +44,13 @@ The `compile` command accepts these options:
 The `run` command compiles an SQRL script and optional API specification to a data layer and then executes the layer locally. That means, the `run` command starts all engines in the data layer and deploys the compiled artifacts on them. In particular, it starts the API server which can be accessed and queried on localhost with the configured port.
 
 ```bash
-docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run  myscript.sqrl myapischema.graphqls
+docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run myscript.sqrl myapischema.graphqls
 ```
 
 The `run` command takes the same arguments and options as the `compile` command. It also accepts these additional options:
 
 | Option/Flag Name   | Description   |
 |--------------|---------------|
-| `-p` or `--port` | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
 | `-d` or `--debug`| Writes the deployment artifiacts of the compiled data layer into the target directory. `deploy/` by default. |
 
 ## Discover
