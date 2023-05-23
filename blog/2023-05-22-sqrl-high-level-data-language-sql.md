@@ -13,7 +13,7 @@ SQRL is a high-level data programming language that compiles into executables fo
 
 ## Why Do We Need SQRL?
 
-<img src="/img/full_squirrel.svg" alt="SQRL High-Level Data Language >" width="30%"/>
+<img src="/img/reference/reactive_data_layer.svg" alt="Data Layer of data-driven application >" width="30%"/>
 
 The data layer of a data-driven application comprises multiple components: There’s the good ol’ database for data storage and queries, a server for handling incoming data and translating API requests into database queries, a queue/log for asynchronous data processing, and a stream processor for pre-processing and writing new data to the database. Consequently, your data processing code becomes fragmented across various systems, technologies, and languages.
 
