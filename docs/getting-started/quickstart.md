@@ -39,7 +39,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
       GROUP BY week ORDER BY week DESC;
 ```
 
-Now run the DataSQRL compiler to build a data layer from the data transformations and aggregations defined in the script:
+Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
 
 ```bash
 docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl
@@ -60,7 +60,7 @@ To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory seg
 
 ## Query Data API {#query}
 
-The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
@@ -135,7 +135,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 
 Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.
 
-There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and data layer construction to make it work. What are you going to build next?
+There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and data service construction to make it work. What are you going to build next?
 
 ## Next Steps {#next}
 

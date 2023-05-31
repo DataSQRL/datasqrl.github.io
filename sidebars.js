@@ -44,9 +44,9 @@ const sidebars = {
           ],
         },
         'getting-started/concepts/datasqrl',
-        'getting-started/concepts/sqrl',
+        // 'getting-started/concepts/sqrl',
         "getting-started/concepts/why-datasqrl",
-        'getting-started/comparison/overview',
+        'getting-started/concepts/when-datasqrl',
         {
           type: 'category',
           label: 'DataSQRL Tutorials',
@@ -214,7 +214,6 @@ const sidebars = {
           items: [
             'reference/concepts/package',
             'reference/concepts/data-service',
-            'reference/concepts/data-layer',
           ],
         },
       ],

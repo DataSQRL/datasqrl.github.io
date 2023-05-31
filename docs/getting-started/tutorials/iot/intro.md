@@ -6,7 +6,7 @@ title: "Internet of Things"
 
 <img src="/img/generic/undraw_factory.svg" alt="Machine Sensor Data >" width="40%"/>
 
-The goods we sell in our [seed shop](../../../quickstart) are produced in the seed factory. There are lots of big machines in our factory washing, shelling, and roasting seeds for our hungry squirrels. Each machine is equipped with multiple sensors that report temperature and humidity measurements in real-time.
+The goods we sell in our [seed shop](../../../intro/overview) are produced in the seed factory. There are lots of big machines in our factory washing, shelling, and roasting seeds for our hungry squirrels. Each machine is equipped with multiple sensors that report temperature and humidity measurements in real-time.
 
 We are building an IoT application that aggregates all this sensor data and gives us an overview of how our machines are doing.
 
@@ -46,7 +46,7 @@ docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run sensors.sqrl
 
 ## Query Data API {#query}
 
-The running data layer compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

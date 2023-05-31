@@ -6,30 +6,20 @@ title: "Implement SQRL Script"
 
 <img src="/img/index/undraw_programming_sqrl.svg" alt="Programming in SQRL >" width="40%"/>
 
-The logic and function of a data service is defined in the SQRL script.
+The data processing and logic of our application is defined in the SQRL script.
 That's where the action is. We are going to dive deeper into
-the SQRL language and how to write SQRL scripts by reviewing and extending the
-[Quickstart tutorial](../../quickstart).
+the SQL language variant of DataSQRL by reviewing and extending the SQRL script from the [introduction](../overview).
 
-When you make it through this document, you will know the key concepts
+When you make it through this chapter, you will know the key concepts
 of SQRL, be ready to write your own SQRL scripts, and lay down some serious data APIs.
 
 ## What's in a SQRL Script?
 
 An SQRL script defines tables and relationships between them. Together, they
-form the data model of the data service which is exposed as an API.
+form the data model which is exposed as an API.
 
 Tables and relationships are defined in SQL - with some additions and a little
-bit of syntactic sugar thrown in there to make your life easier. We call
-the resulting language variant **SQRL**.
-
-:::info
-
-If you are unfamiliar with SQL, we recommend you read the
-[SQL Primer](/docs/reference/sqrl/sql-primer) which introduces
-the basic concepts of SQL. You'll have to learn SQL eventually, might as well start now.
-
-:::
+bit of syntactic sugar thrown in there to make your life easier.
 
 ## Tables
 
@@ -47,7 +37,7 @@ You define tables in SQRL through import or query statements.
 ### Import Table
 
 An important statement adds a table from an external data source to your SQRL script. 
-In the [quickstart tutorial](../../quickstart#adding-data) we imported the `Orders` table.
+In the [first chapter](../overview#sqrl) we imported the `Orders` table.
 
 ```sqrl
 IMPORT datasqrl.seedshop.Orders;
@@ -71,7 +61,7 @@ at one glance.
 Once you have imported tables, you build with the data they contain.
 You do this by defining new tables that query the data in existing ones.
 
-In the [Quickstart tutorial](../../quickstart#structure) we defined the `Users` table by querying
+In the [first chapter](../overview.md#sqrl) we defined the `Users` table by querying
 for all the unique customer ids in the `Orders` table:
 
 ```sqrl
@@ -88,7 +78,7 @@ NumOrders := SELECT COUNT(*) AS count FROM Orders;
 ```
 
 The `NumOrders` table gets exposed in our data service API as an additional endpoint
-through which the frontend team can query for the current order count. [Run](../../quickstart#run) the modified script and [execute](../../quickstart#query) the following query: 
+through which the frontend team can query for the current order count. [Run](../overview#run) the modified script and [execute](../overview#query) the following query: 
 
 ```graphql
 {
@@ -296,8 +286,7 @@ convenience features to address both of those.
 
 ### Time Windows for Grouping
 
-For the Quickstart tutorial we computed customer spending and savings 
-profiles by week.
+We computed customer spending and savings profiles by week.
 
 ```sqrl
 Users.spending := SELECT endOfWeek(p.time) AS week,
@@ -335,10 +324,9 @@ Note, that this query will return an empty result set for now. We are going to f
 
 And that, my friend, is a pretty good start for our seed shop data API.
 
-
 ## Next Steps
 
-We've built a complete e-commerce data service with customer analysis, recommendation engine, and business intelligence. Good work 💪! Take a look at the [final SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl) that includes the changes and additions we discussed in this chapter. You've learned enough about SQRL to start building data services on your own. 
+We've built a complete e-commerce data service with customer analysis, recommendation engine, and business intelligence. Good work 💪! Take a look at the [final SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl) that includes the changes and additions we discussed in this chapter. You've learned enough about SQRL to start building data microservices on your own. 
 
 In the [**next chapter**](../data-sources), we are going to define our own data source and looks at imports in more detail.
 

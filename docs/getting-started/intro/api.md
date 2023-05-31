@@ -6,7 +6,7 @@ title: "Design the API"
 
 <img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
 
-When we [run](../../quickstart#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compiles and executes a data layer that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
+When we [run](../overview#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compiles and executes a data microservice that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888/graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
@@ -16,7 +16,7 @@ We will be accessing the generated GraphQL API. If you are new to the GraphQL AP
 
 ## Querying the API
 
-In the [Quickstart tutorial](../../quickstart#query) we retrieved the purchase history and spending analysis of the user with `id=10` by running the following query.
+In the [first chapter](../overview) we retrieved the purchase history and spending analysis of the user with `id=10` by running the following query.
 
 ```graphql
 {
@@ -205,7 +205,7 @@ docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl s
 
 If refresh GraphiQL in the browser, you will see your custom API.
 
-Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data layers. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
+Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data services. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
 
 ### Pagination
 
@@ -262,9 +262,70 @@ This query limits the number of returned products to 5 starting after position 2
 Note, that these arguments are applied locally for each record that is returned. In the query above, `volume_10day(limit: 2) ` means that we are asking for up to 2 results *for each* product and not 2 total for the entire request. <br />
 As we navigate through relationships, we need to keep in mind that result set cardinalities multiply and choose small enough page sizes to avoid huge responses from the server.
 
-## Next Steps
+## Mutations and Inserting Data
 
-And there we have our custom, polished data API in GraphQL. You can see the final GraphQL schema [here](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-user.graphqls).
+Next, we are going to collect product visits through the API in order to improve our recommendation engine with recent user behavior. We are going to capture when a user visits a product page and aggregate those product visits to determine which products a user is interested in.
+
+First, we are going to add a mutation to our GraphQL API schema to capture the product visit event. Add the following to the end of the `seedshop.graphqls` file:
+
+```graphql
+type Mutation {
+  ProductVisit(event: VisitEvent!): CreatedProductVisit
+}
+
+input VisitEvent {
+  userid: Int!
+  productid: Int!
+}
+
+type CreatedProductVisit {
+  _source_time: String!
+  productid: Int!
+  userid: Int!
+}
+```
+
+We created a mutation (i.e. an API endpoint that accepts data) called `ProductVisit` that accepts an input of type `VisitEvent` and returns the type `CreatedProductVisit`.
+
+When you create mutations, the input type can have arbitrary fields to represent the data you want to capture. The fields of the mutation return type must be a subset of those fields plus the special field `_source_time` which returns the time when the event was created on the server.
+
+The use the product visits in our SQRL script, we import it like the other data before. Add the following line to the imports in the `seedshop.sqrl`.
+
+```sql
+IMPORT seedshop.ProductVisit;
+```
+
+To import the data from a mutation, you use the name of the GraphQL schema file as the package name (i.e. `seedshop`) and the mutation name as the table name (i.e. `ProductVisit`).
+
+Now, we can aggregate the product visits over the last 90 days for each user to determine what products they might like:
+
+```sql
+Users.product_visits := SELECT productid, count(1) as visits
+      FROM @ JOIN ProductVisit v ON @.id = v.userid
+      WHERE v._source_time > now() - INTERVAL 90 DAY
+      GROUP BY productid ORDER BY visits DESC;
+```
+
+Add the table definition after `Users.past_purchases` and save the SQRL script.
+
+To retrieve `product_visits` through the API, we add the corresponding type and relationship to the GraphQL schema:
+
+```graphql
+
+type User {
+  [existing fields...]
+  product_visits: [product_visits!]
+}
+
+type product_visits {
+  productid: Int!
+  visits: Int!
+}
+```
+
+And there we have our custom, polished data API in GraphQL that allows us to query and add data. Check out the [final GraphQL schema](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-mutation.graphqls) and [corresponding SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-mutation.sqrl).
+
+## Next Steps
 
 Wonderful, you have completed the 3 essential steps of building a data service with DataSQRL:
 * Writing SQRL scripts
@@ -273,6 +334,9 @@ Wonderful, you have completed the 3 essential steps of building a data service w
 
 Now you can go off, build amazing data services, and [tell us](/community) about it.
 
-If you are eager to continue learning, [the next chapter](../advanced) is going to cover some advanced topics for extra credit. If you want to learn how to take your SQRL script to production and how exactly DataSQRL builds data layers, take a look at the [last chapter in this tutorial](../deploy).
+If you are eager to continue learning, we have two more optional chapters in this tutorial:
+
+* [**Advanced Topics**](../advanced) covers additional features of DataSQRL.
+* [**Deployment**](../deploy) shows you how to deploy the data microservice compiled by DataSQRL.
 
 If you want to learn more about querying the data API from your application or favorite programming language, the [reference documentation](/docs/reference/api/graphql/query) has an overview. It also [covers API design](/docs/reference/api/graphql/design) in more detail.

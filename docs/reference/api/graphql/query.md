@@ -12,7 +12,7 @@ GraphQL is a query language for APIs. DataSQRL exposes GraphQL APIs that can be 
 
 If you are unfamiliar with GraphQL, we recommend that you [learn about GraphQL](https://graphql.org/learn/) before proceeding.
 
-For the example code snippets below, we are following the [Quickstart tutorial](/docs/getting-started/quickstart) and assume you are [running](/docs/getting-started/quickstart#run) the Quickstart SQRL script on your local machine. To connect to a different server or use a different example, you need to change the server URI and query examples.
+For the example code snippets below, we are following the [DataSQRL tutorial](/docs/getting-started/intro/overview) and assume you are [running](/docs/getting-started/intro/overview#run) the Quickstart SQRL script on your local machine. To connect to a different server or use a different example, you need to change the server URI and query examples.
 
 ## GraphQL Playground
 

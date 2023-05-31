@@ -2,7 +2,15 @@
 title: "Deploy"
 ---
 
-# Deploying SQRL Projects
+# Deploying DataSQRL Projects
+
+To deploy your DataSQRL project, the first step is to compile the deployment artifacts:
+
+```bash
+docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
+```
+
+The compiler populates the `build/` directory with all the build artifacts needed to compile the data service. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the [package configuration](../../package-config). If no package configuration is provided, DataSQRL uses the default engines.
 
 You can either deploy DataSQRL scripts in standalone mode or deploy each engine separately. Standalone mode is the easiest deployment option. Deploying each engine separately gives you greater control over the deployment, allows you to scale each engine independently with workload requirements, and is robust to failure. You also want to deploy each engine separate if you want to deploy on existing infrastructure or use managed cloud services.
 
@@ -21,11 +29,11 @@ See the [command documentation](../../command#run) for more information.
 
 ## Separate Engines
 
-Deploying each component of the data layer independently gives you complete control over how and where your data layer is deployed.
+Deploying each component of the data service independently gives you complete control over how and where your data service is deployed.
 
 In this deployment mode, DataSQRL compiles deployment artifacts for each engine configured in `engines` section of the [package configuration](../../package-config) which you can then deploy in a way that works for your infrastructure and deployment requirements.
 
-Deploying the entire data layer takes 3 steps:
+Deploying the entire data service takes 3 steps:
 1. Compile script
 2. Generate executables for each engine
 3. Deploy executables to each engine
@@ -38,7 +46,7 @@ First, execute the `compile` command for the SQRL script and optional API specif
 docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 ```
 
-The compiler populates the `build/` directory with all the build artifacts needed to compile the data layer. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the [package configuration](../../package-config).
+The compiler populates the `build/` directory with all the build artifacts needed to compile the data service. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the [package configuration](../../package-config).
 
 ### Build Executables
 
@@ -50,13 +58,13 @@ For this reason, the executables are build in separate docker containers via com
 docker run -it --rm -v $PWD/build:/build datasqrl/engine-{ENGINE_NAME}
 ```
 
-where `{ENGINE_NAME}` is the name of the engines in your data layer. Refer to the [documentation for each engine](../../engines/overview) to learn how to build optimized executables for a particular engine.
+where `{ENGINE_NAME}` is the name of the engines in your data service. Refer to the [documentation for each engine](../../engines/overview) to learn how to build optimized executables for a particular engine.
 
 ### Deploy Executables
 
 Finally, deploy the executables for each engine. This step depends on the infrastructure you are deploying to:
 
-* [**Docker**](../docker): Use docker to deploy the data layer.
+* [**Docker**](../docker): Use docker to deploy the data service.
 * **Managed Services**: coming soon
 * **Existing infrastructure**: Check the [engine documentation](../../engines/overview) on how to deploy the executables on existing data infrastructure (an existing Flink cluster, database cluster, etc).
 

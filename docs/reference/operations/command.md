@@ -18,11 +18,11 @@ All following commands accept these options:
 |--------------|---------------|
 | `-c` or `--config` | Path to one or more [package configuration](../package-config) files. If multiple files are provided, the contents are merged into a single configuration file in the order listed. If this option is omitted, the `package.json` file in the current directory is used. If no such file exists, DataSQRL generates a default package configuration. |
 
-The package configuration configures the compiler, data layer architecture, [engines](../engines/overview), and dependencies among other aspects. Review the [package configuration documentation](../package-config) for more information.
+The package configuration configures the compiler, data service architecture, [engines](../engines/overview), and dependencies among other aspects. Review the [package configuration documentation](../package-config) for more information.
 
 ## Compile
 
-The `compile` command compiles an SQRL script and optional API specification to a data layer. The deployment artifacts for the data layer are written to the target directory.
+The `compile` command compiles an SQRL script and optional API specification to a data service. The deployment artifacts for the data service are written to the target directory.
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
@@ -35,13 +35,13 @@ The `compile` command accepts these options:
 | Option/Flag Name   | Description                                                                                                                                                                                                                                                                       |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-a` or `--api`    | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
-| `-t` or `--target` | Writes the deployment artifiacts of the compiled data layer into the target directory. `deploy/` by default.                                                                                                                                                                   |
+| `-t` or `--target` | Writes the deployment artifiacts of the compiled data service into the target directory. `deploy/` by default.                                                                                                                                                                   |
 | `--nolookup`       | Disables lookup of packages in the repository that cannot be resolved locally or as dependencies.                                                                                                                                                                                 |
 
 
 ## Run
 
-The `run` command compiles an SQRL script and optional API specification to a data layer and then executes the layer locally. That means, the `run` command starts all engines in the data layer and deploys the compiled artifacts on them. In particular, it starts the API server which can be accessed and queried on localhost with the configured port.
+The `run` command compiles an SQRL script and optional API specification to a data service and then executes the layer locally. That means, the `run` command starts all engines in the data service and deploys the compiled artifacts on them. In particular, it starts the API server which can be accessed and queried on localhost with the configured port.
 
 ```bash
 docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run  myscript.sqrl myapischema.graphqls
@@ -52,7 +52,7 @@ The `run` command takes the same arguments and options as the `compile` command.
 | Option/Flag Name   | Description   |
 |--------------|---------------|
 | `-p` or `--port` | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
-| `-d` or `--debug`| Writes the deployment artifiacts of the compiled data layer into the target directory. `deploy/` by default. |
+| `-d` or `--debug`| Writes the deployment artifiacts of the compiled data service into the target directory. `deploy/` by default. |
 
 ## Discover
 

@@ -14,7 +14,7 @@ DataSQRL table schemas are stored in files ending in `.schema.yml`. There is one
 
 ## Example DataSQRL Schema
 
-This is the DataSQRL schema of the `orders` table from the [Quickstart tutorial](/docs/getting-started/quickstart):
+This is the DataSQRL schema of the `orders` table from the [DataSQRL tutorial](/docs/getting-started/intro/overview):
 
 ```yml
 name: "orders"
@@ -111,7 +111,7 @@ To define arrays of scalar types, wrap the type in square brackets. For instance
 
 ## Data Constraints
 
-The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build more efficient data layers.
+The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build more efficient data services.
 
 DataSQRL schema supports the following test constraints:
 

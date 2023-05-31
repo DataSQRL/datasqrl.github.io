@@ -7,7 +7,7 @@ import styles from './HomepageHeader.module.css';
 export default function HomepageHeader({title, tagLine, text, buttonLink, buttonText, LogoSvg}) {
   let button;
   if (buttonLink) {
-    button = <div className={styles.buttons}>
+    button = <div className={clsx('margin-bottom--lg', styles.buttons)}>
                <Link className="button button--primary button--lg" to={buttonLink}>{buttonText}</Link>
              </div>;
   } else {

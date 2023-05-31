@@ -38,4 +38,4 @@ docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run myscript.sqrl schem
 
 You can use any authentication layer with the compiled data API.
 
-JWT-based authorization is coming soon.
+JWT-based authorization is on the roadmap.

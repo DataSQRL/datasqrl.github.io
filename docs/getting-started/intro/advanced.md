@@ -1,10 +1,10 @@
 ---
-title: "Advanced Concepts"
+title: "Advanced Topics"
 ---
 
-# Advanced Concepts in DataSQRL
+# Advanced Topics in DataSQRL
 
-You have made it through the entire introduction tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some additional aspects of DataSQRL with pointers to more information, so you can continue your journey to ninja SQRL status 🥇. 
+You have made it through the entire introduction tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some additional aspects of DataSQRL with pointers to more information, so you can continue your journey to ninja squirrel status 🐿🥇. 
 
 ## Relationship Expressions
 
@@ -81,7 +81,7 @@ Finally, add the following statement to export to our file system sink.
 EXPORT UserPromotion TO mySinkPackage.promotion;
 ```
 
-When you [run](../../quickstart#run) the script, a folder with the name `promotion` (the name of our sink table we defined in the `EXPORT` statement) will appear inside the `mysink-output` folder that contains partitioned files with the `UserPromotion` records in them in Json format.
+When you [run](../overview#run) the script, a folder with the name `promotion` (the name of our sink table we defined in the `EXPORT` statement) will appear inside the `mysink-output` folder that contains partitioned files with the `UserPromotion` records in them in Json format.
 
 Streams are a powerful feature to *react* to changes in the data and notify downstream systems immediately. DataSQRL supports various types of data sinks including logs. Check out the [data sources and sinks documentation](/docs/reference/sources/overview) for more information.
 

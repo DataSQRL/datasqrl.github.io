@@ -6,13 +6,16 @@ Welcome to DataSQRL! You have found the DataSQRL documentation - your gateway to
 
 ## Getting Started
 
-If you are new to DataSQRL, start with the [Getting Started](../getting-started/overview) section of this documentation. It contains the [Quickstart tutorial](../getting-started/quickstart) that only takes a few minutes and an extended [DataSQRL introduction](../getting-started/intro/overview) which teaches you everything you need to know to start building data APIs with DataSQRL.
+If you are new to DataSQRL, start with the [Getting Started](../getting-started/overview) section of this documentation. 
 
-You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), [why it exists](../getting-started/concepts/why-datasqrl), and [whether to use DataSQRL](../getting-started/comparison/overview) for your next data service implementation.
+* The [Quickstart](../getting-started/quickstart) shows you how to build a streaming application in a few minutes. 
+* The [DataSQRL tutorial](../getting-started/intro/overview) introduces you to all the concepts of DataSQRL in more depth while building a customer 360° application and recommendation engine.
+
+You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), [why it exists](../getting-started/concepts/why-datasqrl), and [whether to use DataSQRL](../getting-started/concepts/when-datasqrl) for your event-driven microservice or streaming application.
 
 ## Getting Information
 
-The [reference documentation](../reference/overview) covers all aspects of DataSQRL and the SQRL language in detail.
+The [reference documentation](../reference/overview) covers all aspects of DataSQRL in detail. If you want more information on how to use DataSQRL or are looking for comprehensive documentation, this is your place to go.
 
 DataSQRL is an open-source project. If you want to learn more about the internals or contribute to the project, take a look at the [developer documentation](../dev/overview).
 
