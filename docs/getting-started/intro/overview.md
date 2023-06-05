@@ -103,11 +103,17 @@ We are going to cover SQRL in more detail in the [next chapter](../sqrl), but th
 
 ## Run Script {#run}
 
-Now run the DataSQRL compiler to build an integrated microservice from the data transformations and aggregations defined in the script:
+Invoke the DataSQRL compiler to build an integrated microservice from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl
+docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl
 ```
+
+Launch the microservice with:
+```bash
+(cd build/deploy; docker compose up)
+```
+
 :::note
 
 If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 6gb.
@@ -117,7 +123,7 @@ If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory
 
 ## Query Data API {#query}
 
-The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://server:8888/graphiql/`](http://server:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

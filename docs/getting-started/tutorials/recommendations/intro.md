@@ -39,15 +39,21 @@ Recommendation := SELECT beforeURL AS url, afterURL AS rec,
     GROUP BY url, rec ORDER BY url ASC, frequency DESC;
 ```
 
-Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
+Now run the DataSQRL compiler to build a recommendation engine from the data transformations and aggregations defined in the script:
 
 ```bash
-docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run clickstream.sqrl
+docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl
+```
+
+To run the recommendation engine, execute:
+
+```bash
+(cd build/deploy; docker compose up)
 ```
 
 ## Query Data API {#query}
 
-The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://server:8888/graphiql/`](http://server:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

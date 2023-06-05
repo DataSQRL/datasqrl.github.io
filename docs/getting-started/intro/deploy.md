@@ -8,13 +8,14 @@ title: "Deployment"
 
 We have built a customer 360 application and recommendation engine, now it's time to take it to production.
 
+<!--
 Throughout the tutorial, we used the DataSQRL `run` command to run our SQRL scripts. That command does two things:
 
 1. It compiles the script and API specification into executables.
 2. It orchestrates and runs the executables in a single process.
 
 This convenient for development, but for deployment we want more control over how the executables are compiled and deployed. That's what we are going to cover in this chapter.
-
+-->
 
 ## Run the Compiler
 
@@ -28,7 +29,6 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl seedshop.graph
 
 The compiler takes a SQRL script, API specification, and optional package configuration as arguments and produces an executable for each component of our data microservice:
 
-
 - topics and schemas for Kafka
 - a Flink jar with all dependencies
 - a physical data model and index definitions for the database
@@ -40,12 +40,12 @@ You can find all the executables in the `build/deploy` folder. It also contains 
 
 ```bash
 > cd build/deploy
-> docker-compose up
+> docker compose up
 ```
 
 The docker-compose template starts a Kafka cluster, Flink cluster, and Postgres database. It initializes the database with the compiled database schema and index structures. It installs the topics in the Kafka cluster. It submits the Flink jar to the Flink cluster. Finally, it launches a server instance with the API model.
 
-To verify that everything is working correctly, you can execute GraphQL queries against the API through GraphiQL running at `http://servlet:8888/graphiql/`.
+To verify that everything is working correctly, you can execute GraphQL queries against the API through GraphiQL running at [`http://server:8888/graphiql/`](http://server:8888/graphiql/).
 
 ## Customize Deployment
 

@@ -21,8 +21,7 @@ Deploying each engine separately gives you more flexibility and allows you to de
 To deploy a SQRL script and API specification with docker, run `docker-compose up` in the `build/deploy` folder:
 
 ```bash
-> cd build/deploy
-> docker-compose up
+(cd build/deploy; docker compose up)
 ```
 
 Docker-compose uses the `docker-compose.yml` template in the `deploy` folder which you can modify to your needs.

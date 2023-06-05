@@ -38,7 +38,7 @@ The `compile` command accepts these options:
 | `-t` or `--target` | Writes the deployment artifiacts of the compiled data service into the target directory. `deploy/` by default.                                                                                                                                                                   |
 | `--nolookup`       | Disables lookup of packages in the repository that cannot be resolved locally or as dependencies.                                                                                                                                                                                 |
 
-
+<!--
 ## Run
 
 The `run` command compiles an SQRL script and optional API specification to a data service and then executes the layer locally. That means, the `run` command starts all engines in the data service and deploys the compiled artifacts on them. In particular, it starts the API server which can be accessed and queried on localhost with the configured port.
@@ -53,6 +53,8 @@ The `run` command takes the same arguments and options as the `compile` command.
 |--------------|---------------|
 | `-p` or `--port` | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
 | `-d` or `--debug`| Writes the deployment artifiacts of the compiled data service into the target directory. `deploy/` by default. |
+
+-->
 
 ## Discover
 

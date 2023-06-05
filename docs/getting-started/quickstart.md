@@ -42,17 +42,18 @@ SensorMaxTemp := SELECT sensorid, max(temp) as maxTemp
 
 DataSQRL's flavor of SQL is called "SQRL", has a more concise syntax, and allows explicit data and function imports.
 
-In the script, we import the sensor data we are monitoring and a time function we are going to use in the aggregation.
+In the script, we import the sensor data we are monitoring and a time function we use for aggregation.
 
 We define the `SecReading` table that aggregates all sensor metrics within one second to smooth our temperature readings. 
 We define another table `SensorMaxTemp` which computes the maximum temperature in the last minute for each sensor.
 
 ## Run Script {#run}
 
-Run the DataSQRL compiler to build a microservice from our SQRL script and expose the processed metrics data through an API.
+DataSQRL compiles our SQRL script into an integrated microservice with the following command:
+
 
 ```bash
-docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run metrics.sqrl
+docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl
 ```
 
 :::note
@@ -61,16 +62,17 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::
 
-:::note
+To run the microservice, execute:
 
-To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 6gb. 
+```bash
+(cd build/deploy; docker compose up)
+```
 
-:::
-
+This will launch all components of the microservice to ingest, process, store, and serve the data through an API.
 
 ## Query API {#query}
 
-Open your favorite browser and navigate to [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+Open your favorite browser and navigate to [`http://server:8888/graphiql/`](http://server:8888/graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
@@ -90,7 +92,7 @@ Got a little more time? Let's customize the GraphQL API and add a metrics ingest
 
 By default, DataSQRL generates a GraphQL schema for us based on the tables we define in the SQRL script. That's great for rapid prototyping, but eventually we want to customize the API and limit data access.
 
-To save us time, we are going to start with the GraphQL API that DataSQRL generates for us by running this command (to terminate the running DataSQRL service, hit `CTRL-C`):
+To save us time, we are going to start with the GraphQL API that DataSQRL generates for us by running this command (to terminate the running DataSQRL microservice, hit `CTRL-C`):
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl -a graphql
@@ -112,10 +114,11 @@ type Query {
 
 Note, that we made `sensorid` a required argument for the `SecReading` query endpoint.
 
-Now, run the compiler with the GraphQL schema we just created.
+Now, run the compiler with the GraphQL schema we just created and then launch the updated microservice:
 
 ```bash
-docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run metrics.sqrl metricsapi.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl metricsapi.graphqls;
+(cd build/deploy; docker compose up)
 ```
 
 When you refresh GraphiQL in the browser, you see that the API is simpler and only exposes the data for our use case.
@@ -152,7 +155,7 @@ SensorReading.time := _source_time;
 
 We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `_source_time` which captures the time data was ingested through the API.
 
-Terminate and run the compiler again to refresh our microservice. In GraphiQL, run the following mutation to add a temperature reading:
+Terminate the running service, run the compiler again, and re-launch the microservice. In GraphiQL, run the following mutation to add a temperature reading:
 
 ```graphql
 [TODO: add!]
