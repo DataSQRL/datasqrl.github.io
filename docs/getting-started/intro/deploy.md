@@ -45,7 +45,7 @@ You can find all the executables in the `build/deploy` folder. It also contains 
 
 The docker-compose template starts a Kafka cluster, Flink cluster, and Postgres database. It initializes the database with the compiled database schema and index structures. It installs the topics in the Kafka cluster. It submits the Flink jar to the Flink cluster. Finally, it launches a server instance with the API model.
 
-To verify that everything is working correctly, you can execute GraphQL queries against the API through GraphiQL running at [`http://server:8888/graphiql/`](http://server:8888/graphiql/).
+To verify that everything is working correctly, you can execute GraphQL queries against the API through GraphiQL running at [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/).
 
 ## Customize Deployment
 

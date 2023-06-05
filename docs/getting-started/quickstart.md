@@ -58,7 +58,7 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl
 
 :::note
 
-To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes an eternity to download.
+To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes an eternity to download. Make sure you are using docker-compose V2.
 
 :::
 
@@ -72,7 +72,7 @@ This will launch all components of the microservice to ingest, process, store, a
 
 ## Query API {#query}
 
-Open your favorite browser and navigate to [`http://server:8888/graphiql/`](http://server:8888/graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+Open your favorite browser and navigate to [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

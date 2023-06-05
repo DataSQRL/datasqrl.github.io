@@ -18,7 +18,7 @@ For the example code snippets below, we are following the [DataSQRL tutorial](/d
 
 DataSQRL includes [GraphiQL](https://github.com/graphql/graphiql) which allows you to create, execute, and profile queries as well as inspect the GraphQL API directly in your browser.
 
-After you [run](../../../operations/command#run) your SQRL script on your machine, open the URL [`http://server:8888/graphiql/`](http://server:8888/graphiql/) in a browser to access GraphiQL.
+After you [run](../../../operations/command#run) your SQRL script on your machine, open the URL [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) in a browser to access GraphiQL.
 
 Now, you can paste GraphQL queries into the left-hand panel and hit the play button `▸` in the middle to see the result in the right-hand panel.
 
@@ -37,7 +37,7 @@ If you don't have the client installed, run `npm install @apollo/client graphql`
 import {ApolloClient, gql, InMemoryCache} from "@apollo/client";
 
 const client = new ApolloClient({
-    uri: "http://server:8888/graphql",
+    uri: "http://localhost:8888//graphql",
     cache: new InMemoryCache(),
 });
 ```

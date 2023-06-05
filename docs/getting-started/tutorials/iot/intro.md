@@ -52,7 +52,7 @@ To run the data service, execute:
 
 ## Query Data API {#query}
 
-The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://server:8888/graphiql/`](http://server:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

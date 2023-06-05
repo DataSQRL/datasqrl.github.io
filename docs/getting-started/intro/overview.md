@@ -18,7 +18,7 @@ That sounds like a lot, but DataSQRL makes it easy. Plus, we'll break it up into
 
 Before we get started, let's get some setup tasks out of the way:
 
-1. Make sure you have [Docker installed](https://docs.docker.com/get-docker/) and running on your machine.
+1. Make sure you have [Docker installed](https://docs.docker.com/get-docker/) and running on your machine. Run `docker compose version` in the terminal and check that the version starts with `v2`.
 2. Create a directory for our project files. Type the following into your terminal or command line:
 
 ```bash
@@ -123,7 +123,7 @@ If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory
 
 ## Query Data API {#query}
 
-The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://server:8888/graphiql/`](http://server:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {

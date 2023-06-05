@@ -103,14 +103,14 @@ Recommendation := SELECT beforeURL AS url, afterURL AS rec,
     usecase: "Metrics & Monitoring",
     description: "Aggregate metrics data and monitor maximum temperature in the last hour.",
     script:
-      `IMPORT mySourcePackage.*;     -- Import all data
+      `IMPORT datasqrl.example.sensors.*;     -- Import all data
 IMPORT time.*;                -- Import all time functions
 /* Aggregate sensor readings to minute */
 MinReadings := SELECT sensorid, endOfMinute(time) as timeMin,
         avg(temperature) as temp FROM SensorReading
     GROUP BY sensorid, timeMin;
 /* Get max temperature in last hour */
-MaxSensorTemp := SELECT sensorid, max(temp) as maxTemp,
+MaxSensorTemp := SELECT sensorid, max(temp) as maxTemp
     FROM MinReadings
     WHERE timeMin >= now() - INTERVAL 1 HOUR
     GROUP BY sensorid;`,
@@ -137,7 +137,7 @@ Users := SELECT DISTINCT customerid AS id FROM Orders;
 Users.purchases := JOIN Orders ON Orders.customerid = @.id;
 /* Aggregate the purchase history for each user by week */
 Users.spending := SELECT endOfWeek(p.time) AS week,
-         sum(i.quantity * i.unit_price) AS spend,
+         sum(i.quantity * i.unit_price) AS spend
       FROM @.purchases p JOIN p.items i
       GROUP BY week ORDER BY week DESC;`,
     queryURL: "?query=query%20UserSpending(%24userid%3A%20Int!)%20%7B%0A%09Users(id%3A%20%24userid)%20%7B%0A%20%20%20%20spending%20%7B%0A%20%20%20%20%20%20week%0A%20%20%20%20%20%20spend%0A%20%20%20%20%20%20saved%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D&operationName=UserSpending&variables=%7B%0A%20%20\"userid\"%3A%202%0A%7D",

@@ -6,7 +6,7 @@ title: "Design the API"
 
 <img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
 
-When we [run](../overview#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compilesa data microservice that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://server:8888/graphiql/`. Let's look at those queries in more detail.
+When we [run](../overview#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compilesa data microservice that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888//graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
