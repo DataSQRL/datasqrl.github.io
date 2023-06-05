@@ -2,7 +2,7 @@
 title: "Build"
 ---
 
-# Building SQRL Projects
+# Building DataSQRL Projects
 
 This page provides an overview of how to compile, run, and debug SQRL scripts and projects using the DataSQRL command. <br />
 The [command documentation](../command) has a complete reference of the DataSQRL command and all options.
@@ -21,9 +21,9 @@ The command compiles the script and API specification into an integrated data se
 
 DataSQRL supports [multiple engines](../engines/overview) and data service architectures. That means, you can configure the architecture of the targeted data service and what systems will execute individual components of the compiled data service.
 
-<img src="/img/dev/simple-pipeline.svg" alt="Simple DataSQRL data service architecture" width="500"/>
+<img src="/img/reference/reactive_microservice.svg" alt="DataSQRL data service architecture >" width="50%"/>
 
-The figure above shows a simple data service architecture that consists of a stream engine, database engine, and API server. The stream engine ingests the imported data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
+The figure shows a data service architecture that consists of a Apache Kafka, Apache Flink, a database engine, and API server. Kafka holds the input and streaming data. Flink ingests the data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
 
 The data service architecture and engines are configured in the [package configuration](../package-config). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../command) for all command line options.
 

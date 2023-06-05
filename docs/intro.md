@@ -11,7 +11,7 @@ If you are new to DataSQRL, start with the [Getting Started](../getting-started/
 * The [Quickstart](../getting-started/quickstart) shows you how to build a streaming application in a few minutes. 
 * The [DataSQRL tutorial](../getting-started/intro/overview) introduces you to all the concepts of DataSQRL in more depth while building a customer 360° application and recommendation engine.
 
-You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), [why it exists](../getting-started/concepts/why-datasqrl), and [whether to use DataSQRL](../getting-started/concepts/when-datasqrl) for your event-driven microservice or streaming application.
+You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), [its benefits](../getting-started/concepts/why-datasqrl), and [whether to use DataSQRL](../getting-started/concepts/when-datasqrl) for your application.
 
 ## Getting Information
 

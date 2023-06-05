@@ -4,45 +4,55 @@ title: "Quickstart Tutorial"
 
 # DataSQRL Quickstart in 5 Minutes
 
-<img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>
+<img src="/img/getting-started/squirrel_computer.jpeg" alt="Metrics Monitoring Quickstart >|" width="35%"/>
 
-Because we have the humor of middle schoolers on Adderall, this quickstart tutorial
-implements a Customer 360 API for the customers of our online DataSQRL seed shop. Seeds and squirrels - how funny are we?
+We are going to build a metrics monitoring service with DataSQRL in 5 minutes. Tik tok, let's go!
 
-We want to build a realtime data API that exposes a customer's purchase history and provides a spending analysis. Let's create an SQRL script for this purpose.
+## Create Script
 
-## Run SQRL Script {#run}
+First, we are going to define the data processing for our monitoring service using SQL.
 
-In the terminal or command line, create an empty folder for the SQRL script:
+:::info
 
-```bash
-> mkdir seedshop; cd seedshop
-```
+If you are unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer) first.
 
-Create a new file in that folder called `seedshop.sqrl` and paste the following content into the file (we will explain the script line-by-line [below](#sqrl)):
+:::
 
-```sql
-IMPORT datasqrl.seedshop.Orders;  
-IMPORT time.endOfWeek;            
-
-Orders.items.total := quantity * unit_price - discount?0.0;
-Orders.totals := SELECT sum(total) as price,
-                  sum(discount?0.0) as saving FROM @.items;
-
-Users := SELECT DISTINCT customerid AS id FROM Orders;
-
-Users.purchases := JOIN Orders ON Orders.customerid = @.id;
-
-Users.spending := SELECT endOfWeek(p.time) AS week,
-         sum(t.price) AS spend, sum(t.saving) AS saved
-      FROM @.purchases p JOIN p.totals t
-      GROUP BY week ORDER BY week DESC;
-```
-
-Now run the DataSQRL compiler to build a data service from the data transformations and aggregations defined in the script:
+In the terminal or command line, create an empty folder for the SQL script:
 
 ```bash
-docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run seedshop.sqrl
+> mkdir metrics; cd metrics
+```
+
+Then create a new file called `metrics.sqrl` and copy-paste the following SQL code:
+
+```sql title=metrics.sqrl
+IMPORT datasqrl.example.sensors.SensorReading; -- Import metrics
+IMPORT time.endOfSecond;  -- Import time function
+/* Aggregate sensor readings to second */
+SecReading := SELECT sensorid, endOfSecond(time) as timeSec,
+                     avg(temperature) as temp 
+              FROM SensorReading GROUP BY sensorid, timeSec;
+/* Get max temperature in last minute per sensor */
+SensorMaxTemp := SELECT sensorid, max(temp) as maxTemp
+                 FROM SecReading
+                 WHERE timeSec >= now() - INTERVAL 1 MINUTE
+                 GROUP BY sensorid;
+```
+
+DataSQRL's flavor of SQL is called "SQRL", has a more concise syntax, and allows explicit data and function imports.
+
+In the script, we import the sensor data we are monitoring and a time function we are going to use in the aggregation.
+
+We define the `SecReading` table that aggregates all sensor metrics within one second to smooth our temperature readings. 
+We define another table `SensorMaxTemp` which computes the maximum temperature in the last minute for each sensor.
+
+## Run Script {#run}
+
+Run the DataSQRL compiler to build a microservice from our SQRL script and expose the processed metrics data through an API.
+
+```bash
+docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run metrics.sqrl
 ```
 
 :::note
@@ -53,92 +63,109 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::note
 
-To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 5gb. 
+To run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 6gb. 
 
 :::
 
 
-## Query Data API {#query}
+## Query API {#query}
 
-The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+Open your favorite browser and navigate to [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
-Users (id: 10) {
-    purchases {
-        id
-        totals {
-            price
-            saving
-        }
-    }    
-    spending {
-        week
-        spend
-        saved
-    }
-}}
+SensorMaxTemp (sensorid: 1) {
+    maxTemp
+}
+}
 ```
 
-When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel. You now have a working data API you can integrate into your application. That took less time than installing a software update.
+When you hit the "run" button you get the maximum temperature for the sensor with id `1` in the last minute.
 
-## Quick Tour of SQRL {#sqrl}
+And there you have it: a running data microservice that ingests metrics, aggregates them, and exposes the results through a GraphQL API which you can call in your applications.
 
-The magic of our little seed-shop data service happens in the SQRL script we created above. The SQRL script imports data tables and defines new tables based on that data. Those tables are exposed in the API. If you have another few minutes to spare, let's look at how that works.
+## Customize API
 
-:::info
+Got a little more time? Let's customize the GraphQL API and add a metrics ingestion endpoint.
 
-SQRL is an extension of SQL, and we are going to use some basic SQL syntax. If you are unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer) first.
+By default, DataSQRL generates a GraphQL schema for us based on the tables we define in the SQRL script. That's great for rapid prototyping, but eventually we want to customize the API and limit data access.
 
-:::
+To save us time, we are going to start with the GraphQL API that DataSQRL generates for us by running this command (to terminate the running DataSQRL service, hit `CTRL-C`):
 
-
-```sql 
-IMPORT datasqrl.seedshop.Orders;  
+```bash
+docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl -a graphql
 ```
 
-The `import` statement imports the `Orders` table from the package [datasqrl.seedshop](https://dev.datasqrl.com/package/datasqrl.seedshop). SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you.
+There is now a file called `schema.graphqls` in the same folder as our script. Rename it to `metricsapi.graphqls` and take a look.
+Notice, how each table defined in our SQRL script maps to a query endpoint in the API and an associated result type. The query endpoints accept arguments for each column of the table to filter the results by column values.
 
-The `Orders` table has a nested `items` table to represent the nested items records for each order. SQRL supports nested tables to represent hierarchical data natively.
+We are going to remove most of those arguments to only support querying by `sensorid`. We will also remove the `SensorReading` query endpoint and result type to only expose the smoothed-out sensor readings from the `SecReading` table.
+
+In the `metricsapi.graphqls` file, remove the `SensorReading` type and replace the query definition with the following:
+
+```graphql
+type Query {
+  SecReading(sensorid: Int!): [SecReading!]
+  SensorMaxTemp(sensorid: Int): [SensorMaxTemp!]
+}
+```
+
+Note, that we made `sensorid` a required argument for the `SecReading` query endpoint.
+
+Now, run the compiler with the GraphQL schema we just created.
+
+```bash
+docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run metrics.sqrl metricsapi.graphqls
+```
+
+When you refresh GraphiQL in the browser, you see that the API is simpler and only exposes the data for our use case.
+
+## Ingest Metrics
+
+So far, we have ingested metrics data from an external source imported from the [DataSQRL repository](http://dev.datasqrl.com). The data source is static which is convenient for whipping up an example data service, but we want our microservice to provide a metrics ingestion endpoint.
+
+No problem, let's add it to our GraphQL schema by appending the following mutation to the `metricsapi.graphqls` file we created above
+
+```graphql title=metricsapi.graphqls
+type Mutation {
+  AddReading(metric: SensorReading!): CreatedReading
+}
+
+input SensorReading {
+  sensorid: Int!
+  temperature: Float!
+}
+
+type CreatedReading {
+  _source_time: String!
+  sensorid: Int!
+}
+```
+
+To use the data created by this mutation in our SQRL script, we have to import it. Replace the first two line of the `metrics.sqrl` script with:
 
 ```sql
-Orders.items.total := quantity * unit_price - discount?0.0;
+IMPORT metricsapi.AddReading AS SensorReading;
+IMPORT time.endOfSecond;
+SensorReading.time := _source_time;
 ```
 
-In SQRL we can add columns to existing tables via simple column expressions. Here, we are adding the `total` column to the nested `Orders.items` table to compute the total price for each item in an order.
+We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `_source_time` which captures the time data was ingested through the API.
 
-```sql 
-Orders.totals := SELECT sum(total) as price,
-                  sum(discount?0.0) as saving FROM @.items;
+Terminate and run the compiler again to refresh our microservice. In GraphiQL, run the following mutation to add a temperature reading:
+
+```graphql
+[TODO: add!]
 ```
 
-We are defining `totals` as a nested table underneath `Orders` to compute the total price and savings for each order by aggregating over all items in the order. Note the use of `@` in the `FROM` clause. `@` refers to each row in the parent `Orders` table and is used when defining localized queries. A localized query allows us to refer to the items for *each* order instead of aggregating across items for *all* orders.
+and query it using the following query:
 
-`Orders.items` is a nested table that is accessible via the relationship column `items` from each row in the `Orders` table to retrieve the items of that order.
-
-SQRL supports relationships as first-class citizens of the language, so we can express relationships in the data explicitly.
-
-```sql
-Users.purchases := JOIN Orders ON Orders.customerid = @.id;
+```graphql
+[TODO: add!]
 ```
-This statement defines the relationship column `purchases` on the `Users` table which links a user to the orders they placed. The `@` refers to the parent `Users` table on the left-hand side.
 
-And, for the grand finale, we have the spending analysis that aggregates a user's total spending by week:
-
-```sql
-Users.spending := SELECT endOfWeek(p.time) AS week,
-         sum(t.price) AS spend, sum(t.saving) AS saved
-      FROM @.purchases p JOIN p.totals t
-      GROUP BY week ORDER BY week DESC;
-```
-`spending` is defined as a nested table underneath `Users` and uses the imported time-window function `endOfWeek` to aggregate the totals for all orders that fall within a given week.
-
-Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.
-
-There you have it: a whole data service packed into a little script. And DataSQRL takes care of all the laborious scaffolding and data service construction to make it work. What are you going to build next?
+Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and services metrics data. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
 
 ## Next Steps {#next}
 
-Read the [DataSQRL introduction](../intro/overview) which extends our seed shop example and explains all the concepts we touched up here in more detail.
-
-If you found this short tutorial too dense or missing information, the [DataSQRL introduction](../intro/overview) will fill in the gaps and teach you everything you need to know to build your own data services in DataSQRL.
+DataSQRL provides a number of features that make it easy, fast, and efficient to build event-driven microservices and streaming applications. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!

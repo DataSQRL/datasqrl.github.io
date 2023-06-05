@@ -25,7 +25,7 @@ const header =  {
 const WhatDataSQRLServices = [
   {
     title: 'Workshops',
-    image: '/img/index/undraw_personal_training_sqrl.svg',
+    image: '/img/index/undraw_programming_sqrl.svg',
     description: (
       <>
         A 2-day workshop combines prototyping a data service for your choice of use case with a miniature training.

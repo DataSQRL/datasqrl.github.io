@@ -1,6 +1,6 @@
 # Package
 
-A package is a grouping of files that the [DataSQRL compiler](/docs/getting-started/concepts/datasqrl) can load at compile time to resolve external dependencies of an [SQRL](/docs/getting-started/concepts/sqrl) script. A package is represented by a directory on the local filesystem. DataSQRL locates the package directory relative to the [build path](../../operations/build).
+A package is a grouping of files that the [DataSQRL compiler](/docs/getting-started/concepts/datasqrl) can load at compile time to resolve external dependencies of an [SQRL](/docs/reference/sqrl/overview) script. A package is represented by a directory on the local filesystem. DataSQRL locates the package directory relative to the [build path](../../operations/build).
 
 For example, the [import](../../sqrl/import) statement `IMPORT datasqrl.seedshop.Orders` is resolved by loading the `Orders` source table from the package `datasqrl.seedshop`. DataSQRL locates the package `datasqrl.seedshop` as the sub-directory `datasqrl/seedshop/` in the build directory.
 

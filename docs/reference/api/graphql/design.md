@@ -165,6 +165,39 @@ type totals {
 }
 ```
 
+## Mutations
+
+To supporting adding data through the API you add a mutation to the GraphQL schema. The mutation should have a single argument with the input type of the data to be added. The return type of the mutation can contain all or some of the fields of the input type in addition to the special field `_source_time` which contains the timestamp when the data was added.
+
+For example, in the [DataSQRL tutorial](/docs/getting-started/intro/api) we added the following mutation to capture product page visits:
+
+```graphql
+type Mutation {
+  ProductVisit(event: VisitEvent!): CreatedProductVisit
+}
+
+input VisitEvent {
+  userid: Int!
+  productid: Int!
+}
+
+type CreatedProductVisit {
+  _source_time: String!
+  productid: Int!
+  userid: Int!
+}
+```
+
+This defines a single mutation called `ProductVisit` which accepts input data of the type `VisitEvent`.
+
+The added data can then be [imported](/docs/reference/sqrl/import) into a SQRL script by using the GraphQL schema file name as the package name and the name of the mutation as the table name.
+
+For example, if the GraphQL schema filename is `seedshop.graphqls` then we can import the product page visit data via
+
+```sql
+IMPORT seedshop.ProductVisit;
+```
+
 ## Additional Reading
 
 Refer to the [API chapter](../../../../getting-started/intro/api) of the intro tutorial for a step-by-step guide to customizing GraphQL APIs.

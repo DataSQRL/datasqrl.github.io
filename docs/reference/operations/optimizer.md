@@ -14,9 +14,10 @@ The DataSQRL compiler produces a computation DAG (directed, acyclic graph) of al
 
 The global optimizer determines which engine executes the computation of which table in the DAG.
 
-<img src="/img/dev/simple-pipeline.svg" alt="Simple DataSQRL data service architecture" width="500"/>
+<img src="/img/reference/reactive_microservice.svg" alt="DataSQRL data service architecture >" width="50%"/>
 
-For example, suppose we are compiling a SQRL script against the data service architecture shown above, which consist of a stream, database, and server engine in sequence. <br />
+
+For example, suppose we are compiling a SQRL script against the data service architecture shown to the left, which consist of the Flink stream processor, a database, API server, and Kafka log in a circle that visualizes the data flow of the data service. <br />
 If we precompute a table in the stream engine, those results are readily available at request time which leads to fast response times and good API performance compared to having to compute the results in the database. However, pre-computing all possible results for the API can be very wasteful or outright impossible due to the number of possible query combinations.
 
 The global compiler strives to find the right balance between pre-computing tables for high performance and computing results at request time to reduce waste in order to build efficient data services.

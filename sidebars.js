@@ -183,7 +183,7 @@ const sidebars = {
                 id: 'reference/operations/deploy/overview',
               },
               items: [
-                'reference/operations/deploy/docker'
+                // 'reference/operations/deploy/docker'
 //                'reference/operations/deploy/secrets',
               ],
             },

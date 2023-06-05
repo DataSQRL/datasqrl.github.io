@@ -159,10 +159,10 @@ const getOptionName = (name, usecase) => {
 
 const LearnMoreLinks = [
     { url: '/docs/getting-started/concepts/why-datasqrl', text: 'Benefits of DataSQRL' },
-    { url: '/docs/getting-started/quickstart', text: 'Getting Started with DataSQRL' },
     { url: 'docs/getting-started/concepts/datasqrl', text: 'How DataSQRL Works' },
-    { url: 'docs/getting-started/concepts/sqrl', text: 'The SQRL Language' },
-    { url: 'docs/getting-started/comparison/overview', text: 'When to Use DataSQRL' },
+    { url: 'docs/getting-started/concepts/when-datasqrl', text: 'When to Use DataSQRL' },
+    { url: '/docs/getting-started/quickstart', text: 'Getting Started with DataSQRL' },
+    { url: 'docs/getting-started/intro/overview', text: 'The DataSQRL Tutorial' },
 ];
 
 const SupportedLanguages = [
@@ -236,7 +236,7 @@ export default function Home() {
             </div>
             <div className="row margin-bottom--xl">
               <div className="col col--6 text--center">
-                    <img className={styles.pipelineSvg} src="/img/reference/compiledMicroservice.svg" alt="DataSQRL compiled microservice" />
+                    <img width="400" src="/img/reference/compiledMicroservice.svg" alt="DataSQRL compiled microservice" />
               </div>
               <div className="col col--5 text--left">
                 <h2>Step 2: Compile to Microservice</h2>
@@ -322,14 +322,14 @@ export default function Home() {
               <div className="col col--4">
                 <p className="text--left margin-bottom--sm">
                   Without DataSQRL you have to implement Flink, Kafka, the database, and API separately and then integrate
-                  the components and make sure the data flows efficiently between them.
+                  the components and make sure the data flows efficiently between them. Plus testing, deployment, monitoring and so forth.
                 </p>
                 <p className="text--left margin-bottom--sm">
-                  For a more detailed breakdown of all the work DataSQRL saves you from, check out:
+                  DataSQRL saves you from all that low-level data plumbing work.
                 </p>
                 <div className="text--center">
-                  <Link className="button button--primary" to="/docs/reference/concepts/data-layer">
-                    How to Build Event-Driven Applications
+                  <Link className="button button--primary" to="/docs/getting-started/concepts/why-datasqrl">
+                    Why Should I Use DataSQRL?
                   </Link>
                 </div>
               </div>
