@@ -4,7 +4,7 @@ title: "Command Reference"
 
 # DataSQRL Command Reference
 
-You interact with DataSQRL through the DataSQRl command on your command line. The DataSQRL command compiles and runs SQRL scripts, discovers data sources and sinks, and publishes packages to the repository.
+You interact with DataSQRL through the DataSQRl command on your command line. The DataSQRL command compiles SQRL scripts, discovers data sources and sinks, and publishes packages to the repository.
 
 :::info
 We recommend that you run the DataSQRL command through docker and the following example commands use docker. This requires that you have [docker installed](https://docs.docker.com/get-docker/) and running on your local machine.

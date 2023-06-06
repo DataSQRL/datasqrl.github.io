@@ -148,10 +148,18 @@ Feel free to adjust the query and play around with the API. Note, how DataSQRL m
 
 In this example, DataSQRL is generating the API for us which is convenient when you are starting out. In a [future chapter](../api) we are going to customize the API to our needs.
 
-
+:::info
+To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
+```bash
+docker compose down -v
+```
+It's important to remove the containers and volumes with this command before launching another microservice to get updated containers. 
+:::
 
 ## Next Steps {#next}
 
 And that's how you build data microservices with DataSQRL: write a SQRL script, run the DataSQRL command to compile and run a microservice, and inspect the API to verify that it meets your expectations.
+
+
 
 In the following chapters, we will cover each of these steps in more detail. First up: [writing the SQRL script](../sqrl).

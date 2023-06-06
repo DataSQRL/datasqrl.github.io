@@ -26,6 +26,14 @@ To deploy a SQRL script and API specification with docker, run `docker-compose u
 
 Docker-compose uses the `docker-compose.yml` template in the `deploy` folder which you can modify to your needs.
 
+:::info
+To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
+```bash
+docker compose down -v
+```
+It's important to remove the containers and volumes with this command before launching another microservice to get updated containers.
+:::
+
 
 ## Individually
 

@@ -86,6 +86,11 @@ When you hit the "run" button you get the maximum temperature for the sensor wit
 
 And there you have it: a running data microservice that ingests metrics, aggregates them, and exposes the results through a GraphQL API which you can call in your applications.
 
+To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
+```bash
+docker compose down -v
+```
+
 ## Customize API
 
 Got a little more time? Let's customize the GraphQL API and add a metrics ingestion endpoint.
@@ -158,13 +163,28 @@ We are now using data ingested through the API mutation endpoint instead of the 
 Terminate the running service, run the compiler again, and re-launch the microservice. In GraphiQL, run the following mutation to add a temperature reading:
 
 ```graphql
-[TODO: add!]
+mutation addReading {
+  AddReading(metric: {
+    sensorid: 1,
+    temperature: 37.2
+  }) {
+    sensorid
+    _source_time
+  }
+}
 ```
 
-and query it using the following query:
+Hit the run button a few times and change the temperature and/or sensor id to insert multiple readings.
+
+To query the maximum temperatures, run the following query:
 
 ```graphql
-[TODO: add!]
+{
+  SensorMaxTemp {
+    sensorid
+    maxTemp
+  }
+}
 ```
 
 Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and services metrics data. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
