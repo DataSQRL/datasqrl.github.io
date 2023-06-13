@@ -14,11 +14,11 @@ import FeatureGrid from "../components/FeatureGrid";
 
 
 const header =  {
-                   title: 'Build Event-Driven Applications Faster',
-                   tagLine: 'Build Event-Driven Applications Faster',
+                   title: 'Build Event-Driven Applications',
+                   tagLine: 'Build Event-Driven Applications',
                    text: (
                      <>
-                       DataSQRL makes it easy to process data streams with Apache Flink and query the results via API in realtime.
+                       DataSQRL builds event-driven microservices that are fast, scalable, and robust using Flink, Kafka, and Postgres.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -82,7 +82,7 @@ const scriptExamples = [
   {
     name: "Clickstream",
     usecase: "Recommendations",
-    description: "Analyze click stream data for real-time content recommendations based on frequency of page visits.",
+    description: "Develop a recommendation engine for your customers based on visits to your website.",
     script:
       `IMPORT datasqrl.example.clickstream.Click;  -- Import data
 /* Find next page visits within 10 minutes */
@@ -101,18 +101,18 @@ Recommendation := SELECT beforeURL AS url, afterURL AS rec,
   {
     name: "Sensors",
     usecase: "Metrics & Monitoring",
-    description: "Aggregate metrics data and monitor maximum temperature in the last hour.",
+    description: "Ingest sensor data, aggregate readings, and monitor maximum temperature in the last minute.",
     script:
-      `IMPORT datasqrl.example.sensors.*;     -- Import all data
-IMPORT time.*;                -- Import all time functions
-/* Aggregate sensor readings to minute */
-MinReadings := SELECT sensorid, endOfMinute(time) as timeMin,
+      `IMPORT datasqrl.example.sensors.*; -- Import sensor data
+IMPORT time.endOfSecond;  -- Import time function
+/* Aggregate sensor readings to second */
+SecReading := SELECT sensorid, endOfSecond(time) as timeSec,
         avg(temperature) as temp FROM SensorReading
-    GROUP BY sensorid, timeMin;
-/* Get max temperature in last hour */
-MaxSensorTemp := SELECT sensorid, max(temp) as maxTemp
-    FROM MinReadings
-    WHERE timeMin >= now() - INTERVAL 1 HOUR
+    GROUP BY sensorid, timeSec;
+/* Get max temperature in last minute */
+SensorMaxTemp := SELECT sensorid, max(temp) as maxTemp
+    FROM SecReading
+    WHERE timeSec >= now() - INTERVAL 1 MINUTE
     GROUP BY sensorid;`,
     queryURL: "?query=query%20MachineTemperature(%24machine%3A%20Int!)%20%7B%0A%09Machine(machineid%3A%20%24machine)%20%7B%0A%20%20%20%20maxTemp%0A%20%20%20%20avgTemp%0A%20%20%7D%0A%7D&variables=%7B%0A%20%20\"machine\"%3A%202%0A%7D",
     link: "docs/getting-started/tutorials/iot/intro",
@@ -123,7 +123,7 @@ MaxSensorTemp := SELECT sensorid, max(temp) as maxTemp
     description:
       (
         <>
-          Integrate and aggregate customer data streams into a customer 360.
+          Integrate customer data from multiple sources and integrate it into a customer 360.
           <br /><br />
           DataSQRL supports relationships and nested tables to structure data.
         </>
