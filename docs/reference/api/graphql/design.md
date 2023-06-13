@@ -26,7 +26,7 @@ Relationship columns of a table map to fields of the type associated with the ta
 
 The mapping between tables and types and (relationship) columns and fields is established by case-insensitive name. That means, to expose the table `Orders` in the API we have to create a type `Orders` or `orders` in the GraphQL schema.
 
-For example, the `Orders` table we imported in the [Quickstart tutorial](../../../../getting-started/quickstart) maps onto the following type in GraphQL
+For example, the `Orders` table we imported in the [DataSQRL tutorial](../../../../getting-started/intro/overview) maps onto the following type in GraphQL
 ```graphql
 type Orders {
   id: Int!
@@ -55,7 +55,7 @@ type spending {
 ```
 The type has a field for each column in the table. In addition, it has the relationship field `parent` that relates a nested table record to its parent record from the `Users` table.
 
-Non-nested tables in the script  map onto query entry-points of the same name as the table which can be used to query the table. In our [Quickstart example](../../../../getting-started/quickstart), we have the root (i.e. non-nested) tables `Orders` and `Users` which are exposed through the following query endpoints:
+Non-nested tables in the script  map onto query entry-points of the same name as the table which can be used to query the table. In the [DataSQRL tutorial](../../../../getting-started/intro/overview), we have the root (i.e. non-nested) tables `Orders` and `Users` which are exposed through the following query endpoints:
 ```graphl
 type Query {
   Orders(id: Int, customerid: Int, time: String): [orders!]
@@ -71,7 +71,7 @@ The compiler generates *complete* GraphQL schemas, which means that the schema c
 
 You can create your own custom GraphQL schema by trimming the generated schema and only expose those tables, fields, relationships, and filters that are required by your data API.
 
-In our [Quickstart example](../../../../getting-started/quickstart) we don't need any filters for the items in each order, so we remove all the arguments from that field.
+In our [DataSQRL tutorial](../../../../getting-started/intro/overview) we don't need any filters for the items in each order, so we remove all the arguments from that field.
 ```graphql
 type Orders {
   id: Int!
@@ -123,7 +123,7 @@ In the type definition for `Users` above, we use `limit` and `offset` arguments 
 
 ### Full Example GraphQL Schema
 
-The following is the final customized GraphQL schema for our [Quickstart example](../../../../getting-started/quickstart).
+The following is the final customized GraphQL schema for our [DataSQRL tutorial example](../../../../getting-started/intro/overview).
 
 ```graphqls
 type Query {
@@ -163,6 +163,39 @@ type totals {
   price: Float!
   saving: Float!
 }
+```
+
+## Mutations
+
+To supporting adding data through the API you add a mutation to the GraphQL schema. The mutation should have a single argument with the input type of the data to be added. The return type of the mutation can contain all or some of the fields of the input type in addition to the special field `_source_time` which contains the timestamp when the data was added.
+
+For example, in the [DataSQRL tutorial](/docs/getting-started/intro/api) we added the following mutation to capture product page visits:
+
+```graphql
+type Mutation {
+  ProductVisit(event: VisitEvent!): CreatedProductVisit
+}
+
+input VisitEvent {
+  userid: Int!
+  productid: Int!
+}
+
+type CreatedProductVisit {
+  _source_time: String!
+  productid: Int!
+  userid: Int!
+}
+```
+
+This defines a single mutation called `ProductVisit` which accepts input data of the type `VisitEvent`.
+
+The added data can then be [imported](/docs/reference/sqrl/import) into a SQRL script by using the GraphQL schema file name as the package name and the name of the mutation as the table name.
+
+For example, if the GraphQL schema filename is `seedshop.graphqls` then we can import the product page visit data via
+
+```sql
+IMPORT seedshop.ProductVisit;
 ```
 
 ## Additional Reading

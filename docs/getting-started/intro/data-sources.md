@@ -18,7 +18,7 @@ A data source is a system that holds data and allows access to the data. DataSQR
 
 A data package contains configuration files that specify the location and structure of one or multiple tables in a data source.
 
-DataSQRL loads the data package for each `IMPORT` statement at compile time to identify and locate the imported table. A data package is a DataSQRL specific artifact used to define an external data stream which is ingested by the data layer that DataSQRL builds.
+DataSQRL loads the data package for each `IMPORT` statement at compile time to identify and locate the imported table. That information is used to ingest the data into the microservice compiled by DataSQRL at runtime. 
 
 That's a lot of concepts to throw around. Let's summarize:
 
@@ -29,7 +29,7 @@ That's a lot of concepts to throw around. Let's summarize:
 
 ## Resolving Imports
 
-In the [Quickstart tutorial](../../quickstart) we imported the `Orders` table.
+In the [DataSQRL tutorial](../overview#sqrl) we imported the `Orders` table.
 
 ```sqrl
 IMPORT datasqrl.seedshop.Orders;

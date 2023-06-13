@@ -130,7 +130,7 @@ In addition, SQRL overloads the `JOIN` operator to support time-consistent joins
 
 Making stream tables a first-class citizen in SQL allows us to process stream data, react to changes in data, and bridge the mental model between the set semantics of the relational world and the event orientation of streams.
 
-Take a look at the [documentation](/docs/getting-started/concepts/sqrl) for a more detailed rundown of all the features SQRL adds to SQL.
+Take a look at the [documentation](/docs/getting-started/intro/sqrl) for a more detailed rundown of all the features SQRL adds to SQL.
 
 ## Help Us Design SQRL
 

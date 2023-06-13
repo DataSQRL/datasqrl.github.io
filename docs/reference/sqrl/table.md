@@ -35,7 +35,7 @@ This statement adds a new column `weight_in_oz` to the existing `Products` table
 
 ## Nested Tables {#nested}
 
-SQRL supports nested tables through table paths to represent nested or hierarchical data. The `Orders` data stream from the [Quickstart Seedshop example](../../../getting-started/quickstart) has nested `items` for each item in an order. Such nested data maps onto nested tables in SQRL. `Orders.items` is the table path that accesses the nested `items` data for the `Orders` example.
+SQRL supports nested tables through table paths to represent nested or hierarchical data. The `Orders` data stream from the [DataSQRL tutorial](../../../getting-started/intro/overview) has nested `items` for each item in an order. Such nested data maps onto nested tables in SQRL. `Orders.items` is the table path that accesses the nested `items` data for the `Orders` example.
 
 We can use and query nested tables like any other table in SQRL.
 ```sql

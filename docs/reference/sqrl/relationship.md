@@ -29,7 +29,7 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
 
 This statement defines a nested table `spending` underneath `Users` which aggregates over the nested order `totals` for all purchases of each user. Relationships used in `FROM` and `JOIN` are expanded to their original definition. That means, `FROM @.purchases` gets expanded to `FROM @ JOIN Orders p ON p.customerid = @.id`.
 
-Relationships are particularly useful in the context of nested tables because they make it easy to navigate between parent and child. In the [Quickstart tutorial](../../../getting-started/quickstart) we define the nested `Orders.totals` table as an aggregation over all items.
+Relationships are particularly useful in the context of nested tables because they make it easy to navigate between parent and child. In the [DataSQRL tutorial](../../../getting-started/intro/overview) we define the nested `Orders.totals` table as an aggregation over all items.
 
 When defining a nested table, each child row has a relationship column `parent` to relates the child row to its parent row. Likewise, the parent table has a relationship column with the name of the nested table that provides access to all child rows of the parent.
 

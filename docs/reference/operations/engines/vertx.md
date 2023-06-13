@@ -37,4 +37,4 @@ This builds a standalone server executable in the `vertex-server.jar` executable
 
 You can run the standalone Vertx executable jar with the associated model and configuration files on any machine, cloud instance, or suitable docker image.
 
-Take a look at the [docker documentation](../../deploy/docker) for using docker to automate the setup of the Vertx server with the standalone executable jar.
+Take a look at the [docker documentation](../../deploy/overview#docker) for using docker to automate the setup of the Vertx server with the standalone executable jar.

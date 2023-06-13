@@ -28,14 +28,14 @@ To customize the API specification, read about API design for:
 
 * [**GraphQL Schema**](../graphql/design)
 
-When you have finished designing the API, use the resulting API specification file as the second argument after the SQRL script when compiling or running your SQRL project:
+When you have finished designing the API, use the resulting API specification file as the second argument after the SQRL script when compiling your SQRL project:
 
 ```bash
-docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run myscript.sqrl schema.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl schema.graphqls
 ```
 
 ## API Security and Authorization
 
 You can use any authentication layer with the compiled data API.
 
-JWT-based authorization is coming soon.
+JWT-based authorization is on the roadmap.
