@@ -18,7 +18,7 @@ const header =  {
                    tagLine: 'Build Event-Driven Applications',
                    text: (
                      <>
-                       DataSQRL builds event-driven microservices that are fast, scalable, and robust using Flink, Kafka, and Postgres.
+                       DataSQRL builds event-driven microservices that are fast, scalable, and robust using Apache Flink and Kafka.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
