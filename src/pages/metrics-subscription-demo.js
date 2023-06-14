@@ -123,7 +123,7 @@ export default function WebSocketSubscriptionExample() {
                     Run the mutation repeatedly with different input data.
                   </li>
                   <li>
-                    You should see data appear in the table to the right. Check the console logs for errors.
+                    You should see data appear in the table to the right. Check the console logs for errors (your browser may block access to localhost).
                   </li>
                 </ol>
               </div>
