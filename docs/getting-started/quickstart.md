@@ -97,7 +97,7 @@ Got a little more time? Let's customize the GraphQL API and add a metrics ingest
 
 By default, DataSQRL generates a GraphQL schema for us based on the tables we define in the SQRL script. That's great for rapid prototyping, but eventually we want to customize the API and limit data access.
 
-To save us time, we are going to start with the GraphQL API that DataSQRL generates for us by running this command (to terminate the running DataSQRL microservice, hit `CTRL-C`):
+To save us time, we are going to start with the GraphQL API that DataSQRL generates for us by running this command:
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl -a graphql
@@ -128,7 +128,7 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl metricsapi.grap
 
 When you refresh GraphiQL in the browser, you see that the API is simpler and only exposes the data for our use case.
 
-## Ingest Metrics
+## Ingest Metrics with Mutations
 
 So far, we have ingested metrics data from an external source imported from the [DataSQRL repository](http://dev.datasqrl.com). The data source is static which is convenient for whipping up an example data service, but we want our microservice to provide a metrics ingestion endpoint.
 
@@ -150,7 +150,7 @@ type CreatedReading {
 }
 ```
 
-To use the data created by this mutation in our SQRL script, we have to import it. Replace the first two line of the `metrics.sqrl` script with:
+To use the data created by this mutation in our SQRL script, we have to import it. Replace the first two lines of the `metrics.sqrl` script with:
 
 ```sql
 IMPORT metricsapi.AddReading AS SensorReading;
@@ -187,7 +187,24 @@ To query the maximum temperatures, run the following query:
 }
 ```
 
-Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and services metrics data. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
+## Realtime Updates with Subscriptions {#subscription}
+
+DataSQRL supports GraphQL subscription, so we can push processed data to the user in realtime instead of the user having to query for it. This is useful when we want to update dashboards with new metrics automatically and in realtime.
+
+Open the `metricsapi.graphqls` file and add the following subscription:
+
+```graphql
+type Subscription {
+  SecReading(sensorid: Int): SecReading
+}
+```
+
+This allows users of our API to subscribe to changes from the `SecReading` table with an optional `sensorid` argument to only receive updates for a particular sensor. Whenever a new sensor reading is processed, the result is pushed out to all subscribers in realtime.
+
+Compile and run the updated microservice with the command above (make sure you have terminated and shut down the running one first) and once everything is fired up again, open [this webpage](/metrics-subscription-demo) to see the subscription work in practice:
+After you run the `addReading` mutation in GraphiQL (with the same or different data), you should see the smoothed temperature readings appear on the webpage.
+
+Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and services metrics data in realtime. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
 
 ## Next Steps {#next}
 

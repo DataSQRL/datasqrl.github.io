@@ -116,3 +116,19 @@ html[data-theme='dark'] .codeContent {
   padding: 2rem 0;
   width: 100%;
 }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--ifm-color-secondary);
+}
