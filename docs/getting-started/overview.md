@@ -1,6 +1,6 @@
 # Getting Started with DataSQRL
 
-DataSQRL makes it easy to build event-driven microservices, streaming applications, and data services. You'll be building powerful data APIs with DataSQLR in no time. How you get started is up to you. We recommend the "Learning by Doing" route, but you can choose your own adventure.
+DataSQRL makes it easy to build event-driven microservices, streaming applications, and data services. You'll be building powerful data APIs with DataSQRL in no time. How you get started is up to you. We recommend the "Learning by Doing" route, but you can choose your own adventure.
 
 ## Learning By Doing
 
