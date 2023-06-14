@@ -47,7 +47,7 @@ An exception to this are [time-window aggregations](#aggregation) which preserve
 
 ```sql
 UserPromotion := STREAM ON ADD AS
-  SELECT u.id, u.first_name, u.last_name, u.email, s.first_order, s.spend
+  SELECT u.id, u.first_name, u.last_name, u.email, s.spend
   FROM Users u JOIN u.order_stats s WHERE s.spend >= 100;
 ```
 This statement defines a new `UserPromotion` stream table that contain a stream record for every record that gets added to state table defined by the `SELECT` query. The query asks for all users who have spent more than $100 in aggregate. Whenever a user meets this threshold and gets added to the table, a stream record is produced in the `UserPromotion` stream table.

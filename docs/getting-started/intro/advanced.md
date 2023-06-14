@@ -13,8 +13,8 @@ In the [chapter on SQRL](../sqrl) we introduced relationship columns and showed 
 First, we are going to create a nested table that aggregates order statistics for each user.
 
 ```sqrl
-Users.order_stats := SELECT min(o.time) as first_order,
-         sum(t.price) as spend, sum(t.saving) as saved, count(1) as num_orders
+Users.order_stats := SELECT min(o.time) sum(t.price) as spend, sum(t.saving) as saved, 
+                            count(1) as num_orders
       FROM @.purchases o JOIN o.totals t;
 ```
 
@@ -36,7 +36,7 @@ To go the other way and create a stream from a state table, we use define a `STR
 
 ```sqrl
 UserPromotion := STREAM ON ADD AS
-  SELECT u.id, u.first_name, u.last_name, u.email, s.first_order, s.spend
+  SELECT u.id, u.first_name, u.last_name, u.email, s.spend
   FROM Users u JOIN u.order_stats s WHERE s.spend >= 100;
 ```
 
