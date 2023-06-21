@@ -21,7 +21,7 @@ const mutationGraphQL =
 `mutation addReading {
   AddReading(metric: {
     sensorid: 1,
-    temperature: 47.2
+    temperature: 57.2
   }) {
     sensorid
     _source_time
@@ -48,7 +48,7 @@ export default function WebSocketSubscriptionExample() {
           type: 'start',
           payload: {
             query: `subscription {
-                              SecReading {
+                              HighTempAlert {
                                   sensorid
                                   timeSec
                                   temp
@@ -64,8 +64,8 @@ export default function WebSocketSubscriptionExample() {
       const data = JSON.parse(event.data);
       console.log('Message from server:', data);
 
-      if (data.type === 'data' && data.payload.data.SecReading) {
-        const reading = data.payload.data.SecReading;
+      if (data.type === 'data' && data.payload.data.HighTempAlert) {
+        const reading = data.payload.data.HighTempAlert;
         const tableBody = document.getElementById('tableBody');
         const newRow = tableBody.insertRow();
 
@@ -116,11 +116,11 @@ export default function WebSocketSubscriptionExample() {
                     Wait until the service is up and running (this takes a few minutes), then <strong>refresh this webpage</strong> to connect to the service.
                   </li>
                   <li>
-                    Open GraphiQL in <Link to="http://localhost:8888/graphiql/?query=mutation%20addReading%20%7B%0A%20%20AddReading(metric%3A%20%7B%0A%20%20%20%20sensorid%3A%201%2C%0A%20%20%20%20temperature%3A%2047.2%0A%20%20%7D)%20%7B%0A%20%20%20%20sensorid%0A%20%20%20%20_source_time%0A%20%20%7D%0A%7D%0A%0A&operationName=addReading">your browser</Link> and invoke the mutation to add some data:
+                    Open GraphiQL in <Link to="http://localhost:8888/graphiql/?query=mutation%20addReading%20%7B%0A%20%20AddReading(metric%3A%20%7B%0A%20%20%20%20sensorid%3A%201%2C%0A%20%20%20%20temperature%3A%2057.2%0A%20%20%7D)%20%7B%0A%20%20%20%20sensorid%0A%20%20%20%20_source_time%0A%20%20%7D%0A%7D%0A%0A&operationName=addReading">your browser</Link> and invoke the mutation to metrics with high temperatures:
                     <CodeBlock language="graphql">
                       {mutationGraphQL}
                     </CodeBlock>
-                    Run the mutation repeatedly with different input data.
+                    Run the mutation repeatedly with different input data (only temperatures above 50° trigger an alert).
                   </li>
                   <li>
                     You should see data appear in the table to the right. Check the console logs for errors (your browser may block access to localhost).
@@ -128,7 +128,7 @@ export default function WebSocketSubscriptionExample() {
                 </ol>
               </div>
               <div className="col col--6">
-                <h2 className="margin-bottom--md">Subscription Data (updated in realtime)</h2>
+                <h2 className="margin-bottom--md">High Temperature Alerts >50° (updated in realtime)</h2>
                 <table className={styles.table}>
                   <thead>
                   <tr>

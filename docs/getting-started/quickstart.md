@@ -110,7 +110,7 @@ We are going to remove most of those arguments to only support querying by `sens
 
 In the `metricsapi.graphqls` file, remove the `SensorReading` type and replace the query definition with the following:
 
-```graphql
+```graphql  title=metricsapi.graphqls
 type Query {
   SecReading(sensorid: Int!): [SecReading!]
   SensorMaxTemp(sensorid: Int): [SensorMaxTemp!]
@@ -152,7 +152,7 @@ type CreatedReading {
 
 To use the data created by this mutation in our SQRL script, we have to import it. Replace the first two lines of the `metrics.sqrl` script with:
 
-```sql
+```sql title=metrics.sqrl
 IMPORT metricsapi.AddReading AS SensorReading;
 IMPORT time.endOfSecond;
 SensorReading.time := _source_time;
@@ -191,20 +191,31 @@ To query the maximum temperatures, run the following query:
 
 DataSQRL supports GraphQL subscription, so we can push processed data to the user in realtime instead of the user having to query for it. This is useful when we want to update dashboards with new metrics automatically and in realtime.
 
-Open the `metricsapi.graphqls` file and add the following subscription:
+Let's add an alert when the temperature of a sensor exceeds 50°. First, we add the `HighTempAlert` table to our script:
+```sql title=metrics.sqrl
+HighTempAlert := SELECT * FROM SecReading WHERE temp > 50;
+```
 
-```graphql
+Open the `metricsapi.graphqls` file and add the following subscription and type:
+
+```graphql  title=metricsapi.graphqls
 type Subscription {
-  SecReading(sensorid: Int): SecReading
+    HighTempAlert(sensorid: Int): HighTempAlert
+}
+
+type HighTempAlert {
+    sensorid: Int!
+    timeSec: String!
+    temp: Float!
 }
 ```
 
-This allows users of our API to subscribe to changes from the `SecReading` table with an optional `sensorid` argument to only receive updates for a particular sensor. Whenever a new sensor reading is processed, the result is pushed out to all subscribers in realtime.
+This allows users of our API to subscribe to the `HighTempAlert` table with an optional `sensorid` argument to only receive alerts for a particular sensor. Whenever a sensor reading exceeds 50°, the user will be immediately notified.
 
 Compile and run the updated microservice with the command above (make sure you have terminated and shut down the running one first) and once everything is fired up again, open [this webpage](/metrics-subscription-demo) to see the subscription work in practice:
-After you run the `addReading` mutation in GraphiQL (with the same or different data), you should see the smoothed temperature readings appear on the webpage.
+After you run the `addReading` mutation in GraphiQL (make sure the temperature is > 50°), you should see the alert appear on the webpage.
 
-Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and services metrics data in realtime. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
+Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and serves metrics data in realtime with push-based alerts. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
 
 ## Next Steps {#next}
 
