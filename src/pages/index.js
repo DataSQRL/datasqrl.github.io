@@ -23,7 +23,8 @@ const header =  {
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
                    buttonText: 'Get Started in 5 minutes',
-                   LogoSvg: require('../../static/img/full_squirrel.svg').default,
+                   youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
+                   // LogoSvg: require('../../static/img/full_squirrel.svg').default,
                  };
 
 
