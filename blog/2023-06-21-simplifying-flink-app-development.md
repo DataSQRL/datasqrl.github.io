@@ -89,7 +89,7 @@ It also generates a docker-compose template to stand up the entire service.
 (cd build/deploy; docker compose up)
 ```
 
-We can now interact with the API and try it out by opening [http://localhost:8888/graphiql/](http://localhost:8888/graphiql/).
+We can now interact with the API and try it out by opening [http://localhost:8888/graphiql/](http://localhost:8888/graphiql/?query=query%20MaxTemp%20%7B%0A%20%20SensorMaxTemp%20%7B%0A%20%20%20%20sensorid%0A%20%20%20%20maxTemp%0A%20%20%7D%0A%7D%0A&operationName=MaxTemp).
 
 ## DataSQRL Does the Work for You
 
