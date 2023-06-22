@@ -93,8 +93,11 @@ We can now interact with the API and try it out by opening [http://localhost:888
 
 ## DataSQRL Does the Work for You
 
+
 Pretty simple, right? And the best part is that DataSQRL compiles deployment artifacts for each component that you can inspect and deploy anywhere. There is no magic or black box.
 For example, DataSQRL compiles a Flink jar you can execute on an existing Flink cluster or Flink managed service.
+
+<img src="/img/generic/undraw_launch.svg" alt="DataSQRL Does the Work >" width="30%"/>
 
 Most importantly, consider all the work we didn’t have to do. No data source configuration, watermark setting, Kafka integration, database schema definition, index structure selection, API implementation, and so on. DataSQRL compiles all that for you.
 
