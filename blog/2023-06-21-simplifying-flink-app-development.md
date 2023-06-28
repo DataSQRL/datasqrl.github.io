@@ -8,7 +8,13 @@ tags: [DataSQRL, Flink]
 # Simplifying Apache Flink Application Development with DataSQRL
 
 Apache Flink is an incredibly powerful stream processor. But to build a complete application with Flink you need to integrate multiple complex technologies which requires a significant amount of custom code.
-DataSQRL is an open-source tool that simplifies this process by compiling SQL into a microservice that integrates Flink, Kafka, Postgres, and API layer. DataSQRL allows you to focus on your application logic without getting bogged down in the details of how to execute your data transformations efficiently across multiple technologies.
+DataSQRL is an open-source tool that simplifies this process by compiling SQL into a microservice that integrates Flink, Kafka, Postgres, and API layer. 
+
+<div style={{float: 'right', width: '40%'}}>
+<iframe width="100%" height="100%" src="https://www.youtube.com/embed/mf5q-IdbVQY" title="DataSQRL Introduction" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+</div>
+
+DataSQRL allows you to focus on your application logic without getting bogged down in the details of how to execute your data transformations efficiently across multiple technologies.
 
 ## The Challenge of Building Applications with Flink
 
