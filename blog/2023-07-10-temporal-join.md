@@ -106,7 +106,7 @@ FROM SensorReading r TEMPORAL JOIN Sensor s
 
 Pretty much the same query, just a different join type. As a temporal join, we are joining each sensor reading with the version of the sensor record at the time of the data stream. In other words, the join not only matches the sensor reading with the sensor record based on the id but also based on the timestamp of the reading to ensure it matches the right version of the sensor record. Pretty neat, right?
 
-Whenever you join a data stream with a state that changes over time, you want to use the temporal join to make sure your data is lined up correctly in time. Temporal joins are a powerful feature of stream processing engines that would be difficult to implement in a database ([see appendix](#appendix)).
+Whenever you join a data stream with a state that changes over time, you want to use the temporal join to make sure your data is lined up correctly in time. Temporal joins are a powerful feature of stream processing engines that would be difficult to implement in a database.
 
 
 ## Why Temporal Joins are Fast and Efficient {#efficient}
@@ -150,26 +150,4 @@ And that’s why the temporal join is stream processing's secret superpower.
 DataSQRL makes using temporal joins a breeze. With its simplified syntax and smart defaults, it's like having a personal tour guide leading you through the sometimes bewildering landscape of stream processing. Take a look at our [IoT tutorial](/docs/getting-started/tutorials/iot/intro/) to see a complete example of temporal joins in action or take a look at our [extended tutorial](/docs/getting-started/intro/overview) for a step-by-step guide to stream processing including temporal joins. And we are [here to help](/community) if you have any questions.
 
 Happy data time-traveling, folks!
-
-## Appendix: Temporal Joins in Relational Databases {#appendix}
-
-It is possible to implement temporal joins in relational databases but it requires a bit of work.
-
-We have to store the version history of the `Sensor` table so that we can join each sensor reading with the “correct” sensor placement at the time of the reading. That means we need to add a `versionTime` column to our `Sensor` table. Then we have to write a nested query to identify the correct version of the `Sensor` table to join with:
-
-```sql
-SELECT s.machineid, MAX(r.temperature) AS maxTemp 
-FROM SensorReading r JOIN 
-    (SELECT id, machineid, versionTime as start_time, LEAD(versionTime) 
-        OVER (PARTITION BY id ORDER BY versionTime) as end_time FROM Sensor) AS s 
-ON (s.id = r.sensorid AND s.start_time <= r.timestamp AND (s.end_time IS NULL OR s.end_time > r.timestamp)) 
-GROUP BY s.machineid
-```
-
-Compared to stream processors like Apache Flink, the database version of temporal joins is more complex and has performance issues.
-
-It’s more complex because we have to use a nested SELECT query that uses windowing to identify the correct version for each sensor based on the `versionTime` column.
-
-It has performance issues because the nested SELECT query and the join are expensive to execute as the version table grows over time. That means we have to carefully tune the query and make sure we periodically prune the sensor version table to remove outdated versions.
-Apache Flink uses watermarks to automatically drop outdated versions without any extra effort on our part. And a temporal join in Apache Flink is a simple lookup.
 
