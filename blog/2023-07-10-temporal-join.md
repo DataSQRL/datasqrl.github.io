@@ -1,0 +1,150 @@
+---
+slug: temporal-join
+title: "Why the Temporal Join is Stream Processing’s Superpower"
+authors: [matthias]
+tags: [Join, Flink, DataSQRL]
+---
+
+# Why the Temporal Join is Stream Processing’s Superpower
+
+Stream processing technologies like Apache Flink introduce a new type of data transformation that’s very powerful: the temporal join. Temporal joins add context to data streams while being efficient and fast to execute.
+
+This article introduces the temporal join, compares it to the traditional inner join, explains when to use it, and why it is a secret superpower.
+
+Table of Contents:
+* [The Join: A Quick Review](#review)
+* [The Temporal Join: Linking Stream and State](#tempjoin)
+* [Temporal Join vs Inner Join](#tempinner)
+* [Why Temporal Joins are Fast and Efficient](#efficient)
+* [Temporal Joins Made Easy to Use](#easy)
+* [Summary](#summary)
+
+## The Join: A Quick Review {#review}
+
+Let's take a quick detour down memory lane and revisit the good ol' join operation. That trusty sidekick in your SQL utility belt helps you link data from two or more tables based on a related column between them.
+
+Suppose we are operating a factory with a number of machines that roast and package coffee. We place sensors on each machine to monitor the temperature and detect overheating.
+
+We keep track of the sensors and machines in two database tables.
+
+The `Sensor` table contains the serial number and machine id that the sensor is placed on.
+
+| id    | serialNo | placedOn |
+|-------|----------|----------|
+| 11503 | X57-774  | 203      |
+| 11523 | X33-453  | 203      |
+| 11034 | X54-554  | 501      |
+
+The `Machine` table contains the name of each machine.
+
+| id    | name           |
+|-------|----------------|
+| 203   | Iron Roaster   |
+| 501   | Gritty Grinder |
+
+To identify all the sensors on the machine “Iron Roaster” we use the following SQL query which joins the `Sensor` and `Machine` tables:
+```sql
+SELECT s.id, s.serialNo FROM Sensor s 
+    JOIN Machine m ON s.placedOn = m.id 
+    WHERE m.name = “Iron Roaster”
+```
+
+Why are joins as important as your morning coffee? Without it, your data tables are like islands, isolated and lonely. Joins bring them together, creating meaningful relationships between data, and enriching data records with context to see the bigger picture.
+
+By default, databases execute joins as **inner** joins which means only matching records are included in the join.
+
+So, now that we've refreshed our memory about the classic join, let's dive into the exciting world of temporal joins in stream processing systems like Apache Flink.
+
+## The Temporal Join: Linking Stream and State {#tempjoin}
+
+Picture this: you're a time traveler. You have the power to access any point in time, past or future, at your will. Now, imagine that your data could do the same. Enter the Temporal Join, the DeLorean of data operations, capable of taking your data on a time-traveling adventure.
+
+A Temporal Join is like a regular join but with a twist. It allows you to join a stream of data (the time traveler) with a versioned table (the timeline) based on the time attribute of the data stream. This means that for each record in the stream, the join will find the most recent record in the versioned table that is less than or equal to the stream record's time.
+
+The versioned table is a normal state table where we keep track of data changes over time. That is, we keep older versions of each record around to allow the stream to match the correct version in time. Like time travel, temporal joins can make your head spin a bit. Let’s look at an example to break it down.
+
+## Temporal Join vs Inner Join {#tempinner}
+
+Back to our coffee roasting factory, we collect the temperature readings from each sensor in a data stream. 
+
+| timestamp           | sensorid | temperature |
+|---------------------|----------|-------------|
+| 2023-07-10T13:25:15 | 11503    | 78.2        |
+| 2023-07-10T13:25:15 | 11523    | 83.1        |
+| 2023-07-10T13:25:15 | 11034    | 101.5       |
+| 2023-07-10T13:25:16 | 11503    | 77.8        |
+| 2023-07-10T13:25:16 | 11523    | 83.5        |
+| 2023-07-10T13:25:16 | 11034    | 105         |
+
+And we want to know the maximum temperature recorded for each machine.
+
+Easy enough, let’s join the temperature data stream with the Sensors table and aggregate by machine id:
+
+```sql
+SELECT s.placedOn, MAX(r.temperature) AS maxTemp FROM SensorReading r INNER JOIN Sensor s ON r.sensorid = s.id GROUP BY s.placedOn
+```
+
+But here is a problem: What if we moved a sensor from one machine to another during the day? With an inner join, all of the sensor’s readings would be linked to the machine it was last placed on. So, if sensor 1 records a high temperature of 105 degrees in the morning and we move the sensor to the “Iron Roaster” machine in the afternoon, then we might see the 105 degrees falsely show up as the maximum temperature for the Iron Roaster. See how time played a trick on our join?
+
+And this happens whenever we join a data stream with a state table that changes over time, like our sensors that get moved around the factory. What to do? Let’s call the temporal join to our rescue:
+
+```sql
+SELECT s.placedOn, MAX(r.temperature) AS maxTemp FROM SensorReading r TEMPORAL JOIN Sensor s ON r.sensorid = s.id GROUP BY s.placedOn
+```
+                                                                                                                  
+Pretty much the same query, just a different join type. As a temporal join, we are joining each sensor reading with the version of the sensor record at the time of the data stream. In other words, the join not only matches the sensor reading with the sensor record based on the sensor id but also based on the timestamp of the reading to ensure it matches the right version of the sensor record. Pretty neat, right?
+
+Whenever you join a data stream with a state that changes over time, you want to use the temporal join to make sure your data is lined up correctly in time. Temporal joins are a powerful feature of stream processing engines that would be difficult to implement in a database (see appendix).
+
+
+## Why Temporal Joins are Fast and Efficient {#efficient}
+
+Not only do temporal joins solve the time-alignment problem when joining data streams with changing state, modern stream processors like Apache Flink are also incredibly efficient at executing temporal joins. A powerful feature with great performance? Sounds too good to be true. Let’s peek behind the stream processing curtain to find out why.
+
+In stream processing, joins are maintained as the underlying data changes over time. That requires the stream engine to hold all the data it needs to update join records when either side of the join changes. This makes inner joins pretty expensive on data streams.
+
+Consider our max-temperature query with the inner join: When we join a temperature reading with the corresponding sensor record, and that record changes, the engine has to update the result join record. To do so, it has to store all of the sensor readings to determine which join results are affected by a change in a sensor record. This can lead to a lot of updates and hence a lot of downstream computation. It can also cause system failure when there are a lot of temperature readings in our data stream because the stream engine has to store all of them.
+
+Temporal joins, on the other hand, can be executed much more efficiently. The stream engine only needs to store the versions of the sensor table that are within the time bounds of the sensor reading data stream. And it only has to briefly store (if at all) the sensor reading records to ensure they are joined with the most up-to-date sensor records. Moreover, temporal joins don’t require sending out a massive amount of updated join records when sensors change placement since the join is fixed in time.
+
+## Temporal Joins Made Easy to Use {#easy}
+
+Because temporal joins are so powerful, we made them easy to use in DataSQRL. DataSQRL is a compiler for Apache Flink that builds integrated microservices for your event-driven or streaming applications. DataSQRL supports the simplified temporal join syntax shown in the queries above. In addition, DataSQRL defaults to a temporal join whenever you join a state and a stream table on the state table’s primary key. In that way, DataSQRL helps you pick the right join for your data and makes it easy for developers new to stream processing.
+
+Apache Flink also supports temporal joins in Flink SQL using the following syntax:
+
+```sql
+SELECT s.placedOn, MAX(r.temperature) AS maxTemp FROM SensorReading AS r  JOIN Sensor FOR SYSTEM_TIME AS OF SensorReading.timestamp AS s ON r.sensorid = s.id GROUP BY s.placedOn
+```
+
+You need to be careful that the join column for the state table is the primary key of that table and that you set the timestamp SensorReading table. DataSQRL does that for you automatically.
+
+## Time to Wrap Up This Temporal Journey {#summary}
+
+We've reached the end of our time-traveling adventure through the universe of temporal joins. We've seen how they're like the DeLorean of data operations, zipping us back and forth through time to make sure our data matches up just right. We've also compared them to the good ol' inner join.
+
+Temporal joins help us avoid the pitfalls of time-alignment problems when joining data streams with changing state. They're also super efficient, making them a great choice for high-volume, real-time data processing.
+
+And that’s why the temporal join is stream processing's secret superpower.
+
+DataSQRL makes using temporal joins a breeze. With its simplified syntax and smart defaults, it's like having a personal tour guide leading you through the sometimes bewildering landscape of stream processing. Take a look at our [IoT tutorial] to see a complete example of temporal joins in action or take a look at our [extended tutorial] for a step-by-step guide to stream processing including temporal joins. And we are [here to help] if you have any questions.
+
+Happy data time-traveling, folks!
+
+## Appendix: Temporal Joins in Relational Databases
+
+It is possible to implement temporal joins in relational databases but it requires a bit of work.
+
+We have to store the version history of the `Sensor` table so that we can join each sensor reading with the “correct” sensor placement at the time of the reading. That means we need to add a `versionTime` column to our `Sensor` table. Then we have to write a nested query to identify the correct version of the `Sensor` table to join with:
+
+```sql
+SELECT s.placedOn, MAX(r.temperature) AS maxTemp FROM SensorReading r JOIN (SELECT id, placedOn, versionTime as start_time, LEAD(versionTime) OVER (PARTITION BY id ORDER BY versionTime) as end_time FROM Sensor) AS s ON (s.id = r.sensorid AND s.start_time <= r.timestamp AND (s.end_time IS NULL OR s.end_time > r.timestamp)) GROUP BY s.placedOn
+```
+
+Compared to stream processors like Apache Flink, the database version of temporal joins is more complex and has performance issues.
+
+It’s more complex because we have to use a nested SELECT query that uses windowing to identify the correct version for each sensor based on the `versionTime` column.
+
+It has performance issues because the nested SELECT query and the join are expensive to execute as the version table grows over time. That means we have to carefully tune the query and make sure we periodically prune the sensor version table to remove outdated versions.
+Apache Flink uses watermarks to automatically drop outdated versions without any extra effort on our part. And a temporal join in Apache Flink is a simple lookup.
+
