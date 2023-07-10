@@ -9,8 +9,6 @@ tags: [Join, Flink, DataSQRL]
   <meta property="og:image" content="/img/dev/temporal_join.png" />
 </head>
 
-# Why Temporal Join is Stream Processing’s Superpower
-
 Stream processing technologies like Apache Flink introduce a new type of data transformation that’s very powerful: the temporal join. Temporal joins add context to data streams while being efficient and fast to execute.
 
 <img src="/img/dev/temporal_join.svg" alt="Temporal Join >" width="30%"/>
@@ -24,6 +22,8 @@ Table of Contents:
 * [Why Temporal Joins are Fast and Efficient](#efficient)
 * [Temporal Joins Made Easy to Use](#easy)
 * [Summary](#summary)
+
+<!--truncate-->
 
 ## The Join: A Quick Review {#review}
 
