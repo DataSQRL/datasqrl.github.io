@@ -104,7 +104,9 @@ FROM SensorReading r TEMPORAL JOIN Sensor s
     ON r.sensorid = s.id GROUP BY s.machineid
 ```
 
-Pretty much the same query, just a different join type. As a temporal join, we are joining each sensor reading with the version of the sensor record at the time of the data stream. In other words, the join not only matches the sensor reading with the sensor record based on the id but also based on the timestamp of the reading to ensure it matches the right version of the sensor record. Pretty neat, right?
+Pretty much the same query, just a different join type. Just a heads-up: the syntax for temporal joins in Flink SQL is more complex - we'll get to that [later](#easy).
+
+As a temporal join, we are joining each sensor reading with the version of the sensor record at the time of the data stream. In other words, the join not only matches the sensor reading with the sensor record based on the id but also based on the timestamp of the reading to ensure it matches the right version of the sensor record. Pretty neat, right?
 
 Whenever you join a data stream with a state that changes over time, you want to use the temporal join to make sure your data is lined up correctly in time. Temporal joins are a powerful feature of stream processing engines that would be difficult to implement in a database.
 
@@ -117,7 +119,7 @@ Not only do temporal joins solve the time-alignment problem when joining data st
 
 In stream processing, joins are maintained as the underlying data changes over time. That requires the stream engine to hold all the data it needs to update join records when either side of the join changes. This makes inner joins pretty expensive on data streams.
 
-Consider our max-temperature query with the inner join: When we join a temperature reading with the corresponding sensor record, and that record changes, the engine has to update the result join record. To do so, it has to store all of the sensor readings to determine which join results are affected by a change in a sensor record. This can lead to a lot of updates and hence a lot of downstream computation. It can also cause system failure when there are a lot of temperature readings in our data stream because the stream engine has to store all of them.
+Consider our max-temperature query with the inner join: When we join a temperature reading with the corresponding sensor record, and that record changes, the engine has to update the result join record. To do so, it has to store all the sensor readings to determine which join results are affected by a change in a sensor record. This can lead to a lot of updates and hence a lot of downstream computation. It can also cause system failure when there are a lot of temperature readings in our data stream because the stream engine has to store all of them.
 
 Temporal joins, on the other hand, can be executed much more efficiently. The stream engine only needs to store the versions of the sensor table that are within the time bounds of the sensor reading data stream. And it only has to briefly store (if at all) the sensor reading records to ensure they are joined with the most up-to-date sensor records. Moreover, temporal joins don’t require sending out a massive amount of updated join records when sensors change placement since the join is fixed in time.
 
@@ -128,7 +130,7 @@ Temporal joins, on the other hand, can be executed much more efficiently. The st
 Because temporal joins are so powerful, we made them easy to use in DataSQRL. DataSQRL is a compiler for Apache Flink that builds integrated microservices for your event-driven or streaming applications. DataSQRL supports the simplified temporal join syntax shown in the queries above. In addition, DataSQRL defaults to a temporal join whenever you join a state and a stream table on the state table’s primary key. In that way, DataSQRL helps you pick the right join for your data and makes it easy for developers new to stream processing.
 
 
-Apache Flink also supports temporal joins in Flink SQL using the following syntax:
+Apache Flink supports temporal joins in Flink SQL using the following syntax:
 
 ```sql
 SELECT s.machineid, MAX(r.temperature) AS maxTemp 
@@ -137,7 +139,7 @@ FROM SensorReading AS r  JOIN Sensor
     ON r.sensorid = s.id GROUP BY s.machineid
 ```
 
-You need to be careful that the join column for the state table is the primary key of that table and that you set the timestamp SensorReading table. DataSQRL does that for you automatically.
+You need to be careful that the join column for the state table is the primary key of that table and that you set the timestamp for the SensorReading table. DataSQRL does that for you automatically based on watermark.
 
 ## Time to Wrap Up This Temporal Journey {#summary}
 
