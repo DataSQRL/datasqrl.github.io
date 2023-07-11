@@ -35,11 +35,11 @@ We keep track of the sensors and machines in two database tables.
 
 The `Sensor` table contains the serial number and machine id that the sensor is placed on.
 
-| id    | serialNo | machineid |
-|-------|----------|----------|
-| 11503 | X57-774  | 203      |
-| 11523 | X33-453  | 203      |
-| 11034 | X54-554  | 501      |
+| id | serialNo | machineid |
+|----|----------|-----------|
+| 1  | X57-774  | 501       |
+| 2  | X33-453  | 203       |
+| 3  | X54-554  | 501       |
 
 The `Machine` table contains the name of each machine.
 
@@ -77,12 +77,11 @@ Back to our coffee roasting factory, we collect the temperature readings from ea
 
 | timestamp           | sensorid | temperature |
 |---------------------|----------|-------------|
-| 2023-07-10T13:25:15 | 11503    | 78.2        |
-| 2023-07-10T13:25:15 | 11523    | 83.1        |
-| 2023-07-10T13:25:15 | 11034    | 101.5       |
-| 2023-07-10T13:25:16 | 11503    | 77.8        |
-| 2023-07-10T13:25:16 | 11523    | 83.5        |
-| 2023-07-10T13:25:16 | 11034    | 105         |
+| 2023-07-10T07:11:08 | 1        | 105.2       |
+| 2023-07-10T07:11:08 | 2        | 83.1        |
+| ...                 |          |             |
+| 2023-07-10T13:25:16 | 1        | 77.8        |
+| 2023-07-10T13:25:16 | 2        | 83.5        |
 
 And we want to know the maximum temperature recorded for each machine.
 
