@@ -7,6 +7,7 @@ tags: [Join, Flink, DataSQRL]
 
 <head>
   <meta property="og:image" content="/img/dev/temporal_join.png" />
+  <meta name="twitter:image" content="/img/dev/temporal_join.png" />
 </head>
 
 Stream processing technologies like Apache Flink introduce a new type of data transformation that’s very powerful: the temporal join. Temporal joins add context to data streams while being efficient and fast to execute.
