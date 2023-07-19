@@ -14,11 +14,12 @@ import FeatureGrid from "../components/FeatureGrid";
 
 
 const header =  {
-                   title: 'Build Event-Driven Applications',
-                   tagLine: 'Build Event-Driven Applications',
+                   title: 'Build Streaming Applications',
+                   tagLine: 'Build Streaming Data Apps Faster, Cheaper, and Better',
                    text: (
                      <>
-                       DataSQRL builds event-driven microservices that are fast, scalable, and robust using Apache Flink and Kafka.
+                       DataSQRL integrates Apache Flink, Kafka, Postgres, and GraphQL so you can focus on building and
+                       not data plumbing.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -83,7 +84,14 @@ const scriptExamples = [
   {
     name: "Clickstream",
     usecase: "Recommendations",
-    description: "Develop a recommendation engine for your customers based on visits to your website.",
+    description:
+      (
+        <>
+          Develop a recommendation engine for your customers based on visits to your website.
+          <br /><br />
+          DataSQRL builds on the SQL you already know for a low learning curve.
+        </>
+      ),
     script:
       `IMPORT datasqrl.example.clickstream.Click;  -- Import data
 /* Find next page visits within 10 minutes */
@@ -102,7 +110,15 @@ Recommendation := SELECT beforeURL AS url, afterURL AS rec,
   {
     name: "Sensors",
     usecase: "Metrics & Monitoring",
-    description: "Ingest sensor data, aggregate readings, and monitor maximum temperature in the last minute.",
+    description:
+      (
+        <>
+          Ingest sensor data, aggregate readings, and monitor maximum temperature in the last minute.
+          <br /><br />
+          DataSQRL makes time-window aggregations easy.
+        </>
+      ),
+
     script:
       `IMPORT datasqrl.example.sensors.*; -- Import sensor data
 IMPORT time.endOfSecond;  -- Import time function
@@ -243,7 +259,7 @@ export default function Home() {
                 <h2>Step 2: Compile to Microservice</h2>
                 <p className="hero__subtitle">
                   DataSQRL compiles your script into a complete microservice integrating
-                  Flink, Kafka, database, and API layer.
+                  Apache Flink, Kafka, database, and API layer into a fast, scalable, and robust application.
                 </p>
                 {/*<CodeBlock language="bash" wrap="true">*/}
                 {/*  docker run --rm -it -p 8888:8888 -v $PWD:/build datasqrl/cmd run {getScriptName(scriptExamples[exampleIndex].name)}*/}
@@ -282,7 +298,8 @@ export default function Home() {
           </div>
         </section>
 
-        <HomepageFeatures FeatureList={DataSQRLFeaturesList} />
+
+        <HomepageFeatures FeatureList={WhyDataSQRLList} />
 
         <section className={styles.content}>
           <div className="container">
@@ -338,7 +355,7 @@ export default function Home() {
           </div>
         </section>
 
-        <HomepageFeatures FeatureList={WhyDataSQRLList} />
+        <HomepageFeatures FeatureList={DataSQRLFeaturesList} />
 
         <LinkRotation teaser="Learn more: " links={LearnMoreLinks} />
       </main>
