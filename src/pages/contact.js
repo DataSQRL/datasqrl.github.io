@@ -19,7 +19,7 @@ const header =  {
                  }
 
 
-const FORMSPARK_ACTION_URL = "https://submit-form.com/8mwiROPE";
+const CONTACT_FORM_URL = "https://submit-form.com/8mwiROPE";
 
 export default function Contact() {
   return (
@@ -44,7 +44,7 @@ export default function Contact() {
                 <p>
                 Enter your name, email, and message in the form below and we will get back to you shortly.
                 </p>
-                <ContactForm formURL={FORMSPARK_ACTION_URL} messageLabel="How Can We Help You?" submitText="Contact Us" />
+                <ContactForm formURL={CONTACT_FORM_URL} messageLabel="How Can We Help You?" submitText="Contact Us" />
               </div>
               <div className="col col--3">
               </div>
