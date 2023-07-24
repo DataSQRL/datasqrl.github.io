@@ -38,8 +38,9 @@ export default function Careers() {
                 <p>
                   We started DataSQRL to combine technical innovation with a culture of belonging. We want
                   to build a company that challenges us to learn and grow without sacrificing our lives
-                  to long work hours. A place to work where you see your impact, feel supported, and advance
-                  the state of technology. Read more about DataSQRL on our <Link to="https://you.datasqrl.com">internal website</Link>.
+                  to long work hours. A place to work where you see your impact, advance
+                  the state of technology, and feel safe, respected, and supported.
+                  Read more about DataSQRL on our <Link to="https://you.datasqrl.com">internal website</Link>.
                 </p>
 
                 <p>
