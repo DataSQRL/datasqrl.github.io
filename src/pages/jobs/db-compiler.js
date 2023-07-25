@@ -34,30 +34,34 @@ export default function JobPosting() {
               <div className="col col--2"></div>
               <div className="col col--8">
                 <p>
-                  One paragraph describing the position and why they should work at DataSQRL.
+                  At DataSQRL, we are building <Link to="https://github.com/DataSQRL/sqrl">innovative open-source technology</Link> that
+                  empowers people to build streaming data and realtime AI applications.
+                  We need your help to improve the core compiler component of DataSQRL which plans, optimizes, and translates
+                  the high-level SQL language into executables for each engine. You'll be working on innovative technology within
+                  an open-source community and supported by domain experts.
                 </p>
 
                 <p>
                   <strong>Technologies We Use</strong><br />
-                  Our tech stack combines Apache Flink, Apache Calcite, Postgres, and Java.
+                  Our tech stack combines Apache Flink, Apache Calcite, Postgres, Apache Kafka, and Java.
                 </p>
 
                 <p>
                   <strong>Skills We Value</strong>
                 <ul>
-                  <li>Stream Processing Frameworks: Mastery over continuous data flow and real-time processing.</li>
-                  <li>Query & Compute Engines: Deep-rooted knowledge in optimizing and managing queries.</li>
+                  <li>Stream Processing Frameworks: Developing continuous data flow and real-time processing engines.</li>
+                  <li>Query Engines: Knowledge of the relational model, query planning, query optimization, and query rewriting.</li>
                   <li>Compiler Construction: Building and fine-tuning compilers.</li>
                   <li>Language Processing: Expertise in parsing high-level languages. Experience working with transpilers and language servers.</li>
                   <li>Logical Planning: Navigating abstract representations of high-level instructions.</li>
-                  <li>Connector Development: Ability to create connectors for diverse systems that offer significant user benefits with minimal configuration.</li>
+                  <li>Connector Development: Ability to create connectors for external systems.</li>
                 </ul>
                 </p>
 
                 <p>
                   <strong>Qualities We Admire</strong>
                 <ul>
-                  <li>Analytical Thinking: Possess the prowess to dissect complex problems and identify the optimal solution path.</li>
+                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
                   <li>Attention to Detail: Every line of code matters. Ensuring the precision and flawless functionality of compilers is paramount.</li>
                   <li>Collaboration: Values the input of everyone on the team. Strives to have others feel safe and heard.</li>
                   <li>Adaptability: Thrive in a dynamic environment with ever-evolving challenges and tech updates.</li>
@@ -68,10 +72,14 @@ export default function JobPosting() {
                 <p>
                   Sounds interesting? Use the form below to apply! We'd love for you to join our team. See how you
                   can <Link to="/careers">supercharge your career</Link> at DataSQRL by growing your skills with the mentorship of
-                  technical experts and experienced entrepreneurs.
+                  technical experts and experienced entrepreneurs in a safe, supportive environment.
+                </p>
 
+                <p>
                   To learn more about our unique company, culture, and how we work, visit
-                  our <Link to="https://you.datasqrl.com">internal company website</Link>.
+                  our <Link to="https://you.datasqrl.com">internal company website</Link> and see if DataSQRL is the right fit for you.
+                  Don't hesitate to <Link to="/contact">contact us</Link> if you have any questions about this position
+                  or DataSQRL in general.
                 </p>
               </div>
               <div className="col col--2"></div>

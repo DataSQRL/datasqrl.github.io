@@ -38,19 +38,19 @@ export default function Careers() {
                 <p>
                   We started DataSQRL to combine technical innovation with a culture of belonging. We want
                   to build a company that challenges us to learn and grow without sacrificing our lives
-                  to long work hours. A place to work where you see your impact, advance
-                  the state of technology, and feel safe, respected, and supported.
+                  for long work hours. A place to work where you see your impact, advance
+                  the state of technology and feel safe, respected, and supported.
                   Read more about DataSQRL on our <Link to="https://you.datasqrl.com">internal website</Link>.
                 </p>
 
                 <p>
                   DataSQRL is an open-source company which means we build our software in the open and nurture a
-                  vibrant community around it. This transparency and relationship-building extends to how DataSQRL operates internally.
+                  vibrant community around it. This transparency and relationship-building extend to how DataSQRL operates internally.
                 </p>
 
                 <p>
-                  Tired of busting your a** to make VCs rich? What to be more than a tiny cog in a large corporate machine?
-                  At DataSQRL we are not beholden to the hyper-growth mantra and committed to aligning your career path
+                  Tired of busting your a** to make VCs rich? Want to be more than a tiny cog in a large corporate machine?
+                  At DataSQRL we are not beholden to the hyper-growth mantra and are committed to aligning your career path
                   with our mission.
                 </p>
 
