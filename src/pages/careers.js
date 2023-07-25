@@ -44,6 +44,11 @@ export default function Careers() {
                 </p>
 
                 <p>
+                  DataSQRL is an open-source company which means we build our software in the open and nurture a
+                  vibrant community around it. This transparency and relationship-building extends to how DataSQRL operates internally.
+                </p>
+
+                <p>
                   Tired of busting your a** to make VCs rich? What to be more than a tiny cog in a large corporate machine?
                   At DataSQRL we are not beholden to the hyper-growth mantra and committed to aligning your career path
                   with our mission.

@@ -50,8 +50,8 @@ export const WhyWorkAtDataSQRL = [
       <>
         Our vision is to make building data products as easy as creating a
         spreadsheet. Data is the lifeblood of the modern economy. Our mission
-        is to enable people to build with data so they can participate in the data
-        economy.
+        is to enable people to build with data through open-source technology
+        so they can participate in the data economy.
       </>
     ),
     link: 'https://you.datasqrl.com/docs/mission/',
@@ -62,7 +62,7 @@ export const WhyWorkAtDataSQRL = [
     image: '/img/generic/undraw_data_points.svg',
     description: (
       <>
-        You get to work on hard problems and cutting edge technology with recognized
+        You get to work on hard problems and open-source technology with recognized
         experts who provide mentorship and guidance. Moreover, DataSQRL is committed to
         your learning journey with hands-on support and not just abstract career training.
       </>
