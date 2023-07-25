@@ -72,6 +72,7 @@ const config = {
           {to: '/community', label: 'Community', position: 'left'},
           {to: '/services', label: 'Services', position: 'left'},
           {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/careers', label: "We're Hiring!", position: 'right'},
           {
             href: 'https://github.com/DataSQRL/sqrl',
             label: 'GitHub',
@@ -136,8 +137,8 @@ const config = {
                 to: '/services',
               },
               {
-                label: 'Blog',
-                to: '/blog',
+                label: "Careers",
+                to: '/careers',
               },
               {
                 label: 'Contact Us',
