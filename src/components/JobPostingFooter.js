@@ -30,13 +30,13 @@ export const DataSQRLWorkBenefits = [
     ),
   },
   {
-    title: 'Customized Benefits',
+    title: 'Solid Benefits',
     image: '/img/index/undraw_online_shopping_sqrl.svg',
     description: (
       <>
-        We customize benefits to your needs instead of throwing the kitchen-sink of benefits at you.
-        Health insurance and unlimited PTO are always included. The rest is customized to suit
-        your unique lifestyle.
+        We got you covered with health benefits and PTO. Take paid time off when you need to take care
+        of others and we also ask that you take a minimum PTO to take care of yourself. Rest
+        is important for high-performance.
       </>
     ),
   },
@@ -77,7 +77,7 @@ export const WhyWorkAtDataSQRL = [
       <>
         At DataSQRL, we are building a culture of responsibility that enables you to
         tackle challenging projects with autonomy and resourcefulness. We don't just
-        throw you into the cold water, but provide structure and support for you to succeed.
+        throw you into the cold water, but provide a safe environment and support for you to succeed.
       </>
     ),
     link: 'https://you.datasqrl.com/docs/culture/',
