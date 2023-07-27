@@ -18,12 +18,12 @@ const header =  {
                    tagLine: 'Build Streaming Data Apps Faster, Cheaper, and Better',
                    text: (
                      <>
-                       DataSQRL integrates Apache Flink, Kafka, Postgres, and GraphQL so you can focus on building and
-                       not data plumbing.
+                       DataSQRL integrates Apache Flink, Kafka, Postgres, and GraphQL so you can focus on building
+                       data products and not data plumbing.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
-                   buttonText: 'Get Started in 5 minutes',
+                   buttonText: "Get Started in 5 minutes (it's open source)",
                    youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
                    // LogoSvg: require('../../static/img/full_squirrel.svg').default,
                  };
