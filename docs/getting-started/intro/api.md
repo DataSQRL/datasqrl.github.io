@@ -192,7 +192,7 @@ We changed the `Users` table query endpoint to `Users(id: Int!): Users` to make 
 To instruct the DataSQRL compiler to use our custom API specification, we add it as a second argument to the command.
 
 ```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl seedshop.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl seedshop.graphqls --mnt $PWD
 ```
 
 To launch the updated microservice, execute:
