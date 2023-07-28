@@ -151,6 +151,12 @@ IMPORT datasqrl.seedshop.Orders TIMESTAMP time + INTERVAL 8 DAY AS time; -- Adju
 ```
 The last order from that dataset is placed on 2023-02-21. We are writing this tutorial on March 1st, 2023 which is 8 days later. Hence, we are adding 8 days. You will have to add a larger number of days depending on how long ago 2023-02-21 is for you.
 
+Another thing to keep in mind when using local files is that we need to mount the directory containing our data files in docker. DataSQRL makes this easy with the `--mnt` configuration option. To run the compiler for our updated `seedshop.sqrl` script, use the following command:
+
+```bash
+docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl --mnt $PWD
+```
+
 DataSQRL is built specifically for realtime and streaming data and supports data sources like [queues, logs, and databases](/docs/reference/sources/overview) which store streaming or changing data. In DataSQRL every source table is a (potentially endless) stream of rows. But during development it is nice to work with static data until we have iterated our data API to the point we are ready to go to production.
 
 

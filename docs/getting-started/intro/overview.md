@@ -151,7 +151,7 @@ In this example, DataSQRL is generating the API for us which is convenient when 
 :::info
 To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
 ```bash
-docker compose down -v
+(cd build/deploy; docker compose down -v)
 ```
 It's important to remove the containers and volumes with this command before launching another microservice to get updated containers. 
 :::

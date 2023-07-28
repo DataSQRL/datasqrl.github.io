@@ -22,7 +22,7 @@ This convenient for development, but for deployment we want more control over ho
 Execute the following command to compile our seedshop script and API specification:
 
 ```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl seedshop.graphqls
+docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl seedshop.graphqls  --mnt $PWD
 ```
 
 <img src="/img/reference/compilation_simplified.svg" alt="DataSQRL Compilation >" width="50%"/>

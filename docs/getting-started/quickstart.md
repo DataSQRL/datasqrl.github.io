@@ -88,7 +88,7 @@ And there you have it: a running data microservice that ingests metrics, aggrega
 
 To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
 ```bash
-docker compose down -v
+(cd build/deploy; docker compose down -v)
 ```
 
 ## Customize API
