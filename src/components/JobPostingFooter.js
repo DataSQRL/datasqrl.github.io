@@ -23,7 +23,7 @@ export const DataSQRLWorkBenefits = [
     image: '/img/index/undraw_time_management_sqrl.svg',
     description: (
       <>
-        DataSQRL is a distributed company which allows you to work when and where is best for you.
+        DataSQRL is a distributed company which allows you to work remotely where and when is best for you.
         We have the experience to build remote teams that work well and maximize your impact without
         getting in the way of your life.
       </>
@@ -34,7 +34,7 @@ export const DataSQRLWorkBenefits = [
     image: '/img/index/undraw_online_shopping_sqrl.svg',
     description: (
       <>
-        We got you covered with health benefits and PTO. Take paid time off when you need to take care
+        We have you covered with health benefits and PTO. Take paid time off when you need to take care
         of others and we also ask that you take a minimum PTO to take care of yourself. Rest
         is important for high-performance.
       </>

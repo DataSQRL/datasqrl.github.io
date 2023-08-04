@@ -51,6 +51,11 @@ export default function JobPosting() {
                 </p>
 
                 <p>
+                  <strong>Location</strong><br />
+                  Americas and Europe. DataSQRL is a distributed company with a strong remote-work culture.
+                </p>
+
+                <p>
                   <strong>Skills We Value</strong>
                 <ul>
                   <li>Stream Processing Frameworks: Developing continuous data flow and real-time processing engines.</li>
