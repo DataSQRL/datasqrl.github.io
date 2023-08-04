@@ -42,7 +42,7 @@ export default function JobPosting() {
                 <p>
                   As a founding engineer, you have the opportunity to build an engineering powerhouse and set the
                   technical direction for DataSQRL while working on innovative technology within
-                  an open-source community and supported by domain experts.
+                  an open-source community and supported by domain experts at DataSQRL.
                 </p>
 
                 <p>
