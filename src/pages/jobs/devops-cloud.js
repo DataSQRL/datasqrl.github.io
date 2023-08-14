@@ -9,12 +9,11 @@ import ContactForm from "../../components/ContactForm";
 import JobPostingFooter, {APPLY_FORM_URL, DataSQRLWorkBenefits, WhyWorkAtDataSQRL} from "../../components/JobPostingFooter";
 
 const header =  {
-  title: 'Job Posting: Database Compiler Engineer',
-  tagLine: 'Database Compiler Engineer',
+  title: 'Job Posting: DevOps & Cloud Engineer',
+  tagLine: 'DevOps & Cloud Engineer',
   text: (
     <>
-      Work on the core compiler technology of DataSQRL which combines database
-      query planning and rewriting with AI optimization.
+      Automate the deployment of DataSQRL applications in the cloud and help developers build event-driven microservices.
     </>
   ),
   LogoSvg: require('../../../static/img/generic/undraw_careers.svg').default,
@@ -36,19 +35,18 @@ export default function JobPosting() {
                 <p>
                   At DataSQRL, we are building <Link to="https://github.com/DataSQRL/sqrl">innovative open-source technology</Link> that
                   empowers people to build streaming data and realtime AI applications with only basic SQL knowledge.
-                  We need your help to improve the core compiler component of DataSQRL which plans, optimizes, and translates
-                  the high-level SQL language into executables for each engine.
+                  To make DataSQRL truly easy to use, we need your help automating cloud deployment of the microservices that DataSQRL compiles.
                 </p>
                 <p>
-                  As a founding engineer, you have the opportunity to build an engineering powerhouse and set the
-                  technical direction for DataSQRL while working on innovative technology within
-                  an open-source community and supported by domain experts at DataSQRL.
+                  You will work with Terraform and other cloud DevOps tooling to build a deployment pipeline and observability platform
+                  for DataSQRL microservices. You will work with a team of supportive data nerds and cheered on by an open-source
+                  community that wants an easy path to production.
                 </p>
 
                 <p>
                   <strong>Technologies You Will Work With</strong><br />
-                  Our tech stack combines Apache Flink, Apache Calcite, Postgres, Apache Kafka, and Java. It integrates
-                  AI runtimes like ONNX and MLeap.
+                  You'll primarily work terraform and similar tooling for AWS cloud services (EMR, RDS, MKS, Fargate, Kinesis, etc). Our initial target is
+                  deployment on AWS with other cloud providers coming in the future.
                 </p>
 
                 <p>
@@ -59,23 +57,23 @@ export default function JobPosting() {
                 <p>
                   <strong>Skills We Value</strong>
                 <ul>
-                  <li>Stream Processing Frameworks: Developing continuous data flow and real-time processing engines.</li>
-                  <li>Query Engines: Knowledge of the relational model, query planning, query optimization, and query rewriting.</li>
-                  <li>Compiler Construction: Building and fine-tuning compilers.</li>
-                  <li>Language Processing: Expertise in parsing high-level languages. Experience working with transpilers and language servers.</li>
-                  <li>Logical Planning: Navigating abstract representations of high-level instructions.</li>
-                  <li>Connector Development: Ability to create connectors for external systems.</li>
+                  <li>Cloud Services: Orchestrating and deploying cloud services for development and production workloads.</li>
+                  <li>Microservices Architecture: Understanding of microservices architectures and operating them in production.</li>
+                  <li>AWS Ecosystem: Building applications and workflows with AWS cloud services, in particular EMR, RDS, MKS, and Fargate.</li>
+                  <li>DevOps Automation: Automating deployment workflows with existing tools and custom implementations.</li>
+                  <li>Java Ecosystem: Understanding of the Java build system, JAR packaging, and module systems for effective code organization and execution.</li>
+                  <li>Observability: Building observability across multiple services for monitoring, incident detection, and operational management.</li>
                 </ul>
                 </p>
 
                 <p>
                   <strong>Qualities We Admire</strong>
                 <ul>
-                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
-                  <li>Attention to Detail: Every line of code matters. Ensuring the precision and flawless functionality of compilers is paramount.</li>
-                  <li>Mentorship: Provides direction to junior engineers and fosters a safe environment for growth.</li>
-                  <li>Collaboration: Values the input of everyone on the team. Strives to have others feel safe and heard.</li>
+                  <li>Automation Mindset: If a computer can do it, a computer should do it.</li>
                   <li>Adaptability: Thrive in a dynamic environment with ever-evolving challenges and tech updates.</li>
+                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
+                  <li>Community Building: Fostering a welcoming, supportive, and safe open-source community.</li>
+                  <li>Communication: Communicating complex topics clearly to internal and external audiences.</li>
                   <li>Simplicity: Prioritize straightforward approaches, even in intricate systems.</li>
                 </ul>
                 </p>
@@ -97,7 +95,7 @@ export default function JobPosting() {
             </div>
           </div>
         </section>
-        <JobPostingFooter jobTitle="Database Compiler Engineer" />
+        <JobPostingFooter jobTitle="DevOps & Cloud Engineer" />
       </main>
     </Layout>
   );

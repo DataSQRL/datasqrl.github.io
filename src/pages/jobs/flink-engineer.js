@@ -9,12 +9,11 @@ import ContactForm from "../../components/ContactForm";
 import JobPostingFooter, {APPLY_FORM_URL, DataSQRLWorkBenefits, WhyWorkAtDataSQRL} from "../../components/JobPostingFooter";
 
 const header =  {
-  title: 'Job Posting: Database Compiler Engineer',
-  tagLine: 'Database Compiler Engineer',
+  title: 'Job Posting: Apache Flink Engineer',
+  tagLine: 'Apache Flink Engineer',
   text: (
     <>
-      Work on the core compiler technology of DataSQRL which combines database
-      query planning and rewriting with AI optimization.
+      Make it easier to build streaming applications with Apache Flink by integrating Flink into the DataSQRL compiler.
     </>
   ),
   LogoSvg: require('../../../static/img/generic/undraw_careers.svg').default,
@@ -36,19 +35,18 @@ export default function JobPosting() {
                 <p>
                   At DataSQRL, we are building <Link to="https://github.com/DataSQRL/sqrl">innovative open-source technology</Link> that
                   empowers people to build streaming data and realtime AI applications with only basic SQL knowledge.
-                  We need your help to improve the core compiler component of DataSQRL which plans, optimizes, and translates
-                  the high-level SQL language into executables for each engine.
+                  A core part of DataSQRL is compiling SQL programs to Flink jobs and that's where we need your help.
                 </p>
                 <p>
-                  As a founding engineer, you have the opportunity to build an engineering powerhouse and set the
-                  technical direction for DataSQRL while working on innovative technology within
-                  an open-source community and supported by domain experts at DataSQRL.
+                  You'll be working on the internals of two open-source projects
+                  - <Link to="https://flink.apache.org/">Apache Flink</Link> and <Link to="https://github.com/DataSQRL/sqrl">DataSQRL</Link> -
+                  which means your contributions will have a big impact, you'll be working within supportive communities of domain experts,
+                  and there are plenty of fun technical problems to tackle.
                 </p>
 
                 <p>
                   <strong>Technologies You Will Work With</strong><br />
-                  Our tech stack combines Apache Flink, Apache Calcite, Postgres, Apache Kafka, and Java. It integrates
-                  AI runtimes like ONNX and MLeap.
+                  You'll primarily work with Apache Flink, Apache Calcite, and Java. Plus integration work with AI technologies like ONNX and MLeap.
                 </p>
 
                 <p>
@@ -59,23 +57,23 @@ export default function JobPosting() {
                 <p>
                   <strong>Skills We Value</strong>
                 <ul>
-                  <li>Stream Processing Frameworks: Developing continuous data flow and real-time processing engines.</li>
-                  <li>Query Engines: Knowledge of the relational model, query planning, query optimization, and query rewriting.</li>
-                  <li>Compiler Construction: Building and fine-tuning compilers.</li>
-                  <li>Language Processing: Expertise in parsing high-level languages. Experience working with transpilers and language servers.</li>
+                  <li>Apache Flink: Understanding of Flink's internals (table & datastream API) and building with and on top of Apache Flink.</li>
+                  <li>Stream Processing Frameworks (in general): Developing continuous data flow and real-time processing engines.</li>
+                  <li>Open-source Development: Implementing complex software systems as part of an open-source community.</li>
                   <li>Logical Planning: Navigating abstract representations of high-level instructions.</li>
-                  <li>Connector Development: Ability to create connectors for external systems.</li>
+                  <li>Connector Development: Ability to create and abstract connectors for Apache Flink.</li>
+                  <li>Streaming DevOps: Running Apache Flink jobs in production.</li>
                 </ul>
                 </p>
 
                 <p>
                   <strong>Qualities We Admire</strong>
                 <ul>
-                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
-                  <li>Attention to Detail: Every line of code matters. Ensuring the precision and flawless functionality of compilers is paramount.</li>
-                  <li>Mentorship: Provides direction to junior engineers and fosters a safe environment for growth.</li>
-                  <li>Collaboration: Values the input of everyone on the team. Strives to have others feel safe and heard.</li>
+                  <li>Performance Engineering: Knowledge of high-performance computing and hardware efficiency. Every line of code matters.</li>
                   <li>Adaptability: Thrive in a dynamic environment with ever-evolving challenges and tech updates.</li>
+                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
+                  <li>Community Building: Fostering a welcoming, supportive, and safe open-source community.</li>
+                  <li>Communication: Communicating complex topics clearly to internal and external audiences.</li>
                   <li>Simplicity: Prioritize straightforward approaches, even in intricate systems.</li>
                 </ul>
                 </p>
@@ -97,7 +95,7 @@ export default function JobPosting() {
             </div>
           </div>
         </section>
-        <JobPostingFooter jobTitle="Database Compiler Engineer" />
+        <JobPostingFooter jobTitle="Apache Flink Engineer" />
       </main>
     </Layout>
   );

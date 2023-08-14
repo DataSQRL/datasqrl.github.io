@@ -85,6 +85,24 @@ export default function Careers() {
                     <td>Americas & Europe</td>
                     <td><Link className="button button--secondary" to="/jobs/db-compiler">Learn More & Apply</Link></td>
                   </tr>
+                  <tr>
+                    <td><strong><Link to="/jobs/flink-engineer">Apache Flink Engineer</Link></strong></td>
+                    <td>Make it easier to build streaming applications with Apache Flink by integrating Flink into the DataSQRL compiler.</td>
+                    <td>Americas & Europe</td>
+                    <td><Link className="button button--secondary" to="/jobs/flink-engineer">Learn More & Apply</Link></td>
+                  </tr>
+                  <tr>
+                    <td><strong><Link to="/jobs/java-engineer">Reactive Java Engineer</Link></strong></td>
+                    <td>Build a reactive API server engine with embedded code execution for data services on top of Eclipse Vert.x.</td>
+                    <td>Americas & Europe</td>
+                    <td><Link className="button button--secondary" to="/jobs/java-engineer">Learn More & Apply</Link></td>
+                  </tr>
+                  <tr>
+                    <td><strong><Link to="/jobs/devops-cloud">DevOps & Cloud Engineer</Link></strong></td>
+                    <td>Automate the deployment of DataSQRL applications in the cloud and help developers build event-driven microservices.</td>
+                    <td>Americas & Europe</td>
+                    <td><Link className="button button--secondary" to="/jobs/devops-cloud">Learn More & Apply</Link></td>
+                  </tr>
                   </tbody>
                 </table>
 

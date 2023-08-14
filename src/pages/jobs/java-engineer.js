@@ -9,12 +9,11 @@ import ContactForm from "../../components/ContactForm";
 import JobPostingFooter, {APPLY_FORM_URL, DataSQRLWorkBenefits, WhyWorkAtDataSQRL} from "../../components/JobPostingFooter";
 
 const header =  {
-  title: 'Job Posting: Database Compiler Engineer',
-  tagLine: 'Database Compiler Engineer',
+  title: 'Job Posting: Reactive Java Engineer',
+  tagLine: 'Reactive Java Engineer',
   text: (
     <>
-      Work on the core compiler technology of DataSQRL which combines database
-      query planning and rewriting with AI optimization.
+      Build a reactive API server engine with embedded code execution for data services on top of Eclipse Vert.x.
     </>
   ),
   LogoSvg: require('../../../static/img/generic/undraw_careers.svg').default,
@@ -36,19 +35,18 @@ export default function JobPosting() {
                 <p>
                   At DataSQRL, we are building <Link to="https://github.com/DataSQRL/sqrl">innovative open-source technology</Link> that
                   empowers people to build streaming data and realtime AI applications with only basic SQL knowledge.
-                  We need your help to improve the core compiler component of DataSQRL which plans, optimizes, and translates
-                  the high-level SQL language into executables for each engine.
+                  DataSQRL generates reactive API endpoints from user applications and we need your help to build the server engine that
+                  powers those endpoints on top of <Link to="https://vertx.io/">Eclipse Vert.x</Link>.
                 </p>
                 <p>
-                  As a founding engineer, you have the opportunity to build an engineering powerhouse and set the
-                  technical direction for DataSQRL while working on innovative technology within
-                  an open-source community and supported by domain experts at DataSQRL.
+                  You will develop a customizable server engine that translates incoming API calls to pre-compiled
+                  database retrieval code for high performance execution of mission-critical data services. Your contributions
+                  will benefit the open-source community and make reactive data applications easier to implement.
                 </p>
 
                 <p>
                   <strong>Technologies You Will Work With</strong><br />
-                  Our tech stack combines Apache Flink, Apache Calcite, Postgres, Apache Kafka, and Java. It integrates
-                  AI runtimes like ONNX and MLeap.
+                  You'll primarily work with Eclipse Vert.x and Java. Plus integration work with AI technologies like ONNX and MLeap.
                 </p>
 
                 <p>
@@ -59,23 +57,23 @@ export default function JobPosting() {
                 <p>
                   <strong>Skills We Value</strong>
                 <ul>
-                  <li>Stream Processing Frameworks: Developing continuous data flow and real-time processing engines.</li>
-                  <li>Query Engines: Knowledge of the relational model, query planning, query optimization, and query rewriting.</li>
-                  <li>Compiler Construction: Building and fine-tuning compilers.</li>
-                  <li>Language Processing: Expertise in parsing high-level languages. Experience working with transpilers and language servers.</li>
-                  <li>Logical Planning: Navigating abstract representations of high-level instructions.</li>
-                  <li>Connector Development: Ability to create connectors for external systems.</li>
+                  <li>Reactive Java: Developing asynchronous server applications in Java and <Link to="https://vertx.io/">Eclipse Vert.x</Link> in particular.</li>
+                  <li>API Development: Designing and implementing GraphQL and REST APIs on the JVM.</li>
+                  <li>Java Ecosystem: Understanding of the Java build system, JAR packaging, and module systems for effective code organization and execution.</li>
+                  <li>Database Query Execution: Efficiently executing database retrieval operations from an API server.</li>
+                  <li>Code Generation: Generating runtime execution code from a high-level instruction set and embedding it in an application.</li>
+                  <li>Server DevOps: Running reactive Java applications in production with observability and DevOps tooling.</li>
                 </ul>
                 </p>
 
                 <p>
                   <strong>Qualities We Admire</strong>
                 <ul>
-                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
-                  <li>Attention to Detail: Every line of code matters. Ensuring the precision and flawless functionality of compilers is paramount.</li>
-                  <li>Mentorship: Provides direction to junior engineers and fosters a safe environment for growth.</li>
-                  <li>Collaboration: Values the input of everyone on the team. Strives to have others feel safe and heard.</li>
+                  <li>Performance Engineering: Knowledge of high-performance computing and hardware efficiency. Every line of code matters.</li>
                   <li>Adaptability: Thrive in a dynamic environment with ever-evolving challenges and tech updates.</li>
+                  <li>Analytical Thinking: Ability to dissect complex problems and identify the optimal solution path.</li>
+                  <li>Community Building: Fostering a welcoming, supportive, and safe open-source community.</li>
+                  <li>Communication: Communicating complex topics clearly to internal and external audiences.</li>
                   <li>Simplicity: Prioritize straightforward approaches, even in intricate systems.</li>
                 </ul>
                 </p>
@@ -97,7 +95,7 @@ export default function JobPosting() {
             </div>
           </div>
         </section>
-        <JobPostingFooter jobTitle="Database Compiler Engineer" />
+        <JobPostingFooter jobTitle="Reactive Java Engineer" />
       </main>
     </Layout>
   );
