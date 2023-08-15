@@ -5,6 +5,11 @@ authors: [matthias]
 tags: [Kafka, Flink, Postgres, microservice, DataSQRL]
 ---
 
+<head>
+  <meta property="og:image" content="/img/blog/preprocessOrQuery.png" />
+  <meta name="twitter:image" content="/img/blog/preprocessOrQuery.png" />
+</head>
+
 # To Preprocess or to Query, that’s the Question!
 
 When developing streaming applications or event-driven microservices, you face the decision of whether to preprocess data transformations in the stream engine or execute them as queries against the database at request time. The choice impacts your application’s performance, behavior, and cost. An incorrect decision results in unnecessary work and potential application failure.
