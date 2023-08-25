@@ -113,10 +113,10 @@ Orders.user := JOIN Users ON @.customerid = Users.id;
 This preparation work allows us to refine the product analysis we added at the end of the last chapter.
 
 ```sqrl
-Products.volume_10day := SELECT u.country, sum(i.quantity) as quantity,
+Products.volume_10day := SELECT coalesce(u.country, 'none') as country, sum(i.quantity) as quantity,
          sum(i.total) as spend, sum(i.quantity * @.weight_in_gram) as weight
-      FROM @.ordered_items i JOIN i.parent o TEMPORAL JOIN o.user u
-      WHERE o.time > now() - INTERVAL 10 DAY GROUP BY u.country;
+      FROM @.ordered_items i JOIN i.parent o JOIN o.user u
+      WHERE o.time > now() - INTERVAL 10 DAY GROUP BY country;
 ```
 
 We are updating the query for the nested `volume_10day` query to group by the country of the user. That gives us a more detailed view of recent product volume by country.
@@ -133,10 +133,10 @@ That's usually not what we want. In our example query, we want the country that 
 To join stream with state tables at the timestamp of the stream, SQRL supports temporal joins. And SQRL makes temporal joins the default join type when joining on a state tables key columns as we do in the example above. That means, we don't have to write out the temporal join explicitly, but we can do that for additional clarity:
 
 ```sqrl
-Products.volume_10day := SELECT u.country, sum(i.quantity) as quantity,
+Products.volume_10day := SELECT coalesce(u.country, 'none') as country, sum(i.quantity) as quantity,
          sum(i.total) as spend, sum(i.quantity * @.weight_in_gram) as weight
       FROM @.ordered_items i JOIN i.parent o TEMPORAL JOIN o.user u
-      WHERE o.time > now() - INTERVAL 10 DAY GROUP BY u.country;
+      WHERE o.time > now() - INTERVAL 10 DAY GROUP BY country;
 ```
 
 ## Developing with Data Sources {#variant}
