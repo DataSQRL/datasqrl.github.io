@@ -12,7 +12,7 @@ The package configuration is the central configuration file used by the [DataSQR
     }
   },
   "engines" : {
-    "stream" : {
+    "streams" : {
       "name" : "flink"
     }, 
     "database" : {
