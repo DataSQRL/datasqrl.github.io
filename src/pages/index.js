@@ -30,8 +30,8 @@ const header =  {
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
                    buttonText: "Build a Data Product in 10 minutes",
-                   youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
-                   // LogoSvg: require('../../static/img/full_squirrel.svg').default,
+                   //youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
+                   LogoSvg: require('../../static/img/full_squirrel.svg').default,
                  };
 
 export default function Home() {
