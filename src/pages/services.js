@@ -24,33 +24,30 @@ const header =  {
 
 const WhatDataSQRLServices = [
   {
-    title: 'Workshops',
+    title: 'Courses',
     image: '/img/index/undraw_programming_sqrl.svg',
     description: (
       <>
-        A 2-day workshop combines prototyping a data service for your choice of use case with a miniature training.
-        We run your team through the DataSQRL process to develop a working data service. It's hackathon
-        meets blitz-training. <br />
+        Our online courses are an easy and convenient way to learn how to use DataSQRL technology
+        and build streaming data services. You will quickly get up to speed in an exclusive learning environment with immediate feedback. <br />
         Plus, you get homework for free.
       </>
     ),
-    link: '/contact',
-    linkText: 'Book a Workshop',
+    link: '/courses',
+    linkText: 'Attend a Course',
   },
   {
-    title: 'Training',
+    title: 'Workshops',
     image: '/img/index/undraw_personal_training_sqrl.svg',
     description: (
       <>
-        A week-long training teaches your organization how to use DataSQRL technology to build data services
-        and how to apply our development process to produce results.
-        Through a series of lessons, exercises, and group work your team learns how to turn
-        your organization's data into valuable services. <br />
-        We promise: no death by Powerpoint.
+        A workshop combines learning with hands-on development. Your team learns how to apply the DataSQRL process
+        and together we build a custom data service for your organization. <br />
+        A workshop empowers your team to build data services autonomously. We promise: no death by Powerpoint.
       </>
     ),
     link: '/contact',
-    linkText: 'Schedule a Training',
+    linkText: 'Schedule a Workshop',
   },
   {
     title: 'Consulting',
