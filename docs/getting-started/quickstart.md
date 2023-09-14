@@ -2,15 +2,15 @@
 title: "Quickstart Tutorial"
 ---
 
-# DataSQRL Quickstart in 5 Minutes
+# DataSQRL Quickstart in 10 Minutes
 
 <img src="/img/getting-started/squirrel_computer.jpeg" alt="Metrics Monitoring Quickstart >|" width="35%"/>
 
-We are going to build a metrics monitoring service with DataSQRL in 5 minutes. Tik tok, let's go!
+We are going to build a data products that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
 
 ## Create Script
 
-First, we are going to define the data processing for our monitoring service using SQL.
+First, we are going to define the metrics processing for our data product using SQL.
 
 :::info
 
@@ -40,9 +40,9 @@ SensorMaxTemp := SELECT sensorid, max(temp) as maxTemp
                  GROUP BY sensorid;
 ```
 
-DataSQRL's flavor of SQL is called "SQRL", has a more concise syntax, and allows explicit data and function imports.
+DataSQRL's flavor of SQL is called "SQRL", which defines tables using the `:=` assignment operator and supports explicit data and function imports.
 
-In the script, we import the sensor data we are monitoring and a time function we use for aggregation.
+In the script, we import the sensor data we are processing and a time function we use for aggregation.
 
 We define the `SecReading` table that aggregates all sensor metrics within one second to smooth our temperature readings. 
 We define another table `SensorMaxTemp` which computes the maximum temperature in the last minute for each sensor.

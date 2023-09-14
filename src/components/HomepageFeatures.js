@@ -11,7 +11,7 @@ function Feature({image, title, link, linkText, description}) {
   }
   let linkContent = "";
   if (link) {
-    linkContent = <div className="text--center"><Link className="button button--secondary button--sm" to={link}>{linkText}</Link></div>
+    linkContent = <div className="text--center"><Link className="button button--secondary button--md" to={link}>{linkText}</Link></div>
   }
   let mainContent = "";
   if (description) {
@@ -32,7 +32,7 @@ function Feature({image, title, link, linkText, description}) {
 export default function HomepageFeatures({FeatureList, headline}) {
   let header;
   if (headline) {
-    header = <h2 className="margin-bottom--md">{headline}</h2>;
+    header = <h2 className="margin-bottom--md text--center">{headline}</h2>;
   } else {
     header = "";
   }
