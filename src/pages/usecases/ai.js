@@ -20,7 +20,7 @@ const header =  {
                    tagLine: 'Build Streaming AI Applications',
                    text: (
                      <>
-                       Enrich your data streams with AI models and machine learning and build powerful data microservices
+                       Enrich your data streams with AI models and machine learning to build powerful data microservices
                        in a fraction of the time.
                      </>
                    ),
@@ -37,7 +37,7 @@ export const UseCaseFeatures = [
     description: (
       <>
         DataSQRL supports vector embeddings, vector similarity, and vector search to build
-        custom semantic search engine and personalized user experiences.
+        custom semantic search engines and personalized user experiences.
       </>
     ),
   },
@@ -106,7 +106,7 @@ export default function Home() {
               <div className="col col--6 text--left">
                 <h2>Why DataSQRL?</h2>
                 <p className="hero__subtitle">
-                  Most AI projects fail because bringing AI models to production requires
+                  Most AI projects fail because productizing AI models requires
                   complex data plumbing to compute real-time features on data streams.
                   DataSQRL eliminates data plumbing allowing you to focus on data transformation
                   and model deployment. Utilize the power of AI without getting bogged down

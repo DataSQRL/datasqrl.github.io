@@ -107,7 +107,7 @@ export default function Home() {
               <div className="col col--6 text--left">
                 <h2>Why DataSQRL?</h2>
                 <p className="hero__subtitle">
-                  The foundational principles of data mesh architectures is domain ownership.
+                  The foundational principle of data mesh architectures is domain ownership.
                   But your domain teams don't have the data technology expertise to implement all the data
                   plumbing that streaming data products require.
                   DataSQRL eliminates data plumbing so domain teams can build successful

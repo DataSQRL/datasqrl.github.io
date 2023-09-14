@@ -47,7 +47,7 @@ export const UseCaseFeatures = [
     description: (
       <>
         Deploy machine learning and large language models for predictive analytics on your
-        metrics and log data streams.
+        metrics or log data streams.
       </>
     ),
   },

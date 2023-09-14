@@ -67,18 +67,18 @@ export const DataSQRLUseCases = [
     link: "/usecases/datamesh/",
     linkText: "Build a Data Mesh"
   },
-  {
-    title: 'Artificial Intelligence',
-    image: '/img/generic/ai_squirrel.svg',
-    description: (
-      <>
-        Take your data to another level with AI. DataSQRL supports vector embeddings,
-        large language models, and machine learning in SQL.
-      </>
-    ),
-    link: "/usecases/ai/",
-    linkText: "Empower your Data with AI"
-  },
+  // {
+  //   title: 'Artificial Intelligence',
+  //   image: '/img/generic/ai_squirrel.svg',
+  //   description: (
+  //     <>
+  //       Take your data to another level with AI. DataSQRL supports vector embeddings,
+  //       large language models, and machine learning in SQL.
+  //     </>
+  //   ),
+  //   link: "/usecases/ai/",
+  //   linkText: "Empower your Data with AI"
+  // },
   {
     title: 'Observability & Automation',
     image: '/img/generic/predictive_analytics.svg',
