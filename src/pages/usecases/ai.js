@@ -25,7 +25,7 @@ const header =  {
                      </>
                    ),
                    buttonLink: '/docs/getting-started/tutorials/recommendations/intro/',
-                   buttonText: "Enrich Your Data With AI 10 minutes",
+                   buttonText: "Enrich Data With AI in 10 min",
                    //youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
                    LogoSvg: require('/static/img/generic/ai_squirrel_double.svg').default,
                  };
@@ -115,7 +115,7 @@ export default function Home() {
                 <Link
                   className="button button--primary button--lg"
                   to="/services/">
-                  Unlock the Value of Your Data with AI
+                  Let's Build AI Data Products
                 </Link>
               </div>
               <div className="col col--4 text--center hide-small-screens">

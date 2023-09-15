@@ -25,7 +25,7 @@ const header =  {
                      </>
                    ),
                    buttonLink: '/docs/getting-started/tutorials/iot/intro/',
-                   buttonText: "Build Custom Metrics Analytics 10 minutes",
+                   buttonText: "Build Metrics Analytics 10 min",
                    //youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
                    LogoSvg: require('/static/img/generic/predictive_analytics_sqrl.svg').default,
                  };

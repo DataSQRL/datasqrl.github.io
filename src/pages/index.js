@@ -29,7 +29,7 @@ const header =  {
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
-                   buttonText: "Build a Data Product in 10 minutes",
+                   buttonText: "Build a Data Product in 10 min",
                    //youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
                    LogoSvg: require('../../static/img/full_squirrel.svg').default,
                  };
@@ -62,7 +62,7 @@ export default function Home() {
 
         <HomepageFeatures FeatureList={DataSQRLUseCases} headline="Use Cases" />
 
-        <WhyDataSQRL linkText="How DataSQRL Helps Your Organization" linkURL="/services" />
+        <WhyDataSQRL linkText="How DataSQRL Helps Your Team" linkURL="/services" />
 
         <HomepageFeatures FeatureList={WhyDataSQRLList} />
 

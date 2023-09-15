@@ -108,7 +108,7 @@ export function HowDataSQRLWorks() {
         <Link
           className="button button--primary button--lg"
           to="/how">
-          Show Me How DataSQRL Works Exactly
+          How DataSQRL Works Exactly
         </Link>
       </div>
     </div>

@@ -26,7 +26,7 @@ const header =  {
                      </>
                    ),
                    buttonLink: '/docs/getting-started/intro/overview/',
-                   buttonText: "Build a Data Product in 10 minutes",
+                   buttonText: "Build a Data Product in 10 min",
                    //youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
                    LogoSvg: require('/static/img/generic/data_mesh_sqrl.svg').default,
                  };
@@ -116,7 +116,7 @@ export default function Home() {
                 <Link
                   className="button button--primary button--lg"
                   to="/services/">
-                  Make Your Data Mesh Strategy Reality
+                  Let's Build a Data Mesh Together
                 </Link>
               </div>
               <div className="col col--4 text--center hide-small-screens">
