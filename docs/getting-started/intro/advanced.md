@@ -6,9 +6,12 @@ title: "Advanced Topics"
 
 You have made it through the entire introduction tutorial and want to keep learning about DataSQLR? Kudos to you! This page highlights some additional aspects of DataSQRL with pointers to more information, so you can continue your journey to ninja squirrel status 🐿🥇. 
 
-## Relationship Expressions
+## Advanced Relationships
 
-In the [chapter on SQRL](../sqrl) we introduced relationship columns and showed how they make relationships explicit, add structure to your data, and simplify joins. In addition, you can reference relationships in expressions to avoid joins entirely. Let's see how that works.
+In the [chapter on SQRL](../sqrl) we introduced relationship columns and showed how they make relationships explicit, add structure to your data, and simplify joins. 
+
+In addition, we are going to show how relationships allow us to structure our tables and data intuitively, which improves
+readability.
 
 First, we are going to create a nested table that aggregates order statistics for each user.
 
@@ -18,13 +21,13 @@ Users.order_stats := SELECT min(o.time) sum(t.price) as spend, sum(t.saving) as 
       FROM @.purchases o JOIN o.totals t;
 ```
 
-We have seen such nested table aggregations before. We are aggregating over all orders for each user and are joining in the order totals via the `totals` relationship.
+We have seen such nested table aggregations before. We are aggregating over all orders for each user and are joining in the order totals via the `totals` relationship. We are adding this example to showcase how reusing the relationships `purchases` and `totals` makes this query concise and easy to read. Plus, we can readily refer to nested tables in filters and other types of queries.
 
 ```sqrl
-HighSpendingUsers := SELECT id, email FROM Users WHERE order_stats.spend > 1000;
+HighSpendingUsers := SELECT id, email FROM Users u JOIN u.order_stats s WHERE s.spend > 1000;
 ```
 
-Next, we are defining the `HighSpendingUsers` table to keep track of our most valuable customers. Note, how we are using the `order_stats` relationship to the previously defined nested table to access the `spend` aggregate in the filter of our `WHERE` clause. This saved us an explicit join and makes the query more readable.
+Here, we are defining the `HighSpendingUsers` table to keep track of our most valuable customers. Note, how we are using the `order_stats` relationship to the previously defined nested table to access the `spend` aggregate in the filter of our `WHERE` clause.
 
 Take a look at the [relationship documentation](/docs/reference/sqrl/relationship) to learn more.
 

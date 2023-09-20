@@ -35,6 +35,7 @@ When defining a nested table, each child row has a relationship column `parent` 
 
 Hence, we are able to use `JOIN p.totals` to join the totals for each order by following the `totals` relationship on the order row.
 
+<!--
 ## Relationship Expressions {#expressions}
 
 Relationships can be used inside expressions in a query.
@@ -66,12 +67,15 @@ HighSpendingUsers := SELECT id, email FROM Users
 ```
 This table contains user information for those users who have spent more than a thousand dollars in total.
 
+-->
+
 ## API Access
 
 The relationships defined in a SQRL script can be exposed in the resulting data API to give consumers of the API the ability to navigate through the data and retrieve related records. Relationships make it possible to represent complex data efficiently through the API.
 
 To learn more about how to expose and navigate relationships in the data API, refer to the [API documentation](../../api/overview).
 
+<!--
 ## Multiplicity
 
 Relationships are defined as SQL `JOIN` clauses with the at-sign `@` used to refer to the table on which the relationship is defined.
@@ -91,3 +95,4 @@ The `LIMIT` clause is used to restrict the multiplicity of the relationship.
 Users.last_purchase := JOIN Orders ON Orders.customerid = @.id LIMIT 1;
 ```
 This statement defines a relationship with `0..1` multiplicity.
+-->

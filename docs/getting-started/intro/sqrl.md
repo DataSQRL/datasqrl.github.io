@@ -271,7 +271,7 @@ a table from a source that you want to treat as an entity, make sure to use a
 Now, that we have our `Products` state table defined, let's relate it to the `Orders.items` table.
 
 ```sqrl
-Orders.items.product := JOIN Products ON Products.id = @.productid LIMIT 1;
+Orders.items.product := JOIN Products ON Products.id = @.productid;
 Products.ordered_items := JOIN Orders.items i ON i.productid = @.id;
 ```
 
@@ -314,7 +314,7 @@ For our seed shop, we want to analyze the order volume for each product over the
 ```sqrl
 Products.volume_10day := SELECT sum(i.quantity) as quantity,
          sum(i.total) as spend, sum(i.quantity * @.weight_in_gram) as weight
-      FROM @.ordered_items i JOIN i.parent o
+      FROM @ JOIN @.ordered_items i JOIN i.parent o
       WHERE o.time > now() - INTERVAL 10 DAY;
 ```
 

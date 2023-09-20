@@ -44,5 +44,5 @@ Finally, we add a relationship to this nested table to relate those records back
 to our `Products` table:
 
 ```sqrl
-Customers.products_by_protein.product := JOIN Products ON Products.id = _productid LIMIT 1;
+Customers.products_by_protein.product := JOIN Products ON Products.id = _productid;
 ```
