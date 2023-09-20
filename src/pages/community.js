@@ -15,7 +15,7 @@ const header =  {
                 We would love for you to nerd out with us and join our open-source community.
                      </>
                    ),
-                   buttonLink: '/contact',
+                   buttonLink: 'https://discord.gg/49AnhVY2w9',
                    buttonText: 'Join us on Discord',
                    LogoSvg: require('/static/img/generic/undraw_community.svg').default,
                  }
