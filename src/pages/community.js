@@ -29,8 +29,8 @@ const Support = [
     linkText: 'Share Your Thoughts',
     description: (
       <>
-        If you want to brainstorm with the community or tune into the development process behind DataSQRL,
-        join us <Link to="https://discord.gg/49AnhVY2w9">on Discord</Link>. Share your thoughts and feedback while watching how the sausage gets made.
+        If you want to talk to the community, ask questions, brainstorm on your problem or tune into the development process behind DataSQRL,
+        join us <Link to="https://discord.gg/49AnhVY2w9">on Discord</Link>. Get help and share your thoughts while watching how the sausage gets made.
       </>
     ),
   },
