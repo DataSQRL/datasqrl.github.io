@@ -12,11 +12,15 @@ tags: [AI, Kafka, Flink, Postgres, microservice, DataSQRL]
 
 Let’s build a personalized recommendation engine using AI as an event-driven microservice with Kafka, Flink, and Postgres. And since Current23 is starting soon, we will use the events of this event-driven conference as our input data (sorry for the pun). You’ll learn how to apply AI techniques to streaming data and what talks you want to attend at the Kafka conference - double win!
 
+
+
+<div style={{float: 'right', width: '40%'}}>
+<iframe width="100%" height="100%" src="https://www.youtube.com/embed/gI_TRF1z-So" title="DataSQRL Introduction" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+</div>
+
 We will implement the whole microservice in 50 lines of code thanks to the DataSQRL compiler, which eliminates all the data plumbing so we can focus on building.
 
-<img src="/img/blog/recommendationsCurrent23.png" alt="Build AI Recommendations with DataSQRL >|" width="40%"/>
-
-<!-- (Click on the video to watch the tutorial or read below) -->
+Watch the video to see the microservice in action or read below for step-by-step building instructions and details.
 
 ## What We Will Build
 
