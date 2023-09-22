@@ -79,7 +79,14 @@ There is a better way: We are going to use the open-source DataSQRL compiler to 
 ## Imports
 
 ```sql
-IMPORTS
+IMPORT conference.Events;  --import external data
+IMPORT recAPI.Likes;        --import data from API mutation
+IMPORT recAPI.AddInterest;  --import data from API mutation
+
+IMPORT string.*;
+IMPORT text.*;
+IMPORT vector.*;
+IMPORT time.parseTimestamp;
 ```
 
 We import the source tables that we are processing in this script. DataSQRL uses packages to represent data sources for modularity and ease of reuse. It’s like importing an external library but for data.
