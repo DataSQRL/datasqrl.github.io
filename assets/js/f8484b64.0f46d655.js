@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[2197],{3454:a=>{a.exports=JSON.parse('{"label":"DataSQRL","permalink":"/blog/tags/data-sqrl","allTagsPath":"/blog/tags","count":7}')}}]);
