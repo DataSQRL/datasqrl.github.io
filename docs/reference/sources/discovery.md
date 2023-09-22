@@ -213,11 +213,3 @@ Example
 
 -->
 
-----
-
-TODO:
-- rename datadiscovery to connector
-- rename "dir" to "file"
-- always have one schema file per table
-- Some sinks don't require data discovery (file, print). Make that clear on the respective documentation pages.
-

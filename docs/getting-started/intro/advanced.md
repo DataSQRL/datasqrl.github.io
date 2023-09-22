@@ -68,7 +68,7 @@ Data sinks are defined like data sources as packages. To create a local package,
   "format": {
     "name": "json"
   },
-  "datadiscovery": {
+  "connector": {
     "directoryURI": "./mysink-output/",
     "filenamePattern": "^([^\\.]+?)(?:_part.*)?$",
     "name": "file"
