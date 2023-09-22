@@ -16,8 +16,8 @@ readability.
 First, we are going to create a nested table that aggregates order statistics for each user.
 
 ```sqrl
-Users.order_stats := SELECT min(o.time) sum(t.price) as spend, sum(t.saving) as saved, 
-                            count(1) as num_orders
+Users.order_stats := SELECT min(o.time) as first_order,
+         sum(t.price) as spend, sum(t.saving) as saved, count(1) as num_orders
       FROM @.purchases o JOIN o.totals t;
 ```
 
