@@ -18,7 +18,7 @@ We will implement the whole microservice in 50 lines of code thanks to the DataS
 
 <!-- (Click on the video to watch the tutorial or read below) -->
 
-# What We Will Build
+## What We Will Build
 
 We are going to build a recommendation engine and semantic search that uses AI to provide personalized results for users based on user interactions.
 
@@ -49,11 +49,11 @@ type Query {
 ```
 The API has two mutations (for REST folks, think of those as POST): one captures which events a user has liked, and another captures a user’s interests.
 
-We have four query endpoints (those are like GET): two boring ones that return all the events and the events a user has liked and two AI-powered ones that return recommended events for a user and personalized search results for a user’s search query.
+We have four query endpoints (those are like GET): two simple ones that return all the events and the events a user has liked and two AI-powered ones that return recommended events for a user and personalized search results for a user’s search query.
 
 You can see the full GraphQL API with the mutation and return types [here](https://gist.github.com/mbroecheler/bd3ba8a8307fc36836a91599b9ff2643).
 
-#  Architecture
+##  Architecture
 
 We will implement our conference recommendation service as an event-driven microservice for robust, real-time processing at scale. The architecture of the microservice is shown below and uses Kafka for event storage, Flink for stream processing, Postgres for querying, and GraphQL for the API.
 
@@ -70,13 +70,13 @@ The data travels counter-clockwise from the top:
 
 Each component serves a distinct purpose in this event-driven architecture: the GraphQL server acts as the interface to the outside world, Kafka manages events in motion, Flink processes the event stream, and Postgres stores the processed data for retrieval on request.
 
-# Implementation
+## Implementation
 
 Now, we could implement this event-driven microservice by implementing each of the components: implement the GraphQL server, set up the Kafka topics and event schemas, implement a Flink job for data processing, and design a database schema plus SQL queries. We would have to write a ton of data plumbing code: moving data between systems, mapping schemas, designing data models, and stitching it all together. There is a reason event-driven microservices are built by teams of specialists.
 
 There is a better way: We are going to use the open-source DataSQRL compiler to generate all of that data plumbing code for us. That means we can implement our entire microservice in just 50 lines of SQL code as follows ([click here](https://gist.github.com/mbroecheler/315f99fc53768f579014ab9be7cc2fd4) to see the entire SQL script):
 
-## Imports
+### Imports
 
 ```sql
 IMPORT conference.Events;  --import external data
@@ -89,14 +89,14 @@ IMPORT vector.*;
 IMPORT time.parseTimestamp;
 ```
 
-We import the source tables that we are processing in this script. DataSQRL uses packages to represent data sources for modularity and ease of reuse. It’s like importing an external library but for data.
+At the beginning, we import the source tables that we are processing in this script. DataSQRL uses packages to represent data sources for modularity and ease of reuse. It’s like importing an external library but for data.
 Our API is treated as a data source which allows us to import the mutation input data as a table.
 
 We are also importing functions for string processing, vector embedding, etc. DataSQRL uses the same packaging structure to organize functions.
 
 Now, onto the actual logic of our script.
 
-## Processing Event Data
+### Processing Event Data
 
 ```sql
 Events.id := coalesce(CAST(regexExtract(url, '(\d*)$') AS INT),0);
@@ -114,7 +114,7 @@ We are adding columns mostly to clean up our ingested events data. When you are 
 
 We are also adding the `embedding` column to compute a vector embedding for the `title` and `abstract` of each talk. We are using the [ONNX AI](https://onnxruntime.ai/) runtime to execute the embedding model. The embedding model we are using here is a quantized version of the [all-MiniLM-L6-v2](https://www.sbert.net/docs/pretrained_models.html) pre-trained model. This is a model for sentence embedding trained on a large corpus that is small and fast while delivering good performance. “Quantized” means that the model has been transformed to run efficiently on CPUs for those of us who aren’t hoarding GPUs right now.
 
-## Processing User Interactions
+### Processing User Interactions
 
 ```sql
 AddInterest.embedding := onnxEmbed(text, '/build/embedding/model_quantized.onnx');
@@ -135,7 +135,8 @@ Next, we are processing the user interactions. We are adding an embedding vector
 
 Then, we combine those data streams in the `UserInterstVectors` table and aggregate them by computing the centroid for all those vectors for each user. That summary of user interest vectors gives us the semantic profile of each user.
 
-## User Analytics
+
+### User Analytics
 
 ```sql
 UserLikes := DISTINCT Likes ON userid, eventId ORDER BY _source_time DESC;
@@ -157,7 +158,7 @@ We add a relationship between `Events` and `EventLikeCount` so that the like cou
 
 We add a table function that returns all the events a user has liked which maps onto the query endpoint in the GraphQL API of the same name.
 
-## Personalized Recommendation
+### Personalized Recommendation
 
 ```sql
 RecommendedEvents(@userid: String) :=
@@ -168,7 +169,7 @@ RecommendedEvents(@userid: String) :=
 
 To serve users personalized recommendations, we compute the similarity between the event embedding and the aggregated semantic user profile of the `UserInterests` table using cosine similarity between the vectors.
 
-## Personalized Search
+### Personalized Search
 
 ```sql
 PersonalizedEventSearch(@query: String, @userid: String) :=
@@ -180,7 +181,7 @@ PersonalizedEventSearch(@query: String, @userid: String) :=
 
 For personalized search, we retrieve those events where the title or abstract matches the search query and then rank the results based on how similar the event is to the aggregated user interests.
 
-# Conclusion
+## Conclusion
 
 And that’s it. A complete event-driven microservice with vector embedding, personalized search, and user interaction analytics in 50 lines of SQL code.
 
@@ -188,7 +189,7 @@ And DataSQRL handles all the rest: mapping mutations onto Kafka topics and event
 
 If you want to learn more about DataSQRL, visit [datasqrl.com](/), take a look at the [in-depth tutorial](/docs/getting-started/intro/overview/), or [join the community](/community) on [Discord](https://discord.gg/49AnhVY2w9) to ask questions and share your thoughts and feedback.
 
-# Run Microservice
+## Run Microservice
 
 Want to run the recommendation microservice yourself? It’s easy. Follow these steps:
 
@@ -204,8 +205,8 @@ docker run --rm -v $PWD:/build datasqrl/cmd:dev compile conference-recommendatio
 ```
 
 :::info
-Disclaimer: We are using the preview release of DataSQRL to showcase the vector embedding feature that's coming in the next release.
-Use the latest tag for the stable release.
+Disclaimer: We are using the preview release of DataSQRL with the `:dev` tag to showcase the vector embedding feature that's coming in the next release.
+Use the `:latest` tag for the stable release.
 :::
 
 
