@@ -106,17 +106,17 @@ This statement re-defines the `Users` table as the most-recent version of each u
 In addition, we are going to do a little bit of data cleaning and add a relationship from `Orders` to `Users`:
 
 ```sqrl
-Users.country := country?'none';
+Users.country0 := coalesce(country,'none');
 Orders.user := JOIN Users ON @.customerid = Users.id;
 ```
 
 This preparation work allows us to refine the product analysis we added at the end of the last chapter.
 
 ```sqrl
-Products.volume_10day := SELECT coalesce(u.country, 'none') as country, sum(i.quantity) as quantity,
+Products.volume_10day := SELECT coalesce(u.country0, 'none') as country, sum(i.quantity) as quantity,
          sum(i.total) as spend, sum(i.quantity * @.weight_in_gram) as weight
       FROM @ JOIN @.ordered_items i JOIN i.parent o JOIN o.user u
-      WHERE o.time > now() - INTERVAL 10 DAY GROUP BY country;
+      WHERE o.time > now() - INTERVAL 10 DAY GROUP BY country0;
 ```
 
 We are updating the query for the nested `volume_10day` query to group by the country of the user. That gives us a more detailed view of recent product volume by country.
@@ -147,7 +147,7 @@ However, a downside of static data is that it doesn't evolve over time which mak
 
 One easy way to fix this is to time-travel static data during development. In our example, we do this by moving the timestamps of the `Orders` data forward in time. 
 ```sqrl
-IMPORT datasqrl.seedshop.Orders TIMESTAMP time + INTERVAL 8 DAY AS time; -- Adjust the number of days!!
+IMPORT datasqrl.seedshop.Orders TIMESTAMP time + INTERVAL 8 DAY AS timestamp; -- Adjust the number of days!!
 ```
 The last order from that dataset is placed on 2023-02-21. We are writing this tutorial on March 1st, 2023 which is 8 days later. Hence, we are adding 8 days. You will have to add a larger number of days depending on how long ago 2023-02-21 is for you.
 

@@ -33,9 +33,9 @@ Create a new file called `seedshop.sqrl` and paste the following content into th
 IMPORT datasqrl.seedshop.Orders;  
 IMPORT time.endOfWeek;            
 
-Orders.items.total := quantity * unit_price - discount?0.0;
+Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
 Orders.totals := SELECT sum(total) as price,
-                  sum(discount?0.0) as saving FROM @.items;
+                  sum(coalesce(discount,0.0)) as saving FROM @.items;
 
 Users := SELECT DISTINCT customerid AS id FROM Orders;
 
@@ -66,14 +66,14 @@ The `import` statement imports the `Orders` table from the package [datasqrl.see
 The `Orders` table has a nested `items` table to represent the nested item records for each order. SQRL supports nested tables to represent hierarchical data natively via the `.` dot notation.
 
 ```sql
-Orders.items.total := quantity * unit_price - discount?0.0;
+Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
 ```
 
 We are adding the `total` column to the nested `Orders.items` table to compute the total price for each item in an order.
 
 ```sql 
 Orders.totals := SELECT sum(total) as price,
-                  sum(discount?0.0) as saving FROM @.items;
+                  sum(coalesce(discount,0.0)) as saving FROM @.items;
 ```
 
 We are defining `totals` as a nested table underneath `Orders` to compute the total price and savings for each order by aggregating over all items in the order. Note the use of `@` in the `FROM` clause. `@` refers to each row in the parent `Orders` table and is used when defining localized queries. A localized query allows us to refer to the items for *each* order instead of aggregating across items for *all* orders.
@@ -123,7 +123,7 @@ If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory
 
 ## Query Data API {#query}
 
-The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
