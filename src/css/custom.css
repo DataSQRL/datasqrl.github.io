@@ -77,6 +77,34 @@ img[alt$="<|"] {
   border-color: var(--ifm-text-color);
 }
 
+
+
+html[data-theme='dark'] .bg_warning {
+  background: var(--ifm-color-secondary-dark);
+}
+
+html[data-theme='dark'] .bg_alert {
+  background: #A52727;
+}
+
+html[data-theme='dark'] .bg_success {
+  background: #38A527;
+}
+
+
+html[data-theme='light'] .bg_warning {
+  background: var(--ifm-color-secondary-light);
+}
+
+html[data-theme='light'] .bg_alert {
+  background: #DC6A6A;
+}
+
+html[data-theme='light'] .bg_success {
+  background: #7ADC6A;
+}
+
+
 @media screen and (max-width: 996px) {
   .hide-small-screens {
     display: none;

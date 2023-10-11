@@ -6,7 +6,7 @@ title: "Design the API"
 
 <img src="/img/generic/undraw_specs.svg" alt="Designing the API >" width="50%"/>
 
-When we [run](../overview#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compilesa data microservice that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888//graphiql/`. Let's look at those queries in more detail.
+When we [run](../overview#run) our `seedshop.sqrl` [script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl), DataSQRL compiles a data pipeline that exposes an API to access the resulting data. We [queried](../../quickstart#query) the API via GraphiQL in the browser by opening `http://localhost:8888//graphiql/`. Let's look at those queries in more detail.
 
 :::info
 
@@ -195,14 +195,14 @@ To instruct the DataSQRL compiler to use our custom API specification, we add it
 docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl seedshop.graphqls --mnt $PWD
 ```
 
-To launch the updated microservice, execute:
+To launch the updated pipeline, execute:
 ```bash
 (cd build/deploy; docker compose up)
 ```
 
 If refresh GraphiQL in the browser, you will see your custom API.
 
-Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data services. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
+Another neat benefit of customizing and trimming down the API specification is that it allows DataSQRL to generate more efficient data pipelines. DataSQRL automatically removes computations that aren't visible in the API and selects optimal index structures for the database based on the filters that are available in the API.
 
 ### Pagination
 
@@ -324,16 +324,16 @@ And there we have our custom, polished data API in GraphQL that allows us to que
 
 ## Next Steps
 
-Wonderful, you have completed the 3 essential steps of building a data service with DataSQRL:
+Wonderful, you have completed the 3 essential steps of building a data pipeline with DataSQRL:
 * Writing SQRL scripts
 * Connecting data sources
 * Designing and querying the data API
 
-Now you can go off, build amazing data services, and [tell us](/community) about it.
+Now you can go off, build amazing data products, and [tell us](/community) about it.
 
 If you are eager to continue learning, we have two more optional chapters in this tutorial:
 
 * [**Advanced Topics**](../advanced) covers additional features of DataSQRL.
-* [**Deployment**](../deploy) shows you how to deploy the data microservice compiled by DataSQRL.
+* [**Deployment**](../deploy) shows you how to deploy the data pipeline compiled by DataSQRL.
 
 If you want to learn more about querying the data API from your application or favorite programming language, the [reference documentation](/docs/reference/api/graphql/query) has an overview. It also [covers API design](/docs/reference/api/graphql/design) in more detail.

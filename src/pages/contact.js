@@ -11,7 +11,7 @@ const header =  {
                    tagLine: 'Get in Touch',
                    text: (
                      <>
-                We help developers and organizations build data services that deliver value. <br />
+                We help developers and organizations build data products that deliver value. <br />
                 Use the form below to contact us and we look forward to building with you.
                      </>
                    ),

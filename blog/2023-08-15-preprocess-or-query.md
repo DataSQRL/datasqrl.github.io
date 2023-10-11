@@ -2,7 +2,7 @@
 slug: preprocess-or-query
 title: "To Preprocess or to Query, that’s the Question!"
 authors: [matthias]
-tags: [Kafka, Flink, Postgres, microservice, DataSQRL]
+tags: [Kafka, Flink, Postgres, data pipeline, DataSQRL]
 ---
 
 <head>

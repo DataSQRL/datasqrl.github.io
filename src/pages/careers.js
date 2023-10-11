@@ -93,13 +93,13 @@ export default function Careers() {
                   </tr>
                   <tr>
                     <td><strong><Link to="/jobs/java-engineer">Reactive Java Engineer</Link></strong></td>
-                    <td>Build a reactive API server engine with embedded code execution for data services on top of Eclipse Vert.x.</td>
+                    <td>Build a reactive API server engine with embedded code execution for data products on top of Eclipse Vert.x.</td>
                     <td>Americas & Europe</td>
                     <td><Link className="button button--secondary" to="/jobs/java-engineer">Learn More & Apply</Link></td>
                   </tr>
                   <tr>
                     <td><strong><Link to="/jobs/devops-cloud">DevOps & Cloud Engineer</Link></strong></td>
-                    <td>Automate the deployment of DataSQRL applications in the cloud and help developers build event-driven microservices.</td>
+                    <td>Automate the deployment of DataSQRL applications in the cloud and help developers build data products.</td>
                     <td>Americas & Europe</td>
                     <td><Link className="button button--secondary" to="/jobs/devops-cloud">Learn More & Apply</Link></td>
                   </tr>

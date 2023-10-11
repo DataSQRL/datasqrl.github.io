@@ -25,7 +25,7 @@ export const WhyDataSQRLList = [
     description: (
       <>
         DataSQRL allows you to focus on your data processing by eliminating the data plumbing
-        that strangles your data microservice implementation with busywork:
+        that strangles your data pipeline implementation with busywork:
         data mapping, schema management, data modeling, error handling, data serving, API generation, and so on.
       </>
     ),
@@ -46,7 +46,7 @@ export const WhyDataSQRLList = [
     image: '/img/index/undraw_fast_loading_sqrl.svg',
     description: (
       <>
-        DataSQRL builds efficient data microservices that optimize data processing,
+        DataSQRL builds efficient data pipelines that optimize data processing,
         partitioning, index selection, view materialization, denormalization, and scalability.
         There actually is some neat technology behind this buzzword bingo.
       </>
@@ -60,50 +60,62 @@ export const DataSQRLUseCases = [
     image: '/img/generic/data_mesh.svg',
     description: (
       <>
-        DataSQRL empowers domain teams to develop robust data products autonomously.
+        DataSQRL empowers domain teams to develop streaming data products autonomously.
         Build a self-service data platform with existing skills.
       </>
     ),
     link: "/usecases/datamesh/",
     linkText: "Build a Data Mesh"
   },
-  // {
-  //   title: 'Artificial Intelligence',
-  //   image: '/img/generic/ai_squirrel.svg',
-  //   description: (
-  //     <>
-  //       Take your data to another level with AI. DataSQRL supports vector embeddings,
-  //       large language models, and machine learning in SQL.
-  //     </>
-  //   ),
-  //   link: "/usecases/ai/",
-  //   linkText: "Empower your Data with AI"
-  // },
   {
-    title: 'Observability & Automation',
-    image: '/img/generic/predictive_analytics.svg',
+    title: 'Artificial Intelligence',
+    image: '/img/generic/ai_squirrel.svg',
     description: (
       <>
-        Build tailored observability platforms that turn your metrics into insights.
-        Automate your processes with custom rules and AIOps.
+        Take your data to another level with AI. DataSQRL supports vector embeddings,
+        large language models, and machine learning in SQL.
       </>
     ),
-    link: "/usecases/observability/",
-    linkText: "Build Smart Monitoring"
+    link: "/usecases/ai/",
+    linkText: "Empower your Data with AI"
   },
+  {
+    title: 'Event-Driven Microservices',
+    image: '/img/index/undraw_use_cases_sqrl.svg',
+    description: (
+      <>
+        Efficiently process events in realtime and expose the results through consumable
+        APIs in an event-driven architecture.
+      </>
+    ),
+    link: "/usecases/microservice/",
+    linkText: "Build ED Architectures"
+  },
+  // {
+  //   title: 'Observability & Automation',
+  //   image: '/img/generic/predictive_analytics.svg',
+  //   description: (
+  //     <>
+  //       Build tailored observability platforms that turn your metrics into insights.
+  //       Automate your processes with custom rules and AIOps.
+  //     </>
+  //   ),
+  //   link: "/usecases/observability/",
+  //   linkText: "Build Smart Monitoring"
+  // },
 ];
 
 export function HowDataSQRLWorks() {
   return (
     <div className="row margin-bottom--sm margin-top--lg">
       <div className="col col--6 text--center">
-        <img src="/img/index/howDataSQRLWorks.svg" alt="How DataSQRL Works" />
+        <img src="/img/index/howDataSQRLWorksPipeline.svg" alt="How DataSQRL Works" />
       </div>
       <div className="col col--5 text--left">
         <h2>How DataSQRL Works</h2>
         <p className="hero__subtitle">
           Implement your data processing in SQL and define your data API in GraphQL.<br />
-          DataSQRL compiles streaming data microservices that are robust, scalable, and easy to maintain.
+          DataSQRL compiles optimized data pipelines that are robust, scalable, and easy to maintain.
         </p>
         <Link
           className="button button--primary button--lg"
@@ -124,9 +136,9 @@ export function WhyDataSQRL({linkText, linkURL}) {
             <h2>Why DataSQRL?</h2>
             <p className="hero__subtitle">
               To compete, you need to unlock the value of your data by building data products.
-              But assembling complex technologies into bespoke microservices wastes most
-              of your time on data plumbing, which causes 85% of data products to fail.
-              DataSQRL eliminates data plumbing so you can focus on enriching your data to deliver value quickly.
+              But assembling complex technologies into bespoke data pipelines wastes most
+              of your time on data plumbing, which causes 80% of data products to fail.
+              DataSQRL eliminates data plumbing so you can focus on enriching your data to deliver value efficiently.
             </p>
             <Link
               className="button button--primary button--lg"

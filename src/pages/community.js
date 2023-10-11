@@ -70,7 +70,7 @@ const Updates = [
     description: (
       <>
         The <Link to="/blog">DataSQRL blog</Link> regularly publishes articles on the development of
-        DataSQRL, how to implement data services, and lessons we learned along the way. Great morning reading.
+        DataSQRL, how to implement data products, and lessons we learned along the way. Great morning reading.
       </>
     ),
   },

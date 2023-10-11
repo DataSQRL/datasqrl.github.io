@@ -8,7 +8,7 @@ A data layer is an abstraction within a software application that manages data s
 
 For managing application state, you use a transactional data layer with a database and an object-relational mapper (ORM) or database abstraction library.
 
-For [data services](../data-service) that require executing data-intensive computations quickly in response to events or external data, you use a reactive data layer. 
+For [data products](../data-product) that require executing data-intensive computations quickly in response to events or external data, you use a reactive data layer. 
 
 This page outlines the architecture and implementations steps for building a reactive data layer.
 
