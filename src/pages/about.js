@@ -41,7 +41,7 @@ const Founders = [
     pic: '/img/headshots/daniel1.png',
     bio: (
       <>
-        Daniel has worked on data services for most of his career in the tech industry. He previously worked for companies such
+        Daniel has worked on data products for most of his career in the tech industry. He previously worked for companies such
          as <Link to="https://www.oracle.com/">Oracle</Link>, <Link to="https://www.datastax.com/">DataStax</Link> (the company behind Apache Cassandra), and <Link to="https://datakin.com/">Datakin</Link> (the
          company behind <Link to="https://openlineage.io/">LFAI OpenLineage</Link>). <br />
         Daniel has worked on a number of open-source projects and (streaming) data systems. He is equally excited about
@@ -80,7 +80,7 @@ export default function About() {
                   <h2>Why DataSQRL?</h2>
                   <p>
                   We have worked with companies of all shapes and sizes - from startups to Fortune 500 -
-                  to build data services with their data and realized that it’s too darn hard with existing
+                  to build data products with their data and realized that it’s too darn hard with existing
                   technologies and processes. Companies are leaving a lot of value on the table because
                   extracting it from their data is difficult, time consuming, and expensive.
                   </p>
@@ -95,7 +95,7 @@ export default function About() {
                   <p>
                   Please join our <Link to="/community">community</Link> or our <Link to="/contact">company</Link> if you
                   care about empowering developers to build with data and help us find a better approach.<br />
-                  <Link to="/services">Work with us</Link> if you want to enable your organization to build successful data services quickly and efficiently.
+                  <Link to="/services">Work with us</Link> if you want to enable your organization to build successful data products quickly and efficiently.
                   We’d love to help you.
                   </p>
 

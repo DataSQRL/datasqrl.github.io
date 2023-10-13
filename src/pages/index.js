@@ -21,10 +21,10 @@ import FeatureGrid from "../components/FeatureGrid";
 
 const header =  {
                    title: 'Build Streaming Data Products',
-                   tagLine: 'Build Data Products Faster',
+                   tagLine: 'Build Data Products Efficiently',
                    text: (
                      <>
-                       DataSQRL is an open-source compiler for data microservices that eliminates data plumbing so you
+                       DataSQRL is an intelligent compiler for data pipelines that eliminates data plumbing so you
                        can ship streaming data products in days instead of months.
                      </>
                    ),
@@ -47,13 +47,13 @@ export default function Home() {
             <div className="row margin-bottom--xl margin-top--lg">
               <div className="col col--5 text--left">
                 <h2><span>With DataSQRL </span><span className="text--primary">= Build Quickly</span></h2>
-                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL2.svg" loading="lazy" alt="Building Data Products with DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withDataSQRL3.svg" loading="lazy" alt="Building Data Products with DataSQRL" />
               </div>
               <div className="col col--1">
               </div>
               <div className="col col--6 text--left">
                 <h2><span>Without DataSQRL </span><span className="text--primary">= Data Plumbing Nightmare</span></h2>
-                <img className={styles.pipelineSvg} src="/img/index/withoutDataSQRL2.svg" loading="lazy" alt="Building Data APIs without DataSQRL" />
+                <img className={styles.pipelineSvg} src="/img/index/withoutDataSQRL3.svg" loading="lazy" alt="Building Data APIs without DataSQRL" />
               </div>
             </div>
             <HowDataSQRLWorks />

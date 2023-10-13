@@ -1,10 +1,10 @@
 # DataSQRL Engines
 
-An **engine** is a system or technology that executes part of the data service compiled by DataSQRL. 
+An **engine** is a system or technology that executes part of the data pipeline compiled by DataSQRL. 
 
-Which engines DataSQRL compiles to is configured in the [package configuration](../../package-config) which also defines the data service architecture. See the [build documentation](../../build) for more details.
+Which engines DataSQRL compiles to is configured in the [package configuration](../../package-config) which also defines the data pipeline architecture. See the [build documentation](../../build) for more details.
 
-DataSQRL supports 3 types of engines that play distinct roles in a data service: stream engines, database engines, and server engines.
+DataSQRL supports 3 types of engines that play distinct roles in a data pipeline: stream engines, database engines, and server engines.
 
 ## Stream Engine
 

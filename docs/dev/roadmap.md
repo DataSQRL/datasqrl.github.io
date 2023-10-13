@@ -68,7 +68,7 @@ To facilitate reuse of table definitions, we want to be able to import
 other scripts like we are importing datasets from data sources.
 
 Each script defines its own dataset. We want to allow dependencies
-between scripts for more complex data services.
+between scripts for more complex data products.
 
 ### Recursive Definitions
 

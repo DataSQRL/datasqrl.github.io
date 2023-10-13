@@ -8,7 +8,7 @@ title: "Internet of Things"
 
 The goods we sell in our [seed shop](../../../intro/overview) are produced in the seed factory. There are lots of big machines in our factory washing, shelling, and roasting seeds for our hungry squirrels. Each machine is equipped with multiple sensors that report temperature and humidity measurements in real-time.
 
-We are building an IoT application that aggregates all this sensor data and gives us an overview of how our machines are doing.
+We are building an IoT data product that aggregates all this sensor data and gives us an overview of how our machines are doing.
 
 ## Run SQRL Script {#run}
 
@@ -38,13 +38,13 @@ Machine := SELECT s.machineid, max(temp) as maxTemp,
     GROUP BY s.machineid;
 ```
 
-Now run the DataSQRL compiler to build an IoT data service from the data transformations and aggregations defined in the script:
+Now run the DataSQRL compiler to build an IoT data product from the data transformations and aggregations defined in the script:
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl
 ```
 
-To run the data service, execute:
+To run the data pipeline, execute:
 
 ```bash
 (cd build/deploy; docker compose up)
@@ -52,7 +52,7 @@ To run the data service, execute:
 
 ## Query Data API {#query}
 
-The running data service compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running data pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
@@ -64,11 +64,11 @@ The running data service compiled by DataSQRL exposes a GraphQL data API which y
 ```
 
 When you hit the "run" button you get the average and maximum temperature for the given machine in the last hour.
-You now have a working IoT application.
+You now have a working IoT data product.
 
 ## Description of SQRL Script {#sqrl}
 
-Let's have a closer look at the SQRL script for our IoT application and describe what it does.
+Let's have a closer look at the SQRL script for our IoT data product and describe what it does.
 
 :::info
 
@@ -116,5 +116,5 @@ Now, we have full oversight over our seed factory. This is a good starting point
 
 ## Next Steps {#next}
 
-Read the [DataSQRL introduction](../../../intro/overview) which is an in-depth tutorial of DataSQRL and gives you all the information you need to extend this IoT application to monitor and automate your business.
+Read the [DataSQRL introduction](../../../intro/overview) which is an in-depth tutorial of DataSQRL and gives you all the information you need to extend this IoT data product to monitor and automate your business.
 

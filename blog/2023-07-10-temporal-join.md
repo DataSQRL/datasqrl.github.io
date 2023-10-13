@@ -127,7 +127,7 @@ Temporal joins, on the other hand, can be executed much more efficiently. The st
 
 <img src="/img/full_squirrel.svg" alt="DataSQRL >" width="30%"/>
 
-Because temporal joins are so powerful, we made them easy to use in DataSQRL. DataSQRL is a compiler for Apache Flink that builds integrated microservices for your event-driven or streaming applications. DataSQRL supports the simplified temporal join syntax shown in the queries above. In addition, DataSQRL defaults to a temporal join whenever you join a state and a stream table on the state table’s primary key. In that way, DataSQRL helps you pick the right join for your data and makes it easy for developers new to stream processing.
+Because temporal joins are so powerful, we made them easy to use in DataSQRL. DataSQRL is a compiler for Apache Flink that builds integrated data pipelines for your event-driven or streaming applications. DataSQRL supports the simplified temporal join syntax shown in the queries above. In addition, DataSQRL defaults to a temporal join whenever you join a state and a stream table on the state table’s primary key. In that way, DataSQRL helps you pick the right join for your data and makes it easy for developers new to stream processing.
 
 
 Apache Flink supports temporal joins in Flink SQL using the following syntax:

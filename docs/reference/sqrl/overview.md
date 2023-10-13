@@ -3,7 +3,7 @@
 
 SQRL is a declarative language for defining data transformations based on SQL. SQRL stands for *"**S**tructured **Q**uery and **R**eaction **L**anguage"* because it extends SQL with support for streaming data and the ability to react to data in realtime. In addition, SQRL adds a number of convenience features that make it development-friendly.
 
-This documentation explains the features of SQRL and everything you need to know to build data services with SQRL. It assumes basic familiarity with SQL. If you haven't used SQL before, or it's been a while, we recommend that you read the [SQL primer](../sql-primer) first.
+This documentation explains the features of SQRL and everything you need to know to build data products with SQRL. It assumes basic familiarity with SQL. If you haven't used SQL before, or it's been a while, we recommend that you read the [SQL primer](../sql-primer) first.
 
 ## SQRL Tables
 

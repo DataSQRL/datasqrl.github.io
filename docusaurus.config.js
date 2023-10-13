@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DataSQRL',
-  tagline: 'Build Data Services In Minutes',
+  tagline: 'Build Data Products Efficiently',
   url: 'https://www.datasqrl.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -62,6 +62,29 @@ const config = {
             docId: 'getting-started/overview',
             position: 'left',
             label: 'Learn',
+          },
+          {
+            type: 'dropdown',
+            label: 'Use Cases',
+            position: 'left',
+            items: [
+              {
+                label: 'Data Mesh',
+                to: '/usecases/datamesh'
+              },
+              {
+                label: 'Event-Driven Microservice',
+                to: '/usecases/microservice'
+              },
+              {
+                label: 'Artifical Intelligence',
+                to: '/usecases/ai'
+              },
+              {
+                label: 'Observability & Automation',
+                to: '/usecases/observability'
+              },
+            ],
           },
           {
             type: 'doc',
@@ -155,7 +178,7 @@ const config = {
       },
       image: 'img/logo.png',
       metadata: [
-        {name: 'keywords', content: 'data, API, SQRL, DataSQRL, data service, data pipeline, database, streaming, real-time analytics'},
+        {name: 'keywords', content: 'data, API, SQRL, DataSQRL, data product, data pipeline, database, streaming, real-time analytics'},
         {name: 'description', content: 'DataSQRL is a compiler and build tool for streaming data pipelines to build data APIs in minutes.'},
         {name: 'twitter:card', content: 'summary'},
         {name: 'twitter:site', content: '@DataSQRL'}

@@ -13,7 +13,7 @@ const header =  {
   tagLine: 'Reactive Java Engineer',
   text: (
     <>
-      Build a reactive API server engine with embedded code execution for data services on top of Eclipse Vert.x.
+      Build a reactive API server engine with embedded code execution for data products on top of Eclipse Vert.x.
     </>
   ),
   LogoSvg: require('../../../static/img/generic/undraw_careers.svg').default,
@@ -40,7 +40,7 @@ export default function JobPosting() {
                 </p>
                 <p>
                   You will develop a customizable server engine that translates incoming API calls to pre-compiled
-                  database retrieval code for high performance execution of mission-critical data services. Your contributions
+                  database retrieval code for high performance execution of mission-critical data products. Your contributions
                   will benefit the open-source community and make reactive data applications easier to implement.
                 </p>
 
