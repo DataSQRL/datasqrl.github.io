@@ -76,9 +76,9 @@ Open your favorite browser and navigate to [`http://localhost:8888//graphiql/`](
 
 ```graphql
 {
-SensorMaxTemp (sensorid: 1) {
+  SensorMaxTemp (sensorid: 1) {
     maxTemp
-}
+  }
 }
 ```
 

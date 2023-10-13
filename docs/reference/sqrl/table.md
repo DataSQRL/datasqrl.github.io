@@ -39,7 +39,7 @@ SQRL supports nested tables through table paths to represent nested or hierarchi
 
 We can use and query nested tables like any other table in SQRL.
 ```sql
-Orders.items.total := quantity * unit_price - discount?0.0;
+Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
 ```
 This statement adds a new `total` column to the `Orders.items` table that computes the total price for each item.
 
@@ -51,13 +51,13 @@ When querying nested tables we need to be mindful to query the nested table at t
 
 ```sql
 Order_totals := SELECT sum(total) as price, 
-    sum(discount?0.0) as saving FROM Orders.items;
+    sum(coalesce(discount,0.0)) as saving FROM Orders.items;
 ```
 The `Orders_totals` table contains a single aggregate that sums up the total and discout over **all** items in **all** orders. The result is one global aggregation over all order items.
 
 ```sql
 Orders.totals := SELECT sum(total) as price, 
-    sum(discount?0.0) as saving FROM @.items;
+    sum(coalesce(discount,0.0)) as saving FROM @.items;
 ```
 This statement, on the other hand, aggregates **all** items **for each** order. The result is one local aggregate for each row in the `Orders` table.
 
@@ -111,12 +111,6 @@ Products := DISTINCT Products ON id ORDER BY updated DESC;
 ```
 
 This statement redefines the `Products` table by de-duplicating the imported `Products` changelog stream on the `id` column. The original `Products` stream table still exists but is no longer referencable in the SQRL script. All references to `Products` are now resolved to the de-duplicated state table.
-
-Similarly, we can overwrite columns on tables:
-```sql
-Users.country := country?'none';
-```
-This statement cleans up `Users` data by replacing the `country` column with a new column definition that replaces `null` values with string literal `none`.
 
 ### Hiding
 

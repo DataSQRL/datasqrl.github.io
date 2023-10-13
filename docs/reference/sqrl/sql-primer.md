@@ -37,7 +37,7 @@ In addition, the `UNION ALL` operator is used to combine data from multiple quer
 The column expression after `SELECT` and the conditions can include function calls to manipulate data and predicates in filters. Common SQL functions and predicates include:
 
 * Aggregation Functions: `min`, `max`, `avg`, `count`, and `count distinct`
-* Conditional Functions: `case when`, `coalesce` (SQRL also supports the inline `x?y` notation instead of `coalesce(x,y)`)
+* Conditional Functions: `case when`, `coalesce`
 * Predicates: `in`, `between`
 
 Time intervals are specified with the `INTERVAL` syntax, such as `INTERVAL 5 DAY`.

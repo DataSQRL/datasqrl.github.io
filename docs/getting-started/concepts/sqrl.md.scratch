@@ -57,7 +57,7 @@ SQRL scripts are essentially a sequence of table and column definitions that all
 You can add columns to existing tables, like this `total` column on our previously imported `Orders.items` table which computes the total price for each item in the order:
 
 ```sqrl
-Orders.items.total := quantity * unit_price - discount?0.0;
+Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
 ```
 
 Or we can define a new `Customers` table based on the rows in the `Orders` table:

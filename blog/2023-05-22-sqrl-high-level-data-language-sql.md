@@ -46,10 +46,10 @@ IMPORT datasqrl.seedshop.Customers;
 IMPORT time.*;
 
 /* Clean orders data and compute subtotals */
-Orders.items.discount := discount?0.0;
-Orders.items.total    := quantity * unit_price - discount;
+Orders.items.discount0 := coalesce(discount,0.0);
+Orders.items.total    := quantity * unit_price - discount0;
 Orders.totals         := SELECT sum(total) as price,
-                         sum(discount) as saving FROM @.items;
+                         sum(discount0) as saving FROM @.items;
 /* Deduplicate customer CDC stream */
 Customers := DISTINCT Customers ON id ORDER BY timestamp DESC;
 /* Create relationship between Customers and Orders */
@@ -84,7 +84,7 @@ SQRL provides native support for nested data by representing it as child tables,
 
 In the example, we sum up the price and saving for all items in an order:
 ```sql
-Orders.totals := SELECT sum(total) as price, sum(discount) as saving FROM @.items;
+Orders.totals := SELECT sum(total) as price, sum(discount0) as saving FROM @.items;
 ```
 
 There are a couple of things happening here:
@@ -97,7 +97,7 @@ Being able to write queries within a nested context makes it possible to process
 For example, when we define the `totals` column for each item in an order, we can refer to the other columns of `items` within the local context:
 
 ```sql
-Orders.items.total := quantity * unit_price - discount;
+Orders.items.total := quantity * unit_price - discount0;
 ```
 
 Nested data support simplifies data consumption from external sources and result data mapping to API calls, eliminating a significant amount of mapping and data transformation code.

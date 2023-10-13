@@ -105,7 +105,7 @@ existing table.
 For example, we defined the `total` column on the nested `Orders.items` table:
 
 ```sqrl
-Orders.items.total := quantity * unit_price - discount?0.0
+Orders.items.total := quantity * unit_price - coalesce(discount,0.0)
 ```
 
 The part on the left-hand side of the
@@ -116,16 +116,6 @@ This is a **localized expression** that is evaluated within the context
 of the table on the left-hand side - in this case `Orders.items`. That's why
 we can refer to the `quantity`, `unit_price`, and `discount` columns of the `Orders.items` table without any
 qualifiers.
-
-Note, that we have to use the conditional expression `discount?0.0` because our input data is a bit messy and some rows don't have a `discount` column.
-
-Incremental column definitions are a great way to clean up such inconsistencies in data:
-```sqrl
-Orders.items.discount := discount?0.0;
-Orders.items.total := quantity * unit_price - discount;
-```
-
-We overwrote the `discount` column with a cleaned-up version, so any future references to the column don't have to.
 
 ## Relationships
 
@@ -195,7 +185,7 @@ the item records for a particular order.
 
 ```sqrl
 Orders.totals := SELECT sum(total) as price,
-                  sum(discount) as saving FROM @.items;
+                  sum(coalesce(discount,0)) as saving FROM @.items;
 ```
 
 This statement defines a new nested table `totals` underneath `Orders` by aggregating the total price and discount over all items in each order.
