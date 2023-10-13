@@ -13,7 +13,7 @@ const header =  {
   tagLine: 'DevOps & Cloud Engineer',
   text: (
     <>
-      Automate the deployment of DataSQRL applications in the cloud and help developers build event-driven microservices.
+      Automate the deployment of DataSQRL applications in the cloud and help developers build data products.
     </>
   ),
   LogoSvg: require('../../../static/img/generic/undraw_careers.svg').default,
@@ -35,11 +35,11 @@ export default function JobPosting() {
                 <p>
                   At DataSQRL, we are building <Link to="https://github.com/DataSQRL/sqrl">innovative open-source technology</Link> that
                   empowers people to build streaming data and realtime AI applications with only basic SQL knowledge.
-                  To make DataSQRL truly easy to use, we need your help automating cloud deployment of the microservices that DataSQRL compiles.
+                  To make DataSQRL truly easy to use, we need your help automating cloud deployment of the data pipelines that DataSQRL compiles.
                 </p>
                 <p>
                   You will work with Terraform and other cloud DevOps tooling to build a deployment pipeline and observability platform
-                  for DataSQRL microservices. You will work with a team of supportive data nerds and cheered on by an open-source
+                  for DataSQRL data pipelines. You will work with a team of supportive data nerds and cheered on by an open-source
                   community that wants an easy path to production.
                 </p>
 

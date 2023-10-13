@@ -56,7 +56,7 @@ export const UseCaseFeatures = [
     image: '/img/index/undraw_decide_sqrl.svg',
     description: (
       <>
-        DataSQRL builds optimized data microservices that efficiently store and process metrics
+        DataSQRL builds optimized data pipelines that efficiently store and process metrics
         data so you can get all the insights at a fraction of the cost.
       </>
     ),

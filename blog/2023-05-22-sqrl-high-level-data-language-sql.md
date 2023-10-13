@@ -19,7 +19,7 @@ The data layer of a data-driven application comprises multiple components: There
 
 <!--truncate-->
 
-For example, consider a project I was once working on. We were building a data service integrating customer data from various silos into a data API for a mobile app. The objective was to provide customers with an integrated view of their service and billing history, support requests, profile information, etc. This is a typical "Customer 360°" challenge many large organizations face when customer data is spread across numerous operational systems.
+For example, consider a project I was once working on. We were building a data product integrating customer data from various silos into a data API for a mobile app. The objective was to provide customers with an integrated view of their service and billing history, support requests, profile information, etc. This is a typical "Customer 360°" challenge many large organizations face when customer data is spread across numerous operational systems.
 
 The data layer of that service consisted of a bunch of scripts ingesting customer data from CDC (change-data-capture) streams, a SQL database for data persistence, and a Java-based API server.
 

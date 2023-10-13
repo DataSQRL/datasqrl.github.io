@@ -20,7 +20,7 @@ const header =  {
                    tagLine: 'Build Streaming AI Applications',
                    text: (
                      <>
-                       Enrich your data streams with AI models and machine learning to build powerful data microservices
+                       Enrich your data streams with AI models and machine learning to build powerful data products
                        in a fraction of the time.
                      </>
                    ),
@@ -57,7 +57,7 @@ export const UseCaseFeatures = [
     description: (
       <>
         DataSQRL compiles integrated AI applications that combine data ingestion, data transformation,
-        feature construction, model application, and API serving in one microservice.
+        feature construction, model application, and API serving in one data pipeline.
       </>
     ),
   },

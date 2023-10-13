@@ -10,7 +10,7 @@ The DataSQRL tutorial introduces you to everything you need to know about DataSQ
 
 Because we have the humor of middle schoolers, we are going to build customer experience features for our ficticious online DataSQRL seed shop. Seeds and squirrels - how funny are we?
 
-Specifically, we will build a data microservice to integrate customer data from various sources, process it, and provide features like spending analysis, recommendations, and personalized offers through an API to enhance our seed shop customer experience.
+Specifically, we will build a data product to integrate customer data from various sources, process it, and provide features like spending analysis, recommendations, and personalized offers through an API to enhance our seed shop customer experience.
 
 That sounds like a lot, but DataSQRL makes it easy. Plus, we'll break it up into chapters to introduce core DataSQRL concepts one at a time.
 
@@ -103,13 +103,13 @@ We are going to cover SQRL in more detail in the [next chapter](../sqrl), but th
 
 ## Run Script {#run}
 
-Invoke the DataSQRL compiler to build an integrated microservice from the data transformations and aggregations defined in the script:
+Invoke the DataSQRL compiler to build an integrated pipeline from the data transformations and aggregations defined in the script:
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl
 ```
 
-Launch the microservice with:
+Launch the pipeline with:
 ```bash
 (cd build/deploy; docker compose up)
 ```
@@ -123,7 +123,7 @@ If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory
 
 ## Query Data API {#query}
 
-The running microservice compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+The running pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
@@ -149,17 +149,15 @@ Feel free to adjust the query and play around with the API. Note, how DataSQRL m
 In this example, DataSQRL is generating the API for us which is convenient when you are starting out. In a [future chapter](../api) we are going to customize the API to our needs.
 
 :::info
-To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
+To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:
 ```bash
 (cd build/deploy; docker compose down -v)
 ```
-It's important to remove the containers and volumes with this command before launching another microservice to get updated containers. 
+It's important to remove the containers and volumes with this command before launching another pipeline to get updated containers. 
 :::
 
 ## Next Steps {#next}
 
-And that's how you build data microservices with DataSQRL: write a SQRL script, run the DataSQRL command to compile and run a microservice, and inspect the API to verify that it meets your expectations.
-
-
+And that's how you build data pipelines with DataSQRL: write a SQRL script, run the DataSQRL command to compile and run a pipeline, and inspect the API to verify that it meets your expectations.
 
 In the following chapters, we will cover each of these steps in more detail. First up: [writing the SQRL script](../sqrl).

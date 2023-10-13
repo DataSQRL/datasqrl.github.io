@@ -18,7 +18,7 @@ A data source is a system that holds data and allows access to the data. DataSQR
 
 A data package contains configuration files that specify the location and structure of one or multiple tables in a data source.
 
-DataSQRL loads the data package for each `IMPORT` statement at compile time to identify and locate the imported table. That information is used to ingest the data into the microservice compiled by DataSQRL at runtime. 
+DataSQRL loads the data package for each `IMPORT` statement at compile time to identify and locate the imported table. That information is used to ingest the data into the pipeline compiled by DataSQRL at runtime. 
 
 That's a lot of concepts to throw around. Let's summarize:
 
@@ -162,9 +162,9 @@ DataSQRL is built specifically for realtime and streaming data and supports data
 
 ## Next Steps
 
-Our seed shop data service now includes user data and improved business intelligence. Nicely done. Take a look at the resulting [seedshop.sqrl](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-user.sqrl) script.
+Our seed shop data product now includes user data and improved business intelligence. Nicely done. Take a look at the resulting [seedshop.sqrl](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-user.sqrl) script.
 
-You've already learned about SQRL and how to create custom data packages. [**In the next chapter**](../api) we are going to complete the trifecta and design the API for our data service.
+You've already learned about SQRL and how to create custom data packages. [**In the next chapter**](../api) we are going to complete the trifecta and design the API for our data product.
 
 If you want to learn more about data sources in more detail, check out the [data sources documentation](/docs/reference/sources/overview). In this introduction, we only covered file system sources. Check out the other [data systems](/docs/category/data-system) that DataSQRL supports and how to use data discovery to create data packages from them.
 

@@ -16,12 +16,12 @@ import {scriptExamples} from "../components/ScriptExamples"
 
 
 const header =  {
-                   title: 'DataSQRL Builds Data Products',
-                   tagLine: 'DataSQRL Builds Data Products',
+                   title: 'DataSQRL Compiles Data Pipelines',
+                   tagLine: 'DataSQRL Compiles Data Pipelines',
                    text: (
                      <>
                        Implement your data processing in SQL and define your data API in GraphQL.
-                       DataSQRL compiles a streaming data microservice powered by Kafka, Flink, and Postgres.
+                       DataSQRL compiles an optimized data pipeline powered by Kafka, Flink, and Postgres.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
@@ -105,7 +105,7 @@ export default function Home() {
                 </CodeBlock>
               </div>
               <div className="col col--5 text--left">
-                <h2>Step 2: Define GraphQL API</h2>
+                <h2>Step 2: Define API</h2>
                 <p className="hero__subtitle">
                   Specify the GraphQL schema for the API. That's how external or internal customers access the processed
                   data.
@@ -114,12 +114,12 @@ export default function Home() {
             </div>
             <div className="row margin-bottom--xl">
               <div className="col col--6 text--center">
-                    <img width="400" src="/img/reference/compiledMicroservice.svg" alt="DataSQRL compiled microservice" />
+                    <img width="400" src="/img/reference/compiledPipeline.svg" alt="DataSQRL compiled data pipeline" />
               </div>
               <div className="col col--5 text--left">
-                <h2>Step 3: Compile to Microservice</h2>
+                <h2>Step 3: Compile to Pipeline</h2>
                 <p className="hero__subtitle">
-                  DataSQRL compiles SQL + GraphQL schema into a complete microservice integrating
+                  DataSQRL compiles SQL + GraphQL schema into an optimized data pipeline integrating
                   Apache Flink, Kafka, Postgres, and API layer into a robust, scalable, and easy to maintain data product.
                 </p>
                 {/*<CodeBlock language="bash" wrap="true">*/}
@@ -141,7 +141,7 @@ export default function Home() {
                       managed service, or self-hosted.
                   </p>
                   <p className="hero__subtitle">
-                    Use the services and technologies you already trust to run your microservice.
+                    Use the services and technologies you already trust to run your data pipeline.
                   </p>
                   <div className={styles.buttons}>
                       <Link

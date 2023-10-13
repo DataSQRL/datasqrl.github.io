@@ -6,7 +6,7 @@ title: "Quickstart Tutorial"
 
 <img src="/img/getting-started/squirrel_computer.jpeg" alt="Metrics Monitoring Quickstart >|" width="35%"/>
 
-We are going to build a data products that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
+We are going to build a data product that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
 
 ## Create Script
 
@@ -49,7 +49,7 @@ We define another table `SensorMaxTemp` which computes the maximum temperature i
 
 ## Run Script {#run}
 
-DataSQRL compiles our SQRL script into an integrated microservice with the following command:
+DataSQRL compiles our SQRL script into an integrated data pipeline with the following command:
 
 
 ```bash
@@ -62,13 +62,13 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::
 
-To run the microservice, execute:
+To run the pipeline, execute:
 
 ```bash
 (cd build/deploy; docker compose up)
 ```
 
-This will launch all components of the microservice to ingest, process, store, and serve the data through an API.
+This will launch all components of the pipeline to ingest, process, store, and serve the data through an API.
 
 ## Query API {#query}
 
@@ -84,9 +84,9 @@ Open your favorite browser and navigate to [`http://localhost:8888//graphiql/`](
 
 When you hit the "run" button you get the maximum temperature for the sensor with id `1` in the last minute.
 
-And there you have it: a running data microservice that ingests metrics, aggregates them, and exposes the results through a GraphQL API which you can call in your applications.
+And there you have it: a running data pipeline that ingests metrics, aggregates them, and exposes the results through a GraphQL API which you can call in your applications.
 
-To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
+To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:
 ```bash
 (cd build/deploy; docker compose down -v)
 ```
@@ -119,7 +119,7 @@ type Query {
 
 Note, that we made `sensorid` a required argument for the `SecReading` query endpoint.
 
-Now, run the compiler with the GraphQL schema we just created and then launch the updated microservice:
+Now, run the compiler with the GraphQL schema we just created and then launch the updated pipeline:
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl metricsapi.graphqls;
@@ -130,7 +130,7 @@ When you refresh GraphiQL in the browser, you see that the API is simpler and on
 
 ## Ingest Metrics with Mutations
 
-So far, we have ingested metrics data from an external source imported from the [DataSQRL repository](http://dev.datasqrl.com). The data source is static which is convenient for whipping up an example data service, but we want our microservice to provide a metrics ingestion endpoint.
+So far, we have ingested metrics data from an external source imported from the [DataSQRL repository](http://dev.datasqrl.com). The data source is static which is convenient for whipping up an example data product, but we want our data pipeline to provide a metrics ingestion endpoint.
 
 No problem, let's add it to our GraphQL schema by appending the following mutation to the `metricsapi.graphqls` file we created above
 
@@ -160,7 +160,7 @@ SensorReading.time := _source_time;
 
 We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `_source_time` which captures the time data was ingested through the API.
 
-Terminate the running service, run the compiler again, and re-launch the microservice. In GraphiQL, run the following mutation to add a temperature reading:
+Terminate the running service, run the compiler again, and re-launch the pipeline. In GraphiQL, run the following mutation to add a temperature reading:
 
 ```graphql
 mutation addReading {
@@ -212,11 +212,11 @@ type HighTempAlert {
 
 This allows users of our API to subscribe to the `HighTempAlert` table with an optional `sensorid` argument to only receive alerts for a particular sensor. Whenever a sensor reading exceeds 50°, the user will be immediately notified.
 
-Compile and run the updated microservice with the command above (make sure you have terminated and shut down the running one first) and once everything is fired up again, open [this webpage](/metrics-subscription-demo) to see the subscription work in practice:
+Compile and run the updated pipeline with the command above (make sure you have terminated and shut down the running one first) and once everything is fired up again, open [this webpage](/metrics-subscription-demo) to see the subscription work in practice:
 After you run the `addReading` mutation in GraphiQL (make sure the temperature is > 50°), you should see the alert appear on the webpage.
 
 Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and serves metrics data in realtime with push-based alerts. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
 
 ## Next Steps {#next}
 
-DataSQRL provides a number of features that make it easy, fast, and efficient to build event-driven microservices and streaming applications. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!
+DataSQRL provides a number of features that make it easy, fast, and efficient to build data pipelines and event-driven microservices. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!

@@ -213,7 +213,7 @@ const sidebars = {
           },
           items: [
             'reference/concepts/package',
-            'reference/concepts/data-service',
+            'reference/concepts/data-product',
           ],
         },
       ],

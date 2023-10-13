@@ -16,9 +16,9 @@ Each stream record processed by the system (shown as grey circles) is associated
 
 ## Now {#now}
 
-SQRL uses the term **now** to designate the point in time to which the data service has caught up in processing stream records. Now is the present moment from the perspective of the data service. Now is marked as the orange vertical bar on the timeline.
+SQRL uses the term **now** to designate the point in time to which the data pipeline has caught up in processing stream records. Now is the present moment from the perspective of the data pipeline. Now is marked as the orange vertical bar on the timeline.
 
-Now is always behind the present. Now monotonically advances like the present, but it may not advance smoothly. If the data service is operating with low latency, now can be just a few milliseconds behind the present. If stream records arrive with delay or the data service is under a lot of load, now can be multiple seconds behind the present. And if the data service crashes and restarts, now may fall minutes or hours behind the present and then catches back up as stream records are processed.
+Now is always behind the present. Now monotonically advances like the present, but it may not advance smoothly. If the data pipeline is operating with low latency, now can be just a few milliseconds behind the present. If stream records arrive with delay or the data pipeline is under a lot of load, now can be multiple seconds behind the present. And if the data pipeline crashes and restarts, now may fall minutes or hours behind the present and then catches back up as stream records are processed.
 
 Now determines how time-based computations are executed. For example, when aggregating stream tables by time window, now determines when the time window closes.
 ```sql
@@ -39,14 +39,14 @@ Users.spending_last_week := SELECT sum(i.total) AS spend,
 The nested `spending_last_week` table aggregates users' orders for the last week. It produces a state table since the aggregate changes as now advances, i.e. as older orders drop out of the aggregate and newer orders are added.
 
 :::info
-To summarize, use `now()` for recency comparisons and to refer to the present time in the data service. 
+To summarize, use `now()` for recency comparisons and to refer to the present time in the data pipeline. 
 :::
 
-Note, that `now()` is different from the standard SQL function `CURRENT_TIMESTAMP` or database specific current-time functions like `now()` in MySQL. These SQL function return the current system time of the system that is executing the function. `now()` in SQRL returns the time to which the data service has caught up in processing stream records. 
+Note, that `now()` is different from the standard SQL function `CURRENT_TIMESTAMP` or database specific current-time functions like `now()` in MySQL. These SQL function return the current system time of the system that is executing the function. `now()` in SQRL returns the time to which the data pipeline has caught up in processing stream records. 
 
 ## Determining Timestamps
 
-The timestamp of a stream table determines how stream records are associated with a point on the timeline and how now advances in the data service.
+The timestamp of a stream table determines how stream records are associated with a point on the timeline and how now advances in the data pipeline.
 
 In many cases, the DataSQRL compiler automatically determines the timestamp column based on the query or how the table is used.
 
@@ -56,7 +56,7 @@ Stream tables that are imported from a data source have a hidden column `_ingest
 
 ## Time Synchronization
 
-The DataSQRL compiler synchronizes time between the components and systems of the data service to ensure that all systems agree on now. However, millisecond imprecisions can arise at system boundaries due to communication overhead. 
+The DataSQRL compiler synchronizes time between the components and systems of the data pipeline to ensure that all systems agree on now. However, millisecond imprecisions can arise at system boundaries due to communication overhead. 
 
 :::note
 Time synchronization between the stream engine and database engine is not yet implemented. Database engines

@@ -10,7 +10,7 @@ To deploy your DataSQRL project, the first step is to compile the deployment art
 docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 ```
 
-The compiler populates the `build/` directory with all the build artifacts needed to compile the data service. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the [package configuration](../../package-config). If no package configuration is provided, DataSQRL uses the default engines.
+The compiler populates the `build/` directory with all the build artifacts needed to compile the data pipeline. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the [package configuration](../../package-config). If no package configuration is provided, DataSQRL uses the default engines.
 
 You can either deploy DataSQRL projects with docker or deploy each engine separately. 
 Using docker is the easiest deployment option.
@@ -27,17 +27,17 @@ To deploy a SQRL script and API specification with docker, run `docker-compose u
 Docker-compose uses the `docker-compose.yml` template in the `deploy` folder which you can modify to your needs.
 
 :::info
-To stop the microservice, interrupt it with `CTRL-C` and shut it down with:
+To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:
 ```bash
 docker compose down -v
 ```
-It's important to remove the containers and volumes with this command before launching another microservice to get updated containers.
+It's important to remove the containers and volumes with this command before launching another data pipeline to get updated containers.
 :::
 
 
 ## Individually
 
-Deploying each component of the data service independently gives you complete control over how and where your data service is deployed.
+Deploying each component of the data pipeline independently gives you complete control over how and where your data pipeline is deployed.
 
 In this deployment mode, DataSQRL compiles deployment artifacts for each engine configured in `engines` section of the [package configuration](../../package-config) which you can then deploy in a way that works for your infrastructure and deployment requirements.
 
@@ -53,11 +53,11 @@ For this reason, the executables are build in separate docker containers via com
 docker run -it --rm -v $PWD/build:/build datasqrl/engine-{ENGINE_NAME}
 ```
 
-where `{ENGINE_NAME}` is the name of the engines in your data service. Refer to the [documentation for each engine](../../engines/overview) to learn how to build optimized executables for a particular engine.
+where `{ENGINE_NAME}` is the name of the engines in your data pipeline. Refer to the [documentation for each engine](../../engines/overview) to learn how to build optimized executables for a particular engine.
 
 ### Deploy Executables
 -->
 
-The deployment artifacts can be found in the `build/deploy` folder. How to deploy them individually depends on the engines that you are using for your data service.
+The deployment artifacts can be found in the `build/deploy` folder. How to deploy them individually depends on the engines that you are using for your data pipeline.
 
 Check the [engine documentation](../../engines/overview) for a particular engine for more information on how to deploy the executables on existing data infrastructure (an existing Flink cluster, database cluster, etc) or managed service.

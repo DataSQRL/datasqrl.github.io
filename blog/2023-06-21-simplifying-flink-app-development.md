@@ -8,7 +8,7 @@ tags: [DataSQRL, Flink]
 # Simplifying Apache Flink Application Development with DataSQRL
 
 Apache Flink is an incredibly powerful stream processor. But to build a complete application with Flink you need to integrate multiple complex technologies which requires a significant amount of custom code.
-DataSQRL is an open-source tool that simplifies this process by compiling SQL into a microservice that integrates Flink, Kafka, Postgres, and API layer. 
+DataSQRL is an open-source tool that simplifies this process by compiling SQL into a data pipeline that integrates Flink, Kafka, Postgres, and API layer. 
 
 <div style={{float: 'right', width: '40%'}}>
 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/mf5q-IdbVQY" title="DataSQRL Introduction" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -20,17 +20,17 @@ DataSQRL allows you to focus on your application logic without getting bogged do
 
 We have built several applications in Flink: recommendation engines, data mesh endpoints, monitoring dashboards, Customer 360 APIs, smart IoT apps, and more. Across those use cases, Flink proved to be versatile and powerful in its ability to instantly analyze and aggregate data from multiple sources. But we found it quite difficult and time-consuming to build applications with Flink.
 
-<img src="/img/reference/compiledMicroservice.svg" alt="DataSQRL compiled microservice >" width="50%"/>
+<img src="/img/reference/compiledMicroservice.svg" alt="DataSQRL compiled data pipeline >" width="50%"/>
 
 To start, you need to learn Flink: the table and datastream API, watermarking, windowing, and all the other stream processing concepts. Flink alone gets our heads spinning. And Flink is just one component of the application.
 
-To build a complete application or microservice, you need Kafka to hold your streaming data and a database like Postgres to query the processed data. On top, you need an API layer that captures input data and provides access to the processed data. Your team must learn, implement, and integrate multiple complex technologies. It takes a village to build a Flink app.
+To build a complete data pipeline, you need Kafka to hold your streaming data and a database like Postgres to query the processed data. On top, you need an API layer that captures input data and provides access to the processed data. Your team must learn, implement, and integrate multiple complex technologies. It takes a village to build a Flink app.
 
 ## Introducing DataSQRL: A Solution for Streamlined Flink Development
 
 <img src="/img/full_squirrel.svg" alt="DataSQRL >" width="20%"/>
 
-That’s why we built [DataSQRL](/). DataSQRL compiles the SQL that defines your data processing into an integrated microservice that orchestrates Flink, Kafka, Postgres, and API - saving us a ton of time and headache in the process. Why not let the computer do all the hard work?
+That’s why we built [DataSQRL](/). DataSQRL compiles the SQL that defines your data processing into an integrated data pipeline that orchestrates Flink, Kafka, Postgres, and API - saving us a ton of time and headache in the process. Why not let the computer do all the hard work?
 
 Let me show you how DataSQRL works by building an IoT monitoring service.
 
@@ -83,7 +83,7 @@ Note, how the tables map to query endpoints and types. That’s how it all fits 
 
 And don’t worry, you don’t have to write this schema - DataSQRL can generate it for you from the SQL script.
 
-DataSQRL compiles the script and GraphQL schema into an integrated microservice with the following command:
+DataSQRL compiles the script and GraphQL schema into an integrated data pipeline with the following command:
 
 ```bash
 docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl metricsapi.graphqls

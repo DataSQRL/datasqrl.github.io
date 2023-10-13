@@ -9,7 +9,7 @@ If you are new to DataSQRL or SQRL, we recommend that you start with the [Quicks
 
 The reference documentation is divided into 4 sections:
 
-* [**SQRL**](../sqrl/overview): Documentation of the SQRL language for writing SQRL scripts.
+* [**SQRL**](../sqrl/overview): Documentation of the SQRL language for writing SQRL scripts. SQRL is an SQL dialect with some syntactic sugar to make data product implementations easier.
 * [**API**](../api/overview): Documentation of how to query and design the data APIs compiled by DataSQRL.
 * [**Sources & Sinks**](../sources/overview): Documentation on how to create data sources and sinks for ingesting and exporting data from and to external sources.
 * [**Build**](../operations/build): Documentation on how to compile, run, and deploy DataSQRL scripts.

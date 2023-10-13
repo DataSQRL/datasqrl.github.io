@@ -6,7 +6,7 @@ title: "Implement SQRL Script"
 
 <img src="/img/index/undraw_programming_sqrl.svg" alt="Programming in SQRL >" width="40%"/>
 
-The data processing and logic of our application is defined in the SQRL script.
+The processing and logic of our data product is defined in the SQRL script.
 That's where the action is. We are going to dive deeper into
 the SQL language variant of DataSQRL by reviewing and extending the SQRL script from the [introduction](../overview).
 
@@ -77,7 +77,7 @@ We define a new `NumOrders` table that contains the count:
 NumOrders := SELECT COUNT(*) AS count FROM Orders;
 ```
 
-The `NumOrders` table gets exposed in our data service API as an additional endpoint
+The `NumOrders` table gets exposed in our data API as an additional endpoint
 through which the frontend team can query for the current order count. [Run](../overview#run) the modified script and [execute](../overview#query) the following query: 
 
 ```graphql
@@ -269,7 +269,7 @@ These two relationship column establish a bidirectional relationship.
 
 ## Time
 
-When building real-time data services, *time* is often an important aspect.
+When building real-time data products, *time* is often an important aspect.
 The two most common time-based transformations on data are grouping data
 points by time windows and aggregating over recent time intervals. SQRL provides
 convenience features to address both of those.
@@ -316,7 +316,7 @@ And that, my friend, is a pretty good start for our seed shop data API.
 
 ## Next Steps
 
-We've built a complete e-commerce data service with customer analysis, recommendation engine, and business intelligence. Good work 💪! Take a look at the [final SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl) that includes the changes and additions we discussed in this chapter. You've learned enough about SQRL to start building data microservices on your own. 
+We've built a complete e-commerce data product with customer analysis, recommendation engine, and business intelligence. Good work 💪! Take a look at the [final SQRL script](https://github.com/DataSQRL/sqrl/blob/main/sqrl-examples/quickstart/quickstart-sqrl.sqrl) that includes the changes and additions we discussed in this chapter. You've learned enough about SQRL to start building data pipelines on your own. 
 
 In the [**next chapter**](../data-sources), we are going to define our own data source and looks at imports in more detail.
 

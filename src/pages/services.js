@@ -11,7 +11,7 @@ const header =  {
                    tagLine: 'Get Value From Your Data',
                    text: (
                      <>
-                We help organizations build successful <Link to="/docs/reference/concepts/data-service">data services</Link> at
+                We help organizations build successful <Link to="/docs/reference/concepts/data-service">data products</Link> at
                 a fraction of the time and cost through innovative <Link to="/docs/getting-started/concepts/datasqrl">technology</Link> and
                  a <Link to="/docs/process/intro">process</Link> focused on value delivery.
                      </>
@@ -29,7 +29,7 @@ const WhatDataSQRLServices = [
     description: (
       <>
         Our online courses are an easy and convenient way to learn how to use DataSQRL technology
-        and build streaming data services. You will quickly get up to speed in an exclusive learning environment with immediate feedback. <br />
+        and build streaming data products. You will quickly get up to speed in an exclusive learning environment with immediate feedback. <br />
         Plus, you get homework for free.
       </>
     ),
@@ -42,8 +42,8 @@ const WhatDataSQRLServices = [
     description: (
       <>
         A workshop combines learning with hands-on development. Your team learns how to apply the DataSQRL process
-        and together we build a custom data service for your organization. <br />
-        A workshop empowers your team to build data services autonomously. We promise: no death by Powerpoint.
+        and together we build a custom data product for your organization. <br />
+        A workshop empowers your team to build data products autonomously. We promise: no death by Powerpoint.
       </>
     ),
     link: '/contact',
@@ -54,7 +54,7 @@ const WhatDataSQRLServices = [
     image: '/img/index/undraw_active_support_sqrl.svg',
     description: (
       <>
-        Partner with us and we will embed with your team to build a data service from inception
+        Partner with us and we will embed with your team to build a data product from inception
         through production to stable operations. This is the fastest way to jumpstart your
         organization into a data powerhouse. We support all parts of your data journey from outside
         guidance to pair-programming with your team.
@@ -114,16 +114,16 @@ export default function Services() {
               <div className="col col--6">
                   <h2>Simple Technology</h2>
                   <p>
-                  To build data services, organizations assemble spaghetti bowls of complex technologies
-                  into bespoke data layers that require specialized engineers and are expensive to maintain.
+                  To build data products, organizations assemble spaghetti bowls of complex technologies
+                  into bespoke data pipelines that require specialized engineers and are expensive to maintain.
                   </p>
                   <p>
                   <Link to="/docs/getting-started/concepts/datasqrl">DataSQRL technology</Link> enables small teams
-                  to quickly build powerful data services with low maintenance overhead by:
+                  to quickly build streaming data products with low maintenance overhead by:
                   <ul>
                   <li>Utilizing your developers' existing skills. No need to hire expensive specialists.</li>
-                  <li>Eliminating bespoke data layers through a compiler so your devs can focus on adding value.</li>
-                  <li>Automatically optimizing data layerss to reduce maintenance, cost, and outages.</li>
+                  <li>Eliminating data plumbing through a compiler so your engineers can focus on adding value.</li>
+                  <li>Automatically optimizing data pipelines to reduce maintenance, cost, and outages.</li>
                   </ul>
                   </p>
                   <div className="text--center">
@@ -133,14 +133,14 @@ export default function Services() {
               <div className="col col--6 text--left">
                  <h2>Value-focused Process</h2>
                   <p>
-                  Many data services fail to deliver value because their development process is fragmented, rigid,
+                  Many data products fail to deliver value because their development process is fragmented, rigid,
                   and detached from customer feedback.
                   </p>
                   <p>
-                  The <Link to="/docs/process/intro">DataSQRL process</Link> empowers organizations to build data services that deliver business outcomes by
+                  The <Link to="/docs/process/intro">DataSQRL process</Link> empowers organizations to build data products that deliver business outcomes by
                   following these principles:
                   <ul>
-                  <li>Focus on customer satisfaction through early and continuous delivery of valuable data services.</li>
+                  <li>Focus on customer satisfaction through early and continuous delivery of valuable data products.</li>
                   <li>Harness changing requirements and creative input from all stakeholders for competitive advantage.</li>
                   <li>Integrate with existing software development processes, tools, and frameworks.</li>
                   </ul>

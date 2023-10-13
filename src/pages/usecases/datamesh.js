@@ -47,7 +47,7 @@ export const UseCaseFeatures = [
     image: '/img/generic/undraw_data_points.svg',
     description: (
       <>
-        DataSQRL builds data microservices that expose user-friendly GraphQL APIs for easy consumption
+        DataSQRL builds data pipelines that expose user-friendly GraphQL APIs for easy consumption
         in a self-serve data platform.
       </>
     ),

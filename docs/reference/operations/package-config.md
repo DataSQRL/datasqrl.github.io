@@ -1,7 +1,7 @@
 
 # Package Configuration
 
-The package configuration is the central configuration file used by the [DataSQRL command](../command). The package configuration declares dependencies, configures the engines in the data service, sets compiler options, and provides package information.
+The package configuration is the central configuration file used by the [DataSQRL command](../command). The package configuration declares dependencies, configures the engines in the data pipeline, sets compiler options, and provides package information.
 
 ```json title="package.json"
 {
@@ -60,7 +60,7 @@ Learn more about the [repository](../repository) and how dependencies are retrie
 
 ## Engines {#engine}
 
-`engines` is a map of engine configurations by engine name that the compiler uses to instantiate the engines in the data service. The DataSQRL compiler produces an integrated data service against those engines. DataSQRL expects that a stream and database engine is configured as shown in the example above.
+`engines` is a map of engine configurations by engine name that the compiler uses to instantiate the engines in the data pipeline. The DataSQRL compiler produces an integrated data pipeline against those engines. DataSQRL expects that a stream and database engine is configured as shown in the example above.
 
 When you use the [DataSQRL command](../command) without specifying an engine, DataSQRL will instantiate default engines for you. Learn more about the [build process](../build).
 

@@ -73,7 +73,7 @@ In essence, GraphQL subscriptions provide a powerful and efficient way to keep e
 
 Mutations make it simple to ingest events into your system, streamlining the process and keeping everything running smoothly. GraphQL mutations support complex event payloads that are defined as input types directly in the API specification, making it easy for users of your API to submit data.
 
-GraphQL was developed with mobile applications in mind, where the connection between phone and server can be spotty. GraphQL mutations follow an event-centric model to separate the state of the mobile device from the state on the server and ensure continued operations when the connection between the two gets interrupted. That’s a perfect match for event-driven microservices and streaming applications which follow the same model for decoupling.
+GraphQL was developed with mobile applications in mind, where the connection between phone and server can be spotty. GraphQL mutations follow an event-centric model to separate the state of the mobile device from the state on the server and ensure continued operations when the connection between the two gets interrupted. That’s a perfect match for data pipelines and event-driven microservices which follow the same model for decoupling.
 
 And unlike REST, you don’t have to worry about HTTP methods and state management which add a level of complexity you don’t need for event-driven applications.
 
@@ -87,7 +87,7 @@ Firstly, the very flexibility that makes GraphQL so appealing can also present c
 
 Secondly, while GraphQL's subscription model is a powerful tool for delivering real-time updates, it can also be difficult to implement with low latency. Especially in high-volume data environments like those typically handled by Flink. Ensuring that updates are delivered to clients as quickly as possible, without overwhelming the server or the network, can be a complex task that requires careful planning and optimization.
 
-However, these challenges are not insurmountable. With the right tooling and a thoughtful approach to implementation, it's possible to take full advantage of the power and flexibility that GraphQL offers without optimizing the implementation by hand. DataSQRL is a tool that optimizes your Flink jobs as well as generates the database schema and index structures for your GraphQL API, compiling an entire event-driven microservice and saving you a ton of work. More on DataSQRL below.
+However, these challenges are not insurmountable. With the right tooling and a thoughtful approach to implementation, it's possible to take full advantage of the power and flexibility that GraphQL offers without optimizing the implementation by hand. DataSQRL is a tool that optimizes your Flink jobs as well as generates the database schema and index structures for your GraphQL API, compiling an entire data pipeline and saving you a ton of work. More on DataSQRL below.
 
 ## How to Build GraphQL APIs with Flink {#howto}
 
@@ -97,7 +97,7 @@ To sum up, the combination of Apache Flink and GraphQL provides a potent solutio
 
 By now you are probably hungry to learn more. It may just be all the food analogies, but if you want to learn how to build GraphQL APIs with Flink then read on.
 
-You can build Flink+GraphQL microservices by hand, but like many things in software, it gets a lot easier with the appropriate tooling. We recommend using [DataSQRL](/) for building GraphQL APIs on top of Flink. DataSQRL compiles the SQL that defines your data processing in Flink and your GraphQL API into a complete microservice that integrates these components efficiently.
+You can build Flink+GraphQL data pipelines by hand, but like many things in software, it gets a lot easier with the appropriate tooling. We recommend using [DataSQRL](/) for building GraphQL APIs on top of Flink. DataSQRL compiles the SQL that defines your data processing in Flink and your GraphQL API into a complete data pipeline that integrates these components efficiently.
 
 Of course, we are biased.  But, who knows, DataSQRL might save you a ton of work, time, and frustration.
 
