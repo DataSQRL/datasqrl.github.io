@@ -1,6 +1,6 @@
 # Getting Started with DataSQRL
 
-DataSQRL makes it easy to implement data products as data pipelines or event-driven microservices. You'll be building powerful data APIs with DataSQRL in no time. How you get started is up to you. We recommend the "Learning by Doing" route, but you can choose your own adventure.
+DataSQRL makes it easy to implement data products as data pipelines or event-driven microservices. You'll be building powerful data products with DataSQRL in no time. How you get started is up to you. We recommend the "Learning by Doing" route, but you can choose your own adventure.
 
 ## Learning By Doing
 
@@ -8,7 +8,7 @@ If you're looking to learn DataSQRL, the best way is to build something with it:
 
 <img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="40%"/>
 
-**STEP 1:** Read the [Quickstart](../quickstart) to build a metrics monitoring data product in 5 minutes.
+**STEP 1:** Read the [Quickstart](../quickstart) to build a metrics monitoring data product in 10 minutes.
 
 **STEP 2:** Dive into the [DataSQRL tutorial](../intro/overview) to get a deeper understanding of DataSQRL and learn everything you need to build your own data product with DataSQRL.
 
@@ -29,9 +29,9 @@ DataSQRL solves the [data plumbing](../concepts/why-datasqrl#dataplumbing) issue
 
 DataSQRL supports various pipeline topologies and has a pluggable engine architecture that allows DataSQRL to compile to proven technologies like Apache Kafka, Apache Flink, and Postgres. That means you are not relying on DataSQRL in production but can use the technologies and cloud services you already trust. DataSQRL compiles data pipelines that are resilient, fast, and scalable by using an optimizer that determines the most efficient data pipeline for a configured architecture.
 
-* [**What is DataSQRL?**](../concepts/datasqrl): DataSQRL compiles optimized data pipelines. Learn more about DataSQRL and how it works.
-* [**Why Use DataSQRL?**](../concepts/why-datasqrl): DataSQRL eliminates data plumbing enabling you to ship data products quickly for less money. Learn more about the benefits of DataSQRL.
-* [**When Should I Use DataSQRL?**](../concepts/when-datasqrl): DataSQRL empowers your team to build efficient data products successfully. Find out when and when not to use DataSQRL.
+* [**What is DataSQRL?**](../concepts/datasqrl): DataSQRL compiles optimized data pipelines. [Learn more](../concepts/datasqrl) about DataSQRL and how it works.
+* [**Why Use DataSQRL?**](../concepts/why-datasqrl): DataSQRL eliminates data plumbing enabling you to ship data products quickly with less effort. [Learn more](../concepts/why-datasqrl) about the benefits of DataSQRL.
+* [**When Should I Use DataSQRL?**](../concepts/when-datasqrl): DataSQRL empowers your team to build efficient data products successfully. [Find out](../concepts/when-datasqrl) when and when not to use DataSQRL.
 
 What to know more? Start with the [reference documentation](/docs/reference/overview) to learn everything there is to know about DataSQRL. <br />
 What to go even deeper? The [developer documentation](/docs/dev/overview) details the internals of DataSQRL and takes you deep into the guts of the system.

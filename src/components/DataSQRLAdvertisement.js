@@ -67,18 +67,18 @@ export const DataSQRLUseCases = [
     link: "/usecases/datamesh/",
     linkText: "Build a Data Mesh"
   },
-  {
-    title: 'Artificial Intelligence',
-    image: '/img/generic/ai_squirrel.svg',
-    description: (
-      <>
-        Take your data to another level with AI. DataSQRL supports vector embeddings,
-        large language models, and machine learning in SQL.
-      </>
-    ),
-    link: "/usecases/ai/",
-    linkText: "Empower your Data with AI"
-  },
+  // {
+  //   title: 'Artificial Intelligence',
+  //   image: '/img/generic/ai_squirrel.svg',
+  //   description: (
+  //     <>
+  //       Take your data to another level with AI. DataSQRL supports vector embeddings,
+  //       large language models, and machine learning in SQL.
+  //     </>
+  //   ),
+  //   link: "/usecases/ai/",
+  //   linkText: "Empower your Data with AI"
+  // },
   {
     title: 'Event-Driven Microservices',
     image: '/img/index/undraw_use_cases_sqrl.svg',
@@ -91,18 +91,18 @@ export const DataSQRLUseCases = [
     link: "/usecases/microservice/",
     linkText: "Build ED Architectures"
   },
-  // {
-  //   title: 'Observability & Automation',
-  //   image: '/img/generic/predictive_analytics.svg',
-  //   description: (
-  //     <>
-  //       Build tailored observability platforms that turn your metrics into insights.
-  //       Automate your processes with custom rules and AIOps.
-  //     </>
-  //   ),
-  //   link: "/usecases/observability/",
-  //   linkText: "Build Smart Monitoring"
-  // },
+  {
+    title: 'Observability & Automation',
+    image: '/img/generic/predictive_analytics.svg',
+    description: (
+      <>
+        Build tailored observability platforms that turn your metrics into insights.
+        Automate your processes with custom rules and AIOps.
+      </>
+    ),
+    link: "/usecases/observability/",
+    linkText: "Build Smart Monitoring"
+  },
 ];
 
 export function HowDataSQRLWorks() {
