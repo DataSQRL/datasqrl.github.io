@@ -11,23 +11,23 @@ But exactly what kinds of data products is DataSQRL good for? And when should yo
 
 The following tables summarizes all the data products you can build with DataSQRL with the color indicating how much time, effort, and money DataSQRL will save you: green saves you a lot, orange a medium amount, and red means you won't save much.
 
-Take a look at the different [types of data products](/docs/reference/concepts/data-product#types) that DataSQRL can build for you to learn what each cell in the table represents.
+Take a look at the different [types of data products](/docs/reference/concepts/data-product#types) that DataSQRL can build to learn what each cell in the table represents.
 
 <table>
     <tr>
-        <td></td>
-        <td><strong>Dynamic</strong></td>
-        <td><strong>Static</strong></td>
+        <td>Data Product Result</td>
+        <td><strong>Dynamic</strong> (updates with changes in data)</td>
+        <td><strong>Static</strong> (does not update)</td>
     </tr>
     <tr>
-        <td><strong>Raw</strong></td>
+        <td><strong>Raw Data</strong></td>
         <td className="bg_warning text--center" ><strong>Stream Processing</strong><br />
             <img src="/img/reference/dpTypes1.svg" alt="Streaming Processing Architecture" width="500"/></td>
         <td className="bg_alert  text--center"><strong>Batch Processing</strong><br />
         <img src="/img/reference/dpTypes4.svg" alt="Batch Processing Architecture" width="500"/> </td>
     </tr>
     <tr>
-        <td><strong>Interactive</strong></td>
+        <td><strong>Interactive Querying</strong></td>
         <td className="bg_success text--center"><strong>Streaming Database</strong><br />
             <img src="/img/reference/dpTypes2.svg" alt="Streaming Database Architecture" width="500"/></td>
         <td className="bg_warning text--center"><strong>Snapshot Database</strong><br />
@@ -50,12 +50,12 @@ If they are red, DataSQRL isn't worth it. If you are adopting DataSQRL for other
 
 ## Long Version
 
-DataSQRL makes it easier and faster to build data products by eliminating the data plumbing that makes data pipeline implementations expensive. But the saving you get from DataSQRL have to be larger than the cost of adopting a new technology in your organization.
+DataSQRL makes it easier and faster to build data products by eliminating the [data plumbing](../why-datasqrl#dataplumbing) that makes data pipeline implementations expensive. But the saving you get from DataSQRL have to be larger than the cost of adopting a new technology in your organization.
 
-As with any new technology, there is a cost of adoption. The cost of adoption for DataSQRL is pretty low because:
+As with any new technology, there is a cost of adoption. The cost of adoption for DataSQRL is fairly low because:
 
 1. DataSQRL compiles data pipelines but the resulting executables are independent of DataSQRL and run on the technologies and cloud services you already trust like Apache Kafka, Flink, Postgres, and so on. That means, there is no operational cost to using DataSQRL.
-2. The learning curve for DataSQRL is fairly low since it uses the SQL knowledge your team already has.
+2. The learning curve for DataSQRL is low since it uses the SQL knowledge your team already has.
 
 To make DataSQRL worth your while, the savings you get from using DataSQRL to compile your data pipelines need to significantly outweigh the cost of adoption. And that's what the table above visualizes: green means the benefits far outweigh the costs, orange means it's on the fence, and red means that they do not.
 
