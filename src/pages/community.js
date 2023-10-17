@@ -34,18 +34,18 @@ const Support = [
       </>
     ),
   },
-  {
-    title: 'Stack Overflow',
-    image: '/img/community/stackoverflow_sqrl.svg',
-    link: 'https://stackoverflow.com/questions/tagged/datasqrl',
-    linkText: 'Ask a Question',
-    description: (
-      <>
-        If you have an implementation question or need somebody to point you in the right direction, <Link to="https://stackoverflow.com/questions/tagged/datasqrl">Stack Overflow</Link> is the place
-        to ask your question and get help from the community. Even the supposedly "stupid" questions.
-      </>
-    ),
-  },
+  // {
+  //   title: 'Stack Overflow',
+  //   image: '/img/community/stackoverflow_sqrl.svg',
+  //   link: 'https://stackoverflow.com/questions/tagged/datasqrl',
+  //   linkText: 'Ask a Question',
+  //   description: (
+  //     <>
+  //       If you have an implementation question or need somebody to point you in the right direction, <Link to="https://stackoverflow.com/questions/tagged/datasqrl">Stack Overflow</Link> is the place
+  //       to ask your question and get help from the community. Even the supposedly "stupid" questions.
+  //     </>
+  //   ),
+  // },
   {
     title: 'GitHub',
     image: '/img/community/github.svg',
@@ -59,9 +59,6 @@ const Support = [
       </>
     ),
   },
-];
-
-const Updates = [
   {
     title: 'Blog',
     image: '/img/generic/undraw_blog.svg',
@@ -74,6 +71,10 @@ const Updates = [
       </>
     ),
   },
+];
+
+const Updates = [
+
   {
     title: 'Youtube',
     image: '/img/community/youtube.svg',
