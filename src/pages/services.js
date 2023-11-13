@@ -23,19 +23,19 @@ const header =  {
 
 
 const WhatDataSQRLServices = [
-  {
-    title: 'Courses',
-    image: '/img/index/undraw_programming_sqrl.svg',
-    description: (
-      <>
-        Our online courses are an easy and convenient way to learn how to use DataSQRL technology
-        and build streaming data products. You will quickly get up to speed in an exclusive learning environment with immediate feedback. <br />
-        Plus, you get homework for free.
-      </>
-    ),
-    link: '/courses',
-    linkText: 'Attend a Course',
-  },
+  // {
+  //   title: 'Courses',
+  //   image: '/img/index/undraw_programming_sqrl.svg',
+  //   description: (
+  //     <>
+  //       Our online courses are an easy and convenient way to learn how to use DataSQRL technology
+  //       and build streaming data products. You will quickly get up to speed in an exclusive learning environment with immediate feedback. <br />
+  //       Plus, you get homework for free.
+  //     </>
+  //   ),
+  //   link: '/courses',
+  //   linkText: 'Attend a Course',
+  // },
   {
     title: 'Workshops',
     image: '/img/index/undraw_personal_training_sqrl.svg',
@@ -62,6 +62,19 @@ const WhatDataSQRLServices = [
     ),
     link: '/contact',
     linkText: 'Let\'s talk',
+  },
+  {
+    title: 'Development',
+    image: '/img/index/undraw_programming_sqrl.svg',
+    description: (
+      <>
+        If you are missing a feature in DataSQRL or need to customize DataSQRL for the unique needs
+        of your organization, we can extend DataSQRL to meet your requirements. You will work closely
+        with DataSQRL committers and help drive this project forward.
+      </>
+    ),
+    link: '/contact',
+    linkText: 'Build with DataSQRL',
   },
 ];
 

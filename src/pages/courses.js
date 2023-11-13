@@ -96,67 +96,9 @@ export default function Courses() {
                   <tbody>
                   <tr>
                     <td className="hero__subtitle"><strong><Link to="https://www.eventbrite.com/e/building-streaming-ai-applications-with-kafka-and-flink-tickets-718595517537">How to build Streaming AI Applications with Kafka & Flink</Link></strong></td>
-                    <td>This course provides an in-depth understanding of using vector embeddings and large-language models in streaming applications for data enrichment. You will gain hands-on experience by building an AI-powered recommendation engine and personalized search as a streaming data microservice.</td>
-                    <td>
-                      <div>
-                        Tue, <strong>November 28</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                      <div className="text--center text--italic">or</div>
-                      <div>
-                        Thu, <strong>December 14</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                    </td>
-                    <td><Link className="button button--secondary" to="https://www.eventbrite.com/e/building-streaming-ai-applications-with-kafka-and-flink-tickets-718595517537">Register</Link></td>
-                  </tr>
-                  <tr>
-                    <td width="30%" className="hero__subtitle"><strong><Link to="https://www.eventbrite.com/e/719290726927">How to build Event-Driven Microservices with Kafka & Flink</Link></strong></td>
-                    <td>This course goes beyond the basics of event-driven microservices, delving into both architectural paradigms and intricate implementation details. We provide a unique blend of theory and practice, ensuring you gain a robust understanding of the subject matter while also acquiring practical skills that can be immediately applied in the real world.</td>
-                    <td>
-                      <div>
-                        Tue, <strong>November 14</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                      <div className="text--center text--italic">or</div>
-                      <div>
-                        Thu, <strong>December 7</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                    </td>
-                    <td><Link className="button button--secondary" to="https://www.eventbrite.com/e/719290726927">Register</Link></td>
-                  </tr>
-                  <tr>
-                    <td width="30%" className="hero__subtitle"><strong><Link to="https://www.eventbrite.com/e/719299804077">How to build Observability and Automation Platforms with Kafka & Flink</Link></strong></td>
-                    <td>This course gives you the knowledge and practical skills to turn your metrics data streams into valuable insights and process automation that puts you ahead of the game. You will gain hands-on experience by building a real-time analytics microservice that serves insights through an API for end-users or dashboards as well as deploying AI models to automate your playbook and utilize AIOps for greater efficiency.</td>
-                    <td>
-                      <div>
-                        Thu, <strong>November 16</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                      <div className="text--center text--italic">or</div>
-                      <div>
-                        Tue, <strong>December 5</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                    </td>
-                    <td><Link className="button button--secondary" to="https://www.eventbrite.com/e/719299804077">Register</Link></td>
-                  </tr>
-                  <tr>
-                    <td width="30%" className="hero__subtitle"><strong><Link to="https://www.eventbrite.com/e/719307477027">How to build A Data Mesh with Kafka & Flink</Link></strong></td>
-                    <td>Empower your domain teams to build decentralized data products on a self-service data platform that turns your organization's data into a business driver. Become an expert in building streaming data products that deliver value for your customers with this exclusive course led by industry experts with decades of experience.</td>
-                    <td>
-                      <div>
-                        Thu, <strong>November 30</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                      <div className="text--center text--italic">or</div>
-                      <div>
-                        Tue, <strong>December 12</strong>, 2023<br/>
-                        9am - 1pm, PST
-                      </div>
-                    </td>
-                    <td><Link className="button button--secondary" to="https://www.eventbrite.com/e/719307477027">Register</Link></td>
+                    <td>Our courses for this year have ended or are full. Please check back again in 2024.</td>
+                    <td></td>
+                    <td></td>
                   </tr>
 
                   </tbody>
