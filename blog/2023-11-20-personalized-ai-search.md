@@ -215,6 +215,6 @@ And that’s how you build a personalized search with vector embeddings. Our imp
 
 We hope you can use this tutorial as a starting point to implement your own personalized search with LLMs. With DataSQRL, you can add additional sources of data, implement custom scoring functions, and fine-tune the search to your particular use case. For extra credit, you could change the aggregation function to prioritize recent product views or fine-tune the LLM for sentence embedding to our dataset. We’ll discuss those improvements in a future tutorial.
 
-Check out the [DataSQRL documentation](/docs) for more information and [star DataSQRL on Github](https://github.com/DataSQRL/sqrl) to bookmark the open-source project. Good luck building your AI search and reach out to the [community](/community) if you have any questions.
+Check out the [DataSQRL documentation](/docs/intro/) for more information and [star DataSQRL on Github](https://github.com/DataSQRL/sqrl) to bookmark the open-source project. Good luck building your AI search and reach out to the [community](/community) if you have any questions.
 
 
