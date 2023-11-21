@@ -148,9 +148,9 @@ ORDER BY coalesce(cosineSimilarity(p.semantics, u.semanticContext),0.0) DESC;
 
 Let’s go over the 4 parts of the implementation:
 
-1. We import the product data from an external data system. For this tutorial, the product data is imported from a file (included in the archive), but DataSQRL supports multiple data sources. We also import `ProductView` events from the API that are created when a user invokes the corresponding mutation endpoint. Lastly, we import a few functions that we’ll use in our script.
-2. We preprocess the `Products` data by computing a vector embedding for the title and description of each product using the LLM. Since we are importing a stream of product data, since products may change over time, we deduplicate the stream to get the most recent version.
-3. We join the `ProductView` events against the `Products` state table to look up the vector embedding for the product. We use a [temporal](/blog/temporal-join/) join so that we look up the associated vector at the time of the event. Then we aggregate all the `ProductViewVectors` by `userid` to create the `UserProfile`.
+1. We import the product data from an external data system. For this tutorial, the product data is imported from a file (included in the archive), but DataSQRL supports multiple [data sources](/docs/reference/sources/overview/). We also import `ProductView` events from the API that are created when a user invokes the corresponding mutation endpoint. Lastly, we import a few functions that we’ll use in our script.
+2. We preprocess the `Products` data by computing a vector embedding for the title and description of each product using the LLM. Since we are importing a stream of product data, because products may change over time, we deduplicate the stream to get the most recent version for each product.
+3. We join the `ProductView` events against the `Products` state table to look up the vector embedding for the product a user viewed. We use a [temporal join](/blog/temporal-join/) so that we look up the associated vector at the time of the event. Then we aggregate all the `ProductViewVectors` by `userid` to create the semantic `UserProfile` as the centroid of all product vectors the user has visited.
 4. To answer a search query, we retrieve the matching products and the vector that represents the semantic profile of a user. We order the results by their semantic similarity to the semantic user profile by computing the cosine similarity between the respective vectors.
 
 ## Step 4: Running Our Personalized Search
