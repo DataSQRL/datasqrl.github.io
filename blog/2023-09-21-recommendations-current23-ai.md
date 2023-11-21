@@ -205,13 +205,8 @@ mkdir current23; cd current23
 
 3. Compile the SQRL script and GraphQL schema into an event-driven microservice by running:
 ```bash
-docker run --rm -v $PWD:/build datasqrl/cmd:dev compile conference-recommendation.sqrl recAPI.graphqls --mnt $PWD
+docker run --rm -v $PWD:/build datasqrl/cmd compile conference-recommendation.sqrl recAPI.graphqls --mnt $PWD
 ```
-
-:::info
-Disclaimer: We are using the preview release of DataSQRL with the `:dev` tag to showcase the vector embedding feature that's coming in the next release.
-Use the `:latest` tag for the stable release.
-:::
 
 
 4. Stand up the entire microservice in docker by running:
