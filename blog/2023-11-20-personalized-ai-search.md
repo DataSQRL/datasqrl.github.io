@@ -192,7 +192,7 @@ mutation AddView($view: ProductViewInput!) {
 }
 ```
 
-Mutations require a payload that specifies which product a user visited. Use the following payload.
+Mutations require a payload that specifies which product a user visited. Enter the following JSON payload under "Query Variables" in the bottom left of GraphiQL before running the query:
 
 ```json  title="Query Variables"
 {
