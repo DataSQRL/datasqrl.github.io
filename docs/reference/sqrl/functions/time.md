@@ -8,7 +8,7 @@ The time function package contains functions to convert, aggregate, and manipula
 
 ```sql
 IMPORT time.*; -- imports all time functions
-IMPORT time.x; -- imports single time function
+IMPORT time.dayOfWeek; -- imports single time function
 ```
 
 ## Reference
