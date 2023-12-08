@@ -95,6 +95,10 @@ const sidebars = {
               items: [
                 'reference/sqrl/functions/string',
                 'reference/sqrl/functions/time',
+                'reference/sqrl/functions/text',
+                'reference/sqrl/functions/secure',
+                'reference/sqrl/functions/json',
+                'reference/sqrl/functions/vector',
                 'reference/sqrl/functions/custom-functions',
               ],
             },
