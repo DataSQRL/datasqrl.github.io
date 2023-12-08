@@ -8,7 +8,7 @@ The string function package contains functions to manipulate and analyze strings
 
 ```sql
 IMPORT string.*; -- imports all string functions
-IMPORT string.x; -- imports single string function
+IMPORT string.concat; -- imports single string function
 ```
 
 ## Reference
