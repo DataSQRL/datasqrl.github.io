@@ -50,11 +50,28 @@ const Founders = [
       </>
     ),
   },
+  {
+    name: 'Michael Canzoneri',
+    pic: '/img/headshots/canz1.png',
+    bio: (
+      <>
+        <Link to="https://www.linkedin.com/in/canz">Canz</Link>, a 3x Silicon Valley Unicorn veteran with IPO experience, has introduced to and guided
+        companies with Artificial Intelligence, Cloud, and Real-time Distributed Computing.
+        He has grown companies from zero to 8-figures in revenue and global teams from single-digit to hundreds of people several times.
+        He also serves as an advisor for several startups in Artificial Intelligence, Data, and Green Technologies. <br />
+
+        Canz has attended M.I.T., Harvard, Villanova, and Penn State.  He's written an award-winning screenplay,
+        several books on Philosophy and Religion, and blog posts on the intersection of Quantum Computing,
+        Artificial Intelligence, and Event Streaming.  He has also written and produced several independent movies,
+        but his favorite subject is college football.
+      </>
+    ),
+  },
 ];
 
 function Profile({name, pic, bio}) {
   return (
-    <div className={clsx('col col--5')}>
+    <div className={clsx('col col--4')}>
       <div className="text--center"><img className={featureStyles.featureProfile} src={pic} alt={name} /></div>
       <div className="padding-horiz--md">
         <h3 className="text--center">{name}</h3>
@@ -111,11 +128,9 @@ export default function About() {
           <div className="container">
             <h2 className="text--center">Meet the Founders</h2>
             <div className="row">
-              <div className="col col--1"></div>
               {Founders.map((props, idx) => (
                 <Profile key={idx} {...props} />
               ))}
-              <div className="col col--1"></div>
             </div>
           </div>
         </section>
