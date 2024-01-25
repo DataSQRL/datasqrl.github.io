@@ -109,7 +109,7 @@ Invoke the DataSQRL compiler to build an integrated pipeline from the data trans
 docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl
 ```
 
-Launch the pipeline with:
+Launch all components of the pipeline with docker compose:
 ```bash
 (cd build/deploy; docker compose up)
 ```

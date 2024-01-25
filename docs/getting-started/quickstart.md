@@ -49,11 +49,11 @@ We define another table `SensorMaxTemp` which computes the maximum temperature i
 
 ## Run Script {#run}
 
-DataSQRL compiles our SQRL script into an integrated data pipeline with the following command:
+DataSQRL compiles our SQRL script into an integrated data pipeline and runs the pipeline with the following command:
 
 
 ```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl
+docker run -it -p 8888:8888 -p 8081:8081 -v $PWD:/build datasqrl/cmd run metrics.sqrl
 ```
 
 :::note
@@ -62,13 +62,13 @@ To run this command you need to have [Docker](https://docs.docker.com/get-docker
 
 :::
 
-To run the pipeline, execute:
+:::note
 
-```bash
-(cd build/deploy; docker compose up)
-```
+If you are using Powershell on Windows, you need to replace `$PWD` with `${PWD}` to reference your local directory in the docker command.
 
-This will launch all components of the pipeline to ingest, process, store, and serve the data through an API.
+:::
+
+Once the pipeline is running, it will ingest, process, store, and serve the data through an API.
 
 ## Query API {#query}
 
@@ -86,10 +86,7 @@ When you hit the "run" button you get the maximum temperature for the sensor wit
 
 And there you have it: a running data pipeline that ingests metrics, aggregates them, and exposes the results through a GraphQL API which you can call in your applications.
 
-To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:
-```bash
-(cd build/deploy; docker compose down -v)
-```
+To stop the pipeline, interrupt it with `CTRL-C`.
 
 ## Customize API
 
@@ -119,11 +116,10 @@ type Query {
 
 Note, that we made `sensorid` a required argument for the `SecReading` query endpoint.
 
-Now, run the compiler with the GraphQL schema we just created and then launch the updated pipeline:
+Now, invoke the compiler with the GraphQL schema we just created and launch the updated pipeline:
 
 ```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl metricsapi.graphqls;
-(cd build/deploy; docker compose up)
+docker run -it -p 8888:8888 -p 8081:8081 -v $PWD:/build datasqrl/cmd run metrics.sqrl metricsapi.graphqls;
 ```
 
 When you refresh GraphiQL in the browser, you see that the API is simpler and only exposes the data for our use case.
