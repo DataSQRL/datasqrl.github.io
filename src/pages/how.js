@@ -26,7 +26,7 @@ const header =  {
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
                    buttonText: "Try Out DataSQRL in 10 minutes!",
-                   youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
+                   youtubeURL: 'https://www.youtube.com/embed/kq6SDR-TJpM',
                    // LogoSvg: require('../../static/img/full_squirrel.svg').default,
                  };
 
