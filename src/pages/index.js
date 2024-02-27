@@ -20,12 +20,12 @@ import FeatureGrid from "../components/FeatureGrid";
 
 
 const header =  {
-                   title: 'Build Streaming Data Products',
-                   tagLine: 'Build Data Products Efficiently',
+                   title: 'Build Realtime Data Products',
+                   tagLine: 'The Operating System for Data',
                    text: (
                      <>
-                       DataSQRL is an intelligent compiler for data pipelines that eliminates data plumbing so you
-                       can ship streaming data products in days instead of months.
+                       Build GenAI applications, data products, and data-driven features quickly at scale
+                       without a PhD in data systems.
                      </>
                    ),
                    buttonLink: '/docs/getting-started/quickstart',
