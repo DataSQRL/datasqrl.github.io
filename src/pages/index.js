@@ -21,7 +21,7 @@ import FeatureGrid from "../components/FeatureGrid";
 
 const header =  {
                    title: 'Build Realtime Data Products',
-                   tagLine: 'The Operating System for Data',
+                   tagLine: 'Operating System for Data™',
                    text: (
                      <>
                        Build GenAI applications, data products, and data-driven features quickly at scale
