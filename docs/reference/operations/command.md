@@ -36,43 +36,6 @@ The `compile` command accepts these options:
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-a` or `--api`    | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
 | `-t` or `--target` | Writes the deployment artifiacts of the compiled data pipeline into the target directory. `deploy/` by default.                                                                                                                                                                    |
-| `--mnt`            | Mounts the specified directory as a volume in the generated docker-compose template so local data can be accessed                                                                                                                                                                 |
-| `--nolookup`       | Disables lookup of packages in the repository that cannot be resolved locally or as dependencies.                                                                                                                                                                                 |
-
-<!--
-## Run
-
-The `run` command compiles an SQRL script and optional API specification to a data pipeline and then executes the layer locally. That means, the `run` command starts all engines in the data pipeline and deploys the compiled artifacts on them. In particular, it starts the API server which can be accessed and queried on localhost with the configured port.
-
-```bash
-docker run --rm -p 8888:8888 -v $PWD:/build datasqrl/cmd run  myscript.sqrl myapischema.graphqls
-```
-
-The `run` command takes the same arguments and options as the `compile` command. It also accepts these additional options:
-
-| Option/Flag Name   | Description   |
-|--------------|---------------|
-| `-p` or `--port` | Generates API specification for the compiled script. <ul><li>Use option argument `graphql` to generate a GraphQL schema in the file `schema.graphqls`</li></ul> The API specification file is written into the current directory and overwrites any existing file with that name. |
-| `-d` or `--debug`| Writes the deployment artifacts of the compiled data pipeline into the target directory. `deploy/` by default. |
-
--->
-
-## Discover
-
-The `discover` command creates new data source and sink packages by inspecting a configured data system.
-
-```bash
-docker run --rm -v $PWD:/build datasqrl/cmd discover system.discovery.table.json
-```
-
-The `discover` command takes the [data system configuration file](../../sources/discovery#datasystem) as an argument and supports the following options:
-
-| Option/Flag Name   | Description   |
-|--------------|---------------|
-| `-o` or `--output` | Data discovery writes the package configuration files to this directory. Defaults to the current directory.  |
-| `-l` or `--limit`| The maximum time (in seconds) for data analysis. Data discovery terminates data analysis after this amount of time. Defaults to 3600 seconds (1 hour).  |
-
-Read the [data discovery documentation](../../sources/discovery) to learn more about adding data sources and sinks for DataSQRL.
 
 ## Publish
 
@@ -88,15 +51,8 @@ docker run --rm -v $PWD:/build datasqrl/cmd publish
 
 The `publish` command supports the following options:
 
-| Option/Flag Name   | Description   |
-|--------------|---------------|
-| `--remote` | Publishes the package to the remote repository in addition to the local one. Publishing to the remote repository requires user credentials for authentication. Read more about [publishing to remote repository](../repository#publish-remote). |
+| Option/Flag Name | Description                                                                                                                                                                                                                                  |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--local`        | Publishes the package to the local repository. Publishing to the remote repository requires user credentials for authentication. Read more about [publishing to remote repository](../repository#publish-remote). |
 
 Read the [repository documentation](../repository#publish) to learn more about publishing packages to the repository.
-
-<!--
-## Serve
-
-## Populate
-
--->

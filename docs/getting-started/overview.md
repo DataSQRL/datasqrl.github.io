@@ -10,9 +10,7 @@ If you're looking to learn DataSQRL, the best way is to build something with it:
 
 **STEP 1:** Read the [Quickstart](../quickstart) to build a metrics monitoring data product in 10 minutes.
 
-**STEP 2:** Dive into the [DataSQRL tutorial](../intro/overview) to get a deeper understanding of DataSQRL and learn everything you need to build your own data product with DataSQRL.
-
-**STEP 3:** Build your own data product with DataSQRL. Take a problem from work or grab some data you've been interested in and give it a go. 
+**STEP 2:** Build your own data product with DataSQRL. Take a problem from work or grab some data you've been interested in and give it a go. 
 
 Need more information? Take a look at the [reference documentation](/docs/reference/overview) for everything you'd ever wanted to know about DataSQRL and then some. <br />
 Still stuck? No worries, the [DataSQRL community](/community) is here to help. Seriously, reach out - we don't bite!

@@ -41,22 +41,6 @@ This statement defines the nested `total_spend` state table that aggregates the 
 
 An exception to this are [time-window aggregations](#aggregation) which preserve time and produce a stream table. 
 
-## Convert State to Stream
-
-`STREAM` statements convert state tables to stream tables.
-
-```sql
-UserPromotion := STREAM ON ADD AS
-  SELECT u.id, u.first_name, u.last_name, u.email, s.spend
-  FROM Users u JOIN u.order_stats s WHERE s.spend >= 100;
-```
-This statement defines a new `UserPromotion` stream table that contain a stream record for every record that gets added to state table defined by the `SELECT` query. The query asks for all users who have spent more than $100 in aggregate. Whenever a user meets this threshold and gets added to the table, a stream record is produced in the `UserPromotion` stream table.
-
-* `STREAM ON ADD`: produces a stream record for every record that gets added to the state table defined by the `SELECT` query.
-* `STREAM ON UPDATE`: produces a stream record every time a record in the state table defined by the `SELECT` query is updated. This produces a change stream of the state table.
-* `STREAM ON DELETE`: produces a stream record for every record that gets deleted from the state table defined by the `SELECT` query.
-
-
 ## Queries
 
 Queries over stream tables differ in semantics from standard SQL queries over state tables in the following cases:
