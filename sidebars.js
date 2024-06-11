@@ -35,30 +35,30 @@ const sidebars = {
             type: 'doc',
             id: 'getting-started/intro/overview',
           },
-          items: [
-            'getting-started/intro/sqrl',
-            'getting-started/intro/data-sources',
-            'getting-started/intro/api',
-            'getting-started/intro/advanced',
-            'getting-started/intro/deploy',
-          ],
+//          items: [
+//            'getting-started/intro/sqrl',
+//            'getting-started/intro/data-sources',
+//            'getting-started/intro/api',
+//            'getting-started/intro/advanced',
+//            'getting-started/intro/deploy',
+//          ],
         },
         'getting-started/concepts/datasqrl',
         // 'getting-started/concepts/sqrl',
         "getting-started/concepts/why-datasqrl",
         'getting-started/concepts/when-datasqrl',
-        {
-          type: 'category',
-          label: 'DataSQRL Tutorials',
-          link: {
-            type: 'doc',
-            id: 'getting-started/tutorials/overview',
-          },
-          items: [
-            'getting-started/tutorials/recommendations/intro',
-            'getting-started/tutorials/iot/intro',
-          ],
-        },
+//        {
+//          type: 'category',
+//          label: 'DataSQRL Tutorials',
+//          link: {
+//            type: 'doc',
+//            id: 'getting-started/tutorials/overview',
+//          },
+//          items: [
+//            'getting-started/tutorials/recommendations/intro',
+//            'getting-started/tutorials/iot/intro',
+//          ],
+//        },
       ],
     },
     {
@@ -136,34 +136,34 @@ const sidebars = {
           },
           items: [
             'reference/sources/discovery',
-            {
-              type: 'category',
-              label: 'Data System',
-              link: {
-                type: 'generated-index',
-                title: 'Data Systems supported by DataSQRL',
-                description: 'DataSQRL supports the following data systems as data sources or sinks:'
-              },
-              items: [
-                'reference/sources/system/file',
-                'reference/sources/system/kafka',
-                'reference/sources/system/print',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Data Format',
-              link: {
-                type: 'generated-index',
-                title: 'Data Formats supported by DataSQRL',
-                description: 'DataSQRL supports the following data formats for data sources and sinks:'
-              },
-              items: [
-                'reference/sources/format/json',
-                'reference/sources/format/csv',
-                'reference/sources/format/avro',
-              ],
-            },
+//            {
+//              type: 'category',
+//              label: 'Data System',
+//              link: {
+//                type: 'generated-index',
+//                title: 'Data Systems supported by DataSQRL',
+//                description: 'DataSQRL supports the following data systems as data sources or sinks:'
+//              },
+//              items: [
+//                'reference/sources/system/file',
+//                'reference/sources/system/kafka',
+//                'reference/sources/system/print',
+//              ],
+//            },
+//            {
+//              type: 'category',
+//              label: 'Data Format',
+//              link: {
+//                type: 'generated-index',
+//                title: 'Data Formats supported by DataSQRL',
+//                description: 'DataSQRL supports the following data formats for data sources and sinks:'
+//              },
+//              items: [
+//                'reference/sources/format/json',
+//                'reference/sources/format/csv',
+//                'reference/sources/format/avro',
+//              ],
+//            },
             'reference/sources/schema',
           ],
         },
@@ -191,19 +191,19 @@ const sidebars = {
 //                'reference/operations/deploy/secrets',
               ],
             },
-            {
-              type: 'category',
-              label: 'Engines',
-              link: {
-                type: 'doc',
-                id: 'reference/operations/engines/overview',
-              },
-              items: [
-                'reference/operations/engines/flink',
-                'reference/operations/engines/postgres',
-                'reference/operations/engines/vertx',
-              ],
-            },
+//            {
+//              type: 'category',
+//              label: 'Engines',
+//              link: {
+//                type: 'doc',
+//                id: 'reference/operations/engines/overview',
+//              },
+//              items: [
+//                'reference/operations/engines/flink',
+//                'reference/operations/engines/postgres',
+//                'reference/operations/engines/vertx',
+//              ],
+//            },
           ],
         },
         {

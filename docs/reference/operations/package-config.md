@@ -5,27 +5,12 @@ The package configuration is the central configuration file used by the [DataSQR
 
 ```json title="package.json"
 {
+  "enabled-engines" : ["vertx", "postgres", "kafka", "flink"],
   "dependencies" : {
     "datasqrl.seedshop" : {
       "version" : "0.1.0",
       "variant" : "dev"
     }
-  },
-  "engines" : {
-    "streams" : {
-      "name" : "flink"
-    }, 
-    "database" : {
-      "name" : "jdbc",
-      "url" : "postgresql://localhost:5432/datasqrl",
-      "driver" : "org.postgresql.Driver",
-      "dialect" : "postgres",
-      "database" : "datasqrl"
-    } 
-  },
-  "compiler" : {
-    "errorSink" : "print.errors",
-    "debugSink" : "print"
   },
   "package": {
     "name": "datasqrl.tutorials.Quickstart",
@@ -69,12 +54,6 @@ The engine configuration depends on each engine. [Look up the engine](../engines
 ## Compiler {#compiler}
 
 The `compiler` configuration contains options to control the behavior of the compiler.
-
-| Field Name  | Description                                                                                                                                                   | Required? |
-|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| errorSink   | Errors in the ingested input data are produced to the table sink defined by this export path. Defaults to `print.errors`                                      | No        |
-| debugSink   | When debugging is enabled, change streams of all tables defined in the SQRL script are exported to the sink defined by this export path. Defaults to `print`. | No        |
-| debugTables | Limits the exported change streams during debugging to the tables in this list, if the list is non-empty.                                                     | No        |
 
 
 ## Package Information {#information}
