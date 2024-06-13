@@ -8,8 +8,8 @@ Welcome to DataSQRL! You have found the DataSQRL documentation - your gateway to
 
 If you are new to DataSQRL, start with the [Getting Started](../getting-started/overview) section of this documentation. 
 
-* The [Quickstart](../getting-started/quickstart) shows you how to build a streaming data product in a few minutes. 
-* The [DataSQRL tutorial](../getting-started/intro/overview) introduces you to all the concepts of DataSQRL in more depth while building a customer 360° application and recommendation engine.
+* The [Quickstart](../getting-started/quickstart) shows you how to build a streaming data product for event ingestion and analysis in a few minutes. 
+* Check out all the [DataSQRL tutorials](../getting-started/tutorials/overview) for the use cases, features, and industries that DataSQRL supports.
 
 You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), [its benefits](../getting-started/concepts/why-datasqrl), and [whether to use DataSQRL](../getting-started/concepts/when-datasqrl) for your data product.
 
@@ -17,7 +17,7 @@ You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), 
 
 The [reference documentation](../reference/overview) covers all aspects of DataSQRL in detail. If you want more information on how to use DataSQRL or are looking for comprehensive documentation, this is your place to go.
 
-DataSQRL is an open-source project. If you want to learn more about the internals or contribute to the project, take a look at the [developer documentation](../dev/overview).
+DataSQRL is an open-source project. If you want to learn more about the internals or contribute to the project, take a look at the [GitHub Repository](https://github.com/DataSQRL/sqrl).
 
 Technology is only one piece to a successful data product. Learn more about the [DataSQRL process](../process/intro) for building [data products](../reference/concepts/data-product) that deliver value and keep your team sane.
 

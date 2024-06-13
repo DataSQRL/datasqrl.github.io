@@ -30,35 +30,37 @@ const sidebars = {
         "getting-started/quickstart",
         {
           type: 'category',
-          label: 'DataSQRL Introduction',
-          link: {
-            type: 'doc',
-            id: 'getting-started/intro/overview',
-          },
-          items: [
-            'getting-started/intro/sqrl',
-            'getting-started/intro/data-sources',
-            'getting-started/intro/api',
-            'getting-started/intro/advanced',
-            'getting-started/intro/deploy',
-          ],
-        },
-        'getting-started/concepts/datasqrl',
-        // 'getting-started/concepts/sqrl',
-        "getting-started/concepts/why-datasqrl",
-        'getting-started/concepts/when-datasqrl',
-        {
-          type: 'category',
           label: 'DataSQRL Tutorials',
           link: {
             type: 'doc',
             id: 'getting-started/tutorials/overview',
           },
           items: [
+            'getting-started/tutorials/customer360/intro',
             'getting-started/tutorials/recommendations/intro',
             'getting-started/tutorials/iot/intro',
           ],
         },
+        // {
+        //   type: 'category',
+        //   label: 'DataSQRL Introduction',
+        //   link: {
+        //     type: 'doc',
+        //     id: 'getting-started/intro/overview',
+        //   },
+        //   items: [
+        //     'getting-started/intro/sqrl',
+        //     'getting-started/intro/data-sources',
+        //     'getting-started/intro/api',
+        //     'getting-started/intro/advanced',
+        //     'getting-started/intro/deploy',
+        //   ],
+        // },
+        'getting-started/concepts/datasqrl',
+        // 'getting-started/concepts/sqrl',
+        "getting-started/concepts/why-datasqrl",
+        'getting-started/concepts/when-datasqrl',
+
       ],
     },
     {
@@ -222,19 +224,19 @@ const sidebars = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'Developer Documentation',
-      link: {
-        type: 'doc',
-        id: 'dev/overview',
-      },
-      items: [
-        'dev/architecture',
-        'dev/roadmap',
-        'dev/contribute',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Developer Documentation',
+    //   link: {
+    //     type: 'doc',
+    //     id: 'dev/overview',
+    //   },
+    //   items: [
+    //     'dev/architecture',
+    //     'dev/roadmap',
+    //     'dev/contribute',
+    //   ],
+    // },
     {
       type: 'category',
       label: 'DataSQRL Process',

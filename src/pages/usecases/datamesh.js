@@ -25,7 +25,7 @@ const header =  {
                        and provides the tooling for a self-service data platform.
                      </>
                    ),
-                   buttonLink: '/docs/getting-started/intro/overview/',
+                   buttonLink: '/docs/getting-started/tutorials/overview/',
                    buttonText: "Build a Data Product in 10 min",
                    //youtubeURL: 'https://www.youtube.com/embed/mf5q-IdbVQY',
                    LogoSvg: require('/static/img/generic/data_mesh_sqrl.svg').default,
@@ -90,7 +90,7 @@ export default function Home() {
                 </p>
                 <Link
                   className="button button--primary button--lg"
-                  to="/docs/getting-started/intro/overview/">
+                  to="/docs/getting-started/tutorials/overview/">
                   Try this Example
                 </Link>
               </div>
