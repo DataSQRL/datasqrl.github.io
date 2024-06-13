@@ -134,6 +134,6 @@ Take a look at the [documentation](/docs/getting-started/intro/sqrl) for a more 
 
 ## Help Us Design SQRL
 
-To take SQRL for a spin and learn how to build data-driven applications, we recommend you start with the [Quickstart tutorial](/docs/getting-started/quickstart). If you have questions, we are happy to answer them on [our Discord](https://discord.gg/49AnhVY2w9).
+To take SQRL for a spin and learn how to build data-driven applications, we recommend you start with the [Quickstart tutorial](/docs/getting-started/quickstart). If you have questions, we are happy to answer them on [Slack](/community).
 
-SQRL is still young, and we would love to hear [your feedback](https://discord.gg/49AnhVY2w9) on the language to shape its future.
+SQRL is still young, and we would love to hear [your feedback](/community) on the language to shape its future.

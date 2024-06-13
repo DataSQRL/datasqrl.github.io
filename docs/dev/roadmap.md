@@ -12,7 +12,7 @@ done before it is ready for prime-time and production use.
 <img src="/img/generic/undraw_roadmap.svg" alt="Roadmap >" width="40%"/>
 
 This page is an overview of what lays ahead for DataSQRL and what
-features and functionality we are currently missing. To join the roadmap discussion or suggest a feature, join the [Discord channel](https://discord.gg/vYyREMNRmh).
+features and functionality we are currently missing. To join the roadmap discussion or suggest a feature, join the [community](/community).
 
 DataSQRL is open source. If you need one of the roadmap items below,
 you can always get your hands dirty and [implement it yourself](../contribute). 
