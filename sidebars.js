@@ -109,6 +109,47 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Data Sources & Sinks',
+          link: {
+            type: 'doc',
+            id: 'reference/sources/overview',
+          },
+          items: [
+            'reference/sources/add-source',
+            'reference/sources/add-sink',
+            {
+              type: 'category',
+              label: 'Connectors',
+              link: {
+                type: 'generated-index',
+                title: 'Connectors supported by DataSQRL',
+                description: 'DataSQRL supports the following connectors for data sources or sinks:'
+              },
+              items: [
+                'reference/sources/system/file',
+                'reference/sources/system/kafka',
+                'reference/sources/system/print',
+              ],
+            },
+            // {
+            //   type: 'category',
+            //   label: 'Data Format',
+            //   link: {
+            //     type: 'generated-index',
+            //     title: 'Data Formats supported by DataSQRL',
+            //     description: 'DataSQRL supports the following data formats for data sources and sinks:'
+            //   },
+            //   items: [
+            //     'reference/sources/format/json',
+            //     'reference/sources/format/csv',
+            //     'reference/sources/format/avro',
+            //   ],
+            // },
+            'reference/sources/schema',
+          ],
+        },
+        {
+          type: 'category',
           label: 'API',
           link: {
             type: 'doc',
@@ -127,46 +168,6 @@ const sidebars = {
                 'reference/api/graphql/design',
               ],
             },
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Sources & Sinks',
-          link: {
-            type: 'doc',
-            id: 'reference/sources/overview',
-          },
-          items: [
-            'reference/sources/discovery',
-            {
-              type: 'category',
-              label: 'Data System',
-              link: {
-                type: 'generated-index',
-                title: 'Data Systems supported by DataSQRL',
-                description: 'DataSQRL supports the following data systems as data sources or sinks:'
-              },
-              items: [
-                'reference/sources/system/file',
-                'reference/sources/system/kafka',
-                'reference/sources/system/print',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Data Format',
-              link: {
-                type: 'generated-index',
-                title: 'Data Formats supported by DataSQRL',
-                description: 'DataSQRL supports the following data formats for data sources and sinks:'
-              },
-              items: [
-                'reference/sources/format/json',
-                'reference/sources/format/csv',
-                'reference/sources/format/avro',
-              ],
-            },
-            'reference/sources/schema',
           ],
         },
         {

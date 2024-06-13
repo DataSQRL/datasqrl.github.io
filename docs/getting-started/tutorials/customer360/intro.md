@@ -15,7 +15,7 @@ Specifically, we will build a data product to integrate customer data from vario
 Create a new file called `seedshop.sqrl` and paste the following content into the file:
 
 ```sql
-IMPORT datasqrl.seedshop.Orders;  
+IMPORT datasqrl.tutorials.seedshop.Orders;  
 IMPORT time.endOfWeek;            
 
 Orders.items.total := quantity * unit_price - coalesce(discount,0.0);

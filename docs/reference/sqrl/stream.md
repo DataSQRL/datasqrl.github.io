@@ -4,7 +4,7 @@ title: "Stream Table"
 
 # Stream Table
 
-Stream tables contain immutable rows of data that have a timestamp. All tables [imported](../import) from [data sources](../../sources/overview) are stream tables and stream tables can be [exported](../export) to [data sinks](../../sources/overview).
+Stream tables contain immutable rows of data that have a timestamp. They are append-only tables to represent logs and streams of data.
 
 This documentation covers how to convert between stream and [state tables](../table#stateVsStream) and documents the differences in query semantics for certain queries over stream tables.
 
@@ -41,6 +41,7 @@ This statement defines the nested `total_spend` state table that aggregates the 
 
 An exception to this are [time-window aggregations](#aggregation) which preserve time and produce a stream table. 
 
+<!--
 ## Convert State to Stream
 
 `STREAM` statements convert state tables to stream tables.
@@ -56,6 +57,7 @@ This statement defines a new `UserPromotion` stream table that contain a stream 
 * `STREAM ON UPDATE`: produces a stream record every time a record in the state table defined by the `SELECT` query is updated. This produces a change stream of the state table.
 * `STREAM ON DELETE`: produces a stream record for every record that gets deleted from the state table defined by the `SELECT` query.
 
+-->
 
 ## Queries
 

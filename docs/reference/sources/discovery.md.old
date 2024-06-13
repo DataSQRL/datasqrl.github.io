@@ -2,6 +2,8 @@
 title: "Add Source/Sink"
 ---
 
+<!-- NO LONGER NEEDED -->
+
 # Adding a Data Source or Sink
 
 Data discovery is the easiest way to connect a data source or sink to DataSQRL and add a [data source/sink package](../overview).
