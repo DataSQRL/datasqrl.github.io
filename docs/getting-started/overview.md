@@ -10,12 +10,12 @@ If you're looking to learn DataSQRL, the best way is to build something with it:
 
 **STEP 1:** Read the [Quickstart](../quickstart) to build a metrics monitoring data product in 10 minutes.
 
-**STEP 2:** Dive into the [DataSQRL tutorial](../intro/overview) to get a deeper understanding of DataSQRL and learn everything you need to build your own data product with DataSQRL.
+**STEP 2:** Follow one or more of the [DataSQRL tutorials](../tutorials/overview) to learn how to implement various use cases and how to apply the features DataSQRL provides.
 
 **STEP 3:** Build your own data product with DataSQRL. Take a problem from work or grab some data you've been interested in and give it a go. 
 
 Need more information? Take a look at the [reference documentation](/docs/reference/overview) for everything you'd ever wanted to know about DataSQRL and then some. <br />
-Still stuck? No worries, the [DataSQRL community](/community) is here to help. Seriously, reach out - we don't bite!
+Got stuck? No worries, the [DataSQRL community](/community) is here to help. Seriously, reach out - we don't bite!
 
 ## Understanding the Big Picture
 
@@ -34,5 +34,4 @@ DataSQRL supports various pipeline topologies and has a pluggable engine archite
 * [**When Should I Use DataSQRL?**](../concepts/when-datasqrl): DataSQRL empowers your team to build efficient data products successfully. [Find out](../concepts/when-datasqrl) when and when not to use DataSQRL.
 
 What to know more? Start with the [reference documentation](/docs/reference/overview) to learn everything there is to know about DataSQRL. <br />
-What to go even deeper? The [developer documentation](/docs/dev/overview) details the internals of DataSQRL and takes you deep into the guts of the system.
 

@@ -6,7 +6,7 @@ title: "Table"
 
 The "table" is the central concept of SQRL. A table defines a set or stream of data. Every data record in SQRL is a row in a table. A table is defined by a list of columns which have unique column names.
 
-A SQRL script defines a set of tables.
+A SQRL script defines a sequence of tables.
 
 ## Table Definitions {#definition}
 
@@ -35,13 +35,9 @@ This statement adds a new column `weight_in_oz` to the existing `Products` table
 
 ## Nested Tables {#nested}
 
-SQRL supports nested tables through table paths to represent nested or hierarchical data. The `Orders` data stream from the [DataSQRL tutorial](../../../getting-started/intro/overview) has nested `items` for each item in an order. Such nested data maps onto nested tables in SQRL. `Orders.items` is the table path that accesses the nested `items` data for the `Orders` example.
+SQRL supports nested tables through table paths to represent nested or hierarchical data. The `Orders` data stream from the [Customer 360 tutorial](../../../getting-started/tutorials/customer360/intro) has nested `items` for each item in an order. Such nested data maps onto nested tables in SQRL. `Orders.items` is the table path that accesses the nested `items` data for the `Orders` example.
 
-We can use and query nested tables like any other table in SQRL.
-```sql
-Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
-```
-This statement adds a new `total` column to the `Orders.items` table that computes the total price for each item.
+Nested tables are useful to structure your data according to your domain model. They represent parent-child relationships and simplify aggregations by parent rows.
 
 Nested tables are special in that each row in a nested table is associated with exactly one *parent* row in the parent table. The parent row can be accessed through the `parent` [relationship column](../relationship) that is implicitly defined for all nested tables. Likewise, all child rows of a parent row can be accessed through a relationship column on the parent row of the same name as the nested table.
 
@@ -115,5 +111,9 @@ This statement redefines the `Products` table by de-duplicating the imported `Pr
 ### Hiding
 
 When the name of a table or column starts with the underscore character  `_` the table or column is hidden. Hidden tables and columns are not exposed in the API or imported by other scripts. 
+
+```sql
+_MyHiddenTable := SELECT * FROM MyTable WHERE ...;
+```
 
 Hidden tables and columns are used to define intermediate state that is local to the current script and not accessible from outside of that script.

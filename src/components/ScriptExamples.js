@@ -13,7 +13,7 @@ export const scriptExamples = [
         </>
       ),
     script:
-      `IMPORT datasqrl.example.clickstream.Click;  -- Import data
+      `IMPORT datasqrl.tutorials.clickstream.Click;  -- Import data
 /* Find next page visits within 10 minutes */
 VisitAfter := SELECT b.url AS beforeURL, a.url AS afterURL,
     a.timestamp AS timestamp
@@ -50,7 +50,7 @@ type Recommendation {
       ),
 
     script:
-      `IMPORT datasqrl.example.sensors.*; -- Import sensor data
+      `IMPORT datasqrl.tutorials.sensors.*; -- Import sensor data
 IMPORT time.endOfSecond;  -- Import time function
 /* Aggregate sensor readings to second */
 SecReading := SELECT sensorid, endOfSecond(time) as timeSec,
@@ -92,7 +92,7 @@ type SensorMaxTemp {
         </>
       ),
     script:
-      `IMPORT datasqrl.seedshop.Orders;  -- Import orders stream
+      `IMPORT datasqrl.tutorials.seedshop.Orders;  -- Import orders stream
 IMPORT time.endOfWeek;            -- Import time function
 /* Create new table of unique customers */
 Users := SELECT DISTINCT customerid AS id FROM Orders;

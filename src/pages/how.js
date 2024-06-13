@@ -36,7 +36,7 @@ const LearnMoreLinks = [
     { url: 'docs/getting-started/concepts/datasqrl', text: 'How DataSQRL Works' },
     { url: 'docs/getting-started/concepts/when-datasqrl', text: 'When to Use DataSQRL' },
     { url: '/docs/getting-started/quickstart', text: 'Getting Started with DataSQRL' },
-    { url: 'docs/getting-started/intro/overview', text: 'The DataSQRL Tutorial' },
+    { url: 'docs/getting-started/tutorials/overview', text: 'DataSQRL Tutorials' },
 ];
 
 const SupportedLanguages = [

@@ -22,7 +22,7 @@ In the terminal or command line, create an empty folder for the SQRL script:
 Create a new file in that folder called `clickstream.sqrl` and paste the following content into the file (we'll explain it line-by-line [below](#sqrl)):
 
 ```sql
-IMPORT datasqrl.example.clickstream.Click;   -- Import data
+IMPORT datasqrl.tutorials.clickstream.Click;   -- Import data
 /* Most visited pages in the last day */
 Trending := SELECT url, count(1) AS total
     FROM Click WHERE timestamp > now() - INTERVAL 1 DAY

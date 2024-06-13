@@ -135,8 +135,8 @@ const config = {
                 href: 'https://stackoverflow.com/questions/tagged/datasqrl',
               },
               {
-                label: 'Discord',
-                href: 'https://discord.gg/49AnhVY2w9',
+                label: 'Slack',
+                href: 'https://join.slack.com/t/datasqrlcommunity/shared_invite/zt-2l3rl1g6o-im6YXYCqU7t55CNaHqz_Kg',
               },
               {
                 label: 'GitHub',

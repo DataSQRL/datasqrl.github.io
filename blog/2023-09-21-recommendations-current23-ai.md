@@ -191,7 +191,7 @@ And that’s it. A complete event-driven microservice with vector embedding, per
 
 And DataSQRL handles all the rest: mapping mutations onto Kafka topics and events, ingesting those events into Flink and mapping schemas, designing the physical data models in Kafka, Flink, and the database, mapping API calls onto database queries, optimizing index structures, and moving the data efficiently between all those components. That’s a whole lot of soul-sucking work we did not have to do.
 
-If you want to learn more about DataSQRL, visit [datasqrl.com](/), take a look at the [in-depth tutorial](/docs/getting-started/intro/overview/), or [join the community](/community) on [Discord](https://discord.gg/49AnhVY2w9) to ask questions and share your thoughts and feedback.
+If you want to learn more about DataSQRL, visit [datasqrl.com](/), take a look at the [quickstart tutorial](/docs/getting-started/quickstart), or [join the community](/community) on [Slack](/community) to ask questions and share your thoughts and feedback.
 
 ## Run Microservice
 

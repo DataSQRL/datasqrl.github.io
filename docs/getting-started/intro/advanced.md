@@ -127,7 +127,7 @@ If you wanna keep reading, we have [one more chapter](../deploy) for you on depl
 
 For any topics we haven't covered thus far, you can consult the [reference documentation](/docs/reference/overview) which covers all the details and then some.
 
-Want to learn more about the internals of DataSQRL or contribute to the codebase? The [developer documentation](/docs/dev/overview) provides a detailed breakdown of the DataSQRL architecture and everything you need to know to extend DataSQRL yourself.
+Want to learn more about the internals of DataSQRL or contribute to the codebase? The [GitHub repository](https://github.com/DataSQRL/sqrl) provides a detailed breakdown of the DataSQRL architecture and everything you need to know to extend DataSQRL yourself.
 
 
 
