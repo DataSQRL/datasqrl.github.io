@@ -92,8 +92,6 @@ through which the frontend team can query for the current order count. [Run](../
 :::info
 
 DataSQRL is still young, and we are actively working on SQL feature parity in SQRL.
-Take a look at the [roadmap](/docs/dev/roadmap#sql-parity) for current
-limitations and what we are working on.
 
 :::
 

@@ -2,7 +2,7 @@
 
 DataSQRL compiles a data API that exposes the data processed by your [SQRL](../../sqrl/overview) script.
 
-Currently, DataSQRL can compile GraphQL APIs with REST and gRPC on the [roadmap](/docs/dev/roadmap).
+Currently, DataSQRL can compile GraphQL APIs with REST on the roadmap.
 
 ## Access Data API {#query}
 

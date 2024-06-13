@@ -5,7 +5,7 @@ The reference documentation covers all aspects of DataSQRL and the SQRL language
 
 <img src="/img/generic/undraw_documentation.svg" alt="Nut Shop Tutorial >" width="40%"/>
 
-If you are new to DataSQRL or SQRL, we recommend that you start with the [Quickstart tutorial](../../getting-started/quickstart) and the [DataSQRL introduction](../../getting-started/intro/overview).
+If you are new to DataSQRL or SQRL, we recommend that you start with the [Quickstart tutorial](../../getting-started/quickstart) or one of the other [DataSQRL tutorials](../../getting-started/tutorials/overview).
 
 The reference documentation is divided into 4 sections:
 

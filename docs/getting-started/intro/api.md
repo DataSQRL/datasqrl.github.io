@@ -10,7 +10,7 @@ When we [run](../overview#run) our `seedshop.sqrl` [script](https://github.com/D
 
 :::info
 
-We will be accessing the generated GraphQL API. If you are new to the GraphQL API standard, take a quick look at the documentation for [querying GraphQL](/docs/reference/api/graphql/query). We [are working](/docs/dev/roadmap#rest) on REST support.
+We will be accessing the generated GraphQL API. If you are new to the GraphQL API standard, take a quick look at the documentation for [querying GraphQL](/docs/reference/api/graphql/query). We are working on REST support.
 
 :::
 

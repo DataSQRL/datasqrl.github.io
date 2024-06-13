@@ -80,7 +80,7 @@ The data format configuration is required unless data discovery can infer the da
 
 :::info
 
-Are you missing a data system connector or data format? You can [contribute](/docs/dev/contribute) one to the open-source project or reach out to the [community](/community) to request it.
+Are you missing a data system connector or data format? You can [contribute](https://github.com/DataSQRL/sqrl) one to the open-source project or reach out to the [community](/community) to request it.
 
 :::
 
