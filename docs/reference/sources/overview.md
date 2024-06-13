@@ -4,51 +4,56 @@ title: "Data Sources and Sinks"
 
 # Data Sources and Sinks
 
-Data sources and sinks are [packages](../../concepts/package) that contain configuration files for reading data from or writing data to external data systems. A data source/sink package is a set of tables. Each table represents a stream or static set of data in another system, such as a Kafka topic, a collection of files, a CDC stream of a database table, etc. 
+Data sources and sinks are defined in configuration files that are contained in [packages](../../concepts/package). The configuration specifies how to connect to and read from (or write to) the source (or sink).
 
-When [importing a table](../../sqrl/import), the last element of the import path specifies the name of the table in the data source (or `*` for all table) and the prior path identifies the package which defines the data source that contains the table. For example:
+DataSQRL supports a lot of different data systems as sources and sinks, including Kafka, file system, object storage, Iceberg, Postgres, etc. Check out the [connectors](docs/category/connectors/) for all the data systems that DataSQRL can connect to.
+
+## Import from Data Source
+
+Data sources are imported into a SQRL script.
+
+When [importing a table](../../sqrl/import), the last element of the import path specifies the name of the source (or `*` for all sources) and the prior path identifies the package which defines contains the source configuration.
 
 ```sqrl
-IMPORT datasqrl.seedshop.Orders;
+IMPORT datasqrl.tutorials.seedshop.Orders;
 ```
-* `datasqrl.seedshop` identifies the package which defines the data source
-* `Orders` is the name of the table we are importing from that data source
+* `datasqrl.tutorials.seedshop` identifies the package which contains the source configuration.
+* `Orders` is the name of the source we are importing from in that package. The name which identifies the source configuration file.
 
-The [export path](../../sqrl/export) is resolved exactly the same way. For example:
+By default, the name of the source is also the name of the table in the SQRL script which contains the source data. To give it a different name, you can use the `AS` keyword:
+
+```sql
+IMPORT datasqrl.tutorials.seedshop.Orders AS MyOrders;
+```
+
+To configure your own data sources, [learn how to add a data source](../add-source).
+
+## Export to Data Sinks
+
+Exporting data to a data sink feeds the processed data to an external data system.
+
+The [export path](../../sqrl/export) is resolved exactly the same way as the import path. For example:
 ```sqrl
 EXPORT NewCustomerPromotion TO sendmail.Promotion; 
 ```
-* `sendmail` identifies the package which defines the data sink
-* `Promotion` is the name of the table from that data sink we are exporting data to
+* `sendmail`  identifies the package which contains the sink configuration.
+* `Promotion` is the name of the sink we are exporting to in that package. The name identifies the sink configuration file.
 
-DataSQRL loads data sources and sinks at compile time to build connectors for data ingestion or data egress as well as schema mappers to validate and synchronize data structures with external systems.
+To configure your own data sinks, [learn how to add a data sink](../add-sink).
 
-DataSQRL loads data sources and sinks from either [local](../../concepts/package#local-package) or [remote](../../concepts/package#remote-package) packages.
+## Packages
 
-## Create New Data Source/Sink Package {#create}
+Source and sink configurations are grouped in [packages](../../concepts/package). A package is identified by a package path, like `datasqrl.tutorials.seedshop`.
 
-To connect to a data system of your choice, create a new data source or sink package using DataSQRL's [data discovery](../discovery). Data discovery inspects the data system, discovers available tables, and generates the configuration and schema files that define a data source or sink package.
+A package path must resolve against a local directory (relative to where the compiler is invoked) or against the [repository](../../operations/repository).
 
-:::info
-Before creating a new data source or sink package, check the [DataSQRL repository](../../operations/repository) to see if the sink or source already exists and [add it as a dependency](#remote) if it does.
-:::
+The compiler loads packages at compile time to read the configuration files for the sources and sinks referenced in `IMPORT` and `EXPORT` statements.
 
-## Add Data Source/Sink as Local Package {#local}
+### Add Package as Dependency {#remote}
 
-To add a data source or sink as a local package, copy the directory containing the data source/sink configuration files as a sub-directory into the root directory of your SQRL project. The relative path to that sub-directory is the package path for the data source/sink.
+Package dependencies can also be explicitly defined in the [package configuration](../../operations/package-config) for your SQRL script. Explicit package dependencies are encouraged as projects head to production or for projects with many team members, since they make it obvious how packages are resolved at compile time.
 
-For example, assuming you ran [data discovery](../discovery) which generated a data source package in the folder `~/datasqrl/datasets/mysource` and the root directory of your SQRL project is `~/datasqrl/project/myproject`, use the following command to copy your data source package into your project:
-```bash
-> mkdir -p ~/datasqrl/project/myproject/mysource && cp -r ~/datasqrl/datasets/mysource $_
-```
-
-Now, you can import tables from that data source via the import statement `IMPORT mysource.MyTable` which resolves the `mysource` package against the `mysource` folder in the project root and locates the `MyTable` table inside it. Copying data sinks as local packages works the same way.
-
-We recommend using local packages when the data source/sink is specific to the SQRL script you are implementing.
-
-## Add Data Source/Sink as Dependency {#remote}
-
-To add a data source or sink from a repository, you declare the package as a dependency in the [package configuration](../../operations/package-config). The DataSQRl package manager fetches all dependencies from the [repository](../../operations/repository) and places them in the build directory at compile time.
+To add a data source or sink from a repository, you declare the package as a dependency in the . The DataSQRl package manager fetches all dependencies from the [repository](../../operations/repository) and places them in the build directory at compile time.
 
 To declare a dependency, create or open the `package.json` configuration file in the root of your SQRL project.
 Add a dependency to the list of dependencies:
@@ -56,35 +61,24 @@ Add a dependency to the list of dependencies:
 {
   "dependencies":
   {
-    "datasqrl.seedshop": { "version":  "1.0.0", "variant":  "dev" }
+    "datasqrl.tutorials.seedshop": { "version":  "1.0.0", "variant":  "dev" }
   }
 }
 ```
 
-A dependency is defined by the package name as the key, the version of the dependency, and an optional variant.
+A dependency is defined by the package name as the key, the version of the dependency, and an optional variant. This dependency makes it explicit that we are importing version `1.0.0` of the `dev` variant of the `datasqrl.tutorials.seedshop` package.
 
 A data source/sink package can have multiple variants for a given version. A variant might be a subset, static snapshot, or point to an alternate data system for development and testing.
 
-This dependency declaration allows us to import a table from the data source via `IMPORT datasqrl.seedshop.Orders;`.
-
-When replacing another dependency or for convenience, we can rename the package in the dependency declaration:
+We can also rename dependencies which makes it easy to dynamically swap out dependencies for different environments and testing.
 ```json
 {
   "dependencies":
   {
-    "renamed.source": { "name": "datasqrl.seedshop", "version":  "1.0.0", "variant":  "dev" }
+    "datasqrl.tutorials.seedshop": { "name": "local-seedshop", "version":  "1.0.0", "variant":  "dev" }
   }
 }
 ```
-This dependency declaration references the same package, version, and variant as the one above but renames the package to `renamed.source` which means the import statement changes to `IMPORT renamed.source.Orders;`.
+The package path `datasqrl.tutorials.seedshop` is now pointing to the local directory `local-seedshop` and source and sink configuration files will be loaded from there at compile time.
 
 We recommend adding data sources and sinks as dependencies whenever the source/sink is independent of the SQRL script. Dependencies make it easier to manage sources and sinks as they or the SQRL script evolve over time.
-
-## Add Data Source/Sink to Repository
-
-To add a data source or sink package to the repository so that it can be declared as a dependency, follow these steps:
-
-1. Create a new data source or sink package locally using [data discovery](../discovery) in an empty directory.
-2. [Publish](../../operations/repository#publish) the source or sink package to the repository.
-
-

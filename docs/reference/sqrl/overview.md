@@ -1,13 +1,21 @@
 
 # SQRL Documentation
 
-SQRL is a declarative language for defining data transformations based on SQL. SQRL stands for *"**S**tructured **Q**uery and **R**eaction **L**anguage"* because it extends SQL with support for streaming data and the ability to react to data in realtime. In addition, SQRL adds a number of convenience features that make it development-friendly.
+SQRL is an extension of SQL that adds support for data streaming to the standard database query language. SQRL stands for *"**S**tructured **Q**uery and **R**eaction **L**anguage"* because it extends SQL with support for streaming data and the ability to react to data in realtime. In addition, SQRL adds a number of convenience features that make it development-friendly.
 
 This documentation explains the features of SQRL and everything you need to know to build data products with SQRL. It assumes basic familiarity with SQL. If you haven't used SQL before, or it's been a while, we recommend that you read the [SQL primer](../sql-primer) first.
 
-## SQRL Tables
+## SQRL Overview
 
-SQRL scripts define a set of tables. Tables can be [exposed in the API](../../api/overview#design), [imported](../import) by other SQRL scripts, or [exported](../export) to other data systems and action triggers.
+A SQRL script looks like this:
+
+```sql
+IMPORT mysource.MyTable;
+       
+DerivedTable := SELECT ... FROM MyTable WHERE ...;
+```
+
+SQRL scripts import and define tables using SQL queries. Tables can be [exposed in the API](../../api/overview#design), [imported](../import) by other SQRL scripts, or [exported](../export) to other data systems and action triggers.
 
 SQRL tables are [defined](../table) as [imports](../import) or as `SELECT` queries from previously defined tables. Tables can also be [defined incrementally](../table) by adding a column or relationship to an existing table. [Learn more](../table) about defining tables in SQRL.
 
@@ -24,12 +32,22 @@ State tables represent entities which can change or evolve over time. State tabl
 
 Functions are used in queries and expressions to manipulate or aggregate data. SQRL supports most of the standard SQL functions out-of-the box.
 
-You can [import](../import#function) additional functions from the SQRL standard function library:
+You can [import](../import#function) additional functions from the SQRL [standard function library](docs/category/functions/) or implement and import your own functions as a [custom function package](../functions/custom-functions).
 
-* [**string**](../functions/string): function to manipulate strings and characters
-* [**time**](../functions/time): functions to process and aggregate by timestamp
+<!--
 
-In addition, you can implement and import your own functions as a [custom function package](../functions/custom-functions).
+## SQL Compatibility
+
+mention FlinkSQL
+similar to https://beam.apache.org/documentation/dsls/sql/calcite/overview/
+
+## SQRL Features
+
+briefly list additional features that SQRL provides on top of SQL
+
+-->
+
+
 
 
 

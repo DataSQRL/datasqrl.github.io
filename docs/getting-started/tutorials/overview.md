@@ -2,7 +2,7 @@
 
 The tutorials implement a use case with DataSQRL. We currently cover the following use cases:
 
-* [**Customer 360 & Personalization**](../customer360/intro): Build a customer 360 by integrating customer data.
+* [**Customer 360**](../customer360/intro): Build a customer 360 by integrating customer data.
 * [**Recommendations**](../recommendations/intro): Build a content recommendation engine based on click-stream data.
 * [**Internet of Things**](../iot/intro): Aggregate and analyze sensor data from a factory floor.
 

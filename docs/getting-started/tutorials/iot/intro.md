@@ -21,7 +21,7 @@ In the terminal or command line, create an empty folder for the SQRL script:
 Create a new file in that folder called `sensors.sqrl` and paste the following content into the file (we'll explain the script line-by-line [below](#sqrl)):
 
 ```sql
-IMPORT datasqrl.example.sensors.*;     -- Import all data
+IMPORT datasqrl.tutorials.sensors.*;     -- Import all data
 IMPORT time.*;                -- Import all time functions
 /* Aggregate sensor readings to minute */
 MinReadings := SELECT sensorid, endOfMinute(time) as timeMin,
