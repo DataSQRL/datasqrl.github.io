@@ -15,12 +15,7 @@ Note, that function packages can be [published to the repository](../../../opera
 
 ## Functions in Java
 
-work in progress - check back soon
-
-
-## Functions in JavaScript
-
-coming soon
+See the java user defined function example in our [examples](https://github.com/DataSQRL/datasqrl-examples/tree/main/user-defined-function).
 
 ## Functions in Python
 

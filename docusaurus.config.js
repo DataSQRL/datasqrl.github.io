@@ -59,7 +59,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'getting-started/overview',
+            docId: 'intro',
             position: 'left',
             label: 'Learn',
           },
@@ -85,12 +85,6 @@ const config = {
                 to: '/usecases/observability'
               },
             ],
-          },
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Docs',
           },
           {to: '/community', label: 'Community', position: 'left'},
           {to: '/services', label: 'Services', position: 'left'},
@@ -119,7 +113,7 @@ const config = {
               },
               {
                 label: 'Reference Docs',
-                to: '/docs/reference/overview',
+                to: '/docs/reference/introduction',
               },
               {
                 label: 'DataSQRL Process',
@@ -199,7 +193,13 @@ const config = {
         searchResultContextMaxLength: 50
       }),
     ],
-  ]
+  ],
+  stylesheets: [
+    {
+      rel: 'stylesheet',
+      href: '/css/custom.css',
+    },
+  ],
 };
 
 module.exports = config;

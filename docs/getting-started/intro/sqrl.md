@@ -61,7 +61,7 @@ at one glance.
 Once you have imported tables, you build with the data they contain.
 You do this by defining new tables that query the data in existing ones.
 
-In the [first chapter](../overview.md#sqrl) we defined the `Users` table by querying
+In the [first chapter](../introduction.md#sqrl) we defined the `Users` table by querying
 for all the unique customer ids in the `Orders` table:
 
 ```sqrl

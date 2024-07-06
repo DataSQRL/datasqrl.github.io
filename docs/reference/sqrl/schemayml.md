@@ -1,8 +1,6 @@
----
-title: "DataSQRL Schema"
----
+# *.schema.yml
 
-# DataSQRL Schema
+### Schemas
 
 The DataSQRL schema is a flexible schema format for data sources and sinks. DataSQRL schema is simple, accommodates semi-structured data, supports schema evolution, and provides testing capabilities.
 
@@ -12,7 +10,8 @@ DataSQRL can automatically discover the schema of data sources via the [discover
 
 DataSQRL table schemas are stored in files ending in `.schema.yml`. There is one schema file per table of the same name.
 
-## Example DataSQRL Schema
+
+#### Example DataSQRL Schema
 
 This is the DataSQRL schema of the `orders` table from the [DataSQRL tutorial](/docs/getting-started/intro/overview):
 
@@ -53,7 +52,7 @@ columns:
   - "not_null"
 ```
 
-## Schema Definition
+#### Schema Definition
 
 DataSQRL schema supports the following attributes to define a table:
 
@@ -95,13 +94,13 @@ This defines the column `time` to be a mixed column that is either a scalar fiel
 
 Each individual column of a mixed column definition gets mapped onto a separate column in the resulting SQRL table with the column name being a combination of the mixed column name and the map key. For our example above, the SQRL `orders` table would contain a column `time_epoch` and `time_timestamp` for each of the respective scalar fields.
 
-## Scalar Types
+#### Scalar Types
 
 DataSQRL schema supports these scalar types:
 
 * **INTEGER**: for whole numbers
 * **FLOAT**: for floating point numbers
-* **BOOLEAN**: true or false  
+* **BOOLEAN**: true or false
 * **DATETIME**: point in time
 * **STRING**: character sequence
 * **UUID**: unique identifier
@@ -109,7 +108,7 @@ DataSQRL schema supports these scalar types:
 
 To define arrays of scalar types, wrap the type in square brackets. For instance, an integer array is defined as `[INTEGER]`.
 
-## Data Constraints
+### Data Constraints
 
 The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build more efficient data pipelines.
 
