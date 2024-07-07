@@ -1,5 +1,5 @@
 
-# DataSQRL Reference
+# DataSQRL
 
 ## Introduction
 <!--Ensure that the overview also hints at how DataSQRL fits within broader data architecture or ecosystems could add value.-->

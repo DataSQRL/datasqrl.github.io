@@ -88,16 +88,14 @@ const sidebars = {
       ],
     },
    {
-      type: 'category',
+      type: 'doc',
       label: '💡 Learn',
+        id: 'reference/sqrl/learn'
 
-      items: [
-        'reference/sqrl/time',
-      ]
     },
     {
       type: 'category',
-      label: '🔪 DataSQRL CLI',
+      label: '🔪 Using DataSQRL',
       collapsed: false,
       link: {
         type: 'doc',
@@ -105,18 +103,9 @@ const sidebars = {
       },
       items: [
         'reference/sqrl/sqrl-spec',
-        'reference/sqrl/time',
+        'reference/sqrl/datasqrl-spec',
         'reference/sqrl/cli',
-        {
-          type: 'category',
-          label: 'Configuration',
 
-          items: [
-            'reference/sqrl/packagejson',
-            'reference/sqrl/nativeconnector',
-            'reference/sqrl/schemayml',
-          ]
-        },
 //        'reference/sources/add-source',
 //        'reference/sources/schema',
 //        'reference/sources/add-sink',
