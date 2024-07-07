@@ -16,7 +16,3 @@ Note, that function packages can be [published to the repository](../../../opera
 ## Functions in Java
 
 See the java user defined function example in our [examples](https://github.com/DataSQRL/datasqrl-examples/tree/main/user-defined-function).
-
-## Functions in Python
-
-coming soon

@@ -110,23 +110,19 @@ You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), 
 
 ## Getting Started with DataSQRL
 
-- Jump into our [Getting Started Guide](../getting-started/overview)  for a quick introduction to the basics of DataSQRL.
+- Jump into our [Getting Started Guide](../getting-started)  for a quick introduction to the basics of DataSQRL.
 - Explore the Interactive Tutorial and [Quickstart](../getting-started/quickstart)  to see DataSQRL in action.
-- Check out the [reference documentation](../reference/overview) covers all aspects of DataSQRL in detail. If you want more information on how to use DataSQRL or are looking for comprehensive documentation, this is your place to go.
+- Check out the [reference documentation](../reference/sqrl/datasqrl-spec) covers all aspects of DataSQRL in detail. If you want more information on how to use DataSQRL or are looking for comprehensive documentation, this is your place to go.
 - Learn more about advanced features and customization in our How-to Guides.
-- Have questions? Join our community on [Slack](todo) or [GitHub](https://github.com/DataSQRL/sqrl).
 
 ## Join the DataSQRL community
+DataSQRL is an open-source project. If you want to learn more about the internals or contribute to the project:
 - Star us on [GitHub](https://github.com/DataSQRL/sqrl) and contribute to the project.
 - Discuss, ask questions, and share your DataSQRL projects on Slack.
 - Report issues or suggest features directly on our [GitHub Issues](https://github.com/DataSQRL/sqrl/issues) page.
 
 ## Getting Information
-
-DataSQRL is an open-source project. If you want to learn more about the internals or contribute to the project, take a look at the [GitHub Repository](https://github.com/DataSQRL/sqrl).
-
 Technology is only one piece to a successful data product. Learn more about the [DataSQRL process](../process/intro) for building [data products](../reference/concepts/data-product) that deliver value and keep your team sane.
 
 ## Getting Help
-
 Couldn't find what you were looking for? Need help or want to talk to somebody about your problem? No worries, the [DataSQRL community](/community) is here to help.

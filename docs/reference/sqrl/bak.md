@@ -91,7 +91,7 @@ If this directory exists, imported tables and functions are located inside that 
 
 ### Dependency
 
-Dependencies are declared in the [package configuration](../../operations/package-config#dependency). Dependencies can point to local package folders or be downloaded from a [repository](../../operations/repository) at compile time.
+Dependencies are declared in the [package configuration](/docs/reference/sqrl/datasqrl-spec/#packagejson#dependency). Dependencies can point to local package folders or be downloaded from a [repository](../../operations/repository) at compile time.
 
 By default, DataSQRL looks up any missing packages in the [repository](https://dev.datasqrl.com). A package is missing if it is not declared as dependencies and cannot be resolved locally. If the missing package can be located in the repository, a dependency on the most recent version of that package is added to the package configuration.
 

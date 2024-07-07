@@ -77,6 +77,7 @@ These table types will be used throughout this specification to further describe
 In SQRL, primary keys and timestamps play critical roles in managing data integrity, query optimization, and ensuring consistency across data transformations. These elements are essential in both base and derived tables and are often managed implicitly by the system.
 
 ** Primary Keys **
+
 Primary keys uniquely identify each record in a table, ensuring data integrity and enabling efficient data retrieval and update operations.
 - Implicit Management: SQRL implementations automatically manage primary keys, especially in operations such as GROUP BY where keys used in the grouping are treated as primary keys for the resulting derived table.
 - Provides semantic validity for nested queries.
@@ -91,6 +92,7 @@ ProductTotals :=
 ```
 
 ** Timestamps **
+
 Timestamps are crucial for managing the temporal aspects of data, especially in stream processing and versioned state tables where data changes over time. Management of these 
 - Implicit Management: In tables where temporal data is significant, such as stream or versioned state tables, timestamps are often managed automatically by SQRL. This management includes tracking the time of data entry or the last update.
 - Query Utilization: Timestamps can be used in queries to manage window functions, perform time-based joins, or filter data based on time criteria.
@@ -99,6 +101,7 @@ Timestamps are crucial for managing the temporal aspects of data, especially in 
 In SQRL, operations on stream tables can be designed to produce state tables through aggregation. This transformation is fundamental in contexts where a summary or consolidation of streaming data is required for analysis or state management.
 
 **Aggregating Stream Tables**
+
 When you aggregate data from a stream table, you effectively summarize or transform the immutable events into a mutable state representation, creating what is known as a state table.
 
 Consider an aggregation of user spend from a stream of order items:
@@ -113,11 +116,11 @@ In this example, Spend becomes a state table where each record represents a user
 Stream tables can be converted to state tables by deduplication or aggregation. If a stream table represents a change stream of a state table, the state table can be defined with the `DISTINCT` query.
 
 ```sql
-Users := SELECT DISTINCT customerid AS id FROM Orders;
 Users := DISTINCT Orders ON customerid;
 ```
 
 **Exception - Time-Window Aggregations**
+
 Time-window aggregations are a special case where aggregating over a stream table can still result in another stream table, particularly when the aggregation is designed to preserve the temporal context.
 
 ```sql
@@ -452,8 +455,9 @@ MyTableById(@id: STRING) := SELECT * FROM Table t WHERE t.id = @id;
 ```
 
 **Arguments**
-Arguments may be provided in any syntactic order and maintain identical semantic meaning.
 
+Arguments may be provided in any syntactic order and maintain identical semantic meaning.
+<!--
 Parameters are
 1. Ordered
 2. Named
@@ -462,6 +466,7 @@ A named parameter can be referenced:
 ```sql
 MyTable := SELECT * FROM table1.table2(name => x).table3;
 ```
+-->
 
 Parameterized queries are useful when describing different views of a table.
 ```sql

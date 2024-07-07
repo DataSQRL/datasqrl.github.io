@@ -85,7 +85,7 @@ Building a data product prototype is one thing, but getting a data product to pr
 
 If you are dealing with a substantial amount of data, you need to handle the data efficiently. Otherwise, your data product is going to be costly, slow, and unstable. Even a trivial omission like a missing index structure can bring down an otherwise soundly engineered data pipeline once you reach a few gigabytes of data with a handful of concurrent users. To make matters worse, you often don't find out about these issues until late in the game, or after you've shipped to production, which ruins game night with tacos.
 
-DataSQRL has an [optimizer](/docs/reference/operations/optimizer) that picks optimal data structures, chooses the least expensive execution path, installs index structures, pushes down predicates, batches requests, and pools resources. All those things you really don't want to think about when you are building data pipelines on a timeline but can potentially come back to bite you. DataSQRL takes care of them for you.
+DataSQRL has an [optimizer](/docs/reference/sqrl/learn) that picks optimal data structures, chooses the least expensive execution path, installs index structures, pushes down predicates, batches requests, and pools resources. All those things you really don't want to think about when you are building data pipelines on a timeline but can potentially come back to bite you. DataSQRL takes care of them for you.
 
 DataSQRL compiles to proven streaming technologies like [Apache Kafka](https://kafka.apache.org/) for ingest and [Apache Flink](https://flink.apache.org/) for processing realtime data flows as well as mature databases like [Postgres](https://www.postgresql.org/) to serve API requests. This means your data pipelines runs on a robust, fast, and efficient architecture that is optimized by DataSQRL. The resulting data product runs on technologies that have been battle-tested for decades, so you can sleep peacefully at night.
 
@@ -96,7 +96,7 @@ However, DataSQRL doesn't slow you down initially with scalability concerns, and
 
 * To get a feel for DataSQRL and how easy it is to build data products, check out the [quickstart tutorial](/docs/getting-started/quickstart).
 * If you are trying to figure out if DataSQLR is the right choice for you, take a look at the [comparison to other data systems](/docs/getting-started/concepts/when-datasqrl) to find out how DataSQRL compares.
-* To dive deeper into DataSQRL, explore how the [optimizer](/docs/reference/operations/optimizer) compiles SQL scripts into efficient data architectures, or read the [documentation](/docs/intro) for all the things.
+* To dive deeper into DataSQRL, explore how the [optimizer](/docs/reference/sqrl/learn) compiles SQL scripts into efficient data architectures.
 
 ## Footnotes {#footnotes}
 

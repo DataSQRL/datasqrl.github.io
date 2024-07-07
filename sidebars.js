@@ -90,8 +90,7 @@ const sidebars = {
    {
       type: 'doc',
       label: '💡 Learn',
-        id: 'reference/sqrl/learn'
-
+      id: 'reference/sqrl/learn'
     },
     {
       type: 'category',

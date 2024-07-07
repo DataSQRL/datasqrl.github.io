@@ -137,6 +137,7 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl --api graphql
 </Tabs>
 
 There is now a file called `schema.graphqls` in the same folder as our script. Open it and take a look.
+
 Notice, how each table defined in our SQRL script maps to a query endpoint in the API and an associated result type. The query endpoints accept arguments for each column of the table to filter the results by column values.
 
 We are going to remove most of those arguments to only support querying by `sensorid`. We will also remove the `SensorReading` query endpoint and result type to only expose the smoothed-out sensor readings from the `SecReading` table.
@@ -179,7 +180,19 @@ When you refresh GraphiQL in the browser, you see that the API is simpler and on
 ## Ingest Metrics with Mutations
 
 So far, we have ingested metrics data from an external source imported from the [DataSQRL repository](http://dev.datasqrl.com). The data source is static which is convenient for whipping up an example data product, but we want our data pipeline to provide a metrics ingestion endpoint.
+<!--
+First let's create a `package.json`. This file will be our main source of configuration for DataSQRL. DataSQRL will automatically use this file, but you can also specify it on the command line with the `-c` switch. 
 
+```json title=package.json
+{
+  "values" : {
+    "flink-config" : {
+      "table.exec.source.idle-timeout" : "1 ms"
+    }
+  }
+}
+```
+-->
 No problem, let's add it to our GraphQL schema by appending the following mutation to the `schema.graphqls` file we created above
 
 ```graphql title=schema.graphqls
@@ -190,6 +203,7 @@ type Mutation {
 input SensorReadingInput {
   sensorid: Int!
   temperature: Float!
+  humidity: Float!
 }
 
 type CreatedReading {
@@ -208,7 +222,7 @@ SecReading := SELECT sensorid, endOfSecond(event_time) as timeSec,
               FROM SensorReading GROUP BY sensorid, timeSec;
 ```
 
-We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `_source_time` which captures the time data was ingested through the API.
+We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `event_time` which captures the time data was ingested through the API.
 
 Terminate the running service, run the compiler again, and re-launch the pipeline.
 ```bash
@@ -238,7 +252,8 @@ In GraphiQL, run the following mutation to add a temperature reading:
 mutation {
   AddReading(metric: {
     sensorid: 1,
-    temperature: 37.2
+    temperature: 37.2,
+    humidity: 88
   }) {
     sensorid
     event_time
@@ -325,7 +340,8 @@ On the other, fire off a mutation:
 mutation {
   AddReading(metric: {
     sensorid: 2,
-    temperature: 90.5
+    temperature: 90.5,
+    humidity: 88
   }) {
     sensorid
     event_time
@@ -338,7 +354,8 @@ Wait a second and fire off a second one:
 mutation {
   AddReading(metric: {
     sensorid: 2,
-    temperature: 95.5
+    temperature: 95.5,
+    humidity: 88
   }) {
     sensorid
     event_time
@@ -347,7 +364,7 @@ mutation {
 ```
 
 Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and serves metrics data in realtime with push-based alerts. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
-
+<!--
 ## Next Steps {#next}
 
-DataSQRL provides a number of features that make it easy, fast, and efficient to build data pipelines and event-driven microservices. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!
+DataSQRL provides a number of features that make it easy, fast, and efficient to build data pipelines and event-driven microservices. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!-->

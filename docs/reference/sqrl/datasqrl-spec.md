@@ -5,6 +5,7 @@ DataSQRL adds engines, optimizer, and tooling on top of the SQRL specification.
 ## Package.json
 The package configuration is the central configuration file used by DataSQRL. The package configuration declares dependencies, configures the engines in the data pipeline, sets compiler options, and provides package information.
 
+Multiple package json documents can be specified and will be merged. Arrays are replaced and objects are merged.
 
 DataSQRL allows environment variables: `${VAR}`.
 
@@ -29,7 +30,8 @@ Engines can be enabled with the enabled-engines property. The default set of eng
 ### Flink
 Default stream engine.
 
-**Additional configuration**:
+#### Connectors
+
 Connectors that link flink to other engines and external systems can be configured in the `connectors` property. Connectors use the [flink configuration](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/overview/) and are directly passed through to flink without modification.
 
 Environment variables that start with the `sqrl` prefix are templated variables that SQRL profiles. For example: `${sqrl:table}` provides the table name for the generated table.
@@ -55,6 +57,12 @@ Environment variables that start with the `sqrl` prefix are templated variables 
           "scan.startup.mode" : "group-offsets",
           "properties.auto.offset.reset" : "earliest",
           "topic" : "${sqrl:topic}"
+        },
+        "iceberg" : {
+          "warehouse":"s3://daniel-iceberg-table-test",
+          "catalog-impl":"org.apache.iceberg.aws.glue.GlueCatalog",
+          "io-impl":"org.apache.iceberg.aws.s3.S3FileIO",
+          "catalog-name": "mydatabase"
         }
       }
     }
@@ -63,8 +71,38 @@ Environment variables that start with the `sqrl` prefix are templated variables 
 ```
 
 ### Postgres
-Default database engine.
+Default `database` engine.
 
+### Vertx
+The default `server` engine. A high performance graphql server implemented in [Vertx](https://vertx.io/). This engine allows bringing graphql schemas. Graphql schemas can be trimmed depending on the use case. Type names are user definable and follow [graphql inference rules](https://github.com/DataSQRL/sqrl/issues/55).
+
+<!--
+**SQRL Integration**
+
+(in development) Graphql mutations and subscriptions automatically create log sources and sinks in SQRL. In addition, a special variable is given to SQRL called `@JWT` which can access jwt token information.
+```sql
+MyUser(@JWT.user: String) := SELECT * FROM Users WHERE id = @JWT.user;
+```
+-->
+
+### Kafka
+The default `log` engine. 
+
+### Iceberg
+A `database` engine. The iceberg engine requires a `query` engine, such as snowflake.
+
+### Snowflake
+A `query` engine. 
+
+The snowflake connector assumes aws glue.
+```json
+{
+  "snowflake" : {
+    "catalog-name": "MyCatalog",
+    "external-volume": "iceberg_storage_vol"
+  }
+}
+```
 
 ## Compiler
 ```json
@@ -82,6 +120,39 @@ Default database engine.
 ```json
 {
   "profiles": ["myprofile"]
+}
+```
+
+Profiles are advanced features for building deployment assets. 
+
+DataSQRL ships with a profile that is suited for docker compose but any profile can be specified. It also includes a package.json for defining the docker compose variables.
+
+The package.json in the profile will be merged with the user provided package.json.
+
+**File Structure**
+Includes a package.json.
+Profiles can ship with many engines. Only the enabled engines will be included, skipping all disabled engines. All other files are copied over.
+
+**Templating**
+After compilation, a freemarker template engine is run on eligible files that end in `.ftl`. Each engine will be given its own plan.
+
+Each physical plan that is generated is available to the templating engine. The plans can be seen in `plans` directory in the `build` directory. The templating engine also provides these variables:
+- **config**: the full package.json file
+- **environment**: The current system environment.
+
+## Values
+The package.json allows a section to allow arbitrary values. This can be useful when writing profiles that need additional information to operate.
+
+The default template exposes a flink-config section to allow injecting additional flink configuration.
+```json
+{
+ "values" : {
+    "flink-config" : {
+      "taskmanager.memory.network.max": "800m",
+      "execution.checkpointing.mode" : "EXACTLY_ONCE",
+      "execution.checkpointing.interval" : "1000ms"
+    }
+   }
 }
 ```
 
@@ -167,6 +238,15 @@ Learn more about publishing in the CLI documentation.
 }
 ```
 
+## Profiles
+Additional profiles can be specified.
+
+```json
+{
+  "profiles" : ["datasqrl.profile.default"]
+}
+```
+
 ## *.table.json
 Bring native connectors are possible with a table.json file. 
 
@@ -237,8 +317,6 @@ DataSQRL table schemas are stored in files ending in `.schema.yml`. There is one
 
 
 #### Example DataSQRL Schema
-
-This is the DataSQRL schema of the `orders` table from the [DataSQRL tutorial](/docs/getting-started/intro/overview):
 
 ```yml
 name: "orders"
@@ -336,7 +414,7 @@ DataSQRL schema supports these scalar types:
 
 To define arrays of scalar types, wrap the type in square brackets. For instance, an integer array is defined as `[INTEGER]`.
 
-### Data Constraints
+#### Data Constraints
 
 The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build more efficient data pipelines.
 

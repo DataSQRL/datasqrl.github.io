@@ -26,7 +26,7 @@ DataSQRL compiles the SQL script and output specification into a data pipeline t
 
 DataSQRL has a pluggable engine architecture which allows it to support various stream processors, databases, data warehouses, data streams, and API servers. Feel free to contribute your favorite data technology as a DataSQRL engine to the open-source, wink wink.
 
-DataSQRL can generate data pipelines with multiple topologies. Take a look at the [types of data products](/docs/reference/concepts/data-product#types) that DataSQRL can build. You can further customize those pipeline topologies in the DataSQRL [package configuration](/docs/reference/operations/package-config) which defines the data technologies at each stage of the resulting data pipeline. 
+DataSQRL can generate data pipelines with multiple topologies. Take a look at the [types of data products](/docs/reference/concepts/data-product#types) that DataSQRL can build. You can further customize those pipeline topologies in the DataSQRL [package configuration](/docs/reference/sqrl/datasqrl-spec/) which defines the data technologies at each stage of the resulting data pipeline. 
 
 DataSQRL compiles executables for each engine in the pipeline which can be deployed on the data technologies and cloud services you already use.
 In addition, DataSQRL provides development tooling that makes it easy to run and test data pipelines locally to speed up the development cycle.
@@ -58,8 +58,9 @@ In other words, DataSQRL can save you a lot of time and allows you to focus on w
 - Read the [quickstart tutorial](../../quickstart) to get a feel for DataSQRL while building an entire data product in 10 minutes.
 - Find out [Why DataSQRL Exists](../why-datasqrl) and what benefits it provides.
 - [Compare DataSQRL](../../concepts/when-datasqrl) to other data technologies and see when to use it.
-- Learn more about the [DataSQRL Optimizer](/docs/reference/operations/optimizer) and how the DataSQRL compiler generates efficient data pipelines.
+- Learn more about the [DataSQRL Optimizer](/docs/reference/sqrl/learn/#datasqrl-optimizer) and how the DataSQRL compiler generates efficient data pipelines.
 
+<!--
 ### More 
 
 <img src="/img/getting-started/tutorial/nutshop.jpg" alt="Nut Shop Tutorial >|" width="40%"/>
@@ -90,3 +91,4 @@ DataSQRL supports various pipeline topologies and has a pluggable engine archite
 * [**When Should I Use DataSQRL?**](../concepts/when-datasqrl): DataSQRL empowers your team to build efficient data products successfully. [Find out](../concepts/when-datasqrl) when and when not to use DataSQRL.
 
 What to know more? Start with the [reference documentation](/docs/reference/introduction) to learn everything there is to know about DataSQRL. <br />
+-->

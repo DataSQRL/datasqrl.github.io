@@ -59,7 +59,7 @@ You tell DataSQRL where and how you want to deploy the compiled data pipeline by
 
 The package configuration specifies what engines DataSQRL compiles to. DataSQRL calls the data technologies that execute the components of a data pipeline "**engines**". For example, DataSQRL supports [Apache Flink](https://flink.apache.org/) as a stream engine, [Apache Kafka](https://kafka.apache.org/) as a log engine, [Postgres](https://www.postgresql.org/) as a database engine, and [Vert.x](https://vertx.io/) as a server engine.
 
-Check out [all the engines](/docs/reference/operations/engines/overview) that DataSQRL supports and how to configure them in the [package configuration](/docs/reference/operations/package-config). 
+Check out [all the engines](/docs/reference/operations/engines/overview) that DataSQRL supports and how to configure them in the [package configuration](/docs/reference/sqrl/datasqrl-spec/#packagejson). 
 
 That concludes our introductory tutorial! Great job and enjoy building with data(sqrl)!
 
@@ -76,4 +76,4 @@ The "magic" of DataSQRL is the optimizer which maps the processing steps from th
 ## Next Steps
 
 * For more information, refer to the reference documentation for [building](/docs/reference/operations/build) and [deploying](/docs/reference/operations/deploy/overview) with DataSQRL as well as the [DataSQRL command documentation](/docs/reference/operations/command) for all the command line options.
-* Wanna know how DataSQRL compiles efficient data pipelines? The [DataSQRL optimizer](/docs/reference/operations/optimizer) uses a cost model to divide up data processing among the components and generate the most efficient executables. You can [provide hints](/docs/reference/operations/optimizer#hints) when the optimizer makes the wrong choice.
+* Wanna know how DataSQRL compiles efficient data pipelines? The [DataSQRL optimizer](/docs/reference/sqrl/learn) uses a cost model to divide up data processing among the components and generate the most efficient executables. You can [provide hints](/docs/reference/sqrl/learn#hints) when the optimizer makes the wrong choice.

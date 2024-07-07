@@ -24,7 +24,7 @@ docker pull datasqrl/cmd:latest
 </TabItem>
 </Tabs>
 
-## Learning By Doing
+## Learn By Doing
 
 If you're looking to learn DataSQRL, the best way is to build something with it. Let's run through a simple metrics aggregation example.
 
@@ -72,7 +72,7 @@ docker run -it -p 8888:8888 -v $PWD:/build datasqrl/cmd compile metrics.sqrl
 4. Start the docker compose pipeline:
 
 ```bash
-(cd build/deploy; docker compose up --build -d)
+(cd build/deploy; docker compose up --build)
 ```
 
 5. Check out your new GraphQL API: [http://localhost:8888/graphiql/](http://localhost:8888/graphiql/)

@@ -2,8 +2,7 @@
 # DataSQRL
 
 ## Introduction
-<!--Ensure that the overview also hints at how DataSQRL fits within broader data architecture or ecosystems could add value.-->
-DataSQRL enhances the SQRL language to optimize data pipeline construction. It features an advanced optimizer that efficiently directs queries across multiple integrated engines. This flexible, composable architecture allows for customization and scalability by enabling the integration of only the necessary engines. DataSQRL also offers comprehensive developer tools, including schema management, generating deployment assets, a repository for dependency management, efficient dependency handling, and more. These features make DataSQRL a versatile and powerful tool for developing and managing data pipelines.
+DataSQRL enhances the SQRL language to optimize data pipeline construction for developers. It features an advanced optimizer that efficiently directs queries across multiple integrated engines. This flexible, composable architecture allows for customization and scalability by enabling the integration of only the necessary engines. DataSQRL also offers comprehensive developer tools, including schema management, generating deployment assets, a repository for dependency management, efficient dependency handling, and more. These features make DataSQRL a versatile and powerful tool for developing and managing data pipelines.
 
 DataSQRL is an open-source project, which means you can view the [entire source code](https://github.com/DataSQRL/sqrl), [fork](https://github.com/DataSQRL/sqrl/fork) and customize it, and make contributions to the project.
 
@@ -24,8 +23,7 @@ Key Objectives:
 - **Community and Collaboration**: As an open-source project, DataSQRL thrives on community input and collaboration. We are committed to maintaining an active dialogue with our users and continuously evolving the tool based on feedback and emerging data technology trends.
 
 ### Relationship to SQRL Language Specification
-<!-- An overview of what datasqrl brings in addition to the sqrl spec -->
-DataSQRL builds upon the SQRL language specification, which defines syntax and semantics for SQL constructs, by adding practical execution and optimization capabilities. While the SQRL specification outlines what is syntactically correct and the basic semantic understanding of operations, it does not address execution across different systems or optimization within complex architectures.
+DataSQRL builds upon the SQRL language specification, which defines syntax and semantics for defining full data pipelines, by adding practical execution and optimization capabilities. While the SQRL specification outlines what is syntactically correct and the basic semantic understanding of operations, it does not address execution across different systems, developer features, or optimization within complex architectures.
 
 **Key Enhancements in DataSQRL**:
 - **Engine Translation**: DataSQRL extends SQRL by translating queries to be compatible with various integrated engines, enhancing the execution efficiency across diverse technological environments.
@@ -36,14 +34,8 @@ DataSQRL builds upon the SQRL language specification, which defines syntax and s
 
 - **Complex Data Operations**: DataSQRL enhances SQRL’s handling of real-world data processing challenges, including streaming data, time-based computations, and complex data transformations necessary for in-depth data pipeline integration.
 
-## Deep-Dive & Developer Documentation
-<!-- Overview of how the key components work -->
-DataSQRL's developer documentation is like a detailed guidebook that helps you understand and use its full capabilities, from setting up basic functions to mastering more complex features. Here's a rundown of what you can expect:
-
-### Architecture Overview
+## Architecture Overview
 <!-- Detailed explanation of DataSQRL architecture: Modular engine architecture, compiler, optimizer, tooling, image of architecture, etc -->
-Describes that there are engines, a compiler, and sets of dev tools.
-
 DataSQRL’s architecture is designed to efficiently handle and process data through a series of integrated components, each serving a specific function in the data pipeline lifecycle. Here’s a straightforward look at each of these components and how they contribute to the overall system:
 
 <img src="/img/dev/compilation.svg" alt="DataSQRL compilation overview >" width="400"/>
@@ -63,8 +55,6 @@ If you are interested to dive into the DataSQRL source code, here are some point
 
 ## Time Handling in SQRL
 <!-- Detailed explanation of handling time and timestamps in scripts. How to use now() and other time-based functions effectively. -->
-Abstractly describes how time is more important in datasqrl and timestamps are required for proper stream handling.
-
 Time is an important concept in DataSQRL because it determines how data streams are processed.
 
 For stream processing, it is useful to think of time as a timeline that stretches from the past through the present and into the future. The blue line in the picture below visualizes a timeline.
@@ -109,9 +99,7 @@ Note, that `now()` is different from the standard SQL function `CURRENT_TIMESTAM
 
 The timestamp of a stream table determines how stream records are associated with a point on the timeline and how now advances in the data pipeline.
 
-In many cases, the DataSQRL compiler automatically determines the timestamp column based on the query or how the table is used.
-
-For stream tables that are imported from a data source, the timestamp is configured explicitly in the [source configuration](../../sources/overview).
+For stream tables that are imported from a data source, the timestamp is configured explicitly in the [source configuration](/docs/reference/sqrl/datasqrl-spec#tablejson).
 
 ### Time Synchronization
 
@@ -123,11 +111,11 @@ use the system time to represent now which can lead to inaccuracies if now has f
 :::
 
 ## Sources/Sinks
-Describes how datasqrl brings a source and sink ecosystem and developer management. We bring preprocessors to more easily bring sources. We allow dependency swapping in the package.json. Sources can be defined either through the table.json spec, or brought with preprocessor. Inline source definitions are wired to the log engine.
+In DataSQRL, sources and sinks represent the endpoints of the data pipeline, integrating external data systems for both input and output operations. Configuration files define these connections, specifying how data is read from sources or written to sinks.
 
-Data sources and sinks are defined in configuration files that are contained in [packages](../../concepts/package). The configuration specifies how to connect to and read from (or write to) the source (or sink).
+Data sources and sinks are defined in configuration files that are contained in packages. The configuration specifies how to connect to and read from (or write to) the source (or sink).
 
-DataSQRL supports a lot of different data systems as sources and sinks, including Kafka, file system, object storage, Iceberg, Postgres, etc. Check out the [connectors](docs/category/connectors/) for all the data systems that DataSQRL can connect to.
+DataSQRL supports a lot of different data systems as sources and sinks, including Kafka, file system, object storage, Iceberg, Postgres, etc. Check out the [connectors](/docs/reference/sqrl/datasqrl-spec#tablejson) for all the data systems that DataSQRL can connect to.
 
 When you are first getting started on a new project with DataSQRL, the easiest way to add a data source is to export your data (or a subset) to a [JSON Lines](https://jsonlines.org/) (i.e. line delimited json) or CSV files.
 
@@ -138,12 +126,8 @@ DataSQRL can automatically derive the configuration file and schema from static 
 
 Once you are ready to move to "real" data source connectors the files you used in the beginning remain useful for test cases.
 
-## DataSQRL Optimizer
-The optimizer figures out how to divide the query dag to different engines. It also allows hints to let the user override choices the optimizer makes. It also handles translating sql queries to stream or database logical plans.
-
-The optimizer is part of the DataSQRL compiler and determines the optimal data pipeline architecture to execute a SQRL script.
-
-The DataSQRL optimizer runs a global optimization for the entire data pipeline and local optimizations for each individual engine that is part of the data pipeline architecture.
+## DataSQRL Optimizer {#datasqrl-optimizer}
+The optimizer is part of the DataSQRL compiler and determines the optimal data pipeline architecture to execute a SQRL script. The DataSQRL optimizer runs a global optimization for the entire data pipeline and local optimizations for each individual engine that is part of the data pipeline architecture.
 
 ### Global Optimization
 
@@ -152,7 +136,6 @@ The DataSQRL compiler produces a computation DAG (directed, acyclic graph) of al
 The global optimizer determines which engine executes the computation of which table in the DAG.
 
 <img src="/img/reference/reactive_microservice.svg" alt="DataSQRL data pipeline architecture >" width="50%"/>
-
 
 For example, suppose we are compiling a SQRL script against the data pipeline architecture shown to the left, which consist of the Flink stream processor, a database, API server, and Kafka log in a circle that visualizes the data flow of the data pipeline. <br />
 If we precompute a table in the stream engine, those results are readily available at request time which leads to fast response times and good API performance compared to having to compute the results in the database. However, pre-computing all possible results for the API can be very wasteful or outright impossible due to the number of possible query combinations.
@@ -185,7 +168,7 @@ OrdersByMonth := SELECT endOfmonth(p.time) AS month,
          FROM Orders GROUP BY month;
 ```
 
-The annotation `EXEC(streams)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](../package-config).
+The annotation `EXEC(streams)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](/docs/reference/sqrl/datasqrl-spec).
 
 Similarly, the `EXEC(database)` annotation instructs the optimizer to choose the engine with the name `database`:
 
@@ -197,24 +180,13 @@ OrdersByMonth := SELECT endOfmonth(p.time) AS month,
 ```
 
 ## Overview of Integrated Engines
-<!-- introductory paragraph that explains the role of engines in extending SQRL before diving into specific types. -->
-Datasqrl brings a set of engines. These engines expand datasqrl in different ways. couple of examples:
-- Simplifying stream-only workloads
-- Brownfielding postgres materialization pipelines
-- Building apis for external consumption
-
-
 An **engine** is a system or technology that executes part of the data pipeline compiled by DataSQRL.
 
-Which engines DataSQRL compiles to is configured in the [package configuration](../../package-config) which also defines the data pipeline architecture. See the [build documentation](../../build) for more details.
+Which engines DataSQRL compiles to is configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec) which also defines the data pipeline architecture. See the [build documentation](../../build) for more details.
 
-DataSQRL supports 3 types of engines that play distinct roles in a data pipeline: stream engines, database engines, and server engines.
+DataSQRL supports 4 types of engines that play distinct roles in a data pipeline: stream engines, database engines, server engines, log engines, query engines.
 
 ### Stream Engine
-<!-- -->
-Roles of stream and database engines in processing and storage.
-How these engines affect the scripting and execution of data workflows.
-
 A stream engine is a stream processing system that can ingest data from external data sources, process the data, and pass the results to external data sinks.
 
 DataSQRL currently supports the following stream engines:
@@ -227,47 +199,24 @@ DataSQRL currently supports the following stream engines:
 
 Apache Flink is DataSQRL's reference implementation for a stream engine and supports all SQRL features.
 
-##### Configure
-
-The Flink stream engine is configured as an engine in the [package configuration](../../package-config#engine) with the following configuration options.
-
-| Field Name | Description                                                | Required? |
-|------------|------------------------------------------------------------|-----------|
-| name       | `flink` string literal                                     | Yes       |
-
-You can add additional Flink configuration options to this configuration and those options are passed through to Flink. Refer to the [Flink configuration documentation](https://nightlies.apache.org/flink/flink-docs-stable/docs/deployment/config/) for a list of options.
-
-
 ### Database Engine
-
 A database engine reliably persists data for concurrent query access.
 
 DataSQRL currently supports the following database engines:
 
 * [Postgres](../postgres): Postgres is an open-source relational database management system.
+* Iceberg
 
 ### Server Engine
+Currently, DataSQRL can compile GraphQL APIs with REST on the roadmap. The default server engine uses the Vertx framework for high performance workloads. Aws lambda server engines are on the roadmap.
 
-Currently, DataSQRL can compile GraphQL APIs with REST on the roadmap.
+### Log Engine
+DataSQRL currently supports Kafka as it's default log engine. DataSQRL will create topics for mutations and subscription in the graphql api. It will also create a topic for `create table` commands.
 
-DataSQRL compiles standard-compliant data APIs that can be accessed from any programming language or application. To learn more about accessing and querying the data API, click on the API type below:
-
-DataSQRL compiles data APIs according to the provided API specification. If no API specification is provided, DataSQRL generates it based on the tables, fields, and relationships defined in the SQRL script.
-
-We recommend that you start with the API specification generated by DataSQRL and then customize it to your needs. Once your SQRL script is ready to be exposed as an API, run the DataSQRL compiler to generate the API specification:
-
-By default, DataSQRL generates an API specification that exposes query endpoints for all tables defined in the SQRL script and makes all fields in those tables accessible, including relationships to navigate to related tables. In addition, DataSQRL generates field filters for all queries and relationships that give the user of the API the option to filter out rows.
-
-The easiest way to design your custom GraphQL data API with DataSQRL is to start with the GraphQL schema that is generated by the compiler.
-
-Currently, DataSQRL supports GraphQL schema with OpenAPI (Rest) and protocol buffers (gRPC) on the [roadmap](../roadmap). If no API specification is provided, DataSQRL will generate an API that exposes all visible tables and columns defined in the SQRL script.
-
-From those provided artifacts, DataSQRL compiles a data pipeline with the specified architecture which ingests data from the defined sources, exports processed data to the defined sinks, and exposes an API that matches the provided API specification.
-
-DataSQRL generates API specifications that expose all visible tables, fields, and relationships defined in the SQRL script as well as filters for most fields. That's likely too generic and permissive for your needs.
+### Query Engine
+DataSQRL supports Snowflake as a query engine. 
 
 ##### Script to GraphQL Schema Mapping
-
 DataSQRL maps the tables, fields, and relationships defined in the SQRL script to a GraphQL schema which exposes the data through a GraphQL API.
 
 ##### GraphQL Schema Customization
@@ -297,54 +246,38 @@ type Users {
 ```
 In the type definition for `Users` above, we use `limit` and `offset` arguments to allow users of the API to page through the purchase history of a user and return a limited amount of spending analysis.
 
-### Log Engine
-<!-- -->
-What is a log engine
-How log engines complete a dataflow cycle
-
-### Cache Engine
-
-Future development
-
-<!-- -->
-Description of different engines DataSQRL integrates with.
-
 ## Compiler and Tools
 <!-- -->
 
 ### Compiler Workflow
 <!-- -->
-In-depth description of the compilation process and options.
-DataSQRL supports [multiple engines](../engines/overview) and data pipeline architectures. That means, you can configure the architecture of the targeted data pipeline and what systems will execute individual components of the compiled data pipeline.
+DataSQRL supports multiple engines and data pipeline architectures. That means, you can configure the architecture of the targeted data pipeline and what systems will execute individual components of the compiled data pipeline.
 
 <img src="/img/reference/reactive_microservice.svg" alt="DataSQRL data pipeline architecture >" width="50%"/>
 
 The figure shows a data pipeline architecture that consists of a Apache Kafka, Apache Flink, a database engine, and API server. Kafka holds the input and streaming data. Flink ingests the data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
 
-The data pipeline architecture and engines are configured in the [package configuration](../package-config). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../command) for all command line options.
+The data pipeline architecture and engines are configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../command) for all command line options.
 
 If no package configuration file is provided or found, DataSQRL generates a default package configuration with the example data pipeline architecture shown above and the following engines:
 
-* [Apache Flink](../engines/flink) as the stream engine
-* [Postgres](../engines/postgres) as the database engine
-* [Vertx](../engines/vertx) as the API server
+* **Apache Flink** as the stream engine
+* **Postgres** as the database engine
+* **Vertx** as the API server
+* **Kafka** as the API server
 
-The package configuration contains additional compiler options and declares the dependencies of a script. Read more about [the package configuration](../package-config) to learn how to configure your build.
+The package configuration contains additional compiler options and declares the dependencies of a script.
 
+<!--
 ## Tools
-### CLI
 
 ### Packager
-<!-- -->
+
 Explanation of preprocessors
 Explanation of template engine
-
+-->
 ## Debugging
-<!-- How to debug sqrl scripts   -->
-
-The print data sink prints the data records in a stream to standard output.
-
-The print data sink is always available as an [internal package](../../../concepts/package#internal-package) and does not need to be configured or included in a project.
+DataSQRL supports a print sink to aid in debugging. The print data sink prints the data records in a stream to standard output.
 
 ```sql
 EXPORT NewCustomerPromotion TO print.Promotion; 
@@ -352,13 +285,14 @@ EXPORT NewCustomerPromotion TO print.Promotion;
 
 This export statement prints all records in the `NewCustomerPromotion` stream table and uses the sink table name `Promotion` as the prefix in the output.
 
+<!--
 ### API Security and Authorization
 
 You can use any authentication layer with the compiled data API.
 
 JWT-based authorization is on the roadmap.
-
-# Deployment and Operations
+-->
+## Deployment and Operations
 
 To deploy your DataSQRL project, the first step is to compile the deployment artifacts:
 
@@ -366,27 +300,14 @@ To deploy your DataSQRL project, the first step is to compile the deployment art
 docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 ```
 
-The compiler populates the `build/` directory with all the build artifacts needed to compile the data pipeline. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the [package configuration](../../package-config). If no package configuration is provided, DataSQRL uses the default engines.
+The compiler populates the `build/` directory with all the build artifacts needed to compile the data pipeline. Inside the build directory is the `deploy/` directory that contains all the deployment artifacts for the individual engines configured in the package configuration. If no package configuration is provided, DataSQRL uses the default engines.
 
-You can either deploy DataSQRL projects with docker or deploy each engine separately.
-Using docker is the easiest deployment option.
+You can either deploy DataSQRL projects with docker or deploy each engine separately. Using docker is the easiest deployment option.
+
 Deploying each engine separately gives you more flexibility and allows you to deploy on existing infrastructure or use managed cloud services.
 <!-- -->
 
-The DataSQRL compiler generates a flink execution plan in the file `build/deploy/flink-plan.json`. It contains the configuration of all imported data sources, connectors for those sources, and table or data stream definitions for all tables that are pre-computed in Flink.
-
 The deployment artifacts can be found in the `build/deploy` folder. How to deploy them individually depends on the engines that you are using for your data pipeline.
-
-Check the [engine documentation](../../engines/overview) for a particular engine for more information on how to deploy the executables on existing data infrastructure (an existing Flink cluster, database cluster, etc) or managed service.
-
-## Deployment
-<!-- -->
-
-### Deployment Artifacts
-
-The DataSQRL compiler generates a database schema for Postgres that includes all table definitions and optimal index structures. The schema is generated in the `build/deploy/database-schema.sql` file.
-
-The DataSQRL compiler generates a Vertx server model that maps the API endpoints onto execution plans for fetching and assembling the requested data. The server model is generated in the file `build/deploy/server-model.json`. In addition, DataSQRL generates a server configuration file for connecting to the database.
 
 ### Docker {#docker}
 
@@ -399,7 +320,7 @@ To run the pipeline that DataSQRL compiles from your SQRL script and API specifi
 This command executes docker-compose with the template generated by the DataSQRL compiler in the `build/deploy` directory. It starts all the engines and deploys the produced deployments artifacts of the compiled data pipeline to the engines to run the entire data pipeline.
 
 The API server which is exposed at `localhost:8888/`. <br />
-You can now access the API and execute queries against it to test your script and the compiled data pipeline. See the [API access documentation](../../api/overview#query) for more details.
+You can now access the API and execute queries against it to test your script and the compiled data pipeline.
 
 Use the keystroke `CTRL-C` to stop the running data pipeline. This will stop all engines gracefully.
 
@@ -409,8 +330,6 @@ To deploy a SQRL script and API specification with docker, run `docker-compose u
 (cd build/deploy; docker compose up)
 ```
 
-Docker-compose uses the `docker-compose.yml` template in the `deploy` folder which you can modify to your needs.
-
 :::info
 To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:
 ```bash
@@ -418,29 +337,7 @@ docker compose down -v
 ```
 It's important to remove the containers and volumes with this command before launching another data pipeline to get updated containers.
 :::
-
-Use [this docker compose](https://github.com/DataSQRL/sqrl/blob/main/docker-compose.yml) template to run all the engines in a data pipeline and deploy the engine executables.
-
-Copy the template into the `build/deploy/` directory created by the DataSQRL compiler, modify it to suit your needs and run it with:
-
-```bash
-docker-compose up
-```
-
-This docker compose template starts Postgres and a Flink cluster (i.e. the job manager and one task manager). It initializes the database with the schema produced by the compiler, executes the server, and submits the Flink jar for execution.
-
-:::info
-This page is just a stub and work in progress
-:::
-### Individually
-
-Deploying each component of the data pipeline independently gives you complete control over how and where your data pipeline is deployed.
-
-In this deployment mode, DataSQRL compiles deployment artifacts for each engine configured in `engines` section of the [package configuration](../../package-config) which you can then deploy in a way that works for your infrastructure and deployment requirements.
-
-Strategies for deploying DataSQRL in different environments.
-
-
+<!--
 ### Deploy on AWS
 
 This documentation walks you through the steps of deploying a data pipeline compiled by DataSQLR on AWS managed services. Using managed services eliminates most of the operational burden of running a data pipeline, auto-scales each engine based on the amount of incoming data and API workload, and gets you up and running with a production-grade data pipeline in an under an hour.
@@ -451,23 +348,18 @@ To set up a DataSQRL data pipeline on AWS managed services, follow these 3 steps
 This documentation is work in progress. Please check back soon.
 :::
 
+
 ### Monitoring and Performance Tuning
-<!-- -->
 Techniques for monitoring and optimizing performance.
 ### High Availability and Disaster Recovery
-<!-- -->
 Planning for high availability and recovery from disasters.
 
 ## FAQs and Troubleshooting
-<!-- -->
 ### Common Issues and Solutions
-<!-- -->
 Troubleshooting common problems and solutions.
 ### Performance Optimization Tips
-<!-- Tips for enhancing the performance of DataSQRL projects.-->
-
+-->
 ## Community and Support Resources
-<!-- Links to community forums, support channels, and additional resources.-->
 
 To get a preview of upcoming features and see what we are currently working on, take a look at the [roadmap](../roadmap) which summarizes the big ticket items and epics that are scheduled for development. However, active discussion of the roadmap and feature requests happens in the [Slack community](/community). <br />
 To report bugs and view a ticket-level breakdown of development, head to the [issue tracker](https://github.com/DataSQRL/sqrl/issues).
