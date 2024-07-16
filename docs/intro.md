@@ -1,13 +1,12 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Introduction
+# What is DataSQRL?
 
-<img src="/img/generic/undraw_documentation.svg" alt="Nut Shop Tutorial >" width="40%"/>
+<img src="/img/generic/undraw_documentation.svg" alt="DataSQRL Documentation >" width="40%"/>
 
-Welcome to DataSQRL! You have found the DataSQRL documentation - your gateway to everything you'd ever want to know about DataSQRL.
+DataSQRL is an open-source data development framework for building data pipelines, event-driven microservices, and AI data products. It provides the basic structure, common patterns, and a set of tools for streamlining the development of data solutions.
 
-## What is DataSQRL?
 DataSQRL is an open-source framework that you can use to build and deploy data pipelines. Get started with:
 
 

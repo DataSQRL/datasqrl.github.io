@@ -37,7 +37,7 @@ const sidebars = {
       items: [
         {
           type: 'doc',
-          label: 'Quickstart',
+          label: 'Metrics Processing',
           id: 'getting-started/quickstart',
         }
       ]
@@ -94,7 +94,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '🔪 Using DataSQRL',
+      label: '🔪 DataSQRL Reference',
       collapsed: false,
       link: {
         type: 'doc',

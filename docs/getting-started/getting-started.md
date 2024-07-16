@@ -3,10 +3,11 @@ import TabItem from '@theme/TabItem';
 
 # Getting started
 
-DataSQRL makes it easy to implement data products as data pipelines or event-driven microservices. You'll be building powerful data products with DataSQRL in no time.
+Let's build a data pipeline with DataSQRL in just a few simple steps.
 
 ## Installation
-Install DataSQRL:
+
+You can install DataSQRL on your Mac with [HomeBrew](https://brew.sh/) or use [Docker](https://www.docker.com/products/docker-desktop/) on any machine.
 
 <Tabs groupId="cli">
 <TabItem value="Mac" default>
@@ -15,20 +16,34 @@ Install DataSQRL:
 brew tap datasqrl/sqrl
 brew install sqrl-cli
 ```
+
+:::note
+Check that you're on the current version of DataSQRL by running `sqrl --version`
+To update an existing installation:
+
+```bash
+brew upgrade sqrl-cli
+```
+:::
+
 </TabItem>
 <TabItem value="Docker">
+
+Pull the latest Docker image to ensure you have the most recent version of DataSQRL:
 
 ```bash
 docker pull datasqrl/cmd:latest
 ```
+
 </TabItem>
 </Tabs>
 
-## Learn By Doing
 
-If you're looking to learn DataSQRL, the best way is to build something with it. Let's run through a simple metrics aggregation example.
+## Implement SQL Script
 
-1. Create a new folder for our sqrl script to live in.
+We are going to build a data pipeline that aggregates sensor metrics. With DataSQRL, you can implement the entire data pipeline in a single SQL script. 
+
+1. Create a new folder for the data pipeline:
 
 ```bash
 mkdir metrics; cd metrics
@@ -40,7 +55,7 @@ mkdir metrics; cd metrics
 IMPORT datasqrl.example.sensors.SensorReading; -- Import metrics
 IMPORT time.endOfSecond;  -- Import time function
 
-/* Aggregate sensor readings to second */
+/* Compute the average temperature per second for each sensor */
 SecReading := SELECT sensorid, endOfSecond(time) as timeSec,
                      avg(temperature) as temp 
               FROM SensorReading GROUP BY sensorid, timeSec;
@@ -52,7 +67,7 @@ SensorMaxTemp := SELECT sensorid, max(temp) as maxTemp
                  GROUP BY sensorid;
 ```
 
-3. Compile the script
+3. Compile the SQL script to an integrated data pipeline:
 
 <Tabs groupId="cli">
 <TabItem value="Mac" default>
@@ -69,13 +84,13 @@ docker run -it -p 8888:8888 -v $PWD:/build datasqrl/cmd compile metrics.sqrl
 </TabItem>
 </Tabs>
 
-4. Start the docker compose pipeline:
+4. By default, DataSQRL uses docker to run data pipelines locally. Start the pipeline with docker compose:
 
 ```bash
 (cd build/deploy; docker compose up --build)
 ```
 
-5. Check out your new GraphQL API: [http://localhost:8888/graphiql/](http://localhost:8888/graphiql/)
+5. The pipeline exposes the data through a GraphQL API. You can query it here: [http://localhost:8888/graphiql/](http://localhost:8888/graphiql/)
 
 Run the query to see the results:
 ```graphql
@@ -88,5 +103,5 @@ Run the query to see the results:
 
 Congrats! You've built a robust and scalable data pipeline with just a few queries! Check out more of what DataSQRL has to offer, you might be surprised how this simple abstraction can unlock advanced features and functionality.
 
-For a continuation of the features of DataSQRL, check out the [Tutorial](../getting-started/quickstart/).
+For a continuation of the features of DataSQRL, check out the [Sensor Data Tutorial](../getting-started/quickstart/).
 

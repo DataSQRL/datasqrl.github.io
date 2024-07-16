@@ -1,12 +1,12 @@
 ---
-title: "Tutorial"
+title: "Metrics Processing"
 ---
 
 # DataSQRL Quickstart in 10 Minutes
 
 <img src="/img/getting-started/squirrel_computer.jpeg" alt="Metrics Monitoring Quickstart >|" width="35%"/>
 
-We are going to build a data product that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
+We are going to build a data pipeline that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
 
 ## Create Script
 
