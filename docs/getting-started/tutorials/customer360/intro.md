@@ -1,44 +1,20 @@
 [//]: # (---)
 
-[//]: # (title: "DataSQRL Tutorial")
+[//]: # (title: "Customer 360")
 
 [//]: # (---)
 
 [//]: # ()
-[//]: # (# DataSQRL Tutorial)
-
-[//]: # ()
-[//]: # (The DataSQRL tutorial introduces you to everything you need to know about DataSQRL while building a Customer 360° application and recommendation engine. The tutorial is broken into individual chapters that focus on a particular aspect of DataSQRL.)
+[//]: # (# Integrating Customer Data)
 
 [//]: # ()
 [//]: # (<img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>)
 
 [//]: # ()
-[//]: # (Because we have the humor of middle schoolers, we are going to build customer experience features for our ficticious online DataSQRL seed shop. Seeds and squirrels - how funny are we?)
+[//]: # (Because we have the humor of middle schoolers, we are going to build customer experience features for our fictitious online DataSQRL seed shop. Seeds and squirrels - how funny are we?)
 
 [//]: # ()
-[//]: # (Specifically, we will build a data product to integrate customer data from various sources, process it, and provide features like spending analysis, recommendations, and personalized offers through an API to enhance our seed shop customer experience.)
-
-[//]: # ()
-[//]: # (That sounds like a lot, but DataSQRL makes it easy. Plus, we'll break it up into chapters to introduce core DataSQRL concepts one at a time.)
-
-[//]: # ()
-[//]: # (## Setup)
-
-[//]: # ()
-[//]: # (Before we get started, let's get some setup tasks out of the way:)
-
-[//]: # ()
-[//]: # (1. Make sure you have [Docker installed]&#40;https://docs.docker.com/get-docker/&#41; and running on your machine. Run `docker compose version` in the terminal and check that the version starts with `v2`.)
-
-[//]: # (2. Create a directory for our project files. Type the following into your terminal or command line:)
-
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (> mkdir seedshop; cd seedshop)
-
-[//]: # (```)
+[//]: # (Specifically, we will build a data product to integrate customer data from various sources, process it, and provide features like spending analysis and order history.)
 
 [//]: # ()
 [//]: # (## Create SQL Script {#sqrl})
@@ -49,7 +25,7 @@
 [//]: # ()
 [//]: # (```sql)
 
-[//]: # (IMPORT datasqrl.seedshop.Orders;  )
+[//]: # (IMPORT datasqrl.tutorials.seedshop.Orders;  )
 
 [//]: # (IMPORT time.endOfWeek;            )
 
@@ -100,7 +76,7 @@
 [//]: # (```)
 
 [//]: # ()
-[//]: # (The `import` statement imports the `Orders` table from the package [datasqrl.seedshop]&#40;https://dev.datasqrl.com/package/datasqrl.seedshop&#41;. SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you. This data source is imported from the [DataSQRL repository]&#40;https://dev.datasqrl.com&#41;. We'll discuss how to create your own data sources in a [future chapter]&#40;../data-sources&#41;.)
+[//]: # (The `import` statement imports the `Orders` table from the package [datasqrl.seedshop]&#40;https://dev.datasqrl.com/package/datasqrl.seedshop&#41;. SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you. This data source is imported from the [DataSQRL repository]&#40;https://dev.datasqrl.com&#41;. )
 
 [//]: # ()
 [//]: # (The `Orders` table has a nested `items` table to represent the nested item records for each order. SQRL supports nested tables to represent hierarchical data natively via the `.` dot notation.)
@@ -164,7 +140,7 @@
 [//]: # (Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.)
 
 [//]: # ()
-[//]: # (We are going to cover SQRL in more detail in the [next chapter]&#40;../sqrl&#41;, but the bottom line is this: SQRL is just SQL with some syntactic sugar that makes it easier to represent nested data and relationships, so you can structure your data how you want to expose it.)
+[//]: # (You can learn more about SQRL in th [documentation]&#40;/docs/reference/sqrl/overview&#41;, but the bottom line is this: SQRL is just SQL with some syntactic sugar that makes it easier to represent nested data and relationships, so you can structure your data as you want to expose it.)
 
 [//]: # ()
 [//]: # (## Run Script {#run})
@@ -245,7 +221,7 @@
 [//]: # (Feel free to adjust the query and play around with the API. Note, how DataSQRL maps every table to an API endpoint and exposes the data with the structure and relationships we defined in the script.)
 
 [//]: # ()
-[//]: # (In this example, DataSQRL is generating the API for us which is convenient when you are starting out. In a [future chapter]&#40;../api&#41; we are going to customize the API to our needs.)
+[//]: # (In this example, DataSQRL is generating the API for us which is convenient when you are starting out. You can also [define and customize]&#40;/docs/reference/api/overview&#41; the API yourself to meet your needs.)
 
 [//]: # ()
 [//]: # (:::info)
@@ -267,6 +243,3 @@
 
 [//]: # ()
 [//]: # (And that's how you build data pipelines with DataSQRL: write a SQRL script, run the DataSQRL command to compile and run a pipeline, and inspect the API to verify that it meets your expectations.)
-
-[//]: # ()
-[//]: # (In the following chapters, we will cover each of these steps in more detail. First up: [writing the SQRL script]&#40;../sqrl&#41;.)

@@ -102,7 +102,7 @@ You can build Flink+GraphQL data pipelines by hand, but like many things in soft
 Of course, we are biased.  But, who knows, DataSQRL might save you a ton of work, time, and frustration.
 
 Check out the [Quickstart tutorial](/docs/getting-started/quickstart) for a quick overview of how to consume and ingest data, process it with Flink, and expose the results through a GraphQL API.
-Looking for a step-by-step guide to building your own GraphQL APIs with Flink? Check out the [introductory tutorial](/docs/getting-started/intro/overview) for a detailed explanation of all the steps.
+Looking for a step-by-step guide to building your own GraphQL APIs with Flink? Check out the [quickstart tutorial](/docs/getting-started/quickstart) for a detailed explanation of all the steps.
 
 And if you run into any issues or have questions, don’t hesitate to [reach out](/community).
 

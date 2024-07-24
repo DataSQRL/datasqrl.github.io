@@ -15,22 +15,22 @@ const header =  {
                 We would love for you to nerd out with us and join our open-source community.
                      </>
                    ),
-                   buttonLink: 'https://discord.gg/49AnhVY2w9',
-                   buttonText: 'Join us on Discord',
+                   buttonLink: 'https://join.slack.com/t/datasqrlcommunity/shared_invite/zt-2l3rl1g6o-im6YXYCqU7t55CNaHqz_Kg',
+                   buttonText: 'Join us on Slack',
                    LogoSvg: require('/static/img/generic/undraw_community.svg').default,
                  }
 
 
 const Support = [
   {
-    title: 'Discord',
-    image: '/img/community/discord.svg',
-    link: 'https://discord.gg/49AnhVY2w9',
+    title: 'Slack',
+    image: '/img/community/slack_sqrl.svg',
+    link: 'https://join.slack.com/t/datasqrlcommunity/shared_invite/zt-2l3rl1g6o-im6YXYCqU7t55CNaHqz_Kg',
     linkText: 'Share Your Thoughts',
     description: (
       <>
         If you want to talk to the community, ask questions, brainstorm on your problem or tune into the development process behind DataSQRL,
-        join us <Link to="https://discord.gg/49AnhVY2w9">on Discord</Link>. Get help and share your thoughts while watching how the sausage gets made.
+        join us <Link to="https://join.slack.com/t/datasqrlcommunity/shared_invite/zt-2l3rl1g6o-im6YXYCqU7t55CNaHqz_Kg">on Slack</Link>. Get help and share your thoughts while watching how the sausage gets made.
       </>
     ),
   },
@@ -76,6 +76,19 @@ const Support = [
 const Updates = [
 
   {
+    title: 'LinkedIn',
+    image: '/img/community/linkedin_sqrl.svg',
+    link: 'https://www.linkedin.com/company/89940086',
+    linkText: 'Follow DataSQRL',
+    description: (
+      <>
+        Follow <Link to="https://www.linkedin.com/company/89940086">DataSQRL on LinkedIn</Link> to keep up to date on the latest and greatest.
+        We'll share development progress, milestones, and other relevant community news - without
+        spamming your feed.
+      </>
+    ),
+  },
+  {
     title: 'Youtube',
     image: '/img/community/youtube.svg',
     link: 'https://www.youtube.com/@datasqrl',
@@ -88,19 +101,7 @@ const Updates = [
       </>
     ),
   },
-  {
-    title: 'Twitter',
-    image: '/img/community/twitter.svg',
-    link: 'https://twitter.com/DataSQRL',
-    linkText: 'Follow DataSQRL',
-    description: (
-      <>
-        Follow <Link to="https://twitter.com/DataSQRL">DataSQRL on Twitter</Link> to keep up to date on the latest and greatest.
-        We'll share development progress, milestones, and other relevant community news - without
-        spamming your twitter feed.
-      </>
-    ),
-  },
+
 
 ];
 

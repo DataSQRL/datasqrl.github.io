@@ -59,7 +59,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'getting-started/overview',
+            docId: 'intro',
             position: 'left',
             label: 'Learn',
           },
@@ -86,12 +86,6 @@ const config = {
               },
             ],
           },
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Docs',
-          },
           {to: '/community', label: 'Community', position: 'left'},
           {to: '/services', label: 'Services', position: 'left'},
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -111,7 +105,7 @@ const config = {
             items: [
               {
                 label: 'Getting Started',
-                to: '/docs/getting-started/overview',
+                to: '/docs/getting-started',
               },
               {
                 label: 'Documentation Overview',
@@ -119,7 +113,7 @@ const config = {
               },
               {
                 label: 'Reference Docs',
-                to: '/docs/reference/overview',
+                to: '/docs/reference/introduction',
               },
               {
                 label: 'DataSQRL Process',
@@ -135,8 +129,8 @@ const config = {
                 href: 'https://stackoverflow.com/questions/tagged/datasqrl',
               },
               {
-                label: 'Discord',
-                href: 'https://discord.gg/49AnhVY2w9',
+                label: 'Slack',
+                href: 'https://join.slack.com/t/datasqrlcommunity/shared_invite/zt-2l3rl1g6o-im6YXYCqU7t55CNaHqz_Kg',
               },
               {
                 label: 'GitHub',
@@ -199,7 +193,13 @@ const config = {
         searchResultContextMaxLength: 50
       }),
     ],
-  ]
+  ],
+  stylesheets: [
+    {
+      rel: 'stylesheet',
+      href: '/css/custom.css',
+    },
+  ],
 };
 
 module.exports = config;

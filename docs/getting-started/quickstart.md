@@ -1,12 +1,12 @@
 ---
-title: "Quickstart Tutorial"
+title: "Metrics Processing"
 ---
 
 # DataSQRL Quickstart in 10 Minutes
 
 <img src="/img/getting-started/squirrel_computer.jpeg" alt="Metrics Monitoring Quickstart >|" width="35%"/>
 
-We are going to build a data product that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
+We are going to build a data pipeline that analyzes sensor metrics in 10 minutes. Tik tok, let's go!
 
 ## Create Script
 
@@ -44,21 +44,32 @@ DataSQRL's flavor of SQL is called "SQRL", which defines tables using the `:=` a
 
 In the script, we import the sensor data we are processing and a time function we use for aggregation.
 
-We define the `SecReading` table that aggregates all sensor metrics within one second to smooth our temperature readings. 
+We define the `SecReading` table that aggregates all sensor metrics within one second to smooth our temperature readings.
 We define another table `SensorMaxTemp` which computes the maximum temperature in the last minute for each sensor.
 
-## Run Script {#run}
+## Compile the Script {#run}
 
-DataSQRL compiles our SQRL script into an integrated data pipeline and runs the pipeline with the following command:
+DataSQRL compiles our SQRL script into an integrated data pipeline with the following command:
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
 
 ```bash
-docker run -it -p 8888:8888 -p 8081:8081 -v $PWD:/build datasqrl/cmd run metrics.sqrl
+sqrl compile metrics.sqrl
 ```
+</TabItem>
+<TabItem value="Docker">
 
+```bash
+docker run -it -v $PWD:/build datasqrl/cmd compile metrics.sqrl
+```
 :::note
 
-To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes an eternity to download. Make sure you are using docker-compose V2.
+To run this command you need to have [Docker](https://docs.docker.com/get-docker/) installed on your machine and running. The first time you run this command takes an eternity to download. Make sure you are using docker compose V2.
 
 :::
 
@@ -68,15 +79,29 @@ If you are using Powershell on Windows, you need to replace `$PWD` with `${PWD}`
 
 :::
 
+</TabItem>
+</Tabs>
+
+## Run the Script {#run}
+```bash
+(cd build/deploy; docker compose up --build -d)
+```
+
 Once the pipeline is running, it will ingest, process, store, and serve the data through an API.
+
+:::note
+
+We'll start up postgres, flink, kafka, and a graphql server. You may have other services running which could cause port conflicts.
+
+:::
 
 ## Query API {#query}
 
-Open your favorite browser and navigate to [`http://localhost:8888//graphiql/`](http://localhost:8888//graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+Open your favorite browser and navigate to [`http://localhost:8888/graphiql/`](http://localhost:8888//graphiql/) to access GraphiQL - a popular GraphQL IDE. Write GraphQL queries in the left-hand panel. For example, copy the following query:
 
 ```graphql
 {
-  SensorMaxTemp (sensorid: 1) {
+  SensorMaxTemp(sensorid: 1) {
     maxTemp
   }
 }
@@ -86,7 +111,7 @@ When you hit the "run" button you get the maximum temperature for the sensor wit
 
 And there you have it: a running data pipeline that ingests metrics, aggregates them, and exposes the results through a GraphQL API which you can call in your applications.
 
-To stop the pipeline, interrupt it with `CTRL-C`.
+To stop the pipeline, interrupt it with `CTRL-C` and run `(cd build/deploy; docker compose down -v)`.
 
 ## Customize API
 
@@ -96,16 +121,28 @@ By default, DataSQRL generates a GraphQL schema for us based on the tables we de
 
 To save us time, we are going to start with the GraphQL API that DataSQRL generates for us by running this command:
 
-```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl -a graphql
-```
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
 
-There is now a file called `schema.graphqls` in the same folder as our script. Rename it to `metricsapi.graphqls` and take a look.
+```bash
+sqrl compile metrics.sqrl --api graphql
+```
+</TabItem>
+<TabItem value="Docker">
+
+```bash
+docker run --rm -v $PWD:/build datasqrl/cmd compile metrics.sqrl --api graphql
+```
+</TabItem>
+</Tabs>
+
+There is now a file called `schema.graphqls` in the same folder as our script. Open it and take a look.
+
 Notice, how each table defined in our SQRL script maps to a query endpoint in the API and an associated result type. The query endpoints accept arguments for each column of the table to filter the results by column values.
 
 We are going to remove most of those arguments to only support querying by `sensorid`. We will also remove the `SensorReading` query endpoint and result type to only expose the smoothed-out sensor readings from the `SecReading` table.
 
-In the `metricsapi.graphqls` file, remove the `SensorReading` type and replace the query definition with the following:
+In the `schema.graphqls` file, remove the `SensorReading` type and replace the query definition with the following:
 
 ```graphql  title=metricsapi.graphqls
 type Query {
@@ -118,8 +155,24 @@ Note, that we made `sensorid` a required argument for the `SecReading` query end
 
 Now, invoke the compiler with the GraphQL schema we just created and launch the updated pipeline:
 
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
+
 ```bash
-docker run -it -p 8888:8888 -p 8081:8081 -v $PWD:/build datasqrl/cmd run metrics.sqrl metricsapi.graphqls;
+sqrl compile metrics.sqrl schema.graphqls
+```
+</TabItem>
+<TabItem value="Docker">
+
+```bash
+docker run -it -v $PWD:/build datasqrl/cmd compile metrics.sqrl schema.graphqls
+```
+</TabItem>
+</Tabs>
+
+Followed By:
+```bash
+(cd build/deploy; docker compose up --build -d)
 ```
 
 When you refresh GraphiQL in the browser, you see that the API is simpler and only exposes the data for our use case.
@@ -127,45 +180,83 @@ When you refresh GraphiQL in the browser, you see that the API is simpler and on
 ## Ingest Metrics with Mutations
 
 So far, we have ingested metrics data from an external source imported from the [DataSQRL repository](http://dev.datasqrl.com). The data source is static which is convenient for whipping up an example data product, but we want our data pipeline to provide a metrics ingestion endpoint.
+<!--
+First let's create a `package.json`. This file will be our main source of configuration for DataSQRL. DataSQRL will automatically use this file, but you can also specify it on the command line with the `-c` switch. 
 
-No problem, let's add it to our GraphQL schema by appending the following mutation to the `metricsapi.graphqls` file we created above
+```json title=package.json
+{
+  "values" : {
+    "flink-config" : {
+      "table.exec.source.idle-timeout" : "1 ms"
+    }
+  }
+}
+```
+-->
+No problem, let's add it to our GraphQL schema by appending the following mutation to the `schema.graphqls` file we created above
 
-```graphql title=metricsapi.graphqls
+```graphql title=schema.graphqls
 type Mutation {
-  AddReading(metric: SensorReading!): CreatedReading
+  AddReading(metric: SensorReadingInput!): CreatedReading
 }
 
-input SensorReading {
+input SensorReadingInput {
   sensorid: Int!
   temperature: Float!
+  humidity: Float!
 }
 
 type CreatedReading {
-  _source_time: String!
+  event_time: String!
   sensorid: Int!
 }
 ```
 
-To use the data created by this mutation in our SQRL script, we have to import it. Replace the first two lines of the `metrics.sqrl` script with:
+To use the data created by this mutation in our SQRL script, we have to import it. Replace the first three lines of the `metrics.sqrl` script with:
 
 ```sql title=metrics.sqrl
-IMPORT metricsapi.AddReading AS SensorReading;
+IMPORT schema.AddReading AS SensorReading;
 IMPORT time.endOfSecond;
-SensorReading.time := _source_time;
+SecReading := SELECT sensorid, endOfSecond(event_time) as timeSec,
+                     avg(temperature) as temp 
+              FROM SensorReading GROUP BY sensorid, timeSec;
 ```
 
-We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `_source_time` which captures the time data was ingested through the API.
+We are now using data ingested through the API mutation endpoint instead of the static example data. And for the timestamp on the metrics, we are using the special column `event_time` which captures the time data was ingested through the API.
 
-Terminate the running service, run the compiler again, and re-launch the pipeline. In GraphiQL, run the following mutation to add a temperature reading:
+Terminate the running service, run the compiler again, and re-launch the pipeline.
+```bash
+(cd build/deploy; docker compose down -v)
+```
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
 
+```bash
+sqrl compile metrics.sqrl schema.graphqls
+```
+</TabItem>
+<TabItem value="Docker">
+
+```bash
+docker run -it -v $PWD:/build datasqrl/cmd compile metrics.sqrl schema.graphqls
+```
+</TabItem>
+</Tabs>
+
+```bash
+(cd build/deploy; docker compose up --build -d)
+```
+
+In GraphiQL, run the following mutation to add a temperature reading:
 ```graphql
-mutation addReading {
+mutation {
   AddReading(metric: {
     sensorid: 1,
-    temperature: 37.2
+    temperature: 37.2,
+    humidity: 88
   }) {
     sensorid
-    _source_time
+    event_time
   }
 }
 ```
@@ -192,9 +283,9 @@ Let's add an alert when the temperature of a sensor exceeds 50°. First, we add 
 HighTempAlert := SELECT * FROM SecReading WHERE temp > 50;
 ```
 
-Open the `metricsapi.graphqls` file and add the following subscription and type:
+Open the `schema.graphqls` file and add the following subscription and type:
 
-```graphql  title=metricsapi.graphqls
+```graphql title=schema.graphqls
 type Subscription {
     HighTempAlert(sensorid: Int): HighTempAlert
 }
@@ -206,13 +297,74 @@ type HighTempAlert {
 }
 ```
 
+Terminate and rerun the pipeline:
+```bash
+(cd build/deploy; docker compose down -v)
+```
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
+
+```bash
+sqrl compile metrics.sqrl schema.graphqls
+```
+</TabItem>
+<TabItem value="Docker">
+
+```bash
+docker run -it -v $PWD:/build datasqrl/cmd compile metrics.sqrl schema.graphqls
+```
+</TabItem>
+</Tabs>
+
+```bash
+(cd build/deploy; docker compose up --build -d)
+```
+
 This allows users of our API to subscribe to the `HighTempAlert` table with an optional `sensorid` argument to only receive alerts for a particular sensor. Whenever a sensor reading exceeds 50°, the user will be immediately notified.
 
-Compile and run the updated pipeline with the command above (make sure you have terminated and shut down the running one first) and once everything is fired up again, open [this webpage](/metrics-subscription-demo) to see the subscription work in practice:
-After you run the `addReading` mutation in GraphiQL (make sure the temperature is > 50°), you should see the alert appear on the webpage.
+Open two browser windows and navigate to [`http://localhost:8888/graphiql/`](http://localhost:8888//graphiql/) so you can see them both.
+
+On one, start the graphql subscription:
+```graphql
+subscription {
+  HighTempAlert(sensorid: 2) {
+    sensorid
+    temp
+    timeSec
+  }
+}
+```
+
+On the other, fire off a mutation:
+```graphql
+mutation {
+  AddReading(metric: {
+    sensorid: 2,
+    temperature: 90.5,
+    humidity: 88
+  }) {
+    sensorid
+    event_time
+  }
+}
+```
+
+Wait a second and fire off a second one:
+```graphql
+mutation {
+  AddReading(metric: {
+    sensorid: 2,
+    temperature: 95.5,
+    humidity: 88
+  }) {
+    sensorid
+    event_time
+  }
+}
+```
 
 Voila, we just built a fully-functioning monitoring service that ingests, aggregates, and serves metrics data in realtime with push-based alerts. And the best part? The DataSQRL compiler ensures that it is efficient, fast, robust, and scalable.
-
+<!--
 ## Next Steps {#next}
 
-DataSQRL provides a number of features that make it easy, fast, and efficient to build data pipelines and event-driven microservices. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!
+DataSQRL provides a number of features that make it easy, fast, and efficient to build data pipelines and event-driven microservices. Read the [DataSQRL tutorial](../intro/overview) to learn about all the features while building a Customer 360° application and recommendation engine. It'll be fun!-->

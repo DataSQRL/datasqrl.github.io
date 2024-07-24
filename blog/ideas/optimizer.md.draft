@@ -34,4 +34,4 @@ Customers.products_by_protein.product := JOIN Products ON Products.id = _product
 
 With the `@optimizer` annotation we can pass hints to the optimizer. The boolean flag `materialize` tells the optimizer whether to incrementally update a table with changing data - i.e. to materialize a table as database folks would say - or to compute the table results at query time with each API request.
 
-Learn more about the [DataSQRL optimizer](/docs/reference/operations/optimizer) and how to provide hints to control the execution plan that it generates for your SQRL script. You can also learn more about the [architecture of DataSQRL](/docs/dev/architecture) to dive deep into the internals of the system.
+Learn more about the [DataSQRL optimizer](/docs/reference/sqrl/learn) and how to provide hints to control the execution plan that it generates for your SQRL script. You can also learn more about the [architecture of DataSQRL](/docs/dev/architecture) to dive deep into the internals of the system.

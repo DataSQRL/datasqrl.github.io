@@ -19,7 +19,7 @@ Your “***Operating System for Data***” builds data products in ***minutes***
 
 DataSQRL abstracts and automates the building of data pipelines through our SQL interface, which we’ve affectionately dubbed SQRL.  Yes, pronounced “Squirrel,” just like the fuzzy little guys running around your yard.
 
-Have you struggled with Apache Kafka?  Flink?  Streaming?  Data in motion? Integrating your Artificial Intelligence into your systems?  Anything “Real-Time?” Struggle no more, and [get started here!](https://www.datasqrl.com/docs/getting-started/overview/)
+Have you struggled with Apache Kafka?  Flink?  Streaming?  Data in motion? Integrating your Artificial Intelligence into your systems?  Anything “Real-Time?” Struggle no more, and [get started here!](https://www.datasqrl.com/docs/getting-started/getting-started/)
 
 We provide an open-source tool that can help you along with some professional services.
 
