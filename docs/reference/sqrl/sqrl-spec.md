@@ -4,62 +4,6 @@ import TabItem from '@theme/TabItem';
 # SQRL Specification
 This is the specification for SQRL, a declarative SQL query language developed at DataSQRL for describing data pipelines. SQRL stands for *"**S**tructured **Q**uery and **R**eaction **L**anguage"* because it extends SQL with support for streaming data and the ability to react to data in realtime. In addition, SQRL adds a number of convenience features that make it development-friendly.
 
-## SQRL Overview
-
-A SQRL is a language is a flexible syntax and system for describing data pipelines and their query workloads. It is intended to be agnostic of the underlying engines that execute the queries.
-
-A full-featured SQRL script might look something like this:
-
-```sql
-IMPORT data.SalesRecords;
-IMPORT data.StockAdjustments;
-IMPORT utils.ReorderLogic;
-
-// Consolidate sales and stock adjustments into a single stream
-InventoryStream := 
-  SELECT * FROM SalesRecords 
-  UNION ALL 
-  SELECT * FROM StockAdjustments;
-
-// Group data by ProductID and automatically aggregate at the end of each minute
-MinuteInventory := 
-  SELECT endOfMinute(ts) as min, ProductID, SUM(Quantity) as QTY
-  FROM InventoryStream
-  GROUP BY ProductID, min;
-
-// Calculate current stock and trigger restocking logic
-StockAnalysis := 
-  SELECT ProductID, MinuteEnd, CurrentQuantity - QTY as CurrentStock,
-     ReorderLogic(CurrentStock) as RestockNeeded
-  FROM CurrentStock s
-  JOIN MinuteInventory i ON s.ProductID = i.ProductID;
-
-UniqueInventory := DISTINCT SalesRecords ON (ProductID);
-
-// A function to query stock by product and time
-QueryProduct(@ProductID: String) := 
-  SELECT * FROM UniqueInventory 
-  WHERE ProductID = @ProductID;
-
-// Export processed data to an inventory management system
-EXPORT StockAnalysis TO externalSystem.inventoryManagementSystem;
-```
-
-The SQRL specification delineates the structure and syntax of the language without specifying execution strategies for data pipelines. It is defined as a declarative language and is separate from the underlying execution engine or runtime environment, thus it is designed to describe required operations rather than implement them.
-
-SQRL is capable of handling both real-time and batch processing workflows, remaining execution-agnostic to accommodate a variety of underlying database technologies and processing engines. SQRL is designed to free of streaming-specific SQL syntax to allow queries to target a wider variety of engines.
-
-SQRL extends standard SQL syntax and semantics. SQRL does not define the SQL syntax, but relies on other SQL parsers to bring SQL syntax. The reference implementation uses Apache Calcite as its parser.
-
-Differences between SQRL and standard SQL include:
-* **Aggregations, Joins, and Unions**: SQRL modifies the traditional semantics of these operations for stream tables, adapting them to better handle streaming data contexts.
-* **Window Functions**: SQRL does not utilize SQL window functions; instead, it employs nested tables to manage time-based data aggregations and transformations.
-* **Union Operations**: In SQRL, UNION operations require that state tables share the same key columns, and unionizing between different table types is not supported.
-* **Sub-queries**: Limited support for sub-queries exists in SQRL, with a preference for using relationship expressions or segregating complex sub-queries into separate, intermediate tables for clarity and manageability.
-* **Join Types**: SQRL changes the semantics of joins depending on the table type.
-
-Most of the differences to SQL serve the purpose to make SQRL easier to use and understand.
-
 ## Table Type System
 In SQRL, every table is assigned a specific type that influences how queries interact with the data, the semantic validity of those queries, and how data is processed by different engines.
 
@@ -72,96 +16,6 @@ SQRL recognizes several distinct table types, each with unique characteristics a
 - **STATIC**: Consists of data that does not change over time, such as constants, table functions, or nested data structures. This type is treated as universally valid across all time points.
 
 These table types will be used throughout this specification to further describe the semantics of sql queries.
-
-## Primary Keys and Timestamps
-In SQRL, primary keys and timestamps play critical roles in managing data integrity, query optimization, and ensuring consistency across data transformations. These elements are essential in both base and derived tables and are often managed implicitly by the system.
-
-** Primary Keys **
-
-Primary keys uniquely identify each record in a table, ensuring data integrity and enabling efficient data retrieval and update operations.
-- Implicit Management: SQRL implementations automatically manage primary keys, especially in operations such as GROUP BY where keys used in the grouping are treated as primary keys for the resulting derived table.
-- Provides semantic validity for nested queries.
-
-For example, the following query will have ProductID as it's primary key.
-```sql
-// Derived table grouped by ProductID
-ProductTotals := 
-  SELECT ProductID, SUM(Quantity) as TotalQuantity
-  FROM Sales
-  GROUP BY ProductID;
-```
-
-** Timestamps **
-
-Timestamps are crucial for managing the temporal aspects of data, especially in stream processing and versioned state tables where data changes over time. Management of these 
-- Implicit Management: In tables where temporal data is significant, such as stream or versioned state tables, timestamps are often managed automatically by SQRL. This management includes tracking the time of data entry or the last update.
-- Query Utilization: Timestamps can be used in queries to manage window functions, perform time-based joins, or filter data based on time criteria.
-
-## Stream to state
-In SQRL, operations on stream tables can be designed to produce state tables through aggregation. This transformation is fundamental in contexts where a summary or consolidation of streaming data is required for analysis or state management.
-
-**Aggregating Stream Tables**
-
-When you aggregate data from a stream table, you effectively summarize or transform the immutable events into a mutable state representation, creating what is known as a state table.
-
-Consider an aggregation of user spend from a stream of order items:
-```sql
-Spend := 
-  SELECT customerid, sum(total) AS spend, sum(discount) AS saved
-  FROM Orders
-  GROUP BY customerId;
-```
-In this example, Spend becomes a state table where each record represents a user’s total expenditure and savings, grouped by customerid.
-
-Stream tables can be converted to state tables by deduplication or aggregation. If a stream table represents a change stream of a state table, the state table can be defined with the `DISTINCT` query.
-
-```sql
-Users := DISTINCT Orders ON customerid;
-```
-
-**Exception - Time-Window Aggregations**
-
-Time-window aggregations are a special case where aggregating over a stream table can still result in another stream table, particularly when the aggregation is designed to preserve the temporal context.
-
-```sql
-// Example of time-window aggregation preserving the stream nature
-HourlySales := 
-  SELECT
-    endOfHour(o.time) AS Hour,
-    SUM(i.total) AS TotalSales
-  FROM Orders o JOIN o.items i
-  GROUP BY endOfHour(o.time);
-```
-
-## Comments
-SQRL supports the use of comments within the code to provide hints, enhance readability, provide documentation, and explain the logic of complex queries or operations.
-
-SQRL supports two types of comments:
-
-**Single-line Comments**: These are initiated with double forward slashes (//). Everything following the // on the same line is considered part of the comment.
-```sql
-// This is a single-line comment explaining the next SQL command
-IMPORT data.SalesRecords;
-```
-
-**Multi-line Comments**: These are enclosed between /* and */. Everything within these markers is treated as a comment, regardless of the number of lines. T
-```sql
-/*
- * This is a multi-line comment.
- * It can span multiple lines and is often used to comment out
- * chunks of code or to provide detailed documentation.
- */
-IMPORT data.StockAdjustments;
-```
-
-## Hints
-Hints are included within multi-line comments and are prefixed with a plus sign (+) followed by the hint type and optional parameters. These hints do not alter the SQL syntax but suggest how the underlying engine should treat the subsequent SQL commands. Hints are placed above assignment statements.
-
-```sql
-// The below hint suggests that the following query should be executed on the stream engine.
-/* +exec(streams) */
-MyTable := SELECT * FROM InventoryStream;
-```
 
 ## Functions
 Functions in SQRL are designed to be engine-agnostic, ensuring that their implementation is consistent across different platforms and execution environments. This uniformity is crucial for maintaining the semantic integrity of functions when executed under various systems.
@@ -320,7 +174,7 @@ The second statement references the Orders.items table locally by accessing the 
 
 Nested table definitions are a convenient way to express GROUP BY and WINDOW queries by grouping on the rows in the parent table. This allows for more intuitive and organized data aggregation, making it easier to manage complex data relationships and calculations.
 
-### Join types
+#### Join types
 SQRL provides additional join types outside of standard SQL:
 - Default join
 - Temporal join
@@ -485,3 +339,34 @@ Users.spending := SELECT endOfWeek(p.time) AS week,
       GROUP BY week ORDER BY week DESC;
 ```
 This statement defines a nested table `spending` underneath `Users` which aggregates over the nested order `totals` for all purchases of each user. Relationships used in `FROM` and `JOIN` are expanded to their original definition. That means, `FROM @.purchases` gets expanded to `FROM @ JOIN Orders p ON p.customerid = @.id`.
+
+
+## Comments
+SQRL supports the use of comments within the code to provide hints, enhance readability, provide documentation, and explain the logic of complex queries or operations.
+
+SQRL supports two types of comments:
+
+**Single-line Comments**: These are initiated with double forward slashes (//). Everything following the // on the same line is considered part of the comment.
+```sql
+// This is a single-line comment explaining the next SQL command
+IMPORT data.SalesRecords;
+```
+
+**Multi-line Comments**: These are enclosed between /* and */. Everything within these markers is treated as a comment, regardless of the number of lines. T
+```sql
+/*
+ * This is a multi-line comment.
+ * It can span multiple lines and is often used to comment out
+ * chunks of code or to provide detailed documentation.
+ */
+IMPORT data.StockAdjustments;
+```
+
+## Hints
+Hints are included within multi-line comments and are prefixed with a plus sign (+) followed by the hint type and optional parameters. These hints do not alter the SQL syntax but suggest how the underlying engine should treat the subsequent SQL commands. Hints are placed above assignment statements.
+
+```sql
+// The below hint suggests that the following query should be executed on the stream engine.
+/* +exec(streams) */
+MyTable := SELECT * FROM InventoryStream;
+```
