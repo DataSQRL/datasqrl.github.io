@@ -222,7 +222,7 @@ Learn more about publishing in the CLI documentation.
 | name          | Name of the package. The package name should start with the name of the individual or organization that provides the package.                                                 | Yes       |
 | version       | The version of the package. We recommend to use [semantic versioning](https://semver.org/).                                                                                   | Yes       |
 | variant       | The variant of the package if multiple variants are available. Defaults to `default`.                                                                                         | No        |
-| latest        | If this is the latest version of this package. DataSQRL uses the latest version when looking up [missing packages on import](../../sqrl/import#dependency). Defaults to `false`. | No        |
+| latest        | If this is the latest version of this package. DataSQRL uses the latest version when looking up missing packages on import. Defaults to `false`. | No        |
 | description   | A description of the package.                                                                                                                                                 | No        |
 | license       | The license used by this package.                                                                                                                                             | No        |
 | documentation | Link that points to documentation for this package                                                                                                                            | No        |
@@ -311,7 +311,7 @@ The DataSQRL schema is a flexible schema format for data sources and sinks. Data
 
 DataSQRL schema is the default schema used for schema-less sources.
 
-DataSQRL can automatically discover the schema of data sources via the [discover](../discovery) command.
+DataSQRL can automatically discover the schema of data sources via the [discover](../cli) command.
 
 DataSQRL table schemas are stored in files ending in `.schema.yml`. There is one schema file per table of the same name.
 
@@ -416,7 +416,7 @@ To define arrays of scalar types, wrap the type in square brackets. For instance
 
 #### Data Constraints
 
-The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](../../operations/optimizer) analyzes the constraints to build more efficient data pipelines.
+The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](/docs/reference/sqrl/learn#datasqrl-optimizer) analyzes the constraints to build more efficient data pipelines.
 
 DataSQRL schema supports the following test constraints:
 

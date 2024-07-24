@@ -182,7 +182,7 @@ OrdersByMonth := SELECT endOfmonth(p.time) AS month,
 ## Overview of Integrated Engines
 An **engine** is a system or technology that executes part of the data pipeline compiled by DataSQRL.
 
-Which engines DataSQRL compiles to is configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec) which also defines the data pipeline architecture. See the [build documentation](../../build) for more details.
+Which engines DataSQRL compiles to is configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec) which also defines the data pipeline architecture.
 
 DataSQRL supports 4 types of engines that play distinct roles in a data pipeline: stream engines, database engines, server engines, log engines, query engines.
 
@@ -191,7 +191,7 @@ A stream engine is a stream processing system that can ingest data from external
 
 DataSQRL currently supports the following stream engines:
 
-* [Apache Flink](../flink): Apache Flink is a fault-tolerant and scalable open-source stream processing engine.
+* [Apache Flink](https://flink.apache.org/): Apache Flink is a fault-tolerant and scalable open-source stream processing engine.
 
 #### Flink Stream Engine
 
@@ -204,7 +204,7 @@ A database engine reliably persists data for concurrent query access.
 
 DataSQRL currently supports the following database engines:
 
-* [Postgres](../postgres): Postgres is an open-source relational database management system.
+* Postgres: Postgres is an open-source relational database management system.
 * Iceberg
 
 ### Server Engine
@@ -257,7 +257,7 @@ DataSQRL supports multiple engines and data pipeline architectures. That means, 
 
 The figure shows a data pipeline architecture that consists of a Apache Kafka, Apache Flink, a database engine, and API server. Kafka holds the input and streaming data. Flink ingests the data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
 
-The data pipeline architecture and engines are configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../command) for all command line options.
+The data pipeline architecture and engines are configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../cli) for all command line options.
 
 If no package configuration file is provided or found, DataSQRL generates a default package configuration with the example data pipeline architecture shown above and the following engines:
 
@@ -361,7 +361,7 @@ Troubleshooting common problems and solutions.
 -->
 ## Community and Support Resources
 
-To get a preview of upcoming features and see what we are currently working on, take a look at the [roadmap](../roadmap) which summarizes the big ticket items and epics that are scheduled for development. However, active discussion of the roadmap and feature requests happens in the [Slack community](/community). <br />
+To get a preview of upcoming features and see what we are currently working on, take a look at the [roadmap](/docs/dev/roadmap/) which summarizes the big ticket items and epics that are scheduled for development. However, active discussion of the roadmap and feature requests happens in the [Slack community](/community). <br />
 To report bugs and view a ticket-level breakdown of development, head to the [issue tracker](https://github.com/DataSQRL/sqrl/issues).
 
-If you want to make a code contribution to DataSQRL or become a committer, please review [these suggestions](../contribute).
+If you want to make a code contribution to DataSQRL or become a committer, please review [these suggestions](/community).

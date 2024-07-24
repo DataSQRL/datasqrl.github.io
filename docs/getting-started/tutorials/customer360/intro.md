@@ -1,146 +1,245 @@
----
-title: "Customer 360"
----
+[//]: # (---)
 
-# Integrating Customer Data
+[//]: # (title: "Customer 360")
 
-<img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>
+[//]: # (---)
 
-Because we have the humor of middle schoolers, we are going to build customer experience features for our fictitious online DataSQRL seed shop. Seeds and squirrels - how funny are we?
+[//]: # ()
+[//]: # (# Integrating Customer Data)
 
-Specifically, we will build a data product to integrate customer data from various sources, process it, and provide features like spending analysis and order history.
+[//]: # ()
+[//]: # (<img src="/img/getting-started/squirrel_seedshop.png" alt="Nut Shop Tutorial >|" width="40%"/>)
 
-## Create SQL Script {#sqrl}
+[//]: # ()
+[//]: # (Because we have the humor of middle schoolers, we are going to build customer experience features for our fictitious online DataSQRL seed shop. Seeds and squirrels - how funny are we?)
 
-Create a new file called `seedshop.sqrl` and paste the following content into the file:
+[//]: # ()
+[//]: # (Specifically, we will build a data product to integrate customer data from various sources, process it, and provide features like spending analysis and order history.)
 
-```sql
-IMPORT datasqrl.tutorials.seedshop.Orders;  
-IMPORT time.endOfWeek;            
+[//]: # ()
+[//]: # (## Create SQL Script {#sqrl})
 
-Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
-Orders.totals := SELECT sum(total) as price,
-                  sum(coalesce(discount,0.0)) as saving FROM @.items;
+[//]: # ()
+[//]: # (Create a new file called `seedshop.sqrl` and paste the following content into the file:)
 
-Users := SELECT DISTINCT customerid AS id FROM Orders;
+[//]: # ()
+[//]: # (```sql)
 
-Users.purchases := JOIN Orders ON Orders.customerid = @.id;
+[//]: # (IMPORT datasqrl.tutorials.seedshop.Orders;  )
 
-Users.spending := SELECT endOfWeek(p.time) AS week,
-         sum(t.price) AS spend, sum(t.saving) AS saved
-      FROM @.purchases p JOIN p.totals t
-      GROUP BY week ORDER BY week DESC;
-```
+[//]: # (IMPORT time.endOfWeek;            )
 
-:::info
+[//]: # ()
+[//]: # (Orders.items.total := quantity * unit_price - coalesce&#40;discount,0.0&#41;;)
 
-This tutorial assumes some basic familiarity with SQL. If you are unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer) first.
+[//]: # (Orders.totals := SELECT sum&#40;total&#41; as price,)
 
-:::
+[//]: # (                  sum&#40;coalesce&#40;discount,0.0&#41;&#41; as saving FROM @.items;)
 
-We express the data transformations and processing of our service in SQL by incrementally defining tables and columns. DataSQRL's flavor of SQL is called **SQRL** because DataSQRL supports relationships and reactions to changes in data (hence the extra "**R**").
+[//]: # ()
+[//]: # (Users := SELECT DISTINCT customerid AS id FROM Orders;)
 
-Let's break down this SQRL script line-by-line:
+[//]: # ()
+[//]: # (Users.purchases := JOIN Orders ON Orders.customerid = @.id;)
 
-```sql 
-IMPORT datasqrl.seedshop.Orders;  
-```
+[//]: # ()
+[//]: # (Users.spending := SELECT endOfWeek&#40;p.time&#41; AS week,)
 
-The `import` statement imports the `Orders` table from the package [datasqrl.seedshop](https://dev.datasqrl.com/package/datasqrl.seedshop). SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you. This data source is imported from the [DataSQRL repository](https://dev.datasqrl.com). 
+[//]: # (         sum&#40;t.price&#41; AS spend, sum&#40;t.saving&#41; AS saved)
 
-The `Orders` table has a nested `items` table to represent the nested item records for each order. SQRL supports nested tables to represent hierarchical data natively via the `.` dot notation.
+[//]: # (      FROM @.purchases p JOIN p.totals t)
 
-```sql
-Orders.items.total := quantity * unit_price - coalesce(discount,0.0);
-```
+[//]: # (      GROUP BY week ORDER BY week DESC;)
 
-We are adding the `total` column to the nested `Orders.items` table to compute the total price for each item in an order.
+[//]: # (```)
 
-```sql 
-Orders.totals := SELECT sum(total) as price,
-                  sum(coalesce(discount,0.0)) as saving FROM @.items;
-```
+[//]: # ()
+[//]: # (:::info)
 
-We are defining `totals` as a nested table underneath `Orders` to compute the total price and savings for each order by aggregating over all items in the order. Note the use of `@` in the `FROM` clause. `@` refers to each row in the parent `Orders` table and is used when defining localized queries. A localized query allows us to refer to the items for *each* order instead of aggregating across items for *all* orders.
+[//]: # ()
+[//]: # (This tutorial assumes some basic familiarity with SQL. If you are unfamiliar with SQL, we recommend you read our [SQL Primer]&#40;/docs/reference/sqrl/sql-primer&#41; first.)
 
-`Orders.items` is a nested table that is accessible via the relationship column `items` from each row in the `Orders` table to retrieve the items of that order.
+[//]: # ()
+[//]: # (:::)
 
-SQRL supports relationships as first-class citizens of the language, so we can express relationships in the data explicitly.
+[//]: # ()
+[//]: # (We express the data transformations and processing of our service in SQL by incrementally defining tables and columns. DataSQRL's flavor of SQL is called **SQRL** because DataSQRL supports relationships and reactions to changes in data &#40;hence the extra "**R**"&#41;.)
 
-```sql
-Users.purchases := JOIN Orders ON Orders.customerid = @.id;
-```
-This statement defines the relationship column `purchases` on the `Users` table which links a user to the orders they placed. The `@` refers to the parent `Users` table on the left-hand side.
+[//]: # ()
+[//]: # (Let's break down this SQRL script line-by-line:)
 
-And, for the grand finale, we have the spending analysis that aggregates a user's total spending by week:
+[//]: # ()
+[//]: # (```sql )
 
-```sql
-Users.spending := SELECT endOfWeek(p.time) AS week,
-         sum(t.price) AS spend, sum(t.saving) AS saved
-      FROM @.purchases p JOIN p.totals t
-      GROUP BY week ORDER BY week DESC;
-```
-`spending` is defined as a nested table underneath `Users` and uses the imported time-window function `endOfWeek` to aggregate the totals for all orders that fall within a given week.
+[//]: # (IMPORT datasqrl.seedshop.Orders;  )
 
-Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.
+[//]: # (```)
 
-You can learn more about SQRL in th [documentation](/docs/reference/sqrl/overview), but the bottom line is this: SQRL is just SQL with some syntactic sugar that makes it easier to represent nested data and relationships, so you can structure your data as you want to expose it.
+[//]: # ()
+[//]: # (The `import` statement imports the `Orders` table from the package [datasqrl.seedshop]&#40;https://dev.datasqrl.com/package/datasqrl.seedshop&#41;. SQRL treats data like software dependencies which makes it easier to depend on external data sources and allows the compiler to manage all the data plumbing for you. This data source is imported from the [DataSQRL repository]&#40;https://dev.datasqrl.com&#41;. )
 
-## Run Script {#run}
+[//]: # ()
+[//]: # (The `Orders` table has a nested `items` table to represent the nested item records for each order. SQRL supports nested tables to represent hierarchical data natively via the `.` dot notation.)
 
-Invoke the DataSQRL compiler to build an integrated pipeline from the data transformations and aggregations defined in the script:
+[//]: # ()
+[//]: # (```sql)
 
-```bash
-docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl
-```
+[//]: # (Orders.items.total := quantity * unit_price - coalesce&#40;discount,0.0&#41;;)
 
-Launch all components of the pipeline with docker compose:
-```bash
-(cd build/deploy; docker compose up)
-```
+[//]: # (```)
 
-:::note
+[//]: # ()
+[//]: # (We are adding the `total` column to the nested `Orders.items` table to compute the total price for each item in an order.)
 
-If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 6gb.
+[//]: # ()
+[//]: # (```sql )
 
-:::
+[//]: # (Orders.totals := SELECT sum&#40;total&#41; as price,)
 
+[//]: # (                  sum&#40;coalesce&#40;discount,0.0&#41;&#41; as saving FROM @.items;)
 
-## Query Data API {#query}
+[//]: # (```)
 
-The running pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`](http://localhost:8888/graphiql/) in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:
+[//]: # ()
+[//]: # (We are defining `totals` as a nested table underneath `Orders` to compute the total price and savings for each order by aggregating over all items in the order. Note the use of `@` in the `FROM` clause. `@` refers to each row in the parent `Orders` table and is used when defining localized queries. A localized query allows us to refer to the items for *each* order instead of aggregating across items for *all* orders.)
 
-```graphql
-{
-Users (id: 10) {
-    purchases {
-        id
-        totals {
-            price
-            saving
-        }
-    }    
-    spending {
-        week
-        spend
-        saved
-    }
-}}
-```
-When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel.
+[//]: # ()
+[//]: # (`Orders.items` is a nested table that is accessible via the relationship column `items` from each row in the `Orders` table to retrieve the items of that order.)
 
-Feel free to adjust the query and play around with the API. Note, how DataSQRL maps every table to an API endpoint and exposes the data with the structure and relationships we defined in the script.
+[//]: # ()
+[//]: # (SQRL supports relationships as first-class citizens of the language, so we can express relationships in the data explicitly.)
 
-In this example, DataSQRL is generating the API for us which is convenient when you are starting out. You can also [define and customize](/docs/reference/api/overview) the API yourself to meet your needs.
+[//]: # ()
+[//]: # (```sql)
 
-:::info
-To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:
-```bash
-(cd build/deploy; docker compose down -v)
-```
-It's important to remove the containers and volumes with this command before launching another pipeline to get updated containers. 
-:::
+[//]: # (Users.purchases := JOIN Orders ON Orders.customerid = @.id;)
 
-## Next Steps {#next}
+[//]: # (```)
 
-And that's how you build data pipelines with DataSQRL: write a SQRL script, run the DataSQRL command to compile and run a pipeline, and inspect the API to verify that it meets your expectations.
+[//]: # (This statement defines the relationship column `purchases` on the `Users` table which links a user to the orders they placed. The `@` refers to the parent `Users` table on the left-hand side.)
+
+[//]: # ()
+[//]: # (And, for the grand finale, we have the spending analysis that aggregates a user's total spending by week:)
+
+[//]: # ()
+[//]: # (```sql)
+
+[//]: # (Users.spending := SELECT endOfWeek&#40;p.time&#41; AS week,)
+
+[//]: # (         sum&#40;t.price&#41; AS spend, sum&#40;t.saving&#41; AS saved)
+
+[//]: # (      FROM @.purchases p JOIN p.totals t)
+
+[//]: # (      GROUP BY week ORDER BY week DESC;)
+
+[//]: # (```)
+
+[//]: # (`spending` is defined as a nested table underneath `Users` and uses the imported time-window function `endOfWeek` to aggregate the totals for all orders that fall within a given week.)
+
+[//]: # ()
+[//]: # (Note, that we can use previously defined relationships in `FROM` clauses and `JOIN` to simplify the query.)
+
+[//]: # ()
+[//]: # (You can learn more about SQRL in th [documentation]&#40;/docs/reference/sqrl/overview&#41;, but the bottom line is this: SQRL is just SQL with some syntactic sugar that makes it easier to represent nested data and relationships, so you can structure your data as you want to expose it.)
+
+[//]: # ()
+[//]: # (## Run Script {#run})
+
+[//]: # ()
+[//]: # (Invoke the DataSQRL compiler to build an integrated pipeline from the data transformations and aggregations defined in the script:)
+
+[//]: # ()
+[//]: # (```bash)
+
+[//]: # (docker run --rm -v $PWD:/build datasqrl/cmd compile seedshop.sqrl)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (Launch all components of the pipeline with docker compose:)
+
+[//]: # (```bash)
+
+[//]: # (&#40;cd build/deploy; docker compose up&#41;)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (:::note)
+
+[//]: # ()
+[//]: # (If you run into an 'java.lang.OutOfMemoryError: Could not allocate enough memory segments for NetworkBufferPool' error, increase the memory resources in the docker settings to at least 6gb.)
+
+[//]: # ()
+[//]: # (:::)
+
+[//]: # ()
+[//]: # ()
+[//]: # (## Query Data API {#query})
+
+[//]: # ()
+[//]: # (The running pipeline compiled by DataSQRL exposes a GraphQL data API which you can access by opening [`http://localhost:8888/graphiql/`]&#40;http://localhost:8888/graphiql/&#41; in your browser. Write GraphQL queries in the left-hand panel. For example, copy the following query:)
+
+[//]: # ()
+[//]: # (```graphql)
+
+[//]: # ({)
+
+[//]: # (Users &#40;id: 10&#41; {)
+
+[//]: # (    purchases {)
+
+[//]: # (        id)
+
+[//]: # (        totals {)
+
+[//]: # (            price)
+
+[//]: # (            saving)
+
+[//]: # (        })
+
+[//]: # (    }    )
+
+[//]: # (    spending {)
+
+[//]: # (        week)
+
+[//]: # (        spend)
+
+[//]: # (        saved)
+
+[//]: # (    })
+
+[//]: # (}})
+
+[//]: # (```)
+
+[//]: # (When you hit the "run" button you get the purchase history and spending analysis for the customer with `id=10` in the right-hand panel.)
+
+[//]: # ()
+[//]: # (Feel free to adjust the query and play around with the API. Note, how DataSQRL maps every table to an API endpoint and exposes the data with the structure and relationships we defined in the script.)
+
+[//]: # ()
+[//]: # (In this example, DataSQRL is generating the API for us which is convenient when you are starting out. You can also [define and customize]&#40;/docs/reference/api/overview&#41; the API yourself to meet your needs.)
+
+[//]: # ()
+[//]: # (:::info)
+
+[//]: # (To stop the pipeline, interrupt it with `CTRL-C` and shut it down with:)
+
+[//]: # (```bash)
+
+[//]: # (&#40;cd build/deploy; docker compose down -v&#41;)
+
+[//]: # (```)
+
+[//]: # (It's important to remove the containers and volumes with this command before launching another pipeline to get updated containers. )
+
+[//]: # (:::)
+
+[//]: # ()
+[//]: # (## Next Steps {#next})
+
+[//]: # ()
+[//]: # (And that's how you build data pipelines with DataSQRL: write a SQRL script, run the DataSQRL command to compile and run a pipeline, and inspect the API to verify that it meets your expectations.)

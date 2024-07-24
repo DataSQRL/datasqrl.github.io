@@ -71,7 +71,7 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.gr
 |--profile|	Selects a specific set of configuration values that override the default package settings.|
 
 
-The command compiles the script and API specification into an integrated data product. The command creates a `build` with all the build artifacts that are used during the compilation and build process (e.g. dependencies). The command writes the deployment artifacts for the compiled data product into the `build/deploy` directory. Read more about deployment artifacts in the [deployment documentation](../deploy/overview).
+The command compiles the script and API specification into an integrated data product. The command creates a `build` with all the build artifacts that are used during the compilation and build process (e.g. dependencies). The command writes the deployment artifacts for the compiled data product into the `build/deploy` directory. Read more about deployment artifacts in the deployment documentation.
 
 #### Publish Command
 Publishes a local package to the repository. It is executed from the root directory of the package, archiving all contents and submitting them under the specified package configuration.
