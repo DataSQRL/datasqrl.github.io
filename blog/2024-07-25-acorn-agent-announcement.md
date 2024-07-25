@@ -5,6 +5,11 @@ authors: [matthias, stefan_anca]
 tags: [launch]
 ---
 
+<head>
+  <meta property="og:image" content="/img/generic/acorn_overview.png" />
+  <meta name="twitter:image" content="/img/generic/acorn_overview.png" />
+</head>
+
 Large-Language Models (LLMs) provide a natural language interface capable of understanding user intent and delivering highly specific responses. The recent addition of "tooling" as a primary feature of LLMs has enabled them to retrieve information on-demand and trigger actions. This makes LLMs a viable natural language interface for various applications, including dashboards, ERPs, CRMs, BI systems, HRMS, SCM, and even customer-facing mobile and web applications. The Acorn Agent framework offers the infrastructure to build such LLM-powered applications by instrumenting LLMs with custom tooling in a safe, secure, and efficient manner. The Acorn Agent framework is open-source under the Apache 2.0 license.
 
 <img src="/img/generic/acorn_agent_mascot.png" alt="Acorn Agent Mascot >" width="30%"/>
