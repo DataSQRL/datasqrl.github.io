@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[5382],{504:s=>{s.exports=JSON.parse('{"label":"GenAI","permalink":"/blog/tags/gen-ai","allTagsPath":"/blog/tags","count":1}')}}]);
