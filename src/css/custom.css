@@ -140,6 +140,10 @@ html[data-theme='dark'] .tabs--hero .tabs__item--active {
     color: var(--ifm-color-primary-darkest); /* Slightly darker shade for better visibility */
 }
 
+html[data-theme='dark'] .menu__link:hover {
+    color: var(--ifm-color-primary-lightest); /* Slightly darker shade for better visibility */
+}
+
 /* Active link styling */
 .menu__link--active {
     font-weight: bold;
