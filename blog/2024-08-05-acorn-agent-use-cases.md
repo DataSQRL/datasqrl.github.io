@@ -10,7 +10,7 @@ tags: [acorn, GenAI]
   <meta name="twitter:image" content="/img/blog/acorn_financial_use_case.png" />
 </head>
 
-Have you wondered how companies can leverage their data through GenAI technologies for business growth? With the **Acorn Agent Framework**, businesses can now extract actionable insights, enhance user engagement, and catalyze new revenue streams by using Generative AI technologies on their data. Acorn Agent enables Large Language Models (LLMs) to connect seamlessly with a company’s data via API calls, providing natural language access to complex sources of data. Let’s explore how Acorn Agent can unlock the value of your data, using financial services as an example.
+Have you wondered how companies can leverage their data through GenAI technologies for business growth? With the open-source [**Acorn Agent Framework**](https://github.com/DataSQRL/Acorn/), businesses can now extract actionable insights, enhance user engagement, and catalyze new revenue streams by using Generative AI technologies on their data. Acorn Agent enables Large Language Models (LLMs) to connect seamlessly with a company’s data via API calls, providing natural language access to complex sources of data. Let’s explore how Acorn Agent can unlock the value of your data, using financial services as an example.
 
 
 
@@ -46,7 +46,7 @@ By accessing user transactions and credit card data through the institution’s 
 
 ## How Acorn Agent works
 
-The Acorn Agent Framework makes it simple to implement such LLM applications by safely integrating with the bank's existing data APIs. Acorn Agent creates a layer of APIs on top of the bank's internal data, which can take the form of REST or GraphQL APIs. These APIs provide all the necessary data for an agent to respond to user queries. The API endpoints are described in an LLM tool definition, which is a JSON file that outlines the required data and its type. Fortunately, most APIs already come with reference documentation, making it possible to automate their transformation into a JSON Schema.
+The [Acorn Agent Framework](https://github.com/DataSQRL/Acorn/) makes it simple to implement such LLM applications by safely integrating with the bank's existing data APIs. Acorn Agent creates a layer of APIs on top of the bank's internal data, which can take the form of REST or GraphQL APIs. These APIs provide all the necessary data for an agent to respond to user queries. The API endpoints are described in an LLM tool definition, which is a JSON file that outlines the required data and its type. Fortunately, most APIs already come with reference documentation, making it possible to automate their transformation into a JSON Schema.
 
 With the Acorn Agent Framework, an LLM Agent application is built. Developers can choose from a wide range of LLMs available through the platform, including OpenAI models and open-source models on AWS Bedrock. Once the model is selected, the API tool definitions are loaded into the application, followed by the creation of a user-friendly interface – the access point for end-users.
 
@@ -101,4 +101,4 @@ The Acorn Agent Framework’s powerful capability to transform data into actiona
 
 ## Conclusion
 
-In conclusion, Acorn Agent – The Data Agent Framework – represents a transformative leap in how businesses can utilize their data. By integrating LLMs with APIs, companies can unlock unprecedented value, drive user engagement, and unveil new business opportunities. Explore the power of Acorn Agent and set your business on a path to innovation and growth.
+In conclusion, the [Acorn Agent Framework](https://github.com/DataSQRL/Acorn/) represents a transformative leap in how businesses can utilize their data. By integrating LLMs with APIs, companies can unlock unprecedented value, drive user engagement, and unveil new business opportunities. Explore the power of [Acorn Agent](https://github.com/DataSQRL/Acorn/) and set your business on a path to innovation and growth.
