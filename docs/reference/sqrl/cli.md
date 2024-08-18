@@ -2,10 +2,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-# CLI Reference
-<!-- -->
-DataSQRL is managed through the `datasqrl` command line interface. This tool enables you to compile SQRL scripts, manage data sources and sinks, and handle package publications.
+# DataSQRL Command
 
+The DataSQRL command compiles, runs, and tests SQRL scripts. It also provides utilities for managing data sources and sinks, uploading packages to the repository, and other convenience features.
+
+You invoke the DataSQRL command in your terminal or command line. Choose your operating system below or use Docker which works on any machine that has Docker installed.
+
+## Installation
 
 <Tabs groupId="cli">
 <TabItem value="Mac" default>
@@ -32,17 +35,21 @@ Always pull the latest Docker image to ensure you have the most recent updates:
 docker pull datasqrl/cmd:latest
 ```
 
+:::note
+The Docker version of DataSQRL has limited functionality and does not support the development or testing runtime that ships with the DataSQRL command. These significantly speed up the development cycles from minutes to seconds.
+:::
+
 </TabItem>
 </Tabs>
 
-#### Global Options
+### Global Options
 All commands support the following global options:
 
 |Option/Flag Name	|Description|
 |--------------|---------------|
 |-c or --config|	Specifies the path to one or more package configuration files. Contents of multiple files are merged in the specified order. Defaults to package.json in the current directory, generating a default configuration if none exists.|
 
-#### Compile Command
+## Compile Command
 The compile command processes an SQRL script and, optionally, an API specification, into a deployable data pipeline. The outputs are saved in the specified target directory.
 
 
@@ -61,8 +68,6 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.gr
 ```
 </TabItem>
 </Tabs>
-1. sqrl compile
-2. docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.graphqls
 
 |Option/Flag Name|	Description|
 |--------------|---------------|
@@ -73,7 +78,38 @@ docker run --rm -v $PWD:/build datasqrl/cmd compile myscript.sqrl myapischema.gr
 
 The command compiles the script and API specification into an integrated data product. The command creates a `build` with all the build artifacts that are used during the compilation and build process (e.g. dependencies). The command writes the deployment artifacts for the compiled data product into the `build/deploy` directory. Read more about deployment artifacts in the deployment documentation.
 
-#### Publish Command
+
+## Test Command
+
+The test command executes the provided test queries and all tables annotated with `/*+test */` and snapshots the results.
+
+When you first run the test command, it will create the snapshots and fail. All subsequent runs of the test command compare the results to the previously snapshotted results and succeed if the results are identical, else fail.
+
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
+
+```bash
+sqrl test
+```
+
+</TabItem>
+<TabItem value="Docker">
+
+```bash
+docker run --rm -v $PWD:/build datasqrl/cmd test
+```
+</TabItem>
+</Tabs>
+
+Options for the Test Command:
+
+|Option/Flag Name| 	Description                                         |
+|--------------|------------------------------------------------------|
+|-s or --snapshot| 	Path to the snapshot files. Defaults to `snapshot`. |
+|--tests| 	Path to test query files. Defaults to `tests`.      |
+
+
+## Publish Command
 Publishes a local package to the repository. It is executed from the root directory of the package, archiving all contents and submitting them under the specified package configuration.
 
 
@@ -97,7 +133,7 @@ docker run --rm -v $PWD:/build datasqrl/cmd publish --local
 |--------------|---------------|
 |--local	|Publishes the package to the local repository only.|
 
-##### How repository resolution works
+### How repository resolution works
 
 A repository contains DataSQRL packages. When compiling an SQRL script, the DataSQRL compiler retrieves dependencies declared in the [package configuration](/docs/reference/sqrl/datasqrl-spec) and unpacks them in the build directory.
 
@@ -105,37 +141,10 @@ The remote DataSQRL directory is hosted at [https://dev.datasqrl.com](https://de
 
 DataSQRL keeps a local repository in the hidden `~/.datasqrl/` directory in the user's home directory. The local repository is only accessible from the local machine. It caches packages downloaded from the remote repository and contains packages that are only published locally.
 
-#### Test Command
-The test command will run queries annotationed with the 'test' hint.
 
-<Tabs groupId="cli">
-<TabItem value="Mac" default>
+## Login Command
 
-```bash
-sqrl test
-```
-
-</TabItem>
-<TabItem value="Docker">
-
-```bash
-docker run --rm -v $PWD:/build datasqrl/cmd test
-```
-</TabItem>
-</Tabs>
-
-Options for the Test Command:
-
-|Option/Flag Name|	Description|
-|--------------|---------------|
-|-s or --snapshot|	Path to the snapshot files.|
-|--tests|	Path to test query files.|
-
-More information on specific test configurations and command examples will be provided here.
-
-#### Login Command
-
-Authenticates a user against the repository.
+Authenticates a user against the repository. A user needs to be authenticated to access private packages in the repository or to publish a package.
 
 <Tabs groupId="cli">
 <TabItem value="Mac" default>

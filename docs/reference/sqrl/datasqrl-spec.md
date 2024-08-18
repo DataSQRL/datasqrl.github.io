@@ -1,4 +1,4 @@
-# DataSQRL Reference
+# DataSQRL Configuration
 
 DataSQRL adds engines, optimizer, and tooling on top of the SQRL specification.
 
