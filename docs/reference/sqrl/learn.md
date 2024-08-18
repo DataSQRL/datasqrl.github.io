@@ -1,5 +1,12 @@
 
-# DataSQRL
+# How to Use DataSQRL
+
+To use DataSQRL, you follow these steps:
+
+* **Implement SQRL script** to ingest, transform, anlayze, and expose data.
+* **Execute DataSQRL command** to compile, run, test, and deploy the implemented data architecture/pipeline.
+* **Configure connectors** to ingest data from and write data to external data systems.
+* **Configure DataSQRL** to customize the data architecture that DataSQRL compiles. (GraphQL, topologies)
 
 ## Introduction
 DataSQRL enhances the SQRL language to optimize data pipeline construction for developers. It features an advanced optimizer that efficiently directs queries across multiple integrated engines. This flexible, composable architecture allows for customization and scalability by enabling the integration of only the necessary engines. DataSQRL also offers comprehensive developer tools, including schema management, generating deployment assets, a repository for dependency management, efficient dependency handling, and more. These features make DataSQRL a versatile and powerful tool for developing and managing data pipelines.
@@ -7,6 +14,49 @@ DataSQRL enhances the SQRL language to optimize data pipeline construction for d
 DataSQRL is an open-source project, which means you can view the [entire source code](https://github.com/DataSQRL/sqrl), [fork](https://github.com/DataSQRL/sqrl/fork) and customize it, and make contributions to the project.
 
 <img src="/img/index/undraw_contribute_sqrl.svg" alt="Developer Documentation >" width="40%"/>
+
+## Installation
+
+To compile and run SQRL script, you need the DataSQRL compiler. You can either install the DataSQRL command suitable for your machine, or use Docker on any machine.
+
+In addition to the DataSQRL compiler, the command version also includes a local development and testing runtime that significantly speeds up the development cycle and allows you to run automated tests. The Docker version only includes the compiler and builds the compiled data architecture with Docker Compose which simulates a production environment but can take minutes to start up.
+
+<Tabs groupId="cli">
+<TabItem value="Mac" default>
+
+```bash
+brew tap datasqrl/sqrl
+brew install sqrl-cli
+```
+
+:::note
+Check that you're on the current version of DataSQRL by running `sqrl --version`
+To update an existing installation:
+
+```bash
+brew upgrade sqrl-cli
+```
+:::
+
+</TabItem>
+<TabItem value="Docker">
+
+Pull the latest Docker image to ensure you have the most recent version of DataSQRL:
+
+```bash
+docker pull datasqrl/cmd:latest
+```
+
+</TabItem>
+</Tabs>
+
+## SQRL
+
+:::info
+
+If you are unfamiliar with SQL, we recommend you read our [SQL Primer](/docs/reference/sqrl/sql-primer) first.
+
+:::
 
 ### Mission and Goals behind DataSQRL
 The fundamental mission of DataSQRL is to democratize the process of building efficient, scalable data products by making advanced data pipeline tools accessible and easy to use. Our goal is to empower developers by simplifying the data pipeline construction process, reducing the barrier to entry, and accelerating the path from development to production.

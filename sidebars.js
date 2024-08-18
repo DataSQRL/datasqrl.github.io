@@ -25,14 +25,14 @@ const sidebars = {
     {
       type: 'doc',
       label: '🚀 Getting Started',
-      id: 'getting-started/getting-started',
+      id: 'getting-started/quickstart',
     },
     {
       type: 'category',
       label: '📔 Tutorials',
       link: {
         type: 'doc',
-        id: 'getting-started/quickstart',
+        id: 'getting-started/tutorials/overview',
       },
       items: [
         {
@@ -70,16 +70,16 @@ const sidebars = {
         // 'getting-started/concepts/sqrl',
         "getting-started/concepts/why-datasqrl",
         'getting-started/concepts/when-datasqrl',
-                    'reference/concepts/data-product',
         {
           type: 'category',
-          label: 'DataSQRL Process',
+          label: 'DataSQRL Framework',
           link: {
             type: 'doc',
             id: 'process/intro',
           },
           collapsed: true,
           items: [
+            'reference/concepts/data-product',
             'process/customer-focused',
             'process/responsive',
             'process/integrated'
@@ -89,12 +89,12 @@ const sidebars = {
     },
    {
       type: 'doc',
-      label: '💡 Learn',
+      label: '💡 How to Use DataSQRL',
       id: 'reference/sqrl/learn'
     },
     {
       type: 'category',
-      label: '🔪 DataSQRL Reference',
+      label: '📖 DataSQRL Reference',
       collapsed: false,
       link: {
         type: 'doc',

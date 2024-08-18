@@ -4,6 +4,8 @@ title: "When to use DataSQRL"
 
 # When Should I Use DataSQRL?
 
+replace with 10 architectures
+
 DataSQRL is an intelligent compiler for data pipelines that eliminates data plumbing so you
 can build efficient data products faster, cheaper, and better.
 

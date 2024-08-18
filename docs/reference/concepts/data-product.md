@@ -1,12 +1,27 @@
 ---
-title: "Data Product"
+title: "What's a Data Product?"
 ---
 
 # What is a Data Product?
 
-A data product is a piece of software that processes data to deliver actionable, valuable insights or results.
+A data product is a piece of software that processes data to deliver actionable, valuable insights or results. A data product produces tangible business value in a consistent, reliable, and sustainable manner.
+
 Data products take raw data as input, apply a series of transformations, algorithmic processes, or analytics, and produces information that is useful to customers, decision makers, or business operations.
 Data products can range in complexity from simple analytics dashboards to personalized recommendation engines utilizing machine learning models and generative AI.
+
+## Data Product Characteristics
+
+Data products encompasses a broad range of software that produces business value from data. 
+What makes such data-driven software a "product" is a match between customer demand and profitable delivery. 
+More specifically, what distinguishes a data product from a data project are the following characteristics:
+
+* **Customer Demand**: The data product solves a real and tangible pain for the customer.
+* **Easy Access**: Customers can discover and access the data product within their regular workflows.
+* **Easy Consumption**: Customers can use the data product to derive value.
+* **Consistent Quality**: The data product is delivered with consistent, well-defined quality. 
+* **Reliable SLA**: The data product is delivered with reliable SLAs for latency, uptime, throughput, etc.
+* **Sustainable**: The data product can be maintained and evolved over time.
+* **Profitable**: The data product is profitable and has a return on investment.
 
 ## What does a Data Product Consist Of? {#components}
 
