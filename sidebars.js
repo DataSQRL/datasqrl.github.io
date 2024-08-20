@@ -94,7 +94,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '🔪 DataSQRL Reference',
+      label: '📖 DataSQRL Reference',
       collapsed: false,
       link: {
         type: 'doc',
