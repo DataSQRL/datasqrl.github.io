@@ -1,11 +1,15 @@
-# DataSQRL Reference
+# DataSQRL Configuration
 
-DataSQRL adds engines, optimizer, and tooling on top of the SQRL specification.
+You control the topology, execution characteristics, and API of the DataSQRL generated data pipeline/microservice through configuration files.
+
+* **Package.json:** Controls all aspects of the compiler.
+* **GraphQL Schema:** Specifies the resulting GraphQL API.
 
 ## Package.json
+
 The package configuration is the central configuration file used by DataSQRL. The package configuration declares dependencies, configures the engines in the data pipeline, sets compiler options, and provides package information.
 
-Multiple package json documents can be specified and will be merged. Arrays are replaced and objects are merged.
+You can pass a configuration file to the compiler via the `-c` or `--config` flag. You can specify a single configuration file or multiple files. If multiple files are specified, they are merged in the order they are specified (i.e. fields - including arrays - are replaced and objects are merged).  
 
 DataSQRL allows environment variables: `${VAR}`.
 
@@ -16,9 +20,9 @@ A minimal package json contains the following:
 } 
 ```
 
-## Engines
-`engines` is a map of engine configurations by engine name that the compiler uses to instantiate the engines in the data pipeline. The DataSQRL compiler produces an integrated data pipeline against those engines. DataSQRL expects that a stream engine is configured.
+### Engines
 
+`engines` is a map of engine configurations by engine name that the compiler uses to instantiate the engines in the data pipeline. The DataSQRL compiler produces an integrated data pipeline against those engines. At a minimum, DataSQRL expects that a stream processing engine is configured.
 
 Engines can be enabled with the enabled-engines property. The default set of engines are listed below:
 ```json
@@ -27,14 +31,21 @@ Engines can be enabled with the enabled-engines property. The default set of eng
 }
 ```
 
-### Flink
-Default stream engine.
+#### Flink
 
-#### Connectors
+Apache Flink is the default stream processing engine. 
 
-Connectors that link flink to other engines and external systems can be configured in the `connectors` property. Connectors use the [flink configuration](https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/overview/) and are directly passed through to flink without modification.
+The physical plan that DataSQRL generates for the Flink engine includes:
+* FlinkSQL table descriptors for the sources and sinks
+* FlinkSQL view definitions for the data processing
+* A list of connector dependencies needed for the sources and sinks.
 
-Environment variables that start with the `sqrl` prefix are templated variables that SQRL profiles. For example: `${sqrl:table}` provides the table name for the generated table.
+Flink reads data from and writes data to the engines in the generated data pipeline. DataSQRL uses connector configuration templates to instantiate those connections.
+These templates are configured under the `connectors` property.
+
+Connectors that link flink to other engines and external systems can be configured in the `connectors` property. Connectors use the [flink configuration options](https://nightlies.apache.org/flink/flink-docs-stable/docs/connectors/table/overview/) and are directly passed through to flink without modification.
+
+Environment variables that start with the `sqrl` prefix are templated variables that the DataSQRL compiler instantiates. For example: `${sqrl:table}` provides the table name for a connector that writes to a table.
 
 ```json
 {
@@ -70,31 +81,53 @@ Environment variables that start with the `sqrl` prefix are templated variables 
 }
 ```
 
-### Postgres
-Default `database` engine.
+Flink runtime configuration can be specified in the [`values` configuration](#values) section.
 
-### Vertx
-The default `server` engine. A high performance graphql server implemented in [Vertx](https://vertx.io/). This engine allows bringing graphql schemas. Graphql schemas can be trimmed depending on the use case. Type names are user definable and follow [graphql inference rules](https://github.com/DataSQRL/sqrl/issues/55).
 
-<!--
-**SQRL Integration**
+#### Postgres
 
-(in development) Graphql mutations and subscriptions automatically create log sources and sinks in SQRL. In addition, a special variable is given to SQRL called `@JWT` which can access jwt token information.
-```sql
-MyUser(@JWT.user: String) := SELECT * FROM Users WHERE id = @JWT.user;
-```
--->
+Postgres is the default database engine.
 
-### Kafka
-The default `log` engine. 
+The physical plan that DataSQRL generates for the Postgres engine includes:
+* Table DDL statements for the physical tables.
+* Index DDL statements for the index structures on those tables.
+* View DDL statements for the logical tables. Views are only created when no server engine is enabled.
 
-### Iceberg
-A `database` engine. The iceberg engine requires a `query` engine, such as snowflake.
+#### Vertx
 
-### Snowflake
-A `query` engine. 
+Vertx is the default server engine. A high performance GraphQL server implemented in [Vertx](https://vertx.io/). The GraphQL endpoint is configured through the [GraphQL Schema](#graphql-schema).
 
-The snowflake connector assumes aws glue.
+The physical plan that DataSQRL generates for Vertx includes:
+* The connection configuration for the database(s) and log engine
+* A mapping of GraphQL endpoints to queries for execution against the database(s) and log engine.
+
+
+#### Kafka
+
+Apache Kafka is the default `log` engine.
+
+The physical plan that DataSQRL generates for Kafka includes:
+* A list of topics with configuration and (optional) Avro schema.
+
+#### Iceberg
+
+Apache Iceberg is a table format that can be used as a database engine with DataSQRL.
+
+The `iceberg` engine requires an enabled query engine to execute queries against it.
+
+The physical plan that DataSQRL generates for Kafka includes:
+* Table DDL statements for the physical tables
+* Catalog registration for registering the tables in the associated catalog, e.g. AWS Glue.
+
+#### Snowflake
+
+Snowflake is a query engine that can be used in combination with a table format as a database in DataSQRL.
+
+The physical plan that DataSQRL generates for Kafka includes:
+* External table registration through catalog integration. The Snowflake connector currently support AWS Glue.
+* View definitions for the logical tables.
+
+To define the catalog integration for Snowflake:
 ```json
 {
   "snowflake" : {
@@ -104,46 +137,57 @@ The snowflake connector assumes aws glue.
 }
 ```
 
-## Compiler
+### Compiler
+
+The `compiler` section of the configuration controls elements of the core compiler and DAG Planner. 
+
 ```json
 {
   "compiler" : {
     "addArguments": true,
-    "explain": true,
-    "snapshotPath": "/mypath"
+    "logger": "print",
+    "explain": {
+      "visual": true,
+      "text": true,
+      "extended": false
+    }
   }
 }
 ```
 
+* `addArguments` specifies whether to include table columns as filters in the generated GraphQL schema. This only applies if the GraphQL schema is generated by the compiler.
+* `logger` configures the logging framework used for logging statements like `EXPORT MyTable TO logger.MyTable;`. It is `print` by default which logs to STDOUT. Set it to the configured log engine for logging output to be sent to that engine, e.g. `"logger": "kafka"`. Set it to `none` to suppress logging output.
+* `explain` configures how the DAG plan compiled by DataSQRL is presented in the `build` directory. If `visual` is true, a visual representation of the DAG is written to the `pipeline_visual.html` file which you can open in any browser. If `text` is true, a textual representation of the DAG is written to the `pipeline_explain.txt` file. If `extended` is true, the DAG outputs include more information like the relational plan which may be very verbose.
 
-## Profiles
+
+### Profiles
+
 ```json
 {
   "profiles": ["myprofile"]
 }
 ```
 
-Profiles are advanced features for building deployment assets. 
+The deployment profile determines the deployment assets that are generated by the DataSQRL compiler. For example, the default profile generates docker images and a docker compose template for orchestrating the entire pipeline compiled by DataSQRL.
 
-DataSQRL ships with a profile that is suited for docker compose but any profile can be specified. It also includes a package.json for defining the docker compose variables.
+You can configure a single or multiple deployment profiles which are merged together.
 
-The package.json in the profile will be merged with the user provided package.json.
+A deployment profile can also be downloaded from the repository when it's fully qualified package name is specified:
 
-**File Structure**
-Includes a package.json.
-Profiles can ship with many engines. Only the enabled engines will be included, skipping all disabled engines. All other files are copied over.
+```json
+{
+  "profiles" : ["datasqrl.profile.default"]
+}
+```
 
-**Templating**
-After compilation, a freemarker template engine is run on eligible files that end in `.ftl`. Each engine will be given its own plan.
+Learn more about [deployment profiles](../deployments).
 
-Each physical plan that is generated is available to the templating engine. The plans can be seen in `plans` directory in the `build` directory. The templating engine also provides these variables:
-- **config**: the full package.json file
-- **environment**: The current system environment.
+### Values
 
-## Values
-The package.json allows a section to allow arbitrary values. This can be useful when writing profiles that need additional information to operate.
+The `values` section of the [DataSQRL configuration](../datasqrl-spec) allows you to specify configuration values that are passed through to the deployment profile and can be referenced in the deployment profile templates. See [deployment profiles](../deployments) for more information.
 
-The default template exposes a flink-config section to allow injecting additional flink configuration.
+The default deployment profiles supports a `flink-config` section to allow injecting additional flink runtime configuration. You can use this section of the configuration to specify any [Flink configuration option](https://nightlies.apache.org/flink/flink-docs-stable/docs/dev/table/config/).
+
 ```json
 {
  "values" : {
@@ -156,7 +200,10 @@ The default template exposes a flink-config section to allow injecting additiona
 }
 ```
 
-## Dependencies
+The `values` configuration settings take precedence over identical configuration settings in the compiled physical plans.
+
+### Dependencies
+
 `dependencies` is a map of all packages that a script depends on. The name of the dependency is the key in the map and the associated value defines the dependency by `version` and `variant`.
 
 While explicit package dependencies are encouraged, DataSQRL will automatically look up packages in the SQRL script in the [repository](https://dev.datasqrl.com).
@@ -173,7 +220,8 @@ While explicit package dependencies are encouraged, DataSQRL will automatically 
 }
 ```
 
-This example declares a single dependency `datasqrl.seedshop`. The DataSQRL packager retrieves the `datasqrl.seedshop` package from the repository for the given version "0.1.0" and "dev" variant and makes it available for the compiler. The `variant` is optional and defaults to `default`.
+This example declares a single dependency `datasqrl.seedshop`. The DataSQRL packager retrieves the `datasqrl.seedshop` package from the repository for the given version "0.1.0" and "dev" variant and makes it available for the compiler. The `variant` is optional and defaults to `default`. <br />
+Note, that specifying the name in this case is optional. You have to specify the name if the package name in the SQRL script is different from the name in the repository (i.e. you want to rename the package).
 
 **Variants**
 Package can have multiple variants for a given version. A variant might be a subset, static snapshot, or point to an alternate data system for development and testing. 
@@ -194,7 +242,22 @@ We can also rename dependencies which makes it easy to dynamically swap out depe
 ```
 In the above example, the `local-seedshop` directory will be looked up and renamed to `datasqrl.tutorials.seedshop`.
 
-## Repository
+### Script
+
+The main SQRL script and GraphQL schema for the project can be configured in the project configuration under the `script` section:
+
+```json
+ {
+  "script": {
+    "main": "mainScript.sqrl",
+    "graphql": "apiSchema.graphqls"
+  }
+}
+```
+
+
+### Package Information
+
 The `package` section of the configuration provides information about the package or script. The whole section can be omitted when compiling or running a script. It is required when publishing a package to the repository.
 
 :::info
@@ -229,7 +292,10 @@ Learn more about publishing in the CLI documentation.
 | homepage      | Link that points to the homepage for this package                                                                                                                             | No        |
 
 
-## Test
+### Testing
+
+Testing related configuration is found in the `test-runner` section.
+
 ```json
 {
   "test-runner": {
@@ -238,188 +304,18 @@ Learn more about publishing in the CLI documentation.
 }
 ```
 
-## Profiles
-Additional profiles can be specified.
+* `delay-sec`: The number of seconds to wait between starting the processing of data and snapshotting the data.
 
-```json
-{
-  "profiles" : ["datasqrl.profile.default"]
-}
+
+## GraphQL Schema
+
+
+<!--
+**SQRL Integration**
+
+(in development) Graphql mutations and subscriptions automatically create log sources and sinks in SQRL. In addition, a special variable is given to SQRL called `@JWT` which can access jwt token information.
+```sql
+MyUser(@JWT.user: String) := SELECT * FROM Users WHERE id = @JWT.user;
 ```
-
-## *.table.json
-Bring native connectors are possible with a table.json file. 
-
-The flink section is a connector passthrough for generating the flink connector. Use the flink documentation to learn how to configure connectors: https://nightlies.apache.org/flink/flink-docs-master/docs/connectors/table/overview/
-
-The table defines the type: source / sink / source_sink
-The primary key.
-The timestamp column. This can be derived from metadata columns.
-Watermark-millis. Could be 0 or a higher watermark. See the flink docs to learn more about watermarks and what works well for your use case.
-Metadata columns can either be metadata columns as described by flink, or a computed column.
-
-```json
-{
-  "version": 1,
-  "flink" : {
-    "format" : "avro",
-    "bootstrap.servers": "${BOOTSTRAP_SERVERS}",
-    "group.id": "datasqrl-orders",
-    "connector" : "kafka"
-  },
-  "table" : {
-    "type" : "source",
-    "primary-key" : ["id", "time"],
-    "timestamp" : "_source_time",
-    "watermark-millis" : "0"
-  },
-  "metadata" : {
-    "_source_time" : {
-      "attribute" : "timestamp",
-      "type": "TIMESTAMP_WITH_LOCAL_TIME_ZONE(3)"
-    },
-    "_uuid" : {
-      "attribute" : "secure.uuid()"
-    }
-  }
-}
-```
-
-For example, the above would generate a flink connector like:
-```
-CREATE TABLE orders (
-    id STRING,
-    time TIMESTAMP(3),
-    ...
-    _source_time TIMESTAMP_WITH_LOCAL_TIME_ZONE(3) METADATA FROM 'timestamp' VIRTUAL,
-    _uuid STRING METADATA FROM 'uuid()',
-    WATERMARK FOR time AS time - INTERVAL '0' SECOND,
-    PRIMARY KEY (id, time) NOT ENFORCED
-) WITH (
-    'connector' = 'kafka',
-    'topic' = '<topic_name>',
-    'properties.bootstrap.servers' = '${BOOTSTRAP_SERVERS}',
-    'properties.group.id' = 'datasqrl-orders',
-    'format' = 'avro',
-    'scan.startup.mode' = 'latest-offset'
-)
-```
-
-### schema.yml
-
-The DataSQRL schema is a flexible schema format for data sources and sinks. DataSQRL schema is simple, accommodates semi-structured data, supports schema evolution, and provides testing capabilities.
-
-DataSQRL schema is the default schema used for schema-less sources.
-
-DataSQRL can automatically discover the schema of data sources via the [discover](../cli) command.
-
-DataSQRL table schemas are stored in files ending in `.schema.yml`. There is one schema file per table of the same name.
-
-
-#### Example DataSQRL Schema
-
-```yml
-name: "orders"
-schema_version: "1"
-partial_schema: false
-columns:
-- name: "id"
-  type: "INTEGER"
-  tests:
-  - "not_null"
-- name: "customerid"
-  type: "INTEGER"
-  tests:
-  - "not_null"
-- name: "time"
-  type: "DATETIME"
-  tests:
-  - "not_null"
-- name: "items"
-  cardinality:
-    min: 1
-    max: 1000
-  columns:
-  - name: "productid"
-    type: "INTEGER"
-    tests:
-    - "not_null"
-  - name: "quantity"
-    type: "INTEGER"
-    tests:
-    - "not_null"
-  - name: "unit_price"
-    type: "FLOAT"
-    tests:
-    - "not_null"
-  - name: "discount"
-    type: "FLOAT"
-  tests:
-  - "not_null"
-```
-
-#### Schema Definition
-
-DataSQRL schema supports the following attributes to define a table:
-
-| Field Name     | Description                                                                                                                   | Required? |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------|-----------|
-| name           | Name of the table that this schema applies to                                                                                 | Yes       |
-| schema_version | Version of DataSQRL schema for this schema file                                                                               | Yes       |
-| description    | Description of the table                                                                                                      | No        |
-| partial_schema | When true, DataSQRL will attempt to discover the rest of the schema in discovery. If false, it considers the schema complete. | No        |
-
-A table is defined by a list of columns. A column has a `name`. A column is either a scalar field or a nested table.
-
-A column is defined by the following attributes:
-
-| Field Name    | Description                                                        | Required?                           |
-|---------------|--------------------------------------------------------------------|-------------------------------------|
-| name          | Name of the column. Must be unique per table at any nesting level. | Yes                                 |
-| description   | Description of the column                                          | No                                  |
-| default_value | Value to use when column is missing in input data.                 | No                                  |
-| type          | Type for a scalar field                                            | One of `type`, `columns` or `mixed` |
-| columns       | Columns for a nested table                                         | One of `type`, `columns` or `mixed` |
-| mixed         | A mix of scalar fields and nested tables for unstructured data     | One of `type`, `columns` or `mixed` |
-| tests         | A set of constraints that the column satisfies                     | No                                  |
-
-A column must either have a type (for scalar field) or a list of columns (for nested table). For unstructured data (i.e. data that does not conform to a schema), there is a third option to define a *mixed column* which can be a combination of multiple scalar fields or nested tables.
-
-A mixed column is defined by the attribute `mixed` which is a map of multiple column definitions that are identified by a unique name.
-
-```yml
-- name: "time"
-  mixed: 
-    - "epoch":
-        type: INTEGER
-    - "timestamp":
-        type: DATETIME
-```
-
-This defines the column `time` to be a mixed column that is either a scalar field called `epoch` with an `INTEGER` type or a scalar field called `timestap` with a `DATETIME` type. We would use such a mixed column definition for data where `time` is either represented as seconds since epoch or a timestamp.
-
-Each individual column of a mixed column definition gets mapped onto a separate column in the resulting SQRL table with the column name being a combination of the mixed column name and the map key. For our example above, the SQRL `orders` table would contain a column `time_epoch` and `time_timestamp` for each of the respective scalar fields.
-
-#### Scalar Types
-
-DataSQRL schema supports these scalar types:
-
-* **INTEGER**: for whole numbers
-* **FLOAT**: for floating point numbers
-* **BOOLEAN**: true or false
-* **DATETIME**: point in time
-* **STRING**: character sequence
-* **UUID**: unique identifier
-* **INTERVAL**: for periods of time
-
-To define arrays of scalar types, wrap the type in square brackets. For instance, an integer array is defined as `[INTEGER]`.
-
-#### Data Constraints
-
-The `test` attribute specifies data constraints for columns, whether scalar field or nested table. These constraints are validated when data is ingested to filter out invalid or unneeded data. The constraints are also used to validate statements in SQRL scripts. In addition, the DataSQRL [optimizer](/docs/reference/sqrl/learn#datasqrl-optimizer) analyzes the constraints to build more efficient data pipelines.
-
-DataSQRL schema supports the following test constraints:
-
-* **not_null**: the column can not be missing or have a null value.
-* **unique**: the column values are unique across all records in this table.
+-->
 

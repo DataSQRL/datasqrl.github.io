@@ -94,7 +94,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '🔪 DataSQRL Reference',
+      label: '📖 DataSQRL Reference',
       collapsed: false,
       link: {
         type: 'doc',
@@ -102,8 +102,9 @@ const sidebars = {
       },
       items: [
         'reference/sqrl/sqrl-spec',
-        'reference/sqrl/datasqrl-spec',
         'reference/sqrl/cli',
+        'reference/sqrl/connectors',
+        'reference/sqrl/datasqrl-spec',
 
 //        'reference/sources/add-source',
 //        'reference/sources/schema',
@@ -113,7 +114,7 @@ const sidebars = {
 //        'reference/sqrl/relationship',
         {
           type: 'category',
-          label: 'Functions',
+          label: 'SQRL Functions',
           link: {
             type: 'generated-index',
             title: 'Functions in SQRL',
@@ -130,7 +131,8 @@ const sidebars = {
             'reference/sqrl/functions/custom-functions',
           ],
         },
-        'dev/roadmap',
+        'reference/sqrl/deployments',
+        // 'dev/roadmap',
 
 
 //          link: {
