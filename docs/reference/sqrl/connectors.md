@@ -55,7 +55,7 @@ Timestamp and watermark are only used for sources.
 
 ### Connector Configuration
 
-The connector configuration specifies how the stream engine connects to the source or sink and how it reads or writes the data. The connector configuration is specific to the configured stream processing engine that DataSQRL compiles to and the section of the configuration is named after the engine. In the example above, the connector configuration is for the `flink` engine.
+The connector configuration specifies how the stream engine connects to the source or sink and how it reads or writes the data. The connector configuration is specific to the configured stream processing engine that DataSQRL compiles to, and the section of the configuration is named after the engine. In the example above, the connector configuration is for the `flink` engine.
 
 The connector configuration is passed through to the stream engine. Check the documentation for the stream processing engine you are using for how to configure the connector:
 
