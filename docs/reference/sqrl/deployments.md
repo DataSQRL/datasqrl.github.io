@@ -17,6 +17,12 @@ As the final step of the compilation process, the deployment assets from the dep
 
 Once the compilation completes, the deployment assets in the `build/deploy` folder are ready to be deployed or executed locally.
 
+## Custom Deployment Values
+
+The `values` section of the [DataSQRL configuration](../datasqrl-spec) allows you to specify configuration values that are passed through to the deployment profile and can be referenced in the deployment profile templates.
+
+This allows you to specify runtime configuration in the project configuration file.
+
 ## Creating Deployment Profiles
 
 Creating a custom deployment profile allows you to:
@@ -30,6 +36,10 @@ A deployment profile consists of:
 * A `package.json` configuration file that is used as the basis for all DataSQRL projects that use this profile. This file is placed in the root of the deployment profile.
 * A folder for each engine that is supported by the profile with engine specific deployment artifacts.
 * Any other "shared" deployment assets that are used across the engines or that pull the individual engines together into one deployment (e.g. a docker compose template). Those are placed in the root of the deployment profile.
+
+The templates are instantiated with the values from the physical plan documents and any values specified in the project configuration under `values`. In addition, the templating engine also provides these variables:
+- `config`: the full package.json file
+- `environment`: The current system environment.
 
 When building your own deployment profile, it is best to start with an existing profile and iterate from there.
 Take a look at the [default DataSQRL profiles](https://github.com/DataSQRL/sqrl/tree/main/profiles).

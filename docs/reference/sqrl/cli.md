@@ -49,6 +49,9 @@ All commands support the following global options:
 |--------------|---------------|
 |-c or --config|	Specifies the path to one or more package configuration files. Contents of multiple files are merged in the specified order. Defaults to package.json in the current directory, generating a default configuration if none exists.|
 
+Note, that most commands require that you either specify the SQRL script (and, optionally, a GraphQL schema) as command line arguments or use the
+`-c` option to specify a project configuration file that configures the SQRL script (and, optionally, a GraphQL schema).
+
 ## Compile Command
 The compile command processes an SQRL script and, optionally, an API specification, into a deployable data pipeline. The outputs are saved in the specified target directory.
 
@@ -89,7 +92,7 @@ When you first run the test command, it will create the snapshots and fail. All 
 <TabItem value="Mac" default>
 
 ```bash
-sqrl test
+sqrl test myscript.sqrl myapischema.graphqls
 ```
 
 </TabItem>
@@ -110,7 +113,22 @@ Options for the Test Command:
 
 
 ## Publish Command
-Publishes a local package to the repository. It is executed from the root directory of the package, archiving all contents and submitting them under the specified package configuration.
+Publishes a local package to the repository. It is executed from the root directory of the package, archiving all contents and submitting them under the specified package configuration. The package must have a main `package.json` that contains the package information:
+
+```json
+{
+  "version": "1",
+  "package": {
+    "name": "myorg.mypackage",
+    "version": "0.1.2",
+    "variant": "dev",
+    "description": "This is my profile",
+    "homepage": "http://www.mypackage.myorg.com",
+    "documentation": "More information on my package",
+    "topics": [ "mytag" ]
+  }
+}
+```
 
 
 <Tabs groupId="cli">
