@@ -131,7 +131,7 @@ const sidebars = {
             'reference/sqrl/functions/custom-functions',
           ],
         },
-        'reference/sqrl/deployments',
+        'sqrl/deployments',
         // 'dev/roadmap',
 
 

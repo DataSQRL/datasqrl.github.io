@@ -96,7 +96,7 @@
 [//]: # (The package configuration specifies what engines DataSQRL compiles to. DataSQRL calls the data technologies that execute the components of a data pipeline "**engines**". For example, DataSQRL supports [Apache Flink]&#40;https://flink.apache.org/&#41; as a stream engine, [Apache Kafka]&#40;https://kafka.apache.org/&#41; as a log engine, [Postgres]&#40;https://www.postgresql.org/&#41; as a database engine, and [Vert.x]&#40;https://vertx.io/&#41; as a server engine.)
 
 [//]: # ()
-[//]: # (Check out [all the engines]&#40;/docs/reference/operations/engines/overview&#41; that DataSQRL supports and how to configure them in the [package configuration]&#40;/docs/reference/sqrl/datasqrl-spec/#packagejson&#41;. )
+[//]: # (Check out [all the engines]&#40;/docs/reference/operations/engines/overview&#41; that DataSQRL supports and how to configure them in the [package configuration]&#40;/sqrl/datasqrl-spec/#packagejson&#41;. )
 
 [//]: # ()
 [//]: # (That concludes our introductory tutorial! Great job and enjoy building with data&#40;sqrl&#41;!)

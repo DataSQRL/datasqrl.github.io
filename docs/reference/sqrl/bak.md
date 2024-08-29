@@ -151,7 +151,7 @@
 [//]: # (### Dependency)
 
 [//]: # ()
-[//]: # (Dependencies are declared in the [package configuration]&#40;/docs/reference/sqrl/datasqrl-spec/#packagejson#dependency&#41;. Dependencies can point to local package folders or be downloaded from a [repository]&#40;../../operations/repository&#41; at compile time.)
+[//]: # (Dependencies are declared in the [package configuration]&#40;/sqrl/datasqrl-spec/#packagejson#dependency&#41;. Dependencies can point to local package folders or be downloaded from a [repository]&#40;../../operations/repository&#41; at compile time.)
 
 [//]: # ()
 [//]: # (By default, DataSQRL looks up any missing packages in the [repository]&#40;https://dev.datasqrl.com&#41;. A package is missing if it is not declared as dependencies and cannot be resolved locally. If the missing package can be located in the repository, a dependency on the most recent version of that package is added to the package configuration.)

@@ -111,7 +111,7 @@ You can also learn more about [DataSQRL](../getting-started/concepts/datasqrl), 
 
 - Jump into our [Getting Started Guide](../getting-started)  for a quick introduction to the basics of DataSQRL.
 - Explore the Interactive Tutorial and [Quickstart](../getting-started/quickstart)  to see DataSQRL in action.
-- Check out the [reference documentation](../reference/sqrl/datasqrl-spec) covers all aspects of DataSQRL in detail. If you want more information on how to use DataSQRL or are looking for comprehensive documentation, this is your place to go.
+- Check out the [reference documentation](/docs/sqrl/datasqrl-spec) covers all aspects of DataSQRL in detail. If you want more information on how to use DataSQRL or are looking for comprehensive documentation, this is your place to go.
 - Learn more about advanced features and customization in our How-to Guides.
 
 ## Join the DataSQRL community
