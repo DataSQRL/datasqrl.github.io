@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prestart": "mkdir -p docs/sqrl && cp -f -R sqrl/docs/* docs/sqrl/",
+    "prebuild": "mkdir -p docs/sqrl && cp -f -R sqrl/docs/* docs/sqrl/",
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "build": "docusaurus build",

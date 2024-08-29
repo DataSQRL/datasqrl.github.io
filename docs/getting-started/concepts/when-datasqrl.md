@@ -65,7 +65,7 @@ That said, if you have multiple orange data products, DataSQRL is still worth it
 
 DataSQRL is a compiler that generates data pipelines using proven data technologies like Apache Flink, Kafka, or Postgres. DataSQRL has a pluggable engine architecture that supports various types of databases, stream processors, and API servers. Hence, the other thing to consider is whether DataSQRL supports the data technologies you are already using or plan to use in your data pipelines.
 
-Take a look at the [engines documentation](/docs/reference/sqrl/datasqrl-spec#engines) to see whether your favorite data technologies are supported. And if not, [reach out to us](/contact) to see if and when DataSQRL will support the data technology of your choice. DataSQRL is still young and we are continuously expanding support.
+Take a look at the [engines documentation](/docs/sqrl/datasqrl-spec#engines) to see whether your favorite data technologies are supported. And if not, [reach out to us](/contact) to see if and when DataSQRL will support the data technology of your choice. DataSQRL is still young and we are continuously expanding support.
 
 ### Expressivity
 

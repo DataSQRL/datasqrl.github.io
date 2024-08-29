@@ -99,7 +99,7 @@ Note, that `now()` is different from the standard SQL function `CURRENT_TIMESTAM
 
 The timestamp of a stream table determines how stream records are associated with a point on the timeline and how now advances in the data pipeline.
 
-For stream tables that are imported from a data source, the timestamp is configured explicitly in the [source configuration](/docs/reference/sqrl/datasqrl-spec#tablejson).
+For stream tables that are imported from a data source, the timestamp is configured explicitly in the [source configuration](docs//sqrl/datasqrl-spec#tablejson).
 
 ### Time Synchronization
 
@@ -115,7 +115,7 @@ In DataSQRL, sources and sinks represent the endpoints of the data pipeline, int
 
 Data sources and sinks are defined in configuration files that are contained in packages. The configuration specifies how to connect to and read from (or write to) the source (or sink).
 
-DataSQRL supports a lot of different data systems as sources and sinks, including Kafka, file system, object storage, Iceberg, Postgres, etc. Check out the [connectors](/docs/reference/sqrl/datasqrl-spec#tablejson) for all the data systems that DataSQRL can connect to.
+DataSQRL supports a lot of different data systems as sources and sinks, including Kafka, file system, object storage, Iceberg, Postgres, etc. Check out the [connectors](/docs/sqrl/datasqrl-spec#tablejson) for all the data systems that DataSQRL can connect to.
 
 When you are first getting started on a new project with DataSQRL, the easiest way to add a data source is to export your data (or a subset) to a [JSON Lines](https://jsonlines.org/) (i.e. line delimited json) or CSV files.
 
@@ -168,7 +168,7 @@ OrdersByMonth := SELECT endOfmonth(p.time) AS month,
          FROM Orders GROUP BY month;
 ```
 
-The annotation `EXEC(streams)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](/docs/reference/sqrl/datasqrl-spec).
+The annotation `EXEC(streams)` instructs the optimizer to compute the `OrdersByMonth` table in the `stream` engine. An engine with the name `stream` must be configured in the engines section of the [package configuration](/docs/sqrl/datasqrl-spec).
 
 Similarly, the `EXEC(database)` annotation instructs the optimizer to choose the engine with the name `database`:
 
@@ -182,7 +182,7 @@ OrdersByMonth := SELECT endOfmonth(p.time) AS month,
 ## Overview of Integrated Engines
 An **engine** is a system or technology that executes part of the data pipeline compiled by DataSQRL.
 
-Which engines DataSQRL compiles to is configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec) which also defines the data pipeline architecture.
+Which engines DataSQRL compiles to is configured in the [package configuration](/docs/sqrl/datasqrl-spec) which also defines the data pipeline architecture.
 
 DataSQRL supports 4 types of engines that play distinct roles in a data pipeline: stream engines, database engines, server engines, log engines, query engines.
 
@@ -257,7 +257,7 @@ DataSQRL supports multiple engines and data pipeline architectures. That means, 
 
 The figure shows a data pipeline architecture that consists of a Apache Kafka, Apache Flink, a database engine, and API server. Kafka holds the input and streaming data. Flink ingests the data, processes it, and writes the results to the database. The API server translates incoming requests into database queries and assembles the response from the returned query results.
 
-The data pipeline architecture and engines are configured in the [package configuration](/docs/reference/sqrl/datasqrl-spec). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](../cli) for all command line options.
+The data pipeline architecture and engines are configured in the [package configuration](/docs/sqrl/datasqrl-spec). The DataSQRL command looks for a `package.json` configuration file in the directory where it is executed. Alternatively, the package configuration file can be provided as an argument via the `-c` option. Check out the [command line reference](/docs/sqrl/cli) for all command line options.
 
 If no package configuration file is provided or found, DataSQRL generates a default package configuration with the example data pipeline architecture shown above and the following engines:
 

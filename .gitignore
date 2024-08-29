@@ -3,3 +3,6 @@ yarn.lock
 .idea
 .docusaurus
 node_modules
+
+# These files are copied from the sqrl submodule
+docs/sqrl/*

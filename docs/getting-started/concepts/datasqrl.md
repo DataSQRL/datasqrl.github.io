@@ -26,7 +26,7 @@ DataSQRL compiles the SQL script and output specification into a data pipeline t
 
 DataSQRL has a pluggable engine architecture which allows it to support various stream processors, databases, data warehouses, data streams, and API servers. Feel free to contribute your favorite data technology as a DataSQRL engine to the open-source, wink wink.
 
-DataSQRL can generate data pipelines with multiple topologies. Take a look at the [types of data products](/docs/reference/concepts/data-product#types) that DataSQRL can build. You can further customize those pipeline topologies in the DataSQRL [package configuration](/docs/reference/sqrl/datasqrl-spec/) which defines the data technologies at each stage of the resulting data pipeline. 
+DataSQRL can generate data pipelines with multiple topologies. Take a look at the [types of data products](/docs/reference/concepts/data-product#types) that DataSQRL can build. You can further customize those pipeline topologies in the DataSQRL [package configuration](/docs/sqrl/datasqrl-spec) which defines the data technologies at each stage of the resulting data pipeline. 
 
 DataSQRL compiles executables for each engine in the pipeline which can be deployed on the data technologies and cloud services you already use.
 In addition, DataSQRL provides development tooling that makes it easy to run and test data pipelines locally to speed up the development cycle.
