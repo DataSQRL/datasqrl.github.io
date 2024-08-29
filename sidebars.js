@@ -95,7 +95,7 @@ const sidebars = {
     {
       type: 'category',
       label: '📖 DataSQRL Reference',
-      collapsed: false, 
+      collapsed: false,
       link: {
         type: 'doc',
         id:  'sqrl/sqrl-spec',
