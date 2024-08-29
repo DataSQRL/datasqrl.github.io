@@ -3,3 +3,4 @@ yarn.lock
 .idea
 .docusaurus
 node_modules
+docs/sqrl/*
