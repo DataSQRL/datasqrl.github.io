@@ -1,0 +1,3 @@
+[submodule "sqrl"]
+	path = sqrl
+	url = git@github.com:DataSQRL/sqrl.git
