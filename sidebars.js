@@ -95,16 +95,16 @@ const sidebars = {
     {
       type: 'category',
       label: '📖 DataSQRL Reference',
-      collapsed: false,
+      collapsed: false, 
       link: {
         type: 'doc',
-        id:  'reference/sqrl/sqrl-spec',
+        id:  'sqrl/sqrl-spec',
       },
       items: [
-        'reference/sqrl/sqrl-spec',
-        'reference/sqrl/cli',
-        'reference/sqrl/connectors',
-        'reference/sqrl/datasqrl-spec',
+        'sqrl/sqrl-spec',
+        'sqrl/cli',
+        'sqrl/connectors',
+        'sqrl/datasqrl-spec',
 
 //        'reference/sources/add-source',
 //        'reference/sources/schema',
