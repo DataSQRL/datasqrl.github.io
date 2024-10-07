@@ -5,7 +5,7 @@ title: "Why Use DataSQRL?"
 # Why Use DataSQRL?
 
 When you build data products, you end up wasting most of your time and effort on data plumbing. In fact, 80% ([source](#footnotes)) of data products fail to deliver value because of data plumbing issues.
-We developed the open-source DataSQRL compiler to eliminate data plumbing so you can build efficient data products in days instead of months.
+We developed the open-source DataSQRL data development framework to automate data plumbing so you can build efficient data products in days instead of months.
 
 <img src="/img/index/undraw_questions_sqrl.svg" alt="DataSQRL allows you to build with data >" width="40%"/>
 
@@ -21,23 +21,23 @@ We are developing DataSQRL as a tool for developers to build data pipelines and 
 
 ## What is Data Plumbing? {#dataplumbing}
 
-What's data plumbing? It's all that extra engineering you need to turn a data transformation into a deployable data pipeline. Specifically, there are 4 types of data plumbing that waste the most time, money, and effort.
+What's data plumbing? It's all the architecture work and glue code you need to implement to integrate multiple data technologies into a coherent data architecture. Specifically, there are 4 types of data plumbing that waste the most time, money, and effort.
 
 ### Code Fragmentation
 
 <img src="/img/reference/dpTypes3.svg" alt="Data Pipeline Architecture" width="100%"/>
 
-A data pipeline consists of multiple technologies that work in concert to transform the raw input data into a valuable result. Data stream like Apache Kafka, stream processors like Apache Flink, databases like Postgres, and API servers like GraphQL.
+A data architecture consists of multiple technologies that work in concert to transform the raw input data into a valuable result. Streaming platforms like Apache Kafka, stream processors like Apache Flink, databases like Postgres, and API servers like GraphQL.
 
-To implement a coherent data pipeline, you need to split the logic of your data product across the various technologies that make up your data pipeline which leads to code fragmentation. And each technology uses a different language, dialect, and conceptual model which means you need to become an expert in each of the technologies or assemble a team of experts to implement a single data pipeline.
+To implement a coherent data architecture, you need to split the logic of your data product across the various technologies that make up your architecture which leads to code fragmentation. And each technology uses a different language, dialect, and conceptual model which means you need to become an expert in each of the technologies or assemble a team of experts to implement a single data product.
 
-That introduces a lot of coordination overhead, makes it hard to implement all the pipeline stages coherently, and very expensive to refactor a data product.
+That introduces a lot of coordination overhead, makes it hard to implement all the pipeline stages coherently, and very expensive to evolve and maintain a data product. 
 
 ### Data Flow Orchestration
 
-To make the data flow smoothly through the data pipeline, you have to implement the integration points between the various technologies in your data pipeline. That requires a lot of "glue code" that is hard to debug and maintain. In addition, you have to be very careful that data flows are synchronized in time to avoid inconsistencies.
+To make the data flow smoothly through the data architecture, you have to implement the integration points between the various technologies in your data architecture. That requires a lot of "glue code" that is hard to debug and maintain. In addition, you have to be very careful that data flows are synchronized in time to avoid inconsistencies.
 
-Furthermore, you end up writing a lot of configuration code to define how data is ingested and moved through the system. All of this code is specific to a particular data pipeline and needs to be maintained over time.
+Furthermore, you end up writing a lot of configuration code to define how data is ingested and moved through the system. All of this code is specific to a particular data architecture and needs to be maintained over time.
 
 ### Data Mapping
 
@@ -46,6 +46,10 @@ Each technology in the data pipeline has its own data and schema representation 
 ### System Optimization
 
 Each technology in the data pipeline has a different physical model and operational characteristics which makes it difficult to optimize data pipelines for efficient operation. To optimize a data pipeline you need deep expertise in each of the technologies and understand how their divergent operational behaviors play off each other to introduce inefficiencies.
+
+### Manual DevOps
+
+Running a data architecture in production requires a lot of manual DevOps or custom automation.
 
 ## Benefits of DataSQLR
 
@@ -57,10 +61,10 @@ Let's break that down:
 
 <img src="/img/index/undraw_time_management_sqrl.svg" alt="DataSQRL saves you time >" width="40%"/>
 
-DataSQRL's intelligent compiler eliminates data plumbing and saves you the time and effort required to tackle the four types of data plumbing outlined above. DataSQRL handles all the time-consuming details of data pipeline implementation for you. You implement the logic of your data product in SQL, and DataSQRL compiles that logic into an optimized data pipeline.
+DataSQRL's intelligent compiler eliminates data plumbing and saves you the time and effort required to tackle the five types of data plumbing outlined above. DataSQRL handles all the time-consuming details of data architecture implementation for you. You implement the logic of your data product in SQL, and DataSQRL compiles that logic into an optimized data architecture.
 
 DataSQRL gives you a higher level of abstraction, so you don't get bogged down implementing, integrating, and optimizing low level data abstractions. <br />
-You don't write your software in low-level languages like [Assembly](https://en.wikipedia.org/wiki/Assembly_language). You use a higher level language like Javascript, Python, Java, etc that compile into machine code to make you more productive. DataSQRL is a compiler for your data pipeline to make you more productive.
+You don't write your software in low-level languages like [Assembly](https://en.wikipedia.org/wiki/Assembly_language). You use a higher level language like Javascript, Python, Java, etc that compile into machine code to make you more productive. DataSQRL is a compiler for your data architecture to make you more productive.
 
 ### DataSQRL is Easy to Use {#easy-to-use}
 
@@ -69,12 +73,12 @@ DataSQRL gives you a higher-level of abstraction for implementing data products.
 
 First, DataSQRL handles a lot of things for you that you don't have to worry about at all like all the data plumbing issues outlined above. When you implement a data product in DataSQRL you have to learn fewer concepts to be successful. DataSQRL doesn't hide any of these elements from you. You get full visibility and can control those elements if you like. But you don't have to and in most cases you never have to worry about it.
 
-You can focus entirely on the logic of your data product by defining data transformations and analytics. DataSQRL uses those definitions to figure out what the schema should look like, how the data should flow, and how to retrieve it for API requests. This simplifies implementing a data product and saves you a ton of data plumbing code that holds a data pipeline together.
+You can focus entirely on the logic of your data product by defining data transformations and analytics. DataSQRL uses those definitions to figure out what the schema should look like, how the data should flow, and how to retrieve it for API requests. This simplifies implementing a data product and saves you a ton of data plumbing code that holds a data architecture together.
 
 <img src="/img/index/undraw_programming_sqrl.svg" alt="DataSQRL is easy to use >" width="40%"/>
 
-Second, the DataSQRL compiler not only determines how to implement data operations but also *when*. A common tradeoff data pipeline implementations face is processing data at ingest time (i.e. when a new data record is ingested) versus at query time (i.e. when a user of the API issues a request). For example, suppose we are providing an API that shows customers the total amount of money they have spent at our e-commerce store. We can compute this value by summing over all the orders at query time or incrementally updating a sum at ingest time when a new order is placed. The result is the same but has different operational characteristics and can make the difference between things humming along and your database being brought to its knees. <br />
-If you are thinking "why are you boring me with these data pipeline implementation trivia", that's exactly the point: With DataSQRL you don't have to think about this. It abstracts those tradeoffs away. If you are going the low-level route and assemble a data pipeline architecture yourself, you'll have to worry about these and other tradeoffs as you design the system. And that makes it very expensive to evolve your pipeline over time.
+Second, the DataSQRL compiler not only determines how to implement data operations but also *when*. A common tradeoff data architecture implementations face is processing data at ingest time (i.e. when a new data record is ingested) versus at query time (i.e. when a user of the API issues a request). For example, suppose we are providing an API that shows customers the total amount of money they have spent at our e-commerce store. We can compute this value by summing over all the orders at query time or incrementally updating a sum at ingest time when a new order is placed. The result is the same but has different operational characteristics and can make the difference between things humming along and your database being brought to its knees. <br />
+If you are thinking "why are you boring me with these data architecture implementation trivia", that's exactly the point: With DataSQRL you don't have to think about this. It abstracts those tradeoffs away. If you are going the low-level route and assemble a data architecture architecture yourself, you'll have to worry about these and other tradeoffs as you design the system. And that makes it very expensive to evolve your architecture over time.
 
 
 ### DataSQRL Compiles Fast & Efficient Pipelines {#performance}

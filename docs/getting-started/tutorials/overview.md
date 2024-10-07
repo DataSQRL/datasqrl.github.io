@@ -1,16 +1,15 @@
-[//]: # (# DataSQRL Tutorials)
+# DataSQRL Tutorials
 
-[//]: # ()
-[//]: # (The tutorials implement a use case with DataSQRL. We currently cover the following use cases:)
 
-[//]: # ()
-[//]: # (* [**Customer 360**]&#40;../customer360/intro&#41;: Build a customer 360 by integrating customer data.)
+The tutorials implement a use case with DataSQRL and provide step-by-step instructions:
 
-[//]: # (* [**Recommendations**]&#40;../recommendations/intro&#41;: Build a content recommendation engine based on click-stream data.)
+* [**Metrics Processing**](../../quickstart): Ingest and aggregate metrics data.
+* [**Recommendations**](../recommendations/intro): Build a content recommendation engine based on click-stream data.
 
-[//]: # (* [**Internet of Things**]&#40;../iot/intro&#41;: Aggregate and analyze sensor data from a factory floor.)
+## DataSQRL Examples
 
-[//]: # ()
-[//]: # (We'll be adding more tutorials with time, so check back soon. If you'd like to see another use case covered, please)
+The [DataSQRL Examples](https://github.com/DataSQRL/datasqrl-examples/) GitHub repository contains a number of DataSQRL projects for various use cases.
+You can clone the repository to play with the examples and adjust them to your needs:
 
-[//]: # ([let us know]&#40;/community&#41;.)
+* [**Credit Card Transactions**](https://github.com/DataSQRL/datasqrl-examples/): Enriches a stream of credit card transactions, aggregates them, and provides a user-facing GraphQL API.
+* [**Credit Card Rewards**](https://github.com/DataSQRL/datasqrl-examples/): Calculates the credit card rewards for users and provides recommendations for credit cards based on potential rewards.

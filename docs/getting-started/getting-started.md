@@ -5,38 +5,6 @@ import TabItem from '@theme/TabItem';
 
 Let's build a data pipeline with DataSQRL in just a few simple steps.
 
-## Installation
-
-You can install DataSQRL on your Mac with [HomeBrew](https://brew.sh/) or use [Docker](https://www.docker.com/products/docker-desktop/) on any machine.
-
-<Tabs groupId="cli">
-<TabItem value="Mac" default>
-
-```bash
-brew tap datasqrl/sqrl
-brew install sqrl-cli
-```
-
-:::note
-Check that you're on the current version of DataSQRL by running `sqrl --version`
-To update an existing installation:
-
-```bash
-brew upgrade sqrl-cli
-```
-:::
-
-</TabItem>
-<TabItem value="Docker">
-
-Pull the latest Docker image to ensure you have the most recent version of DataSQRL:
-
-```bash
-docker pull datasqrl/cmd:latest
-```
-
-</TabItem>
-</Tabs>
 
 
 ## Implement SQL Script
