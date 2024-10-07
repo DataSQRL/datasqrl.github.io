@@ -4,8 +4,6 @@ title: "What is DataSQRL?"
 
 # What is DataSQRL?
 
-Copy-paste repo README
-
 DataSQRL is a flexible data development framework for building various types of streaming data architectures, like data pipelines, event-driven microservices, and Kappa. It provides the basic structure, common patterns, and a set of tools for streamlining the development process of [data products](/docs/reference/concepts/data-product).
 
 DataSQRL integrates any combination of the following technologies:
