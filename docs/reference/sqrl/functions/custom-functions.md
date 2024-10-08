@@ -23,7 +23,7 @@ In the same folder where the JAR file resides (e.g., `myudf-0.1.0-SNAPSHOT.jar`)
 
 ### Create `package.json`
 
-The `package.json` file defines the package metadata, such as name, version, etc. A minimal `package.json` looks like this:
+The `package.json` file defines the package manifest, such as name, version, etc. A minimal `package.json` looks like this:
 
 ```
 {
@@ -35,6 +35,8 @@ The `package.json` file defines the package metadata, such as name, version, etc
   }
 }
 ```
+
+For detailed instructions on configuring the package manifest, please refer to the [documentation](http://www.datasqrl.com/docs/reference/sqrl/datasqrl-spec/#packagejson).
 
 ### Create Function Descriptors
 
