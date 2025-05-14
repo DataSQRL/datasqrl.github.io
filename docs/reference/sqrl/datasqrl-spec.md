@@ -43,7 +43,7 @@ The physical plan that DataSQRL generates for the Flink engine includes:
 Flink reads data from and writes data to the engines in the generated data pipeline. DataSQRL uses connector configuration templates to instantiate those connections.
 These templates are configured under the `connectors` property.
 
-Connectors that link flink to other engines and external systems can be configured in the `connectors` property. Connectors use the [flink configuration options](https://nightlies.apache.org/flink/flink-docs-stable/docs/connectors/table/overview/) and are directly passed through to flink without modification.
+Connectors that link flink to other engines and external systems can be configured in the `connectors` property. Connectors use the [flink configuration options](https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/connectors/table/overview/) and are directly passed through to flink without modification.
 
 Environment variables that start with the `sqrl` prefix are templated variables that the DataSQRL compiler instantiates. For example: `${sqrl:table}` provides the table name for a connector that writes to a table.
 
@@ -186,7 +186,7 @@ Learn more about [deployment profiles](../deployments).
 
 The `values` section of the [DataSQRL configuration](../datasqrl-spec) allows you to specify configuration values that are passed through to the deployment profile and can be referenced in the deployment profile templates. See [deployment profiles](../deployments) for more information.
 
-The default deployment profiles supports a `flink-config` section to allow injecting additional flink runtime configuration. You can use this section of the configuration to specify any [Flink configuration option](https://nightlies.apache.org/flink/flink-docs-stable/docs/dev/table/config/).
+The default deployment profiles supports a `flink-config` section to allow injecting additional flink runtime configuration. You can use this section of the configuration to specify any [Flink configuration option](https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/dev/table/config/).
 
 ```json
 {
