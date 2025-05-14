@@ -59,7 +59,7 @@ The connector configuration specifies how the stream engine connects to the sour
 
 The connector configuration is passed through to the stream engine. Check the documentation for the stream processing engine you are using for how to configure the connector:
 
-* [**Flink Connector Configuration**](https://nightlies.apache.org/flink/flink-docs-stable/docs/connectors/table/overview/): Make sure you use the connector configuration that's compatible with the version of Flink you are compiling to.
+* [**Flink Connector Configuration**](https://nightlies.apache.org/flink/flink-docs-release-1.19/docs/connectors/table/overview/): Make sure you use the connector configuration that's compatible with the version of Flink you are compiling to.
 
 ### Metadata Columns
 
